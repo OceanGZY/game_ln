@@ -5,10 +5,10 @@
       "main": true,
       "url": "app://editor/index.html",
       "windowType": "dockable",
-      "x": 0,
-      "y": 30,
-      "width": 1920,
-      "height": 1050,
+      "x": -8,
+      "y": 22,
+      "width": 1936,
+      "height": 1066,
       "layout": {
         "children": [
           {
@@ -20,7 +20,7 @@
                 ],
                 "height": 466,
                 "type": "panel",
-                "width": 381
+                "width": 243.4375
               },
               {
                 "active": 0,
@@ -29,12 +29,12 @@
                 ],
                 "height": 463,
                 "type": "panel",
-                "width": 381
+                "width": 243.4375
               }
             ],
             "height": 932,
             "type": "dock-v",
-            "width": 381
+            "width": 243.4375
           },
           {
             "children": [
@@ -47,7 +47,7 @@
                     ],
                     "height": 645,
                     "type": "panel",
-                    "width": 783
+                    "width": 441.5625
                   },
                   {
                     "active": 0,
@@ -56,12 +56,12 @@
                     ],
                     "height": 645,
                     "type": "panel",
-                    "width": 323
+                    "width": 264
                   }
                 ],
                 "height": 645,
                 "type": "dock-h",
-                "width": 1109
+                "width": 708.5625
               },
               {
                 "active": 0,
@@ -72,12 +72,12 @@
                 ],
                 "height": 284,
                 "type": "panel",
-                "width": 1109
+                "width": 708.5625
               }
             ],
             "height": 932,
             "type": "dock-v",
-            "width": 1109
+            "width": 708.5625
           },
           {
             "active": 0,
@@ -87,7 +87,7 @@
             ],
             "height": 932,
             "type": "panel",
-            "width": 408
+            "width": 304
           }
         ],
         "type": "dock-h"
@@ -104,7 +104,8 @@
         "cocos-services"
       ]
     },
-    "worker": {}
+    "worker": {},
+    "window-1628704410293": {}
   },
   "panels": {
     "preferences": {

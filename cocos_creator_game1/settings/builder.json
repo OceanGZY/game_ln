@@ -1,5 +1,5 @@
 {
-  "title": "NewProject",
+  "title": "EatingStar",
   "packageName": "org.cocos2d.demo",
   "startScene": "de6231bf-2260-474f-91ff-a0fdba4f7a95",
   "excludeScenes": [],
@@ -51,5 +51,7 @@
     "skipRecord": false
   },
   "appBundle": false,
-  "agreements": {}
+  "agreements": {
+    "20200904180755": false
+  }
 }
