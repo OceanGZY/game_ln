@@ -1,0 +1,1 @@
+window._CCSettings={platform:"win32",groupList:["default"],collisionMatrix:[[true]],hasResourcesBundle:false,hasStartSceneBundle:false,remoteBundles:[],subpackages:[],launchScene:"db://assets/Scene/main.fire",orientation:"",server:"",jsList:[],bundleVers:{internal:"395b1",main:"93c5e"}};
