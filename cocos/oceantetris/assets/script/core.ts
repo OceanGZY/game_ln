@@ -2,11 +2,11 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-15 22:58:20
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-17 16:35:38
+ * @LastEditTime: 2022-11-17 19:56:17
  * @FilePath: /oceantetris/assets/script/core.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, Node, Prefab, Vec2, instantiate, v2, log } from 'cc';
+import { _decorator, Component, Node, Prefab, Vec2, instantiate, v2, log, find } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('core')
@@ -488,6 +488,28 @@ export class core extends Component {
 
 
 
+    }
+
+
+    gameStart() {
+        let startBtn = find("Canvas/GameOption")
+        let gameCont = find("Canvas/GameContainer")
+        startBtn!.active = false
+        gameCont!.active = true
+    }
+
+    gamePause() {
+        let pauseBtn = find("Canvas/GameContainer/PauseBtn")
+        let resumeBtn = find("Canvas/GameContainer/ResumeBtn")
+        pauseBtn!.active = false
+        resumeBtn!.active = true
+    }
+
+    gameResume() {
+        let pauseBtn = find("Canvas/GameContainer/PauseBtn")
+        let resumeBtn = find("Canvas/GameContainer/ResumeBtn")
+        pauseBtn!.active = true
+        resumeBtn!.active = false
     }
 }
 
