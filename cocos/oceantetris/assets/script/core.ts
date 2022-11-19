@@ -2,17 +2,17 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-15 22:58:20
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-19 20:21:45
- * @FilePath: /oceantetris/assets/script/core.ts
+ * @LastEditTime: 2022-11-19 22:30:17
+ * @FilePath: \oceantetris\assets\script\core.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, Node, Prefab, Vec2, instantiate, v2, log, find } from 'cc'
+import { _decorator, Component, Node, Prefab, Vec2, instantiate, v2, log, find, Layers } from 'cc'
 const { ccclass, property } = _decorator
 
 @ccclass('core')
 export class core extends Component {
     start() {
-    
+
     }
 
     update(deltaTime: number) {
@@ -57,9 +57,10 @@ export class core extends Component {
     currentBlockPart03Pos: Vec2 = null!
     currentBlockPart04Pos: Vec2 = null!
 
-    // 游戏状态
-    gameState: number | undefined
+    //游戏状态 暂停 -1  结束 0  开始 1 
+    gameState: number = null!
 
+    //初始化box二维数组，这个数组的[0][0]在游戏区的最左下角
     InitBox() {
         for (let i = 0; i < 20; i++) {
             this.box[i] = []
@@ -67,6 +68,43 @@ export class core extends Component {
                 this.box[i][j] = null!
             }
         }
+
+
+        log("初始化的currentBlock 是")
+        log(this.currentBlock)
+
+        log("初始化的currentBlockPart01 是")
+        log(this.currentBlockPart01)
+
+        log("初始化的currentBlockPart02 是")
+        log(this.currentBlockPart02)
+
+
+        log("初始化的currentBlockPart03 是")
+        log(this.currentBlockPart03)
+
+
+        log("初始化的currentBlockPart04 是")
+        log(this.currentBlockPart04)
+
+
+        log("初始化的currentBlockPart01Pos 是")
+        log(this.currentBlockPart01Pos)
+
+
+        log("初始化的currentBlockPart02Pos 是")
+        log(this.currentBlockPart02Pos)
+
+
+        log("初始化的currentBlockPart03Pos 是")
+        log(this.currentBlockPart03Pos)
+
+        log("初始化的currentBlockPart04Pos 是")
+        log(this.currentBlockPart04Pos)
+
+        log("初始化的box 是")
+        log(this.box)
+
         // 生成不同的方块集合
         this.initBlock()
     }
@@ -78,10 +116,16 @@ export class core extends Component {
         this.rand = Math.floor(7 * Math.random())
         this.initColor(this.rand)
         this.initShape(this.rand)
+        this.currentBlock.layer = Layers.Enum.UI_2D
+        this.currentBlockPart01.layer = Layers.Enum.UI_2D
+        this.currentBlockPart02.layer = Layers.Enum.UI_2D
+        this.currentBlockPart03.layer = Layers.Enum.UI_2D
+        this.currentBlockPart04.layer = Layers.Enum.UI_2D
     }
 
     // 设置颜色
     initColor(rand: number) {
+        log("初始化颜色，rand是：", rand)
         // 正方形的颜色
         if (rand == 0) {
             this.currentBlockPart01 = instantiate(this.block_0)
@@ -89,7 +133,6 @@ export class core extends Component {
             this.currentBlockPart03 = instantiate(this.block_0)
             this.currentBlockPart04 = instantiate(this.block_0)
             this.currentBlock = instantiate(this.currentBlockCentre)
-
             this.node.addChild(this.currentBlock)
             this.currentBlock.setPosition(0, 480) // 将当前生成的方块设定在游戏区域的最上面，准备后续下落
         }
@@ -169,17 +212,20 @@ export class core extends Component {
             this.currentBlock.setPosition(30, 510) // 将当前生成的方块设定在游戏区域的最上面，准备后续下落
         }
 
+        log(this.currentBlock)
+        log(this.node)
+
     }
 
     // 设置形状
     initShape(rand: number) {
+
+        log("初始化形状，rand是：", rand)
         // 正方形
         if (rand == 0) {
             // 正方形右上
             this.currentBlockPart01.setPosition(30, 30)
             this.currentBlockPart01Pos = v2(18, 5)  // 初始化当前块的位置，相对于 currentBlock
-            log(this.currentBlockPart01Pos)
-
 
             //正方形 左上
             this.currentBlockPart02.setPosition(-30, 30)
@@ -311,7 +357,31 @@ export class core extends Component {
             this.currentBlockPart04.setPosition(60, 0)
             this.currentBlockPart04Pos = v2(17, 6)
         }
+
+        // log("this.currentBlockPart01 是")
+        // log(this.currentBlockPart01.position)
+        // log("this.currentBlockPart02 是")
+        // log(this.currentBlockPart02.position)
+        // log("this.currentBlockPart03 是")
+        // log(this.currentBlockPart03.position)
+        // log("this.currentBlockPart04 是")
+        // log(this.currentBlockPart04.position)
+
+
+        // log("this.currentBlockPart01Pos 是")
+        // log(this.currentBlockPart01Pos)
+        // log("this.currentBlockPart02Pos 是")
+        // log(this.currentBlockPart02Pos)
+        // log("this.currentBlockPart03Pos 是")
+        // log(this.currentBlockPart03Pos)
+        // log("this.currentBlockPart04Pos 是")
+        // log(this.currentBlockPart04Pos)
+
+
         this.checkCurrentBlockPos()
+
+        log("构建以后的box")
+        log(this.box)
     }
 
     // 读取当前操作方块集合的位置信息
@@ -381,11 +451,11 @@ export class core extends Component {
 
     // 判断是否碰撞到其他方块 -下
     isClashBlockBottom() {
-        let tmp: Node = new Node
-        if (this.box[this.currentBlockPart01Pos.x - 1][this.currentBlockPart01Pos.y] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart01Pos.x - 1][this.currentBlockPart01Pos.y]) ||
-            this.box[this.currentBlockPart02Pos.x - 1][this.currentBlockPart02Pos.y] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart02Pos.x - 1][this.currentBlockPart02Pos.y]) ||
-            this.box[this.currentBlockPart03Pos.x - 1][this.currentBlockPart03Pos.y] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart03Pos.x - 1][this.currentBlockPart03Pos.y]) ||
-            this.box[this.currentBlockPart04Pos.x - 1][this.currentBlockPart04Pos.y] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart04Pos.x - 1][this.currentBlockPart04Pos.y])) {
+
+        if (this.box[this.currentBlockPart01Pos.x - 1][this.currentBlockPart01Pos.y] != null && !this.isCurrentBlockChild(this.box[this.currentBlockPart01Pos.x - 1][this.currentBlockPart01Pos.y]) ||
+            this.box[this.currentBlockPart02Pos.x - 1][this.currentBlockPart02Pos.y] != null && !this.isCurrentBlockChild(this.box[this.currentBlockPart02Pos.x - 1][this.currentBlockPart02Pos.y]) ||
+            this.box[this.currentBlockPart03Pos.x - 1][this.currentBlockPart03Pos.y] != null && !this.isCurrentBlockChild(this.box[this.currentBlockPart03Pos.x - 1][this.currentBlockPart03Pos.y]) ||
+            this.box[this.currentBlockPart04Pos.x - 1][this.currentBlockPart04Pos.y] != null && !this.isCurrentBlockChild(this.box[this.currentBlockPart04Pos.x - 1][this.currentBlockPart04Pos.y])) {
             return true
         }
         return false
@@ -394,11 +464,10 @@ export class core extends Component {
     // 判断是否碰撞到其他方块 -左
     isClashBlockLeft() {
         //向左检测方块碰撞
-        let tmp: Node = new Node
-        if (this.box[this.currentBlockPart01Pos.x][this.currentBlockPart01Pos.y - 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart01Pos.x][this.currentBlockPart01Pos.y - 1]) ||
-            this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y - 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y - 1]) ||
-            this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y - 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y - 1]) ||
-            this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y - 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y - 1])) {
+        if (this.box[this.currentBlockPart01Pos.x][this.currentBlockPart01Pos.y - 1] != null && !this.isCurrentBlockChild(this.box[this.currentBlockPart01Pos.x][this.currentBlockPart01Pos.y - 1]) ||
+            this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y - 1] != null && !this.isCurrentBlockChild(this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y - 1]) ||
+            this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y - 1] != null && !this.isCurrentBlockChild(this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y - 1]) ||
+            this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y - 1] != null && !this.isCurrentBlockChild(this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y - 1])) {
             return true
         }
         return false
@@ -407,11 +476,10 @@ export class core extends Component {
     // 判断是否碰撞到其他方块 -右
     isClashBlockRight() {
         //向右检测方块碰撞
-        let tmp: Node = new Node
-        if (this.box[this.currentBlockPart01Pos.x][this.currentBlockPart01Pos.y + 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart01Pos.x][this.currentBlockPart01Pos.y + 1]) ||
-            this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y + 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y + 1]) ||
-            this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y + 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y + 1]) ||
-            this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y + 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y + 1])) {
+        if (this.box[this.currentBlockPart01Pos.x][this.currentBlockPart01Pos.y + 1] != null && !this.isCurrentBlockChild(this.box[this.currentBlockPart01Pos.x][this.currentBlockPart01Pos.y + 1]) ||
+            this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y + 1] != null && !this.isCurrentBlockChild(this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y + 1]) ||
+            this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y + 1] != null && !this.isCurrentBlockChild(this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y + 1]) ||
+            this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y + 1] != null && !this.isCurrentBlockChild(this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y + 1])) {
             return true
         }
         return false
@@ -419,7 +487,10 @@ export class core extends Component {
 
     // 旋转
     revolveShape() {
-        // this.revolveShapePart()
+        this.revolveShapePart(this.currentBlockPart01, this.currentBlockPart01Pos)
+        this.revolveShapePart(this.currentBlockPart02, this.currentBlockPart02Pos)
+        this.revolveShapePart(this.currentBlockPart03, this.currentBlockPart03Pos)
+        this.revolveShapePart(this.currentBlockPart04, this.currentBlockPart04Pos)
     }
 
     // 具体旋转的位置
@@ -532,14 +603,23 @@ export class core extends Component {
     // 自动下落
     autoDown() {
         this.schedule(() => {
+            log("this.currentBlock的最新位置")
+            log(this.currentBlock.position)
             if (this.isClashBottom()) {
-
+                log("直接到底了")
+                this.deleteRow()
+                this.initBlock()
             }
             else if (this.isClashBlockBottom()) {
-
+                log("碰到底部其他方块")
+                this.deleteRow()
+                this.initBlock()
             }
             else {
-                this.currentBlock.setPosition(this.currentBlock.position.x, this.currentBlock.position.y - 60)
+                log("向下滚动")
+                let tempx = this.currentBlock.position.x
+                let tempy = this.currentBlock.position.y
+                this.currentBlock.setPosition(tempx, tempy - 60)
                 this.deleteCurrentBlockPos()
                 this.currentBlockPart01Pos.x -= 1
                 this.currentBlockPart02Pos.x -= 1
@@ -547,8 +627,50 @@ export class core extends Component {
                 this.currentBlockPart04Pos.x -= 1
                 this.checkCurrentBlockPos()
             }
-        }, 1)
+        }, 20)
 
+    }
+
+    //行消除检测
+    deleteRow() {
+        for (let i = 0; i < 18; i++) {
+            let count = 0;
+            for (let j = 0; j < 10; j++) {
+                if (this.box[i][j] != null) {
+                    count++;
+                }
+            }
+            if (count == 10) {
+                for (let j = 0; j < 10; j++) {
+                    this.box[i][j].removeFromParent();
+                    this.box[i][j] = null!;
+                }
+                this.rowDown(i);
+                i--;
+            }
+        }
+    }
+
+    //全体方块向下移动一格
+    rowDown(i: number) {
+        //记录i值，即被当前被消除行
+        let k = i;
+        //列遍历
+        for (let j = 0; j < 10; j++) {
+            //temp:用于计算当前被消除行上面有多少行的方块元素（包括中间层存在镂空）
+            let temp = -1;
+            for (i = k; i < 18; i++) {
+                temp++;
+                if (this.box[i][j] != null) {
+                    this.box[i - 1][j] = this.box[i][j];
+                    this.box[i][j].setPosition(this.box[i][j].position.x, this.box[i][j].position.y - 60);
+                    if (this.box[i + 1][j] == null) {
+                        this.box[temp + k][j] = null!;
+                    }
+
+                }
+            }
+        }
     }
 }
 
