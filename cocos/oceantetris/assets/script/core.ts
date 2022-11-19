@@ -2,17 +2,17 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-15 22:58:20
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-19 14:14:43
+ * @LastEditTime: 2022-11-19 20:21:45
  * @FilePath: /oceantetris/assets/script/core.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, Node, Prefab, Vec2, instantiate, v2, log, find } from 'cc';
-const { ccclass, property } = _decorator;
+import { _decorator, Component, Node, Prefab, Vec2, instantiate, v2, log, find } from 'cc'
+const { ccclass, property } = _decorator
 
 @ccclass('core')
 export class core extends Component {
     start() {
-
+    
     }
 
     update(deltaTime: number) {
@@ -20,51 +20,51 @@ export class core extends Component {
     }
 
     @property(Prefab)
-    block_0: Prefab = new Prefab;
+    block_0: Prefab = null!
     @property(Prefab)
-    block_1: Prefab = new Prefab;
+    block_1: Prefab = null!
     @property(Prefab)
-    block_2: Prefab = new Prefab;
+    block_2: Prefab = null!
     @property(Prefab)
-    block_3: Prefab = new Prefab;
+    block_3: Prefab = null!
     @property(Prefab)
-    block_4: Prefab = new Prefab;
+    block_4: Prefab = null!
     @property(Prefab)
-    block_5: Prefab = new Prefab;
+    block_5: Prefab = null!
     @property(Prefab)
-    block_6: Prefab = new Prefab;
+    block_6: Prefab = null!
 
     // 方块集合的中心
     @property(Prefab)
-    currentBlockCentre = null!;
+    currentBlockCentre = null!
 
 
     //整个游戏区域的格子用二维数组保存
-    box: Node[][] = [];
+    box: Node[][] = []
     // 随机数，用于随机块的颜色和形状
-    rand: number | undefined;
+    rand: number = null!
 
     //当前的块
-    currentBlock: Node = new Node;
-    currentBlockPart01: Node = new Node;
-    currentBlockPart02: Node = new Node;
-    currentBlockPart03: Node = new Node;
-    currentBlockPart04: Node = new Node;
+    currentBlock: Node = null!
+    currentBlockPart01: Node = null!
+    currentBlockPart02: Node = null!
+    currentBlockPart03: Node = null!
+    currentBlockPart04: Node = null!
 
     // 当前的位置
-    currentBlockPart01Pos: Vec2 = new Vec2;
-    currentBlockPart02Pos: Vec2 = new Vec2;
-    currentBlockPart03Pos: Vec2 = new Vec2;
-    currentBlockPart04Pos: Vec2 = new Vec2;
+    currentBlockPart01Pos: Vec2 = null!
+    currentBlockPart02Pos: Vec2 = null!
+    currentBlockPart03Pos: Vec2 = null!
+    currentBlockPart04Pos: Vec2 = null!
 
     // 游戏状态
-    gameState: number | undefined;
+    gameState: number | undefined
 
     InitBox() {
         for (let i = 0; i < 20; i++) {
-            this.box[i] = [];
+            this.box[i] = []
             for (let j = 0; j < 10; j++) {
-                this.box[i][j] = new Node;
+                this.box[i][j] = null!
             }
         }
         // 生成不同的方块集合
@@ -74,6 +74,7 @@ export class core extends Component {
 
     // 生成不同的方块集合
     initBlock() {
+        log("开发初始化方块")
         this.rand = Math.floor(7 * Math.random())
         this.initColor(this.rand)
         this.initShape(this.rand)
@@ -323,10 +324,10 @@ export class core extends Component {
 
     // 清除上个位置的当前操作方块集合的位置信息
     deleteCurrentBlockPos() {
-        this.box[this.currentBlockPart01Pos.x][this.currentBlockPart01Pos.y] = new Node;
-        this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y] = new Node;
-        this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y] = new Node;
-        this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y] = new Node;
+        this.box[this.currentBlockPart01Pos.x][this.currentBlockPart01Pos.y] = null!
+        this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y] = null!
+        this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y] = null!
+        this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y] = null!
     }
 
     // 判断是否到达左边界
@@ -385,7 +386,7 @@ export class core extends Component {
             this.box[this.currentBlockPart02Pos.x - 1][this.currentBlockPart02Pos.y] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart02Pos.x - 1][this.currentBlockPart02Pos.y]) ||
             this.box[this.currentBlockPart03Pos.x - 1][this.currentBlockPart03Pos.y] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart03Pos.x - 1][this.currentBlockPart03Pos.y]) ||
             this.box[this.currentBlockPart04Pos.x - 1][this.currentBlockPart04Pos.y] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart04Pos.x - 1][this.currentBlockPart04Pos.y])) {
-            return true;
+            return true
         }
         return false
     }
@@ -398,7 +399,7 @@ export class core extends Component {
             this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y - 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y - 1]) ||
             this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y - 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y - 1]) ||
             this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y - 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y - 1])) {
-            return true;
+            return true
         }
         return false
     }
@@ -411,9 +412,9 @@ export class core extends Component {
             this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y + 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y + 1]) ||
             this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y + 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y + 1]) ||
             this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y + 1] != tmp && !this.isCurrentBlockChild(this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y + 1])) {
-            return true;
+            return true
         }
-        return false;
+        return false
     }
 
     // 旋转
@@ -500,11 +501,6 @@ export class core extends Component {
 
         }
 
-
-
-
-
-
     }
 
 
@@ -522,6 +518,8 @@ export class core extends Component {
         let resumeBtn = find("Canvas/GameContainer/ResumeBtn")
         pauseBtn!.active = false
         resumeBtn!.active = true
+        log("点击了一个pause按钮")
+        this.gameStart()
     }
 
     gameResume() {
