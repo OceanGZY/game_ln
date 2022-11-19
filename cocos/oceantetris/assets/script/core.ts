@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-15 22:58:20
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-17 19:56:17
+ * @LastEditTime: 2022-11-19 14:14:43
  * @FilePath: /oceantetris/assets/script/core.ts
  * @Description: 注释信息
  */
@@ -36,7 +36,7 @@ export class core extends Component {
 
     // 方块集合的中心
     @property(Prefab)
-    currentBlockCentre: Prefab = new Prefab;
+    currentBlockCentre = null!;
 
 
     //整个游戏区域的格子用二维数组保存
@@ -68,7 +68,15 @@ export class core extends Component {
             }
         }
         // 生成不同的方块集合
+        this.initBlock()
+    }
 
+
+    // 生成不同的方块集合
+    initBlock() {
+        this.rand = Math.floor(7 * Math.random())
+        this.initColor(this.rand)
+        this.initShape(this.rand)
     }
 
     // 设置颜色
@@ -136,7 +144,7 @@ export class core extends Component {
 
 
         // 长条形的颜色
-        if (rand = 5) {
+        if (rand == 5) {
             this.currentBlockPart01 = instantiate(this.block_5)
             this.currentBlockPart02 = instantiate(this.block_5)
             this.currentBlockPart03 = instantiate(this.block_5)
@@ -161,7 +169,6 @@ export class core extends Component {
         }
 
     }
-
 
     // 设置形状
     initShape(rand: number) {
@@ -306,12 +313,22 @@ export class core extends Component {
         this.checkCurrentBlockPos()
     }
 
+    // 读取当前操作方块集合的位置信息
     checkCurrentBlockPos() {
         this.box[this.currentBlockPart01Pos.x][this.currentBlockPart01Pos.y] = this.currentBlockPart01
         this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y] = this.currentBlockPart02
         this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y] = this.currentBlockPart03
         this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y] = this.currentBlockPart04
     }
+
+    // 清除上个位置的当前操作方块集合的位置信息
+    deleteCurrentBlockPos() {
+        this.box[this.currentBlockPart01Pos.x][this.currentBlockPart01Pos.y] = new Node;
+        this.box[this.currentBlockPart02Pos.x][this.currentBlockPart02Pos.y] = new Node;
+        this.box[this.currentBlockPart03Pos.x][this.currentBlockPart03Pos.y] = new Node;
+        this.box[this.currentBlockPart04Pos.x][this.currentBlockPart04Pos.y] = new Node;
+    }
+
     // 判断是否到达左边界
     isClashLeft() {
         if (
@@ -496,6 +513,8 @@ export class core extends Component {
         let gameCont = find("Canvas/GameContainer")
         startBtn!.active = false
         gameCont!.active = true
+        this.InitBox()
+        this.autoDown()
     }
 
     gamePause() {
@@ -510,6 +529,28 @@ export class core extends Component {
         let resumeBtn = find("Canvas/GameContainer/ResumeBtn")
         pauseBtn!.active = true
         resumeBtn!.active = false
+    }
+
+    // 自动下落
+    autoDown() {
+        this.schedule(() => {
+            if (this.isClashBottom()) {
+
+            }
+            else if (this.isClashBlockBottom()) {
+
+            }
+            else {
+                this.currentBlock.setPosition(this.currentBlock.position.x, this.currentBlock.position.y - 60)
+                this.deleteCurrentBlockPos()
+                this.currentBlockPart01Pos.x -= 1
+                this.currentBlockPart02Pos.x -= 1
+                this.currentBlockPart03Pos.x -= 1
+                this.currentBlockPart04Pos.x -= 1
+                this.checkCurrentBlockPos()
+            }
+        }, 1)
+
     }
 }
 
