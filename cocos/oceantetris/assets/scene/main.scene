@@ -1189,6 +1189,9 @@
       "__uuid__": "31da4167-0bff-4e82-a9f1-bdee6d39c6e9",
       "__expectedType__": "cc.Prefab"
     },
+    "bgCont": {
+      "__id__": 5
+    },
     "_id": "516arRAC9PkJ5jCyCAk5LS"
   },
   {
