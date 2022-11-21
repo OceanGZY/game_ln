@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:27
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-21 21:58:32
+ * @LastEditTime: 2022-11-21 22:44:53
  * @FilePath: \oceantetris\assets\scripts\core.ts
  * @Description: 注释信息
  */
@@ -400,6 +400,40 @@ export class core extends Component {
                 this.checkCurrentBlockPos()
             }
         }, 0.5)
+    }
+
+
+
+    // 删除行
+    deleteRow() {
+        for (let i = 0; i < 18; i++) {
+            let count = 0
+            for (let j = 0; j < 10; j++) {
+                if (this.box[i][j] != null) {
+                    count++
+                }
+            }
+
+            if (count == 10) {
+                for (let k = 0; k < 10; k++) {
+                    this.box[i][k].removeFromParent()
+                    this.box[i][k] = null!
+                }
+            }
+            this.rowDown(i)
+            i--
+        }
+    }
+
+    // 整体下移动
+    rowDown(i: number) {
+        let k = i
+
+        for (let j = 0; j < 10; j++) {
+
+            let temp=-1
+            
+        }
     }
 
     // 游戏状态 0已结束 1运行中 2已暂停
