@@ -2,17 +2,18 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:27
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-21 16:30:28
+ * @LastEditTime: 2022-11-21 19:48:24
  * @FilePath: /oceantetris/assets/scripts/init.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, Node, Prefab, instantiate, log } from 'cc';
+import { _decorator, Component, Node, Prefab, instantiate, log, Vec2, v2 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('init')
 export class init extends Component {
     start() {
-
+        this.initBox()
+        this.autoDown()
     }
 
     update(deltaTime: number) {
@@ -20,8 +21,6 @@ export class init extends Component {
     }
     onLoad() {
         this.initBgBlock()
-        this.initGameBlock()
-        this.autoDown()
     }
 
     @property(Node)
@@ -55,13 +54,19 @@ export class init extends Component {
 
     rand: number = null!
     // 游戏格子
-    box: Node[][] = null!
+    box: Node[][] = []
     // 当前块
     curBlock: Node = null!
     curBlockP1: Node = null!
     curBlockP2: Node = null!
     curBlockP3: Node = null!
     curBlockP4: Node = null!
+
+    curBlockP1Pos: Vec2 = null!
+    curBlockP2Pos: Vec2 = null!
+    curBlockP3Pos: Vec2 = null!
+    curBlockP4Pos: Vec2 = null!
+
 
     initBgBlock() {
         log("初始化程序")
@@ -74,7 +79,13 @@ export class init extends Component {
 
 
     initBox() {
-
+        for (let i = 0; i < 24; i++) {
+            this.box[i] = []
+            for (let j = 0; j < 10; j++) {
+                this.box[i][j] = null!
+            }
+        }
+        this.initGameBlock()
 
     }
 
@@ -84,8 +95,8 @@ export class init extends Component {
         //     var _gameBlock = instantiate(this.gameBlock0)
         //     _gameBlock.parent = this.gcLayout
         // }
-        this.createBlockColor(this.rand)
-        this.createBlockShape(this.rand)
+        this.createBlockColor(5)
+        this.createBlockShape(5)
 
     }
 
@@ -114,7 +125,7 @@ export class init extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock1)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(27, 569)
+                this.curBlock.setPosition(27, 596)
 
                 log("Z颜色的位置,", this.curBlock.position)
 
@@ -129,13 +140,12 @@ export class init extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock2)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(27, 569)
+                this.curBlock.setPosition(27, 596)
 
                 log("反Z颜色的位置,", this.curBlock.position)
                 break;
 
             // 左L
-
             case 3:
                 log("初始化左L形颜色")
                 this.curBlockP1 = instantiate(this.gameBlock3)
@@ -144,13 +154,13 @@ export class init extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock3)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(27, 569)
+                this.curBlock.setPosition(27, 596)
 
                 log("左L颜色的位置,", this.curBlock.position)
 
                 break;
-            // 右L
 
+            // 右L
             case 4:
                 log("初始化右L形颜色")
                 this.curBlockP1 = instantiate(this.gameBlock4)
@@ -159,7 +169,7 @@ export class init extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock4)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(27, 569)
+                this.curBlock.setPosition(27, 596)
 
                 log("右L颜色的位置,", this.curBlock.position)
                 break;
@@ -172,7 +182,7 @@ export class init extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock5)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(27, 569)
+                this.curBlock.setPosition(27, 546)
 
                 log("T颜色的位置,", this.curBlock.position)
                 break;
@@ -186,7 +196,7 @@ export class init extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock6)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(27, 569)
+                this.curBlock.setPosition(27, 596)
 
                 log("T颜色的位置,", this.curBlock.position)
 
@@ -211,6 +221,11 @@ export class init extends Component {
                 this.curBlockP2!.setPosition(-26, 26) //左上
                 this.curBlockP3!.setPosition(26, -26) // 右下
                 this.curBlockP4!.setPosition(-26, -26) // 左下
+
+                this.curBlockP1Pos = v2(21, 5)
+                this.curBlockP2Pos = v2(21, 4)
+                this.curBlockP3Pos = v2(20, 5)
+                this.curBlockP4Pos = v2(20, 4)
                 break;
 
             // Z
@@ -220,15 +235,25 @@ export class init extends Component {
                 this.curBlockP2!.setPosition(0, 0) //中
                 this.curBlockP3!.setPosition(0, -52) // 下
                 this.curBlockP4!.setPosition(52, -52) // 下右
+
+                this.curBlockP1Pos = v2(21, 4)
+                this.curBlockP2Pos = v2(21, 5)
+                this.curBlockP3Pos = v2(20, 5)
+                this.curBlockP4Pos = v2(20, 6)
                 break;
 
             // 反Z
             case 2:
                 log("初始化反Z形")
-                this.curBlockP1!.setPosition(52, 52) //上右
+                this.curBlockP1!.setPosition(52, 0) //上右
                 this.curBlockP2!.setPosition(0, 0) //中
                 this.curBlockP3!.setPosition(0, -52) // 下
                 this.curBlockP4!.setPosition(-52, -52) // 下左
+
+                this.curBlockP1Pos = v2(21, 6)
+                this.curBlockP2Pos = v2(21, 5)
+                this.curBlockP3Pos = v2(20, 5)
+                this.curBlockP4Pos = v2(20, 4)
                 break;
 
             // 左L
@@ -238,6 +263,11 @@ export class init extends Component {
                 this.curBlockP2!.setPosition(0, 0) //中
                 this.curBlockP3!.setPosition(0, -52) // 下
                 this.curBlockP4!.setPosition(52, -52) // 下右
+
+                this.curBlockP1Pos = v2(22, 5)
+                this.curBlockP2Pos = v2(21, 5)
+                this.curBlockP3Pos = v2(20, 5)
+                this.curBlockP4Pos = v2(20, 6)
                 break;
 
             // 右L
@@ -247,6 +277,11 @@ export class init extends Component {
                 this.curBlockP2!.setPosition(0, 0) //中
                 this.curBlockP3!.setPosition(0, -52) // 下
                 this.curBlockP4!.setPosition(-52, -52) // 下左
+
+                this.curBlockP1Pos = v2(22, 5)
+                this.curBlockP2Pos = v2(21, 5)
+                this.curBlockP3Pos = v2(20, 5)
+                this.curBlockP4Pos = v2(20, 4)
                 break;
 
             // T
@@ -256,6 +291,11 @@ export class init extends Component {
                 this.curBlockP2!.setPosition(0, 0) //中
                 this.curBlockP3!.setPosition(-52, 0) // 左
                 this.curBlockP4!.setPosition(52, 0) // 右
+
+                this.curBlockP1Pos = v2(21, 5)
+                this.curBlockP2Pos = v2(20, 5)
+                this.curBlockP3Pos = v2(20, 4)
+                this.curBlockP4Pos = v2(20, 6)
                 break;
 
             // 长条
@@ -265,21 +305,108 @@ export class init extends Component {
                 this.curBlockP2!.setPosition(0, 52) //上
                 this.curBlockP3!.setPosition(0, 0) // 中
                 this.curBlockP4!.setPosition(0, -52) // 下
+
+                this.curBlockP1Pos = v2(23, 5)
+                this.curBlockP2Pos = v2(22, 5)
+                this.curBlockP3Pos = v2(21, 5)
+                this.curBlockP4Pos = v2(20, 5)
                 break;
 
             default:
                 break;
 
         }
+
+        this.checkCurrentBlockPos()
     }
+
+
+
+
+
+
+    // 判断是否触碰下边界
+    isClashBottom() {
+        if (
+            this.curBlockP1Pos.x - 1 < 0 ||
+            this.curBlockP2Pos.x - 1 < 0 ||
+            this.curBlockP3Pos.x - 1 < 0 ||
+            this.curBlockP4Pos.x - 1 < 0
+        ) {
+            return true
+        }
+        return false
+    }
+
+    // 检测是否碰到下方其他方块
+    isClashBottomBlock() {
+        log(this.box)
+        log(this.box[this.curBlockP1Pos.x - 1][this.curBlockP1Pos.y])
+        if (
+            (this.box[this.curBlockP1Pos.x - 1][this.curBlockP1Pos.y] != null && !this.isCurrentBlockChild(this.box[this.curBlockP1Pos.x - 1][this.curBlockP1Pos.y])) ||
+            (this.box[this.curBlockP2Pos.x - 1][this.curBlockP2Pos.y] != null && !this.isCurrentBlockChild(this.box[this.curBlockP2Pos.x - 1][this.curBlockP2Pos.y])) ||
+            (this.box[this.curBlockP3Pos.x - 1][this.curBlockP3Pos.y] != null && !this.isCurrentBlockChild(this.box[this.curBlockP3Pos.x - 1][this.curBlockP3Pos.y])) ||
+            (this.box[this.curBlockP4Pos.x - 1][this.curBlockP4Pos.y] != null && !this.isCurrentBlockChild(this.box[this.curBlockP4Pos.x - 1][this.curBlockP4Pos.y]))
+        ) {
+            return true
+        }
+        return false
+    }
+
+    // 检测是否是当前操作方块集合的子块
+    isCurrentBlockChild(tNode: Node): boolean {
+        for (let i = 0; i < 4; i++) {
+            if (tNode === this.curBlock.children[i]) {
+                return true
+            }
+        }
+        return false
+    }
+
+    // 写入当前操作方块的位置信息
+    checkCurrentBlockPos() {
+        this.box[this.curBlockP1Pos.x][this.curBlockP1Pos.y] = this.curBlockP1
+        this.box[this.curBlockP2Pos.x][this.curBlockP2Pos.y] = this.curBlockP2
+        this.box[this.curBlockP3Pos.x][this.curBlockP3Pos.y] = this.curBlockP3
+        this.box[this.curBlockP4Pos.x][this.curBlockP4Pos.y] = this.curBlockP4
+    }
+
+    // 删除当前操作方块的位置信息
+    deleteCurrentBlockPos() {
+        this.box[this.curBlockP1Pos.x][this.curBlockP1Pos.y] = null!
+        this.box[this.curBlockP2Pos.x][this.curBlockP2Pos.y] = null!
+        this.box[this.curBlockP3Pos.x][this.curBlockP3Pos.y] = null!
+        this.box[this.curBlockP4Pos.x][this.curBlockP4Pos.y] = null!
+    }
+
+
+
 
 
     // 自动下落
     autoDown() {
         this.schedule(() => {
-            this.curBlock.setPosition(this.curBlock.position.x, this.curBlock.position.y - 52)
-        }, 1)
+            if (this.isClashBottom()) {
+                log("碰到底部了")
+                this.initGameBlock()
+
+            } else if (this.isClashBottomBlock()) {
+                log("碰到下面的方块了")
+                this.initGameBlock()
+
+            } else {
+                this.curBlock.setPosition(this.curBlock.position.x, this.curBlock.position.y - 52)
+                this.deleteCurrentBlockPos()
+                this.curBlockP1Pos.x -= 1
+                this.curBlockP2Pos.x -= 1
+                this.curBlockP3Pos.x -= 1
+                this.curBlockP4Pos.x -= 1
+                this.checkCurrentBlockPos()
+            }
+        }, 0.5)
     }
+
+
 
 }
 
