@@ -2,8 +2,8 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:27
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-21 22:44:53
- * @FilePath: \oceantetris\assets\scripts\core.ts
+ * @LastEditTime: 2022-11-21 23:16:54
+ * @FilePath: /oceantetris/assets/scripts/core.ts
  * @Description: 注释信息
  */
 import { _decorator, Component, Node, Prefab, instantiate, log, Vec2, v2, find } from 'cc';
@@ -388,6 +388,7 @@ export class core extends Component {
 
             } else if (this.isClashBottomBlock()) {
                 log("碰到下面的方块了")
+                this.isGameOver()
                 this.initGameBlock()
 
             } else {
@@ -399,7 +400,7 @@ export class core extends Component {
                 this.curBlockP4Pos.x -= 1
                 this.checkCurrentBlockPos()
             }
-        }, 0.5)
+        }, 0.05)
     }
 
 
@@ -427,12 +428,21 @@ export class core extends Component {
 
     // 整体下移动
     rowDown(i: number) {
+        // 记录当前被消除的行
         let k = i
-
         for (let j = 0; j < 10; j++) {
-
-            let temp=-1
-            
+            // 用于计算当被消除的行 上面有多少行
+            let temp = -1
+            for (let m = k; m < 18; m++) {
+                temp++
+                if (this.box[m][j] != null) {
+                    this.box[m - 1][j] = this.box[m][j]
+                    this.box[m][j].setPosition(this.box[m][j].position.x, this.box[m][j].position.y - 52)
+                    if (this.box[m + 1][j] == null) {
+                        this.box[temp + k][j] = null!
+                    }
+                }
+            }
         }
     }
 
@@ -441,7 +451,9 @@ export class core extends Component {
 
     gameStart() {
         let _gameWelcome = find("Canvas/GameWelcome")
+        let _gameOver = find("Canvas/GameOver")
         _gameWelcome!.active = false
+        _gameOver!.active = false
         this.gameState = 1
         this.initBox()
         this.autoDown()
@@ -457,11 +469,31 @@ export class core extends Component {
 
     }
 
-    isGameOver(): boolean {
-        if (this.gameState == 0) {
-            return true
-        } else {
-            return false
+    gameOver() {
+        this.gameState = 0
+        let _gameOver = find("Canvas/GameOver")
+        _gameOver!.active = true
+        this.enabled = false
+    }
+
+    gameRestart() {
+        this.gameState = 1
+        let _gameOver = find("Canvas/GameOver")
+        _gameOver!.active = false
+        this.enabled = true
+        this.gcLayout.removeAllChildren()
+        this.initBox()
+        this.autoDown()
+    }
+
+
+    isGameOver() {
+        for (let i = 18; i < 20; i++) {
+            for (let j = 0; j < 10; j++) {
+                if (this.box[i][j] != null) {
+                    this.gameOver()
+                }
+            }
         }
     }
 }
