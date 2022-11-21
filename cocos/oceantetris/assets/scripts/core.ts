@@ -2,15 +2,15 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:27
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-21 19:57:08
- * @FilePath: /oceantetris/assets/scripts/init.ts
+ * @LastEditTime: 2022-11-21 21:58:32
+ * @FilePath: \oceantetris\assets\scripts\core.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, Node, Prefab, instantiate, log, Vec2, v2 } from 'cc';
+import { _decorator, Component, Node, Prefab, instantiate, log, Vec2, v2, find } from 'cc';
 const { ccclass, property } = _decorator;
 
-@ccclass('init')
-export class init extends Component {
+@ccclass('core')
+export class core extends Component {
     start() {
         this.initBgBlock()
     }
@@ -400,6 +400,35 @@ export class init extends Component {
                 this.checkCurrentBlockPos()
             }
         }, 0.5)
+    }
+
+    // 游戏状态 0已结束 1运行中 2已暂停
+    gameState: number = null!
+
+    gameStart() {
+        let _gameWelcome = find("Canvas/GameWelcome")
+        _gameWelcome!.active = false
+        this.gameState = 1
+        this.initBox()
+        this.autoDown()
+    }
+
+    gameResume() {
+        this.gameState = 1
+
+    }
+
+    gamePause() {
+        this.gameState = 2
+
+    }
+
+    isGameOver(): boolean {
+        if (this.gameState == 0) {
+            return true
+        } else {
+            return false
+        }
     }
 }
 
