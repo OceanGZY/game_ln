@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:27
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-21 19:48:24
+ * @LastEditTime: 2022-11-21 19:57:08
  * @FilePath: /oceantetris/assets/scripts/init.ts
  * @Description: 注释信息
  */
@@ -12,15 +12,11 @@ const { ccclass, property } = _decorator;
 @ccclass('init')
 export class init extends Component {
     start() {
-        this.initBox()
-        this.autoDown()
+        this.initBgBlock()
     }
 
     update(deltaTime: number) {
 
-    }
-    onLoad() {
-        this.initBgBlock()
     }
 
     @property(Node)
@@ -405,9 +401,6 @@ export class init extends Component {
             }
         }, 0.5)
     }
-
-
-
 }
 
 

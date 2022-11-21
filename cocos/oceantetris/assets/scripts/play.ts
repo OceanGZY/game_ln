@@ -2,18 +2,22 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:59:19
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-20 21:10:19
- * @FilePath: \oceantetris\assets\scripts\play.ts
+ * @LastEditTime: 2022-11-21 20:00:10
+ * @FilePath: /oceantetris/assets/scripts/play.ts
  * @Description: 注释信息
  */
 import { _decorator, Component, Node, find } from 'cc';
+import { init } from "./init"
 const { ccclass, property } = _decorator;
 
 @ccclass('play')
 export class play extends Component {
     start() {
+        this.gameInit = new init
 
     }
+    gameInit: init = null!
+
 
     update(deltaTime: number) {
 
@@ -26,6 +30,8 @@ export class play extends Component {
         let _gameWelcome = find("Canvas/GameWelcome")
         _gameWelcome!.active = false
         this.gameState = 1
+        this.gameInit.initBox()
+        this.gameInit.autoDown()
     }
 
     gameResume() {
