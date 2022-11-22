@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:27
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-22 12:58:51
+ * @LastEditTime: 2022-11-22 15:02:36
  * @FilePath: /oceantetris/assets/scripts/core.ts
  * @Description: 注释信息
  */
@@ -550,6 +550,18 @@ export class core extends Component {
 
     // 自动下落
     autoDown() {
+        let _timer = 0
+        if (this._score < 100) {
+            _timer = 0.4
+        } else if (this._score < 200) {
+            _timer = 0.3
+        } else if (this._score < 300) {
+            _timer = 0.2
+        } else if (this._score < 400) {
+            _timer = 0.1
+        } else {
+            _timer = 0.05
+        }
         this.schedule(() => {
             if (this.isClashBottom()) {
                 log("碰到底部了")
@@ -571,7 +583,7 @@ export class core extends Component {
                 this.curBlockP4Pos.x -= 1
                 this.checkCurrentBlockPos()
             }
-        }, 0.5)
+        }, _timer)
     }
 
     // 删除行
@@ -733,6 +745,7 @@ export class core extends Component {
         let _gameOver = find("Canvas/GameOver")
         _gameOver!.active = true
         find("GameMusic")!.emit("gameover")
+        find("GameMusic")!.emit("bgmStop")
         this.enabled = false
         input.off(Input.EventType.KEY_DOWN, this.onKeyDown, this)
     }
@@ -744,6 +757,9 @@ export class core extends Component {
         this.enabled = true
         this.gcLayout.removeAllChildren()
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this)
+        find("GameMusic")!.emit("bgm")
+        this._score = 0
+        this.scoreValue.string = this._score.toString()
         this.initBox()
         this.autoDown()
     }

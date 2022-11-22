@@ -1,0 +1,13 @@
+{
+  "splash-setting": {
+    "url": "/Users/gaozhiyong/Documents/GitHub/game_ln/cocos/oceantetris/assets/assets/images/newLogo.png",
+    "clearColor": {
+      "x": 0.9215686274509803,
+      "y": 0.9137254901960784,
+      "z": 0.9137254901960784,
+      "w": 1
+    },
+    "totalTime": 2000,
+    "displayWatermark": false
+  }
+}
