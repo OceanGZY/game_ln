@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:27
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-22 17:54:23
+ * @LastEditTime: 2022-11-22 20:08:24
  * @FilePath: /oceantetris/assets/scripts/core.ts
  * @Description: 注释信息
  */
@@ -66,6 +66,7 @@ export class core extends Component {
     rand: number = null!
 
     _score: number = 0
+    _timer: number = 0.5
 
     // 游戏格子
     box: Node[][] = []
@@ -560,18 +561,7 @@ export class core extends Component {
 
     // 自动下落
     autoDown() {
-        let _timer = 0
-        if (this._score < 100) {
-            _timer = 0.4
-        } else if (this._score < 200) {
-            _timer = 0.3
-        } else if (this._score < 300) {
-            _timer = 0.2
-        } else if (this._score < 400) {
-            _timer = 0.1
-        } else {
-            _timer = 0.05
-        }
+        log("最新的_timer是：", this._timer)
         this.schedule(() => {
             if (this.isClashBottom()) {
                 log("碰到底部了")
@@ -593,7 +583,7 @@ export class core extends Component {
                 this.curBlockP4Pos.x -= 1
                 this.checkCurrentBlockPos()
             }
-        }, _timer)
+        }, this._timer)
     }
 
     // 删除行
@@ -612,11 +602,24 @@ export class core extends Component {
                     this.box[i][k] = null!
                     find("GameMusic")!.emit("cleanOneLine")
                     this._score += 1
-                    this.scoreValue.string = this._score.toString()
                 }
                 this.rowDown(i)
                 i--
             }
+        }
+        this.scoreValue.string = this._score.toString()
+        if (this._score < 100) {
+            this._timer = 0.5
+
+        } else if (this._score < 500) {
+            this._timer = 0.4
+        } else if (this._score < 1000) {
+            this._timer = 0.35
+        }
+        else if (this._score < 2000) {
+            this._timer = 0.25
+        } else {
+            this._timer = 0.2
         }
     }
 
@@ -885,6 +888,7 @@ export class core extends Component {
         find("GameMusic")!.emit("bgm")
         this._score = 0
         this.scoreValue.string = this._score.toString()
+        this._timer = 0.5
         this.initBox()
         this.autoDown()
     }
