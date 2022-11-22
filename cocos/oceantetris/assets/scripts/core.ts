@@ -2,17 +2,18 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:27
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-22 01:55:59
+ * @LastEditTime: 2022-11-22 12:58:51
  * @FilePath: /oceantetris/assets/scripts/core.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, Node, Prefab, instantiate, log, Vec2, v2, find, KeyCode, input, Input } from 'cc';
+import { _decorator, Component, Node, Prefab, instantiate, log, Vec2, v2, find, KeyCode, input, Input, Label } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('core')
 export class core extends Component {
     start() {
         this.initBgBlock()
+        this.scoreValue.string = "0"
         find("GameMusic")!.emit("bgm")
     }
 
@@ -49,7 +50,13 @@ export class core extends Component {
     @property(Node)
     testLayout: Node = null!
 
+    @property(Label)
+    scoreValue: Label = null!
+
     rand: number = null!
+
+    _score: number = 0
+
     // 游戏格子
     box: Node[][] = []
     // 当前块
@@ -582,6 +589,8 @@ export class core extends Component {
                     this.box[i][k].removeFromParent()
                     this.box[i][k] = null!
                     find("GameMusic")!.emit("cleanOneLine")
+                    this._score += 1
+                    this.scoreValue.string = this._score.toString()
                 }
                 this.rowDown(i)
                 i--
