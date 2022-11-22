@@ -2,11 +2,11 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:27
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-22 15:02:36
+ * @LastEditTime: 2022-11-22 17:54:23
  * @FilePath: /oceantetris/assets/scripts/core.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, Node, Prefab, instantiate, log, Vec2, v2, find, KeyCode, input, Input, Label } from 'cc';
+import { _decorator, Component, Node, Prefab, instantiate, log, Vec2, v2, find, KeyCode, input, Input, Label, Button } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('core')
@@ -43,6 +43,16 @@ export class core extends Component {
     gameBlock5: Prefab = null!
     @property(Prefab)
     gameBlock6: Prefab = null!
+
+    @property(Button)
+    leftBtn: Button = null!
+    @property(Button)
+    topBtn: Button = null!
+    @property(Button)
+    rightBtn: Button = null!
+    @property(Button)
+    bottomBtn: Button = null!
+
 
     @property(Prefab)
     gameBlockCenter: Prefab = null!
@@ -630,12 +640,15 @@ export class core extends Component {
         }
     }
 
-    // 键盘事件
+    // 键盘按下事件
     onKeyDown(e: any) {
         switch (e.keyCode) {
             case KeyCode.ARROW_LEFT:
                 // 左移
                 log("左移动")
+                find("GameMusic")!.emit("rotate")
+                let _leftBtnNode = this.leftBtn.node
+                _leftBtnNode.setScale(0.8, 0.8)
                 if (this.isClashLeft()) {
                     break
                 } else if (this.isClashLeftBlock()) {
@@ -655,6 +668,8 @@ export class core extends Component {
                 // 右移
                 log("右移动")
                 find("GameMusic")!.emit("rotate")
+                let _rightBtnNode = this.rightBtn.node
+                _rightBtnNode.setScale(0.8, 0.8)
                 if (this.isClashRight()) {
                     break
                 } else if (this.isClashRightBlock()) {
@@ -672,6 +687,8 @@ export class core extends Component {
             case KeyCode.ARROW_UP:
                 //变形
                 find("GameMusic")!.emit("rotate")
+                let _topBtnNode = this.topBtn.node
+                _topBtnNode.setScale(0.8, 0.8)
                 if (this.isClashBottom()) {
                     break
                 } else if (this.isClashBottomBlock()) {
@@ -695,6 +712,8 @@ export class core extends Component {
                 // 手动向下
                 log("下移动")
                 find("GameMusic")!.emit("rotate")
+                let _bottomBtnNode = this.bottomBtn.node
+                _bottomBtnNode.setScale(0.8, 0.8)
                 if (this.isClashBottom()) {
                     break
                 } else if (this.isClashBottomBlock()) {
@@ -715,6 +734,109 @@ export class core extends Component {
         }
     }
 
+    // 键盘弹起事件
+    onKeyUp(e: any) {
+        switch (e.keyCode) {
+            case KeyCode.ARROW_LEFT:
+                let _leftBtnNode = this.leftBtn.node
+                _leftBtnNode.setScale(1, 1)
+                break;
+
+            case KeyCode.ARROW_RIGHT:
+                let _rightBtnNode = this.rightBtn.node
+                _rightBtnNode.setScale(1, 1)
+                break;
+            case KeyCode.ARROW_UP:
+                let _topBtnNode = this.topBtn.node
+                _topBtnNode.setScale(1, 1)
+                break;
+            case KeyCode.ARROW_DOWN:
+                let _bottomBtnNode = this.bottomBtn.node
+                _bottomBtnNode.setScale(1, 1)
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    // 点击left
+    clickLeft() {
+        log("点击left")
+        let _leftBtnNode = this.leftBtn.node
+        _leftBtnNode.on(Input.EventType.TOUCH_START, () => _leftBtnNode.setScale(0.8, 0.8))
+        _leftBtnNode.on(Input.EventType.TOUCH_END, () => _leftBtnNode.setScale(1, 1))
+        find("GameMusic")!.emit("rotate")
+        if (!(this.isClashLeft() ||
+            this.isClashLeftBlock())) {
+            this.curBlock.setPosition(this.curBlock.position.x - 52, this.curBlock.position.y)
+            this.deleteCurrentBlockPos()
+            this.curBlockP1Pos.y -= 1
+            this.curBlockP2Pos.y -= 1
+            this.curBlockP3Pos.y -= 1
+            this.curBlockP4Pos.y -= 1
+            this.checkCurrentBlockPos()
+        }
+    }
+
+    // 点击right
+    clickRight() {
+        log("点击right")
+        let _rightBtnNode = this.rightBtn.node
+        _rightBtnNode.on(Input.EventType.TOUCH_START, () => _rightBtnNode.setScale(0.8, 0.8))
+        _rightBtnNode.on(Input.EventType.TOUCH_END, () => _rightBtnNode.setScale(1, 1))
+        find("GameMusic")!.emit("rotate")
+        if (!(this.isClashRight() ||
+            this.isClashRightBlock())) {
+            this.curBlock.setPosition(this.curBlock.position.x + 52, this.curBlock.position.y)
+            this.deleteCurrentBlockPos()
+            this.curBlockP1Pos.y += 1
+            this.curBlockP2Pos.y += 1
+            this.curBlockP3Pos.y += 1
+            this.curBlockP4Pos.y += 1
+            this.checkCurrentBlockPos()
+        }
+
+    }
+
+    // 点击top
+    clickTop() {
+        log("点击top")
+        let _topBtnNode = this.topBtn.node
+        _topBtnNode.on(Input.EventType.TOUCH_START, () => _topBtnNode.setScale(0.8, 0.8))
+        _topBtnNode.on(Input.EventType.TOUCH_END, () => _topBtnNode.setScale(1, 1))
+        find("GameMusic")!.emit("rotate")
+        if (!(this.isClashBottom() ||
+            this.isClashBottomBlock() ||
+            this.isClashLeft() ||
+            this.isClashLeftBlock() ||
+            this.isClashRight() ||
+            this.isClashRightBlock())) {
+            this.deleteCurrentBlockPos()
+            this.rotateShape()
+            this.checkCurrentBlockPos()
+        }
+    }
+
+    // 点击bottom
+    clickBottom() {
+        log("点击bottom")
+        let _bottomBtnNode = this.bottomBtn.node
+        _bottomBtnNode.on(Input.EventType.TOUCH_START, () => _bottomBtnNode.setScale(0.8, 0.8))
+        _bottomBtnNode.on(Input.EventType.TOUCH_END, () => _bottomBtnNode.setScale(1, 1))
+        find("GameMusic")!.emit("rotate")
+        if (!(this.isClashBottom() ||
+            this.isClashBottomBlock())) {
+            this.curBlock.setPosition(this.curBlock.position.x, this.curBlock.position.y - 52)
+            this.deleteCurrentBlockPos()
+            this.curBlockP1Pos.x -= 1
+            this.curBlockP2Pos.x -= 1
+            this.curBlockP3Pos.x -= 1
+            this.curBlockP4Pos.x -= 1
+            this.checkCurrentBlockPos()
+        }
+    }
+
     // 游戏状态 0已结束 1运行中 2已暂停
     gameState: number = null!
 
@@ -725,6 +847,7 @@ export class core extends Component {
         _gameOver!.active = false
         this.gameState = 1
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this)
+        input.on(Input.EventType.KEY_UP, this.onKeyUp, this)
         this.initBox()
         this.autoDown()
 
@@ -748,6 +871,7 @@ export class core extends Component {
         find("GameMusic")!.emit("bgmStop")
         this.enabled = false
         input.off(Input.EventType.KEY_DOWN, this.onKeyDown, this)
+        input.off(Input.EventType.KEY_UP, this.onKeyUp, this)
     }
 
     gameRestart() {
@@ -757,6 +881,7 @@ export class core extends Component {
         this.enabled = true
         this.gcLayout.removeAllChildren()
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this)
+        input.on(Input.EventType.KEY_UP, this.onKeyUp, this)
         find("GameMusic")!.emit("bgm")
         this._score = 0
         this.scoreValue.string = this._score.toString()
