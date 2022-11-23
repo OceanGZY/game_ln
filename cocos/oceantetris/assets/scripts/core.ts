@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:27
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-22 20:08:24
+ * @LastEditTime: 2022-11-23 11:15:13
  * @FilePath: /oceantetris/assets/scripts/core.ts
  * @Description: 注释信息
  */
@@ -562,28 +562,26 @@ export class core extends Component {
     // 自动下落
     autoDown() {
         log("最新的_timer是：", this._timer)
-        this.schedule(() => {
-            if (this.isClashBottom()) {
-                log("碰到底部了")
-                this.deleteRow()
-                this.initGameBlock()
+        if (this.isClashBottom()) {
+            log("碰到底部了")
+            this.deleteRow()
+            this.initGameBlock()
 
-            } else if (this.isClashBottomBlock()) {
-                log("碰到下面的方块了")
-                this.isGameOver()
-                this.deleteRow()
-                this.initGameBlock()
+        } else if (this.isClashBottomBlock()) {
+            log("碰到下面的方块了")
+            this.isGameOver()
+            this.deleteRow()
+            this.initGameBlock()
 
-            } else {
-                this.curBlock.setPosition(this.curBlock.position.x, this.curBlock.position.y - 52)
-                this.deleteCurrentBlockPos()
-                this.curBlockP1Pos.x -= 1
-                this.curBlockP2Pos.x -= 1
-                this.curBlockP3Pos.x -= 1
-                this.curBlockP4Pos.x -= 1
-                this.checkCurrentBlockPos()
-            }
-        }, this._timer)
+        } else {
+            this.curBlock.setPosition(this.curBlock.position.x, this.curBlock.position.y - 52)
+            this.deleteCurrentBlockPos()
+            this.curBlockP1Pos.x -= 1
+            this.curBlockP2Pos.x -= 1
+            this.curBlockP3Pos.x -= 1
+            this.curBlockP4Pos.x -= 1
+            this.checkCurrentBlockPos()
+        }
     }
 
     // 删除行
@@ -610,16 +608,25 @@ export class core extends Component {
         this.scoreValue.string = this._score.toString()
         if (this._score < 100) {
             this._timer = 0.5
-
-        } else if (this._score < 500) {
+            this.unschedule(this.autoDown)
+            this.schedule(this.autoDown, this._timer)
+        } else if (this._score < 250) {
             this._timer = 0.4
-        } else if (this._score < 1000) {
+            this.unschedule(this.autoDown)
+            this.schedule(this.autoDown, this._timer)
+        } else if (this._score < 500) {
             this._timer = 0.35
+            this.unschedule(this.autoDown)
+            this.schedule(this.autoDown, this._timer)
         }
-        else if (this._score < 2000) {
+        else if (this._score < 1000) {
             this._timer = 0.25
+            this.unschedule(this.autoDown)
+            this.schedule(this.autoDown, this._timer)
         } else {
             this._timer = 0.2
+            this.unschedule(this.autoDown)
+            this.schedule(this.autoDown, this._timer)
         }
     }
 
@@ -852,8 +859,7 @@ export class core extends Component {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this)
         input.on(Input.EventType.KEY_UP, this.onKeyUp, this)
         this.initBox()
-        this.autoDown()
-
+        this.schedule(this.autoDown, this._timer)
     }
 
     gameResume() {
@@ -872,6 +878,7 @@ export class core extends Component {
         _gameOver!.active = true
         find("GameMusic")!.emit("gameover")
         find("GameMusic")!.emit("bgmStop")
+        this.unschedule(this.autoDown)
         this.enabled = false
         input.off(Input.EventType.KEY_DOWN, this.onKeyDown, this)
         input.off(Input.EventType.KEY_UP, this.onKeyUp, this)
@@ -890,7 +897,7 @@ export class core extends Component {
         this.scoreValue.string = this._score.toString()
         this._timer = 0.5
         this.initBox()
-        this.autoDown()
+        this.schedule(this.autoDown, this._timer)
     }
 
 
