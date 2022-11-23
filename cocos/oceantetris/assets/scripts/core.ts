@@ -1,8 +1,8 @@
 /*
  * @Author: OCEAN.GZY
- * @Date: 2022-11-20 20:49:27
+ * @Date: 2022-11-20 20:49:19
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-23 11:15:13
+ * @LastEditTime: 2022-11-23 22:39:11
  * @FilePath: /oceantetris/assets/scripts/core.ts
  * @Description: 注释信息
  */
@@ -126,7 +126,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock0)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(0, 571)
+                this.curBlock.setPosition(0, 395)
 
                 log("正方形颜色的位置,", this.curBlock.position)
                 break;
@@ -140,7 +140,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock1)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(27, 596)
+                this.curBlock.setPosition(19, 412)
 
                 log("Z颜色的位置,", this.curBlock.position)
 
@@ -155,7 +155,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock2)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(27, 596)
+                this.curBlock.setPosition(19, 412)
 
                 log("反Z颜色的位置,", this.curBlock.position)
                 break;
@@ -169,7 +169,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock3)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(27, 596)
+                this.curBlock.setPosition(19, 412)
 
                 log("左L颜色的位置,", this.curBlock.position)
 
@@ -184,7 +184,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock4)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(27, 596)
+                this.curBlock.setPosition(19, 412)
 
                 log("右L颜色的位置,", this.curBlock.position)
                 break;
@@ -197,7 +197,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock5)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(27, 546)
+                this.curBlock.setPosition(19, 378)
 
                 log("T颜色的位置,", this.curBlock.position)
                 break;
@@ -211,7 +211,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock6)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(27, 596)
+                this.curBlock.setPosition(19, 412)
 
                 log("T颜色的位置,", this.curBlock.position)
 
@@ -232,10 +232,10 @@ export class core extends Component {
             //正方形
             case 0:
                 log("初始化正方形")
-                this.curBlockP1!.setPosition(26, 26) //右上
-                this.curBlockP2!.setPosition(-26, 26) //左上
-                this.curBlockP3!.setPosition(26, -26) // 右下
-                this.curBlockP4!.setPosition(-26, -26) // 左下
+                this.curBlockP1!.setPosition(18, 18) //右上
+                this.curBlockP2!.setPosition(-18, 18) //左上
+                this.curBlockP3!.setPosition(18, -18) // 右下
+                this.curBlockP4!.setPosition(-18, -18) // 左下
 
                 this.curBlockP1Pos = v2(21, 5)
                 this.curBlockP2Pos = v2(21, 4)
@@ -246,10 +246,10 @@ export class core extends Component {
             // Z
             case 1:
                 log("初始化Z形")
-                this.curBlockP1!.setPosition(-52, 0) //左
+                this.curBlockP1!.setPosition(-36, 0) //左
                 this.curBlockP2!.setPosition(0, 0) //中
-                this.curBlockP3!.setPosition(0, -52) // 下
-                this.curBlockP4!.setPosition(52, -52) // 下右
+                this.curBlockP3!.setPosition(0, -36) // 下
+                this.curBlockP4!.setPosition(36, -36) // 下右
 
                 this.curBlockP1Pos = v2(21, 4)
                 this.curBlockP2Pos = v2(21, 5)
@@ -260,10 +260,10 @@ export class core extends Component {
             // 反Z
             case 2:
                 log("初始化反Z形")
-                this.curBlockP1!.setPosition(52, 0) //上右
+                this.curBlockP1!.setPosition(36, 0) //上右
                 this.curBlockP2!.setPosition(0, 0) //中
-                this.curBlockP3!.setPosition(0, -52) // 下
-                this.curBlockP4!.setPosition(-52, -52) // 下左
+                this.curBlockP3!.setPosition(0, -36) // 下
+                this.curBlockP4!.setPosition(-36, -36) // 下左
 
                 this.curBlockP1Pos = v2(21, 6)
                 this.curBlockP2Pos = v2(21, 5)
@@ -274,10 +274,10 @@ export class core extends Component {
             // 左L
             case 3:
                 log("初始化左L形")
-                this.curBlockP1!.setPosition(0, 52) //上
+                this.curBlockP1!.setPosition(0, 36) //上
                 this.curBlockP2!.setPosition(0, 0) //中
-                this.curBlockP3!.setPosition(0, -52) // 下
-                this.curBlockP4!.setPosition(52, -52) // 下右
+                this.curBlockP3!.setPosition(0, -36) // 下
+                this.curBlockP4!.setPosition(36, -36) // 下右
 
                 this.curBlockP1Pos = v2(22, 5)
                 this.curBlockP2Pos = v2(21, 5)
@@ -288,10 +288,10 @@ export class core extends Component {
             // 右L
             case 4:
                 log("初始化右L形")
-                this.curBlockP1!.setPosition(0, 52) //上
+                this.curBlockP1!.setPosition(0, 36) //上
                 this.curBlockP2!.setPosition(0, 0) //中
-                this.curBlockP3!.setPosition(0, -52) // 下
-                this.curBlockP4!.setPosition(-52, -52) // 下左
+                this.curBlockP3!.setPosition(0, -36) // 下
+                this.curBlockP4!.setPosition(-36, -36) // 下左
 
                 this.curBlockP1Pos = v2(22, 5)
                 this.curBlockP2Pos = v2(21, 5)
@@ -302,10 +302,10 @@ export class core extends Component {
             // T
             case 5:
                 log("初始化T形")
-                this.curBlockP1!.setPosition(0, 52) //上
+                this.curBlockP1!.setPosition(0, 36) //上
                 this.curBlockP2!.setPosition(0, 0) //中
-                this.curBlockP3!.setPosition(-52, 0) // 左
-                this.curBlockP4!.setPosition(52, 0) // 右
+                this.curBlockP3!.setPosition(-36, 0) // 左
+                this.curBlockP4!.setPosition(36, 0) // 右
 
                 this.curBlockP1Pos = v2(21, 5)
                 this.curBlockP2Pos = v2(20, 5)
@@ -316,10 +316,10 @@ export class core extends Component {
             // 长条
             case 6:
                 log("初始化竖形")
-                this.curBlockP1!.setPosition(0, 104) //上上
-                this.curBlockP2!.setPosition(0, 52) //上
+                this.curBlockP1!.setPosition(0, 72) //上上
+                this.curBlockP2!.setPosition(0, 36) //上
                 this.curBlockP3!.setPosition(0, 0) // 中
-                this.curBlockP4!.setPosition(0, -52) // 下
+                this.curBlockP4!.setPosition(0, -36) // 下
 
                 this.curBlockP1Pos = v2(23, 5)
                 this.curBlockP2Pos = v2(22, 5)
@@ -433,8 +433,8 @@ export class core extends Component {
     rotateShapePart(tNode: Node, tPos: Vec2) {
         log(tNode.position)
 
-        let mParamX = Math.abs(tNode.position.x / 52)
-        let mParamY = Math.abs(tNode.position.y / 52)
+        let mParamX = Math.abs(tNode.position.x / 36)
+        let mParamY = Math.abs(tNode.position.y / 36)
 
         let mParamMax = Math.max(mParamX, mParamY)
 
@@ -478,7 +478,7 @@ export class core extends Component {
         // 第一象限 (右上)
         else if (tNode.position.x > 0 && tNode.position.y > 0) {
             log("从右上顺时针旋转")
-            if (tNode.position.x >= 52 && tNode.position.y >= 52) {
+            if (tNode.position.x >= 36 && tNode.position.y >= 36) {
                 tPos.x -= 2
             } else {
                 tPos.x -= 1
@@ -492,7 +492,7 @@ export class core extends Component {
         // 第四象限 (右下)
         else if (tNode.position.x > 0 && tNode.position.y < 0) {
             log("从右下顺时针旋转")
-            if (tNode.position.x >= 52 && tNode.position.y <= -52) {
+            if (tNode.position.x >= 36 && tNode.position.y <= -36) {
                 tPos.y -= 2
             } else {
                 tPos.y -= 1
@@ -506,7 +506,7 @@ export class core extends Component {
         // 第三象限 (左下)
         else if (tNode.position.x < 0 && tNode.position.y < 0) {
             log("从左下顺时针旋转")
-            if (tNode.position.x <= -52 && tNode.position.y <= -52) {
+            if (tNode.position.x <= -36 && tNode.position.y <= -36) {
                 tPos.x += 2
             } else {
                 tPos.x += 1
@@ -519,7 +519,7 @@ export class core extends Component {
         // 第二象限 (左上)
         else if (tNode.position.x < 0 && tNode.position.y > 0) {
             log("从左上顺时针旋转")
-            if (tNode.position.x <= -52 && tNode.position.y >= 52) {
+            if (tNode.position.x <= -36 && tNode.position.y >= 36) {
                 tPos.y += 2
             } else {
                 tPos.y += 1
@@ -574,7 +574,7 @@ export class core extends Component {
             this.initGameBlock()
 
         } else {
-            this.curBlock.setPosition(this.curBlock.position.x, this.curBlock.position.y - 52)
+            this.curBlock.setPosition(this.curBlock.position.x, this.curBlock.position.y - 36)
             this.deleteCurrentBlockPos()
             this.curBlockP1Pos.x -= 1
             this.curBlockP2Pos.x -= 1
@@ -641,7 +641,7 @@ export class core extends Component {
                 temp++
                 if (this.box[m][j] != null) {
                     this.box[m - 1][j] = this.box[m][j]
-                    this.box[m][j].setPosition(this.box[m][j].position.x, this.box[m][j].position.y - 52)
+                    this.box[m][j].setPosition(this.box[m][j].position.x, this.box[m][j].position.y - 36)
                     if (this.box[m + 1][j] == null) {
                         this.box[temp + k][j] = null!
                     }
@@ -664,7 +664,7 @@ export class core extends Component {
                 } else if (this.isClashLeftBlock()) {
                     break
                 } else {
-                    this.curBlock.setPosition(this.curBlock.position.x - 52, this.curBlock.position.y)
+                    this.curBlock.setPosition(this.curBlock.position.x - 36, this.curBlock.position.y)
                     this.deleteCurrentBlockPos()
                     this.curBlockP1Pos.y -= 1
                     this.curBlockP2Pos.y -= 1
@@ -685,7 +685,7 @@ export class core extends Component {
                 } else if (this.isClashRightBlock()) {
                     break
                 } else {
-                    this.curBlock.setPosition(this.curBlock.position.x + 52, this.curBlock.position.y)
+                    this.curBlock.setPosition(this.curBlock.position.x + 36, this.curBlock.position.y)
                     this.deleteCurrentBlockPos()
                     this.curBlockP1Pos.y += 1
                     this.curBlockP2Pos.y += 1
@@ -729,7 +729,7 @@ export class core extends Component {
                 } else if (this.isClashBottomBlock()) {
                     break
                 } else {
-                    this.curBlock.setPosition(this.curBlock.position.x, this.curBlock.position.y - 52)
+                    this.curBlock.setPosition(this.curBlock.position.x, this.curBlock.position.y - 36)
                     this.deleteCurrentBlockPos()
                     this.curBlockP1Pos.x -= 1
                     this.curBlockP2Pos.x -= 1
@@ -779,7 +779,7 @@ export class core extends Component {
         find("GameMusic")!.emit("rotate")
         if (!(this.isClashLeft() ||
             this.isClashLeftBlock())) {
-            this.curBlock.setPosition(this.curBlock.position.x - 52, this.curBlock.position.y)
+            this.curBlock.setPosition(this.curBlock.position.x - 36, this.curBlock.position.y)
             this.deleteCurrentBlockPos()
             this.curBlockP1Pos.y -= 1
             this.curBlockP2Pos.y -= 1
@@ -798,7 +798,7 @@ export class core extends Component {
         find("GameMusic")!.emit("rotate")
         if (!(this.isClashRight() ||
             this.isClashRightBlock())) {
-            this.curBlock.setPosition(this.curBlock.position.x + 52, this.curBlock.position.y)
+            this.curBlock.setPosition(this.curBlock.position.x + 36, this.curBlock.position.y)
             this.deleteCurrentBlockPos()
             this.curBlockP1Pos.y += 1
             this.curBlockP2Pos.y += 1
@@ -837,7 +837,7 @@ export class core extends Component {
         find("GameMusic")!.emit("rotate")
         if (!(this.isClashBottom() ||
             this.isClashBottomBlock())) {
-            this.curBlock.setPosition(this.curBlock.position.x, this.curBlock.position.y - 52)
+            this.curBlock.setPosition(this.curBlock.position.x, this.curBlock.position.y - 36)
             this.deleteCurrentBlockPos()
             this.curBlockP1Pos.x -= 1
             this.curBlockP2Pos.x -= 1

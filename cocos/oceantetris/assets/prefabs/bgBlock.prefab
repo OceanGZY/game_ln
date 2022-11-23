@@ -71,8 +71,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
-      "height": 50
+      "width": 34,
+      "height": 34
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -101,9 +101,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 224,
-      "g": 144,
-      "b": 144,
+      "r": 168,
+      "g": 120,
+      "b": 127,
       "a": 28
     },
     "_spriteFrame": {
