@@ -2,8 +2,8 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:19
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-23 22:39:11
- * @FilePath: /oceantetris/assets/scripts/core.ts
+ * @LastEditTime: 2022-11-23 23:33:22
+ * @FilePath: \oceantetris\assets\scripts\core.ts
  * @Description: 注释信息
  */
 import { _decorator, Component, Node, Prefab, instantiate, log, Vec2, v2, find, KeyCode, input, Input, Label, Button } from 'cc';
@@ -126,7 +126,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock0)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(0, 395)
+                this.curBlock.setPosition(0, 396)
 
                 log("正方形颜色的位置,", this.curBlock.position)
                 break;
@@ -140,7 +140,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock1)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(19, 412)
+                this.curBlock.setPosition(19, 414)
 
                 log("Z颜色的位置,", this.curBlock.position)
 
@@ -155,7 +155,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock2)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(19, 412)
+                this.curBlock.setPosition(19, 414)
 
                 log("反Z颜色的位置,", this.curBlock.position)
                 break;
@@ -169,7 +169,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock3)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(19, 412)
+                this.curBlock.setPosition(19, 414)
 
                 log("左L颜色的位置,", this.curBlock.position)
 
@@ -184,7 +184,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock4)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(19, 412)
+                this.curBlock.setPosition(19, 414)
 
                 log("右L颜色的位置,", this.curBlock.position)
                 break;
@@ -211,7 +211,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock6)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(19, 412)
+                this.curBlock.setPosition(19, 414)
 
                 log("T颜色的位置,", this.curBlock.position)
 
@@ -564,11 +564,13 @@ export class core extends Component {
         log("最新的_timer是：", this._timer)
         if (this.isClashBottom()) {
             log("碰到底部了")
+            log(this.curBlock.position)
             this.deleteRow()
             this.initGameBlock()
 
         } else if (this.isClashBottomBlock()) {
             log("碰到下面的方块了")
+            log(this.curBlock.position)
             this.isGameOver()
             this.deleteRow()
             this.initGameBlock()
