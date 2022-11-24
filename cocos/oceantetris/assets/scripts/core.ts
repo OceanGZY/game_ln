@@ -2,8 +2,8 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:19
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-24 20:12:51
- * @FilePath: /oceantetris/assets/scripts/core.ts
+ * @LastEditTime: 2022-11-24 22:12:53
+ * @FilePath: \oceantetris\assets\scripts\core.ts
  * @Description: 注释信息
  */
 import { _decorator, Component, Node, Prefab, instantiate, log, Vec2, v2, find, KeyCode, input, Input, Label, Button, screen, Widget, Sprite, TransformBit, UITransform, Layout, Size } from 'cc';
@@ -14,7 +14,7 @@ export class core extends Component {
     start() {
         this.initBgBlock()
         this.scoreValue.string = "0"
-        find("GameMusic")!.emit("bgm")
+        // find("GameMusic")!.emit("bgm")
     }
 
     update(deltaTime: number) {
@@ -36,58 +36,26 @@ export class core extends Component {
         // 屏幕适配
         //375的iOS
         if (this._vWidth <= 375) {
-            this._playBgTop = 64
-            this._playBgBottom = 49
+            this._playBgTop = 56
+            this._playBgBottom = 44
             this._playBgH = this._vHeight - this._playBgTop - this._playBgBottom
             this._blockSize = (this._playBgH - 38) / 20
             this._playBgW = this._blockSize * 10 + 18
             this._playBgLeft = (this._vWidth - this._playBgW) / 2
             this._playBgRight = (this._vWidth - this._playBgW) / 2
+            let _playBg = find("Canvas/GameCont/GCPlayGroundMask/GCBgPlayGround")
+            _playBg!.active = false
         }
-        log("屏幕适配")
-        log(this._playBgTop)
-        log(this._playBgBottom)
-        log(this._playBgLeft)
-        log(this._playBgRight)
-        log(this._blockSize)
-        log(this._playBgH)
-        log(this._playBgW)
-        log(this._blockSize)
-
-
-
-
+        this.scoreValue.string = screen.windowSize.toString()
+        
         let _playBgMsak = find("Canvas/GameCont/GCPlayGroundMask")
-        let _playBg = find("Canvas/GameCont/GCBgPlayGround")
-
-
-        let _playWidget = _playBgMsak?.getComponent(Widget)
-        let _playBgWidget = _playBg?.getComponent(Widget)
-
-        log("容器组件：", _playWidget)
-        _playWidget!.top = this._playBgTop
-        _playWidget!.bottom = this._playBgBottom
-        _playWidget!.left = this._playBgLeft
-        _playWidget!.right = this._playBgRight
-
+        let _playBgWidget = _playBgMsak?.getComponent(Widget)
         _playBgWidget!.top = this._playBgTop
         _playBgWidget!.bottom = this._playBgBottom
         _playBgWidget!.left = this._playBgLeft
         _playBgWidget!.right = this._playBgRight
-
-        log("容器新的宽高")
-        log(this._playBgH)
-        log(this._playBgW)
-
         _playBgMsak!.getComponent(UITransform)?.setContentSize(this._playBgW, this._playBgH)
-        _playBg!.getComponent(UITransform)?.setContentSize(this._playBgW, this._playBgH)
-        _playBg!.getComponent(Layout)!.cellSize = new Size(this._blockSize, this._blockSize)
 
-
-        log("更新以后容器组件：", _playWidget!.top)
-        log("更新以后容器组件：", _playWidget!.bottom)
-        log("更新以后容器组件：", _playWidget!.left)
-        log("更新以后容器组件：", _playWidget!.right)
     }
 
 
@@ -200,7 +168,6 @@ export class core extends Component {
         // }
         this.createBlockColor(this.rand)
         this.createBlockShape(this.rand)
-
     }
 
     createBlockColor(rand: number) {
@@ -285,7 +252,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock5)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(this._blockSize / 2 + 2, 378)
+                this.curBlock.setPosition(this._blockSize / 2 + 2, this._playBgH / 2 + this._blockSize / 2 + 2)
 
                 log("T颜色的位置,", this.curBlock.position)
                 break;
@@ -299,7 +266,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock6)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(this._blockSize / 2 + 2, this._playBgH / 2 + this._blockSize / 2 + 2)
+                this.curBlock.setPosition(this._blockSize / 2 + 2, this._playBgH / 2 + this._blockSize * 1.5 + 4)
 
                 log("T颜色的位置,", this.curBlock.position)
 
@@ -988,7 +955,7 @@ export class core extends Component {
         this.gcLayout.removeAllChildren()
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this)
         input.on(Input.EventType.KEY_UP, this.onKeyUp, this)
-        find("GameMusic")!.emit("bgm")
+        // find("GameMusic")!.emit("bgm")
         this._score = 0
         this.scoreValue.string = this._score.toString()
         this._timer = 0.5
