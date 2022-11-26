@@ -2,11 +2,11 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:19
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-24 22:12:53
- * @FilePath: \oceantetris\assets\scripts\core.ts
+ * @LastEditTime: 2022-11-26 08:09:55
+ * @FilePath: /oceantetris/assets/scripts/core.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, Node, Prefab, instantiate, log, Vec2, v2, find, KeyCode, input, Input, Label, Button, screen, Widget, Sprite, TransformBit, UITransform, Layout, Size } from 'cc';
+import { _decorator, Component, Node, Prefab, instantiate, log, Vec2, v2, find, KeyCode, input, Input, Label, Button, screen, Widget, Sprite, TransformBit, UITransform, Layout, Size, view } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('core')
@@ -30,31 +30,55 @@ export class core extends Component {
     fitDevice() {
         log("加载的时候，最新的尺寸")
         log(screen.windowSize)
-        this._vHeight = screen.windowSize.width > 900 ? screen.windowSize.height / 3 : screen.windowSize.height / 2
-        this._vWidth = screen.windowSize.width > 900 ? screen.windowSize.width / 3 : screen.windowSize.width / 2
 
-        // 屏幕适配
-        //375的iOS
-        if (this._vWidth <= 375) {
-            this._playBgTop = 56
-            this._playBgBottom = 44
-            this._playBgH = this._vHeight - this._playBgTop - this._playBgBottom
-            this._blockSize = (this._playBgH - 38) / 20
-            this._playBgW = this._blockSize * 10 + 18
-            this._playBgLeft = (this._vWidth - this._playBgW) / 2
-            this._playBgRight = (this._vWidth - this._playBgW) / 2
-            let _playBg = find("Canvas/GameCont/GCPlayGroundMask/GCBgPlayGround")
-            _playBg!.active = false
+        this._vHeight = screen.windowSize.height / 2
+        this._vWidth = screen.windowSize.width / 2
+
+        let _tmptop = 0
+        let _tmepbottom = 0
+        let _tmpleft = 0
+        let _tmepright = 0
+
+        switch (this._vWidth) {
+            case 375:
+                _tmptop = 66
+                _tmepbottom = 52
+                _tmpleft = 16
+                _tmepright = 16
+                break;
+            case 414:
+                _tmptop = 66
+                _tmepbottom = 52
+                _tmpleft = 16
+                _tmepright = 16
+                break;
+            default:
+                break;
         }
-        this.scoreValue.string = screen.windowSize.toString()
-        
+
         let _playBgMsak = find("Canvas/GameCont/GCPlayGroundMask")
         let _playBgWidget = _playBgMsak?.getComponent(Widget)
-        _playBgWidget!.top = this._playBgTop
-        _playBgWidget!.bottom = this._playBgBottom
-        _playBgWidget!.left = this._playBgLeft
-        _playBgWidget!.right = this._playBgRight
-        _playBgMsak!.getComponent(UITransform)?.setContentSize(this._playBgW, this._playBgH)
+
+        let _tmpBlockSize1 = (this._vHeight - _tmptop - _tmepbottom - 38) / 20
+        let _tmpBlockSize2 = (this._vWidth - _tmpleft - _tmepright - 18) / 10
+
+        log(_tmpBlockSize1)
+        log(_tmpBlockSize2)
+        this._blockSize = _tmpBlockSize1 > _tmpBlockSize2 ? _tmpBlockSize2 : _tmpBlockSize1
+        log(this._blockSize)
+
+        this._playBgW = Math.floor(this._blockSize * 10 + 18.5)
+        this._playBgH = Math.floor(this._blockSize * 20 + 38.5)
+
+        log(this._playBgH)
+        log(this._playBgW)
+
+        _playBgWidget!.left = (this._vWidth - this._playBgW) / 2
+        _playBgWidget!.right = (this._vWidth - this._playBgW) / 2
+        _playBgWidget!.top = (this._vHeight - this._playBgH) / 2 + 7
+        _playBgWidget!.bottom = (this._vHeight - this._playBgH) / 2 - 7
+
+        _playBgMsak!.getComponent(UITransform)!.setContentSize(this._playBgW, this._playBgH)
 
     }
 
@@ -106,18 +130,13 @@ export class core extends Component {
     _score: number = 0
     _timer: number = 0.5
 
-    _vWidth: number = 414
-    _vHeight: number = 896
+    _vWidth: number = 375
+    _vHeight: number = 667
 
     _blockSize: number = 34
 
     _playBgW: number = 358
     _playBgH: number = 718
-    _playBgTop: number = 89
-    _playBgBottom: number = 89
-    _playBgLeft: number = 28
-    _playBgRight: number = 28
-
 
 
     // 游戏格子
@@ -141,9 +160,12 @@ export class core extends Component {
         log("初始化程序")
         for (let index = 0; index < 200; index++) {
             var _gbBlock = instantiate(this.gbBlock)
-            // _gbBlock.setScale(this._blockSize / 34, this._blockSize / 34)
+
             _gbBlock.getComponent(UITransform)!.setContentSize(this._blockSize, this._blockSize)
+            log(_gbBlock)
             _gbBlock.parent = this.gcBgLayout
+            // _gbBlock.parent = this.testLayout
+
 
         }
     }
