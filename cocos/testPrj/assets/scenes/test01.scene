@@ -147,7 +147,7 @@
     "_priority": 1073741824,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 333.5,
+    "_orthoHeight": 445.3125,
     "_near": 0,
     "_far": 2000,
     "_color": {
@@ -1025,7 +1025,7 @@
     "node": {
       "__id__": 14
     },
-    "_enabled": true,
+    "_enabled": false,
     "__prefab": null,
     "_alignFlags": 45,
     "_target": {

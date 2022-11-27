@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:19
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-24 22:12:53
+ * @LastEditTime: 2022-11-27 11:38:24
  * @FilePath: \oceantetris\assets\scripts\core.ts
  * @Description: 注释信息
  */
@@ -24,39 +24,39 @@ export class core extends Component {
 
     }
     onLoad() {
-        this.fitDevice()
+        // this.fitDevice()
     }
 
-    fitDevice() {
-        log("加载的时候，最新的尺寸")
-        log(screen.windowSize)
-        this._vHeight = screen.windowSize.width > 900 ? screen.windowSize.height / 3 : screen.windowSize.height / 2
-        this._vWidth = screen.windowSize.width > 900 ? screen.windowSize.width / 3 : screen.windowSize.width / 2
+    // fitDevice() {
+    //     log("加载的时候，最新的尺寸")
+    //     log(screen.windowSize)
+    //     this._vHeight = screen.windowSize.width > 900 ? screen.windowSize.height / 3 : screen.windowSize.height / 2
+    //     this._vWidth = screen.windowSize.width > 900 ? screen.windowSize.width / 3 : screen.windowSize.width / 2
 
-        // 屏幕适配
-        //375的iOS
-        if (this._vWidth <= 375) {
-            this._playBgTop = 56
-            this._playBgBottom = 44
-            this._playBgH = this._vHeight - this._playBgTop - this._playBgBottom
-            this._blockSize = (this._playBgH - 38) / 20
-            this._playBgW = this._blockSize * 10 + 18
-            this._playBgLeft = (this._vWidth - this._playBgW) / 2
-            this._playBgRight = (this._vWidth - this._playBgW) / 2
-            let _playBg = find("Canvas/GameCont/GCPlayGroundMask/GCBgPlayGround")
-            _playBg!.active = false
-        }
-        this.scoreValue.string = screen.windowSize.toString()
+    //     // 屏幕适配
+    //     //375的iOS
+    //     if (this._vWidth <= 375) {
+    //         this._playBgTop = 56
+    //         this._playBgBottom = 44
+    //         this._playBgH = this._vHeight - this._playBgTop - this._playBgBottom
+    //         this._blockSize = (this._playBgH - 38) / 20
+    //         this._playBgW = this._blockSize * 10 + 18
+    //         this._playBgLeft = (this._vWidth - this._playBgW) / 2
+    //         this._playBgRight = (this._vWidth - this._playBgW) / 2
+    //         let _playBg = find("Canvas/GameCont/GCPlayGroundMask/GCBgPlayGround")
+    //         _playBg!.active = false
+    //     }
+    //     this.scoreValue.string = screen.windowSize.toString()
         
-        let _playBgMsak = find("Canvas/GameCont/GCPlayGroundMask")
-        let _playBgWidget = _playBgMsak?.getComponent(Widget)
-        _playBgWidget!.top = this._playBgTop
-        _playBgWidget!.bottom = this._playBgBottom
-        _playBgWidget!.left = this._playBgLeft
-        _playBgWidget!.right = this._playBgRight
-        _playBgMsak!.getComponent(UITransform)?.setContentSize(this._playBgW, this._playBgH)
+    //     let _playBgMsak = find("Canvas/GameCont/GCPlayGroundMask")
+    //     let _playBgWidget = _playBgMsak?.getComponent(Widget)
+    //     _playBgWidget!.top = this._playBgTop
+    //     _playBgWidget!.bottom = this._playBgBottom
+    //     _playBgWidget!.left = this._playBgLeft
+    //     _playBgWidget!.right = this._playBgRight
+    //     _playBgMsak!.getComponent(UITransform)?.setContentSize(this._playBgW, this._playBgH)
 
-    }
+    // }
 
 
     @property(Node)
@@ -106,17 +106,17 @@ export class core extends Component {
     _score: number = 0
     _timer: number = 0.5
 
-    _vWidth: number = 414
-    _vHeight: number = 896
+    // _vWidth: number = 414
+    // _vHeight: number = 896
 
-    _blockSize: number = 34
+    _blockSize: number = 25
 
-    _playBgW: number = 358
-    _playBgH: number = 718
-    _playBgTop: number = 89
-    _playBgBottom: number = 89
-    _playBgLeft: number = 28
-    _playBgRight: number = 28
+    _playBgW: number = 268
+    _playBgH: number = 538
+    // _playBgTop: number = 89
+    // _playBgBottom: number = 89
+    // _playBgLeft: number = 28
+    // _playBgRight: number = 28
 
 
 
