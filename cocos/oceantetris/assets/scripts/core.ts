@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2022-11-20 20:49:19
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2022-11-27 11:38:24
+ * @LastEditTime: 2022-11-27 12:55:29
  * @FilePath: \oceantetris\assets\scripts\core.ts
  * @Description: 注释信息
  */
@@ -181,7 +181,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock0)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(0, this._playBgH / 2 + 3 + this._blockSize)
+                this.curBlock.setPosition(0, this._playBgH / 2 + 2 + this._blockSize)
 
                 log("正方形颜色的位置,", this.curBlock.position)
                 break;
@@ -195,7 +195,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock1)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(this._blockSize / 2 + 2, this._playBgH / 2 + this._blockSize * 1.5 + 4)
+                this.curBlock.setPosition(this._blockSize / 2 + 1, this._playBgH / 2 + this._blockSize * 1.5 + 4)
 
                 log("Z颜色的位置,", this.curBlock.position)
 
@@ -210,7 +210,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock2)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(this._blockSize / 2 + 2, this._playBgH / 2 + this._blockSize * 1.5 + 4)
+                this.curBlock.setPosition(this._blockSize / 2 + 1, this._playBgH / 2 + this._blockSize * 1.5 + 4)
 
                 log("反Z颜色的位置,", this.curBlock.position)
                 break;
@@ -224,7 +224,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock3)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(this._blockSize / 2 + 2, this._playBgH / 2 + this._blockSize * 1.5 + 4)
+                this.curBlock.setPosition(this._blockSize / 2 + 1, this._playBgH / 2 + this._blockSize * 1.5 + 4)
 
                 log("左L颜色的位置,", this.curBlock.position)
 
@@ -239,7 +239,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock4)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(this._blockSize / 2 + 2, this._playBgH / 2 + this._blockSize * 1.5 + 4)
+                this.curBlock.setPosition(this._blockSize / 2 + 1, this._playBgH / 2 + this._blockSize * 1.5 + 4)
 
                 log("右L颜色的位置,", this.curBlock.position)
                 break;
@@ -252,7 +252,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock5)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(this._blockSize / 2 + 2, this._playBgH / 2 + this._blockSize / 2 + 2)
+                this.curBlock.setPosition(this._blockSize / 2 + 1, this._playBgH / 2 + this._blockSize / 2 + 2)
 
                 log("T颜色的位置,", this.curBlock.position)
                 break;
@@ -266,7 +266,7 @@ export class core extends Component {
                 this.curBlockP4 = instantiate(this.gameBlock6)
                 this.curBlock = instantiate(this.gameBlockCenter)
                 this.curBlock.parent = this.gcLayout
-                this.curBlock.setPosition(this._blockSize / 2 + 2, this._playBgH / 2 + this._blockSize * 1.5 + 4)
+                this.curBlock.setPosition(this._blockSize / 2 + 1, this._playBgH / 2 + this._blockSize * 1.5 + 4)
 
                 log("T颜色的位置,", this.curBlock.position)
 
