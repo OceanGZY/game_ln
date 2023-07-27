@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-07-27 10:43:42
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-07-27 22:58:08
+ * @LastEditTime: 2023-07-27 23:22:44
  * @FilePath: /tetris/source/Game.cpp
  * @Description: 注释信息
  */
@@ -101,6 +101,9 @@ void Game::keyEvent(sf::RenderWindow *window)
                 break;
             case sf::Keyboard::Right:
                 dx = 1;
+                break;
+            case sf::Keyboard::Down:
+                drop();
                 break;
             default:
                 break;
