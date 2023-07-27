@@ -5,11 +5,16 @@ project(sqtetis)
 # sources 
 file(GLOB SRC_LIST 
         "main.cpp"
-        # "source/*.cpp"
+        "source/*.cpp"
         "assets/*.png"
         "assets/*.wav"
         "assets/*.ttf"
         )
+
+#includes
+include_directories(
+    "include"
+)
 
 # 3rd part filedir
 set (THIRDPART_DIR 3rds)
