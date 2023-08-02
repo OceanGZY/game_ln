@@ -34,11 +34,6 @@ else()
     message("SFML FOUND!")
 endif()
 
-# include directory
-include_directories(
-    include
-)
-
 
 add_executable(sqtetris ${SRC_LIST})
 
