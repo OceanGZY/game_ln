@@ -4,20 +4,24 @@ project(tickball VERSION 0.0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 
-include_directories(
 
+include_directories(
+    "/usr/local/Cellar/sdl2/2.28.1/include"
 )
 
-find_package(SDL2 REQUIRED COMPONENTS SDL2)
-
 file( GLOB SOURCES
-    main.cpp
-    src/.h
-    src/*.cpp
+    "main.cpp"
+    "src/.h"
+    "src/*.cpp"
+)
+
+set(
+    SDL2_LIB
+    "/usr/local/Cellar/sdl2/2.28.1/lib/libSDL2-2.0.0.dylib"
 )
 
 add_executable(
     tickball ${SOURCES}
 )
 
-target_link_libraries(tickball PRIVATE SDL2::SDL2)
+target_link_libraries(tickball ${SDL2_LIB} )

@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-08-02 19:45:35
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-08-02 20:14:08
+ * @LastEditTime: 2023-08-03 22:40:44
  * @FilePath: /demo02/include/Game.h
  * @Description: 注释信息
  */
@@ -23,18 +23,18 @@ public:
     Game(/* args */);
     ~Game();
 
-    bool init();
+    bool Init();
 
-    void run();
-    void shutdown();
+    void Run();
+    void Shutdown();
 
-    void add_actor(class Actor *actor);
-    void remove_actor(class Actor *actor);
+    void AddActor(class Actor *actor);
+    void RemoveActor(class Actor *actor);
 
-    void add_sprite(class SpriteComponent *sprite);
-    void remove_sprite(class SpriteComponent *sprite);
+    void AddSprite(class SpriteComponent *sprite);
+    void RemoveSprite(class SpriteComponent *sprite);
 
-    SDL_Texture *load_texture(const std::string &file_name);
+    SDL_Texture *LoadTexture(const std::string &file_name);
 
 private:
     SDL_Window *m_window;
@@ -55,11 +55,11 @@ private:
 
     class Ship *m_ship; // 玩家的ship
 
-    void process_input();
-    void update_game();
-    void generate_output();
-    void load_data();
-    void unload_data();
+    void ProcessInput();
+    void UpdateGame();
+    void GenerateOutput();
+    void LoadData();
+    void UnloadData();
 };
 
 #endif
