@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-08-02 20:15:09
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-08-03 23:07:47
+ * @LastEditTime: 2023-08-04 11:34:28
  * @FilePath: /demo02/include/Actor.h
  * @Description: 注释信息
  */
@@ -10,7 +10,7 @@
 #define __ACTOR_H__
 
 #include <vector>
-#include "Math.h"
+#include "MyMath.h"
 
 class Actor
 {

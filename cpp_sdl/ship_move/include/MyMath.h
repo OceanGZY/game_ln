@@ -2,8 +2,8 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-08-02 23:39:13
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-08-03 22:51:26
- * @FilePath: /demo02/include/Math.h
+ * @LastEditTime: 2023-08-04 21:59:11
+ * @FilePath: /demo02/include/MyMath.h
  * @Description: 注释信息
  */
 #ifndef __MY_MATH_H__
@@ -435,7 +435,7 @@ public:
     static const Vector3 NegUnitY;
     static const Vector3 NegUnitZ;
     static const Vector3 Infinity;
-    static const Vector3 MegInfinity;
+    static const Vector3 NegInfinity;
 };
 
 // 3*3 Matrix
@@ -828,6 +828,7 @@ public:
             {0.0f, 1.0f, 0.0f, 0.0f},
             {0.0f, 0.0f, 1.0f, 0.0f},
             {trans.x, trans.y, trans.z, 1}};
+        return Matrix4(temp);
     }
 
     static Matrix4 CreateLookAt(const Vector3 &eye, const Vector3 &target, const Vector3 &up)
@@ -1042,7 +1043,6 @@ namespace Color
     static const Vector3 LightGrey(0.7f, 0.7f, 0.7f);
     static const Vector3 Grey(0.5f, 0.5f, 0.5f);
     static const Vector3 DarkGrey(0.2f, 0.2f, 0.2f);
-    static const Vector3 LightOrange(1.0f, 0.6f, 0.0f);
     static const Vector3 DarkBlue(0.0f, 0.0f, 0.5f);
     static const Vector3 DarkGreen(0.0f, 0.5f, 0.0f);
 

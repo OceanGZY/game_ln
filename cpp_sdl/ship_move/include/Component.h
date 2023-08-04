@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-08-03 23:19:36
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-08-03 23:27:58
+ * @LastEditTime: 2023-08-04 10:20:03
  * @FilePath: /demo02/include/Component.h
  * @Description: 注释信息
  */
@@ -11,9 +11,12 @@
 
 class Component
 {
-private:
+protected:
     /* data */
+    // owner actor
     class Actor *m_owner;
+
+    // 更新order
     int m_updateOrder;
 
 public:

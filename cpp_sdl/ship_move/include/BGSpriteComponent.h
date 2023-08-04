@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-08-02 20:15:56
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-08-03 23:47:34
+ * @LastEditTime: 2023-08-04 21:52:13
  * @FilePath: /demo02/include/BGSpriteComponent.h
  * @Description: 注释信息
  */
@@ -10,7 +10,7 @@
 #define __BG_SPRITE_COMPONENT_H__
 
 #include "SpriteComponent.h"
-#include "Math.h"
+#include "MyMath.h"
 #include <vector>
 
 class BGSpriteComponent : public SpriteComponent
@@ -19,6 +19,8 @@ private:
     /* data */
     struct BGTexture
     {
+        SDL_Texture * m_texture;
+        Vector2 m_offset;
     };
     std::vector<BGTexture> m_bg_textures;
     Vector2 m_screen_size;
@@ -27,7 +29,6 @@ private:
 public:
     // Set draw order to default to lower (so it's in the background)
     BGSpriteComponent(class Actor *owner, int drawOrder = 10);
-    ~BGSpriteComponent();
 
     void Update(float deltaTime) override;
 

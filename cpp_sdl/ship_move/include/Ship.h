@@ -2,12 +2,14 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-08-02 20:15:28
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-08-03 23:17:30
+ * @LastEditTime: 2023-08-04 11:23:26
  * @FilePath: /demo02/include/Ship.h
  * @Description: 注释信息
  */
 #ifndef __SHIP_H__
 #define __SHIP_H__
+
+#include "Actor.h"
 
 class Ship : public Actor
 {
