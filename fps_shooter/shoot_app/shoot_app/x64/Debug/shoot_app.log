@@ -1,4 +1,1 @@
-﻿  shoot_app.cpp
-\\Mac\Home\Documents\GitHub\game_ln\fps_shooter\shoot_app\shoot_app\shoot_app.cpp(16,12): warning C4305: “初始化”: 从“double”到“float”截断
-\\Mac\Home\Documents\GitHub\game_ln\fps_shooter\shoot_app\shoot_app\shoot_app.cpp(86,26): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
-  shoot_app.vcxproj -> \\Mac\Home\Documents\GitHub\game_ln\fps_shooter\shoot_app\x64\Debug\shoot_app.exe
+﻿
