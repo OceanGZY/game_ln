@@ -12,13 +12,16 @@ public class Player : MonoBehaviour
 {
 
     public Rigidbody2D rb;
+
     public float sensitive = 10f;
+
+    public AudioSource jumpPlayer;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        jumpPlayer = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -55,12 +58,17 @@ public class Player : MonoBehaviour
             if (other.CompareTag("Brand"))
             {
                 rb.velocity = new Vector2(0f, 10f);
+                jumpPlayer.Play();
+            }
+            else
+            {
+                jumpPlayer.Stop();
             }
         }
 
-        if (other.CompareTag("win"))
+        if (other.CompareTag("Win"))
         {
-            SceneManager.LoadScene("win");
+            SceneManager.LoadScene("Win");
         }
 
     }
