@@ -10,8 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4436293464865529633}
   - component: {fileID: 5307524275460013822}
+<<<<<<< HEAD
   - component: {fileID: 7625210264162686576}
   - component: {fileID: 3587372176141355706}
+=======
+  - component: {fileID: 6706046615696768024}
+  - component: {fileID: 880672636278973293}
+>>>>>>> 2231f1c6434c6597ed41acfa7d8b1f91b9fb6b36
   m_Layer: 0
   m_Name: Brand
   m_TagString: Brand
@@ -86,7 +91,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< HEAD
 --- !u!60 &7625210264162686576
+=======
+--- !u!60 &6706046615696768024
+>>>>>>> 2231f1c6434c6597ed41acfa7d8b1f91b9fb6b36
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,7 +148,11 @@ PolygonCollider2D:
       - {x: 0.52, y: 0.125}
       - {x: 0.48, y: 0.145}
   m_UseDelaunayMesh: 0
+<<<<<<< HEAD
 --- !u!251 &3587372176141355706
+=======
+--- !u!251 &880672636278973293
+>>>>>>> 2231f1c6434c6597ed41acfa7d8b1f91b9fb6b36
 PlatformEffector2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -18,12 +18,15 @@ public class Player : MonoBehaviour
     public AudioSource jumpPlayer;
 
 
+<<<<<<< HEAD
     // Start is called before the first frame update
     void Start()
     {
         jumpPlayer = GetComponent<AudioSource>();
     }
 
+=======
+>>>>>>> 2231f1c6434c6597ed41acfa7d8b1f91b9fb6b36
     // Update is called once per frame
     void Update()
     {
@@ -51,7 +54,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        System.Console.Write("开始下落了");
+        Debug.Log("开始下落了");
         // 下落时计算碰撞， 避免角色碰到东西就飞
         if (rb.velocity.y <= 0)
         {
@@ -75,6 +78,7 @@ public class Player : MonoBehaviour
 
     private void PlayerController()
     {
+
         float horizontalAxis = 0;
         horizontalAxis = Input.GetAxis("Horizontal");
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
@@ -86,6 +90,12 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
 
+        // Debug.Log("transform.rotation");
+        // Debug.Log(transform.rotation);
+        // Debug.Log("rb.velocity.x");
+        // Debug.Log(rb.velocity.x);
+        // Debug.Log("rb.velocity.y");
+        // Debug.Log(rb.velocity.y);
         rb.velocity = new Vector2(horizontalAxis * sensitive, rb.velocity.y);
     }
 }

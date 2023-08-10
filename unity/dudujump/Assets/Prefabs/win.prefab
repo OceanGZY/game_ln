@@ -10,7 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8695551841369094560}
   - component: {fileID: -7272597313158944815}
+<<<<<<< HEAD
   - component: {fileID: -3329280746347264237}
+=======
+  - component: {fileID: -3325893570514913364}
+>>>>>>> 2231f1c6434c6597ed41acfa7d8b1f91b9fb6b36
   m_Layer: 0
   m_Name: win
   m_TagString: Win
@@ -85,7 +89,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< HEAD
 --- !u!60 &-3329280746347264237
+=======
+--- !u!60 &-3325893570514913364
+>>>>>>> 2231f1c6434c6597ed41acfa7d8b1f91b9fb6b36
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
