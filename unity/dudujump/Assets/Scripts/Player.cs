@@ -15,12 +15,6 @@ public class Player : MonoBehaviour
     public float sensitive = 10f;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -48,7 +42,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        System.Console.Write("开始下落了");
+        Debug.Log("开始下落了");
         // 下落时计算碰撞， 避免角色碰到东西就飞
         if (rb.velocity.y <= 0)
         {
@@ -58,15 +52,16 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("win"))
+        if (other.CompareTag("Win"))
         {
-            SceneManager.LoadScene("win");
+            SceneManager.LoadScene("Win");
         }
 
     }
 
     private void PlayerController()
     {
+
         float horizontalAxis = 0;
         horizontalAxis = Input.GetAxis("Horizontal");
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
@@ -78,6 +73,12 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
 
+        // Debug.Log("transform.rotation");
+        // Debug.Log(transform.rotation);
+        // Debug.Log("rb.velocity.x");
+        // Debug.Log(rb.velocity.x);
+        // Debug.Log("rb.velocity.y");
+        // Debug.Log(rb.velocity.y);
         rb.velocity = new Vector2(horizontalAxis * sensitive, rb.velocity.y);
     }
 }
