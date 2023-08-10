@@ -12,12 +12,8 @@ GameObject:
   - component: {fileID: 3376179226977174392}
   - component: {fileID: -1276180219219135448}
   - component: {fileID: 3535476122258658977}
-<<<<<<< HEAD
   - component: {fileID: 8732151589579550910}
   - component: {fileID: -236691140729658561}
-=======
-  - component: {fileID: -5342263780298033999}
->>>>>>> 2231f1c6434c6597ed41acfa7d8b1f91b9fb6b36
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -182,11 +178,7 @@ PolygonCollider2D:
       - {x: -0.01, y: -0.32}
       - {x: 0, y: -0.32999998}
   m_UseDelaunayMesh: 0
-<<<<<<< HEAD
 --- !u!114 &8732151589579550910
-=======
---- !u!114 &-5342263780298033999
->>>>>>> 2231f1c6434c6597ed41acfa7d8b1f91b9fb6b36
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,7 +192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: -1276180219219135448}
   sensitive: 10
-<<<<<<< HEAD
   jumpPlayer: {fileID: 0}
 --- !u!82 &-236691140729658561
 AudioSource:
@@ -298,5 +289,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-=======
->>>>>>> 2231f1c6434c6597ed41acfa7d8b1f91b9fb6b36

@@ -18,15 +18,12 @@ public class Player : MonoBehaviour
     public AudioSource jumpPlayer;
 
 
-<<<<<<< HEAD
     // Start is called before the first frame update
     void Start()
     {
         jumpPlayer = GetComponent<AudioSource>();
     }
 
-=======
->>>>>>> 2231f1c6434c6597ed41acfa7d8b1f91b9fb6b36
     // Update is called once per frame
     void Update()
     {
