@@ -28,18 +28,19 @@ AEnemy::AEnemy()
 void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
-	Player = Cast<ASpaceShip>(UGameplayStatics::GetPlayerPawn(this,0)); // 获取主角
+	SpaceShipPlayer = Cast<ASpaceShip>(UGameplayStatics::GetPlayerPawn(this,0)); // 获取主角
+	SetColor();
 	
 }
 
 void AEnemy::MoveTowardPlayer(float DeltaTime)
 {
 	// 用主角 减去 敌人位置 相减得到 敌人指向主角的 向量
-	FVector Direction= (Player->GetActorLocation() - GetActorLocation()).GetSafeNormal(); // 单位化
+	FVector Direction= (SpaceShipPlayer->GetActorLocation() - GetActorLocation()).GetSafeNormal(); // 单位化
 	AddActorWorldOffset(Direction*Speed*DeltaTime, true); // 移动
 
 	// 看向主角，控制旋转
-	SetActorRotation(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), Player->GetActorLocation()));
+	SetActorRotation(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), SpaceShipPlayer->GetActorLocation()));
 
 }
 

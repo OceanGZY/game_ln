@@ -24,15 +24,19 @@ protected:
 
 	void MoveTowardPlayer(float DeltaTime); // 朝主角移动
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void SetColor();// 设置敌人颜色
 
-	ASpaceShip* Player;
+
+	UPROPERTY(VisibleAnywhere, Category = "Component")
+	ASpaceShip* SpaceShipPlayer;
 
 	float Speed;
 
-	UPROPERTY(VisibleAnywhere, Category = "Component")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component")
 	UStaticMeshComponent* ShipStaticMeshComp;
 
-	UPROPERTY(VisibleAnywhere, Category = "Component")
+	UPROPERTY(VisibleAnywhere,  Category = "Component")
 	USphereComponent* SphereCollisionComp;
 
 public:	
