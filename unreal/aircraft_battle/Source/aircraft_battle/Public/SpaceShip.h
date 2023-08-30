@@ -31,7 +31,7 @@ protected:
 
 	void MoveLeftRight(float Value);
 
-	void Move(float DeltaTime); // pawn没有移动的方法，需要实现
+	void Move(float DeltaTime); // pawn没锟斤拷锟狡讹拷锟侥凤拷锟斤拷锟斤拷锟斤拷要实锟斤拷
 
 	void Fire();
 

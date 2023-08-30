@@ -46,24 +46,24 @@ ASpaceShip::ASpaceShip()
 void ASpaceShip::BeginPlay()
 {
 	Super::BeginPlay();
-	Pc =Cast<APlayerController>(GetController()); // »ñÈ¡player controller
-	Pc->bShowMouseCursor = true; // ÏÔÊ¾Êó±ê
+	Pc =Cast<APlayerController>(GetController()); // ï¿½ï¿½È¡player controller
+	Pc->bShowMouseCursor = true; // ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
 	
 }
 
 void ASpaceShip::LookAtCousor()
 {
-	FVector MouseLocation,MouseDirection;  // Êó±êÎ»ÖÃ, Êó±ê·½Ïò
+	FVector MouseLocation,MouseDirection;  // ï¿½ï¿½ï¿½Î»ï¿½ï¿½, ï¿½ï¿½ê·½ï¿½ï¿½
 	Pc->DeprojectMousePositionToWorld(MouseLocation,MouseDirection);
 	FVector TargetLocation = FVector(MouseLocation.X, MouseLocation.Y, GetActorLocation().Z);
-	FRotator Rotator = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetLocation); // ·É»úÎ»ÖÃ ºÍ Êó±êÎ»ÖÃµÄ·½Ïò
-	SetActorRotation(Rotator); // Ê¹·É»ú×ªÏò
+	FRotator Rotator = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetLocation); // ï¿½É»ï¿½Î»ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Î»ï¿½ÃµÄ·ï¿½ï¿½ï¿½
+	SetActorRotation(Rotator); // Ê¹ï¿½É»ï¿½×ªï¿½ï¿½
 
 }
 
 void ASpaceShip::MoveUpDown(float Value)
 {
-	// FVector(1, 0, 0);  //FVector::ForwardVector;  ÏòÇ°ÒÆ¶¯
+	// FVector(1, 0, 0);  //FVector::ForwardVector;  ï¿½ï¿½Ç°ï¿½Æ¶ï¿½
 	AddMovementInput(FVector::ForwardVector,Value);
 }
 
@@ -74,7 +74,7 @@ void ASpaceShip::MoveLeftRight(float Value)
 
 void ASpaceShip::Move(float DeltaTime)
 {
-	AddActorWorldOffset(ConsumeMovementInputVector()*Speed*DeltaTime,false); // »ñÈ¡ÊäÈëµÄÒÆ¶¯ÏòÁ¿±ä»¯£¬²¢ÉèÖÃÎªactorµÄÊÀ½ç×ø±ê
+	AddActorWorldOffset(ConsumeMovementInputVector()*Speed*DeltaTime,false); // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä»¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªactorï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 }
 
 void ASpaceShip::Fire()
@@ -85,7 +85,7 @@ void ASpaceShip::Fire()
 	}
 }
 
-void ASpaceShip::StartFire() // ÉèÖÃ¶¨Ê±Æ÷£¬Á¬Ðø¿ª»ð
+void ASpaceShip::StartFire() // ï¿½ï¿½ï¿½Ã¶ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 {
 	GetWorldTimerManager().SetTimer(TimerHandle_BetweenShot, this, &ASpaceShip::Fire, TimeBetweenShot, true, 0.0f);
 
