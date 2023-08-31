@@ -11,6 +11,7 @@ class UCameraComponent;
 class USpringArmComponent;
 class ABullet;
 class USceneComponent;
+class USoundCue;
 
 UCLASS()
 class AIRCRAFT_BATTLE_API ASpaceShip : public APawn
@@ -39,13 +40,33 @@ protected:
 
 	void EndFire();
 
+	void ReStartLevel();
 
+	void OnDead(); // 主角死亡
 
 
 	APlayerController* Pc;
 
+	bool bDead;
+
+	bool bUpDownMove;
+
+	bool bLeftRightMove;
+
+
+	UPROPERTY(EditAnywhere, Category = "Sound")
+	USoundCue* GameOverCue;
+	UPROPERTY(EditAnywhere, Category = "Sound")
+	USoundCue* ShotCue;
+
+
 	UPROPERTY(EditAnywhere, Category = "Fire")
 	FTimerHandle TimerHandle_BetweenShot;
+
+
+	UPROPERTY(EditAnywhere, Category = "GameState")
+	FTimerHandle TimerHandle_ReStart;
+
 
 	float TimeBetweenShot;
 
@@ -72,6 +93,12 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Component")
 	USpringArmComponent* SpringArmComp;
 
+	UPROPERTY(VisibleAnywhere, Category = "Component")
+	UParticleSystemComponent* ThrusterParticleComp;
+
+	UPROPERTY(EditAnywhere, Category = "Particle")
+	UParticleSystem* ExploseParticle;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -80,5 +107,9 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+
+	FORCEINLINE bool GetBDead() {
+		return bDead;
+	}
 
 };

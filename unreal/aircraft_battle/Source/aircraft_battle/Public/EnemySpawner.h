@@ -40,8 +40,18 @@ protected:
 	
 	float SpawnInterval; // 时间间隔
 
+	// 最大敌人生成数量
+	UPROPERTY(EditAnywhere,Category="Spawn")
+	int MaxEnemyNum;
+
+	// 当前敌人生成数量
+	UPROPERTY(EditAnywhere, Category = "Spawn")
+	int CurrentEnemyCount;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	
+	void DecreaseEnemyCount(); // 减少敌人数量
 
 };

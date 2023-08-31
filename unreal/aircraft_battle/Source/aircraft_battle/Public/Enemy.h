@@ -8,6 +8,8 @@
 class UStaticMeshComponent;
 class USphereComponent;
 class ASpaceShip;
+class AShapeGameModeBase;
+class AEnemySpawner;
 
 UCLASS()
 class AIRCRAFT_BATTLE_API AEnemy : public APawn
@@ -22,11 +24,20 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	void MoveTowardPlayer(float DeltaTime); // ³¯Ö÷½ÇÒÆ¶¯
+	void MoveTowardPlayer(float DeltaTime); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void SetColor();// ÉèÖÃµÐÈËÑÕÉ«
+	void SetColor();// ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½É«
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void SpawnExplose();
 
+
+	
+
+	AShapeGameModeBase* ShipGameModeBase;
+
+	AEnemySpawner* EnemySpawner;
 
 	UPROPERTY(VisibleAnywhere, Category = "Component")
 	ASpaceShip* SpaceShipPlayer;
@@ -39,6 +50,9 @@ protected:
 	UPROPERTY(VisibleAnywhere,  Category = "Component")
 	USphereComponent* SphereCollisionComp;
 
+	UPROPERTY(EditAnywhere, Category = "Particle")
+	UParticleSystem* ExploseParticle;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -46,4 +60,5 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void OnDead();
 };

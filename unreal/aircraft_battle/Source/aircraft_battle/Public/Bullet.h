@@ -10,6 +10,7 @@ class UStaticMeshComponent;
 class USceneComponent;
 class UProjectileMovementComponent;
 
+
 UCLASS()
 class AIRCRAFT_BATTLE_API ABullet : public AActor
 {

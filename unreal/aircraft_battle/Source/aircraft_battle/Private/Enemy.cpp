@@ -7,6 +7,9 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "SpaceShip.h"
+#include "ShapeGameModeBase.h"
+#include "EnemySpawner.h"
+#include "Particles/ParticleSystem.h"
 
 // Sets default values
 AEnemy::AEnemy()
@@ -28,27 +31,46 @@ AEnemy::AEnemy()
 void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
-	SpaceShipPlayer = Cast<ASpaceShip>(UGameplayStatics::GetPlayerPawn(this,0)); // ªÒ»°÷˜Ω«
+	SpaceShipPlayer = Cast<ASpaceShip>(UGameplayStatics::GetPlayerPawn(this,0)); // ÔøΩÔøΩ»°ÔøΩÔøΩÔøΩÔøΩ
 	SetColor();
+
+	ShipGameModeBase = Cast<AShapeGameModeBase>(UGameplayStatics::GetGameMode(this));
+
+	TArray<AActor*> EnemySpawnerArray;
+	UGameplayStatics::GetAllActorsOfClass(this, AEnemySpawner::StaticClass(), EnemySpawnerArray); // Ëé∑Âèñenemyspawner
+	EnemySpawner = Cast<AEnemySpawner>(EnemySpawnerArray[0]);
 	
 }
 
 void AEnemy::MoveTowardPlayer(float DeltaTime)
 {
-	// ”√÷˜Ω« ºı»• µ–»ÀŒª÷√ œ‡ºıµ√µΩ µ–»À÷∏œÚ÷˜Ω«µƒ œÚ¡ø
-	FVector Direction= (SpaceShipPlayer->GetActorLocation() - GetActorLocation()).GetSafeNormal(); // µ•ŒªªØ
-	AddActorWorldOffset(Direction*Speed*DeltaTime, true); // “∆∂Ø
+	// ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ ÔøΩÔøΩ»• ÔøΩÔøΩÔøΩÔøΩŒªÔøΩÔøΩ ÔøΩÔøΩÔøΩÔøΩ√µÔøΩ ÔøΩÔøΩÔøΩÔøΩ÷∏ÔøΩÔøΩÔøΩÔøΩÔøΩ«µÔøΩ ÔøΩÔøΩÔøΩÔøΩ
+	FVector Direction= (SpaceShipPlayer->GetActorLocation() - GetActorLocation()).GetSafeNormal(); // ÔøΩÔøΩŒªÔøΩÔøΩ
+	AddActorWorldOffset(Direction*Speed*DeltaTime, true); // ÔøΩ∆∂ÔøΩ
 
-	// ø¥œÚ÷˜Ω«£¨øÿ÷∆–˝◊™
+	// ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ«£ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ◊™
 	SetActorRotation(UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), SpaceShipPlayer->GetActorLocation()));
 
+}
+
+void AEnemy::OnDead()
+{
+	ShipGameModeBase->IncreaseScore();
+	EnemySpawner->DecreaseEnemyCount();
+	//if (ExploseParticle) {
+	//	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExploseParticle, GetActorLocation(), FRotator::ZeroRotator, true); // Ëß¶ÂèëÁàÜÁÇ∏Á≤íÂ≠ê
+	//}
+	SpawnExplose();
+	Destroy();
 }
 
 // Called every frame
 void AEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	MoveTowardPlayer(DeltaTime);
+	if (SpaceShipPlayer->GetBDead() == false) {
+		MoveTowardPlayer(DeltaTime);
+	}
 }
 
 // Called to bind functionality to input

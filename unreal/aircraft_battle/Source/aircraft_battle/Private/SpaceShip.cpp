@@ -12,7 +12,12 @@
 #include "Bullet.h"
 #include "Enemy.h"
 #include "TimerManager.h"
-
+#include "Engine/BlockingVolume.h"
+#include "Kismet/GameplayStatics.h"
+#include "TimerManager.h"
+#include "Sound/SoundCue.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Particles/ParticleSystem.h"
 
 // Sets default values
 ASpaceShip::ASpaceShip()
@@ -37,10 +42,19 @@ ASpaceShip::ASpaceShip()
 	SpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("SpawnPoint"));
 	SpawnPoint->SetupAttachment(ShipStaticMeshComp);
 
+
+	ThrusterParticleComp = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ThrusterParticleComp"));
+	ThrusterParticleComp->SetupAttachment(RootComponent);
+
 	Speed = 2500.0f;
 
 	TimeBetweenShot = 0.2f;
 
+	bDead = false;
+
+	bUpDownMove =false;
+
+	bLeftRightMove = false;
 }
 
 // Called when the game starts or when spawned
@@ -64,12 +78,23 @@ void ASpaceShip::LookAtCousor()
 
 void ASpaceShip::MoveUpDown(float Value)
 {
+	if (Value != 0) {
+		bUpDownMove = true;
+	}
+	else {
+		bUpDownMove = false;
+	}
 	// FVector(1, 0, 0);  //FVector::ForwardVector;  ��ǰ�ƶ�
 	AddMovementInput(FVector::ForwardVector,Value);
 }
 
 void ASpaceShip::MoveLeftRight(float Value)
 {
+	if (Value != 0) {
+		bLeftRightMove = true;
+	}else{
+		bLeftRightMove = false;
+	}
 	AddMovementInput(FVector::RightVector, Value);
 }
 
@@ -80,13 +105,16 @@ void ASpaceShip::Move(float DeltaTime)
 
 void ASpaceShip::Fire()
 {
-	if (Bullet) {
+	if (Bullet && !bDead) {
 		FActorSpawnParameters SpawnParams;
 		GetWorld()->SpawnActor<ABullet>(Bullet, SpawnPoint->GetComponentLocation(), SpawnPoint->GetComponentRotation(), SpawnParams);
+		if (ShotCue) {
+			UGameplayStatics::PlaySoundAtLocation(this, ShotCue, GetActorLocation());
+		}
 	}
 }
 
-void ASpaceShip::StartFire() // ���ö�ʱ������������
+void ASpaceShip::StartFire() // 开火
 {
 	GetWorldTimerManager().SetTimer(TimerHandle_BetweenShot, this, &ASpaceShip::Fire, TimeBetweenShot, true, 0.0f);
 
@@ -97,12 +125,42 @@ void ASpaceShip::EndFire()
 	GetWorldTimerManager().ClearTimer(TimerHandle_BetweenShot);
 }
 
+void ASpaceShip::ReStartLevel()
+{
+	UGameplayStatics::OpenLevel(this, "MainGame");
+}
+
+void ASpaceShip::OnDead()
+{
+	bDead = true;
+	SphereCollisionComp->SetVisibility(false,true); // 父亲组件不显示，子组件也受影响
+	if (GameOverCue) {
+		UGameplayStatics::PlaySoundAtLocation(this, GameOverCue, GetActorLocation());
+	}
+	if(ExploseParticle){
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExploseParticle, GetActorLocation(), FRotator::ZeroRotator, true); // 触发爆炸粒子
+	}
+	GetWorldTimerManager().SetTimer(TimerHandle_ReStart,this,&ASpaceShip::ReStartLevel,2.0f,false);
+}
+
 // Called every frame
 void ASpaceShip::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	LookAtCousor();
-	Move(DeltaTime);
+	if (!bDead) {
+		if (bUpDownMove || bLeftRightMove)
+		{
+			ThrusterParticleComp->Activate();
+		}
+		else {
+			ThrusterParticleComp->Deactivate();
+		}
+		LookAtCousor();
+		Move(DeltaTime);
+	}
+	else {
+		ThrusterParticleComp->Deactivate();
+	}
 }
 
 // Called to bind functionality to input
@@ -125,6 +183,11 @@ void ASpaceShip::NotifyActorBeginOverlap(AActor* OtherActor)
 		Enemy->Destroy(); //敌人销毁
 		UE_LOG(LogTemp, Warning, TEXT("Player is dead"));
 		//Destroy();
+		OnDead();
+	}
+	else if (Cast<ABlockingVolume>(OtherActor)) {
+		UE_LOG(LogTemp, Warning, TEXT("Player 到边界了"));
+		OnDead();
 	}
 }
 
