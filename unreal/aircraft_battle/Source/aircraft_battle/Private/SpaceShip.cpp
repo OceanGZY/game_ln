@@ -10,6 +10,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Bullet.h"
+#include "Enemy.h"
 #include "TimerManager.h"
 
 
@@ -113,5 +114,17 @@ void ASpaceShip::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	PlayerInputComponent->BindAxis("MoveLeftRight", this, &ASpaceShip::MoveLeftRight);
 	PlayerInputComponent->BindAction("Fire",IE_Pressed ,this, &ASpaceShip::StartFire);
 	PlayerInputComponent->BindAction("Fire", IE_Released, this, &ASpaceShip::EndFire);
+}
+
+void ASpaceShip::NotifyActorBeginOverlap(AActor* OtherActor)
+{
+	Super::NotifyActorBeginOverlap(OtherActor);
+
+	AEnemy* Enemy = Cast<AEnemy>(OtherActor); // 转换为敌人
+	if (Enemy) {
+		Enemy->Destroy(); //敌人销毁
+		UE_LOG(LogTemp, Warning, TEXT("Player is dead"));
+		//Destroy();
+	}
 }
 
