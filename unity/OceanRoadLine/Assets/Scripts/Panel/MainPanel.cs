@@ -40,6 +40,8 @@ public class MainPanel : MonoBehaviour
     */
     private void OnStartBtnClick()
     {
+        GameManager.Instance.IsGameStarted = true ;
+        GameManager.Instance.IsGameOver = false ;
         EventCenter.Broadcast(EventDefine.ShowGamePanel);
         gameObject.SetActive(false);
     }

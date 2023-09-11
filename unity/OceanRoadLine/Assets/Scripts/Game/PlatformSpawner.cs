@@ -17,6 +17,11 @@ public class PlatformSpawner : MonoBehaviour
     /// </summary>
     private int spawnPlatformCount;
 
+    private void Awake()
+    {
+        EventCenter.AddListener(EventDefine.DecidePath, DecidePath);
+    }
+
     private void Start()
     {
         // 第一个platform的位置
@@ -32,8 +37,8 @@ public class PlatformSpawner : MonoBehaviour
         }
 
         // 生成人物
-       GameObject go =  Instantiate(vars.characterPre);
-       go.transform.position = new Vector3(0, -1.8f, 0);
+        GameObject go = Instantiate(vars.characterPre);
+        go.transform.position = new Vector3(0, -1.8f, 0);
 
     }
 
@@ -84,5 +89,11 @@ public class PlatformSpawner : MonoBehaviour
         GameObject go = Instantiate(vars.normalPlatformPre, transform);
         go.transform.position = platformSpawnPos;
 
+    }
+
+
+    private void OnDestroy()
+    {
+        EventCenter.RemoveListener(EventDefine.DecidePath, DecidePath);
     }
 }

@@ -1,3 +1,4 @@
 public enum EventDefine{
-    ShowGamePanel
+    ShowGamePanel,
+    DecidePath
 };

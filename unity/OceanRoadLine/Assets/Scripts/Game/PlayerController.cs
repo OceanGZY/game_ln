@@ -21,20 +21,26 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && isJumping == false)
+        // 游戏开始，或游戏未结束，则不可以操作
+        if (GameManager.Instance.IsGameOver == false || GameManager.Instance.IsGameStarted)
         {
-            isJumping = true;
-            Vector3 mousePos = Input.mousePosition; //获取鼠标位置
-            // 如果X <= 屏幕的一半 则在左边,否则右边
-            if (mousePos.x <= Screen.width / 2)
+
+            if (Input.GetMouseButtonDown(0) && isJumping == false)
             {
-                isMoveLeft = true;
+                isJumping = true;
+                Vector3 mousePos = Input.mousePosition; //获取鼠标位置
+                                                        // 如果X <= 屏幕的一半 则在左边,否则右边
+                if (mousePos.x <= Screen.width / 2)
+                {
+                    isMoveLeft = true;
+                }
+                else
+                {
+                    isMoveLeft = false;
+                }
+                Jump();
             }
-            else
-            {
-                isMoveLeft = false;
-            }
-            Jump();
+
         }
     }
 
@@ -69,6 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Platfrom"))
         {
+            EventCenter.Broadcast(EventDefine.DecidePath);
             isJumping = false;
             Vector3 currentPlatfromPos = other.gameObject.transform.position;
             nextPlatformLeft = new Vector3(currentPlatfromPos.x - vars.nextXPos, currentPlatfromPos.y + vars.nextYPos, 0);
