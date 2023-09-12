@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // 游戏开始，或游戏未结束，则不可以操作
-        if (GameManager.Instance.IsGameOver == false || GameManager.Instance.IsGameStarted)
+        // 游戏开始可以操作
+        if (GameManager.Instance.IsGameStarted)
         {
 
             if (Input.GetMouseButtonDown(0) && isJumping == false)
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
                 {
                     isMoveLeft = true;
                 }
-                else
+                else if (mousePos.x > Screen.width / 2)
                 {
                     isMoveLeft = false;
                 }
@@ -60,9 +60,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            transform.localScale = Vector3.one;
+
             transform.DOMoveX(nextPlatformRight.x, 0.2f).SetEase(Ease.InOutQuad);
             transform.DOMoveY(nextPlatformRight.y + 0.8f, 0.15f).SetEase(Ease.InOutQuad);
+            transform.localScale = Vector3.one;
         }
     }
 
