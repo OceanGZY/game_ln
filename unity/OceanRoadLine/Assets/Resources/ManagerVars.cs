@@ -34,5 +34,6 @@ public class ManagerVars : ScriptableObject
 
     public GameObject spikePlatformGroupRightPre;
 
+    public GameObject deathEffectPre;
 
 }

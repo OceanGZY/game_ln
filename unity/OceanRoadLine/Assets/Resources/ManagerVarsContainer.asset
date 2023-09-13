@@ -40,3 +40,4 @@ MonoBehaviour:
   characterPre: {fileID: 4055795375795834199, guid: c105b1c59c9414a31a645c87c0c3b1d4, type: 3}
   spikePlatformGroupLeftPre: {fileID: 3558721051764135524, guid: f20ee4b04aed3435cae3ec7ac61177c2, type: 3}
   spikePlatformGroupRightPre: {fileID: 1241394974134726166, guid: c040306549caf47739a7390f7c86e9c3, type: 3}
+  deathEffectPre: {fileID: 8714038503914121855, guid: 31bda99f9dbd54f4e8a7926ba7fbadd0, type: 3}

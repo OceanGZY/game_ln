@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D my_body;
     private SpriteRenderer spriteRenderer;
 
-
+    private GameObject lastHitGo = null;
 
 
 
@@ -38,13 +39,20 @@ public class PlayerController : MonoBehaviour
     {
         //绘制射线
         Debug.DrawRay(rayDown.position, Vector2.down * 1, Color.red);
-        Debug.DrawRay(rayLeft.position, Vector2.left * 2f, Color.red);
-        Debug.DrawRay(rayRight.position, Vector2.right * 2f, Color.red);
+        Debug.DrawRay(rayLeft.position, Vector2.left * 0.15f, Color.red);
+        Debug.DrawRay(rayRight.position, Vector2.right * 0.15f, Color.red);
 
+        if (EventSystem.current.IsPointerOverGameObject())
+        { // 如果碰到的是UI 则返回掉
+            return;
+        }
 
         if (!GameManager.Instance.IsGameStarted || GameManager.Instance.IsGameOver
             || GameManager.Instance.IsGamePaused)
+        { // 如果游戏未开始、或者暂停则返回掉 
             return;
+        }
+
 
         // 游戏开始可以操作
         if (GameManager.Instance.IsGameStarted)
@@ -81,13 +89,14 @@ public class PlayerController : MonoBehaviour
         // 游戏结束--碰到障碍物
         if (isJumping && !GameManager.Instance.IsGameOver && IsRayObstacle())
         {
+            // 死亡特效
+            GameObject go = Instantiate(ObjectPool.Instance.GetDeathEffect());
+            go.transform.position = transform.position;
+            go.SetActive(true);
             GameManager.Instance.IsGameOver = true;
             Destroy(gameObject);
             Debug.Log("碰到障碍物，游戏结束！");
         }
-
-
-
     }
 
     /// <summary>
@@ -103,6 +112,21 @@ public class PlayerController : MonoBehaviour
             if (hit.collider.tag == "Platfrom") //碰撞到平台了
             {
                 // Debug.Log("射线碰到platform");
+                if (lastHitGo != hit.collider.gameObject) // 如果当前碰撞的不是最后一次碰撞的平台，避免重复加分
+                {
+                    if (lastHitGo == null)
+                    {
+                        lastHitGo = hit.collider.gameObject;
+                        return true;
+                    }
+                    else
+                    {
+                        // 广播一个加分数的消息
+                        EventCenter.Broadcast(EventDefine.AddScore);
+                        lastHitGo = hit.collider.gameObject;
+                    }
+
+                }
                 return true;
             }
             // Debug.Log("射线没有hit平台");
@@ -112,14 +136,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
-/// <summary>
-/// 射线检测。是否检测到碰撞障碍物
-/// </summary>
-/// <returns></returns>
+    /// <summary>
+    /// 射线检测。是否检测到碰撞障碍物
+    /// </summary>
+    /// <returns></returns>
     private bool IsRayObstacle()
     {
-        RaycastHit2D hitLeft = Physics2D.Raycast(rayLeft.position, Vector2.left, 2f, obstacleLayer);
-        RaycastHit2D hitRight = Physics2D.Raycast(rayRight.position, Vector2.right, 2f, obstacleLayer);
+        RaycastHit2D hitLeft = Physics2D.Raycast(rayLeft.position, Vector2.left, 0.15f, obstacleLayer);
+        RaycastHit2D hitRight = Physics2D.Raycast(rayRight.position, Vector2.right, 0.15f, obstacleLayer);
 
         if (hitLeft.collider != null)
         {

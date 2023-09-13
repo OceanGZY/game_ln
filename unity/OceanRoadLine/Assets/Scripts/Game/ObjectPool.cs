@@ -23,6 +23,9 @@ public class ObjectPool : MonoBehaviour
 
     private List<GameObject> spikePlatformRightList = new List<GameObject>();
 
+
+    private List<GameObject> deathEffectList = new List<GameObject>();
+
     private ManagerVars vars;
 
     private void Awake()
@@ -75,6 +78,11 @@ public class ObjectPool : MonoBehaviour
         for (int i = 0; i < initSpawnCount; i++)
         {// 右边钉子
             InstantiateObject(vars.spikePlatformGroupRightPre, ref spikePlatformRightList);
+        }
+
+        for (int i = 0; i < initSpawnCount; i++)
+        {// 死亡特效
+            InstantiateObject(vars.deathEffectPre, ref deathEffectList);
         }
 
     }
@@ -198,6 +206,23 @@ public class ObjectPool : MonoBehaviour
             }
         }
         return InstantiateObject(vars.spikePlatformGroupRightPre, ref spikePlatformRightList);
+    }
+
+
+    /// <summary>
+    /// 获取死亡特效
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetDeathEffect()
+    {
+        for (int i = 0; i < deathEffectList.Count; i++)
+        {
+            if (!deathEffectList[i].activeInHierarchy)
+            { // 没有在场景中显示，则可以返回出去
+                return deathEffectList[i];
+            }
+        }
+        return InstantiateObject(vars.deathEffectPre, ref deathEffectList);
     }
 
 

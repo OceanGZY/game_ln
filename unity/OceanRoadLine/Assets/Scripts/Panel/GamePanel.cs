@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GamePanel : MonoBehaviour
 {
@@ -9,9 +10,9 @@ public class GamePanel : MonoBehaviour
 
     private Button btn_resume;
 
-    private Text score_text;
+    private TextMeshProUGUI score_text;
 
-    private Text diamond_num;
+    private TextMeshProUGUI diamond_num;
 
     private void Init()
     {
@@ -22,9 +23,9 @@ public class GamePanel : MonoBehaviour
         btn_resume.onClick.AddListener(OnResumeBtnClick);
 
 
-        score_text = transform.Find("TextScore").GetComponent<Text>();
+        score_text = transform.Find("TextScore").GetComponent<TextMeshProUGUI>();
 
-        diamond_num = transform.Find("Diamond/DiamondNum").GetComponent<Text>();
+        diamond_num = transform.Find("Diamond/DiamondNum").GetComponent<TextMeshProUGUI>();
 
         btn_resume.gameObject.SetActive(false); // 游戏GamePanel中ResumeBtn隐藏
 
@@ -36,6 +37,7 @@ public class GamePanel : MonoBehaviour
     private void Awake()
     {
         EventCenter.AddListener(EventDefine.ShowGamePanel, Show);
+        EventCenter.AddListener<int>(EventDefine.UpdateShowScore, UpdateScoreText); // 监听 分数变化的消息，然后更新分数文本
         Init();
     }
 
@@ -44,6 +46,9 @@ public class GamePanel : MonoBehaviour
     {
         btn_pause.gameObject.SetActive(false);
         btn_resume.gameObject.SetActive(true); // 游戏GamePanel中ResumeBtn显示
+
+
+        Time.timeScale = 0; // 游戏暂停
     }
 
 
@@ -51,6 +56,8 @@ public class GamePanel : MonoBehaviour
     {
         btn_resume.gameObject.SetActive(false);
         btn_pause.gameObject.SetActive(true); // 游戏GamePanel中PauseBtn显示
+
+        Time.timeScale = 1;// 游戏继续
     }
 
 
@@ -63,6 +70,16 @@ public class GamePanel : MonoBehaviour
     private void OnDestroy()
     {
         EventCenter.RemoveListener(EventDefine.ShowGamePanel, Show);
+        EventCenter.RemoveListener<int>(EventDefine.UpdateShowScore, UpdateScoreText);
     }
 
+
+    /// <summary>
+    /// 更新成绩显示
+    /// </summary>
+    /// <param name="socre"></param>
+    private void UpdateScoreText(int socre)
+    {
+        score_text.text = socre.ToString();
+    }
 }

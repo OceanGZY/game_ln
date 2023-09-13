@@ -31,9 +31,31 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public bool IsGamePaused { get; set; }
 
+
+    private int gameScore;
+
     private void Awake()
     {
         Instance = this;
+        EventCenter.AddListener(EventDefine.AddScore, AddGameSocre);
+    }
+
+
+
+    private void OnDestroy()
+    {
+        EventCenter.RemoveListener(EventDefine.AddScore, AddGameSocre);
+    }
+
+
+    private void AddGameSocre()
+    {
+        if (IsGameOver || !IsGameStarted || !IsGamePaused)
+        {
+            gameScore++;
+            EventCenter.Broadcast(EventDefine.UpdateShowScore, gameScore);
+        }
+
     }
 
 }
