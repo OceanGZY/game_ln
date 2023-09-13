@@ -15,15 +15,21 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name=""></param>
     /// <returns></returns>
-    public bool IsGameStarted{get;set;}
+    public bool IsGameStarted { get; set; }
 
 
-/// <summary>
-/// 游戏是否结束
-/// </summary>
-/// <param name=""></param>
-/// <returns></returns>
-    public bool IsGameOver{get;set;}
+    /// <summary>
+    /// 游戏是否结束
+    /// </summary>
+    /// <param name=""></param>
+    /// <returns></returns>
+    public bool IsGameOver { get; set; }
+
+
+    /// <summary>
+    ///    游戏是否暂停
+    /// </summary>
+    public bool IsGamePaused { get; set; }
 
     private void Awake()
     {

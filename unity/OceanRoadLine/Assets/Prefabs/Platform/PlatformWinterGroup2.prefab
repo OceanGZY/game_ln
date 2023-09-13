@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2070819869
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300022, guid: 20da7e56cbb26b3498b25fb61fa9a7ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -117,7 +117,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.010655522, y: 0.5114563}
+  m_Offset: {x: 0.010655522, y: 0.44}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -128,7 +128,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.28398514, y: 0.48345625}
+  m_Size: {x: 0.34, y: 0.54}
   m_EdgeRadius: 0
 --- !u!1 &2341790166194461564
 GameObject:
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 2761960784687660288}
   - component: {fileID: 6671874890611556367}
   - component: {fileID: 4891469736682358433}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlatformWinterGroup2
   m_TagString: Platfrom
   m_Icon: {fileID: 0}
@@ -252,6 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderers:
   - {fileID: 2712582070383429065}
+  obstacle: {fileID: 919598786127312377}
 --- !u!1 &3231817231954774603
 GameObject:
   m_ObjectHideFlags: 0

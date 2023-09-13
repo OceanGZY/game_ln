@@ -5,6 +5,9 @@ using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
+    public Transform rayDown, rayLeft, rayRight; //射线检测用
+
+    public LayerMask platfromLayer, obstacleLayer; //平台层，障碍物层
 
     private bool isMoveLeft = false; // 是否向左移动，反之向右
 
@@ -14,13 +17,35 @@ public class PlayerController : MonoBehaviour
 
     private bool isJumping = false; //是否正在跳跃
 
+
+    private Rigidbody2D my_body;
+    private SpriteRenderer spriteRenderer;
+
+
+
+
+
+
     private void Awake()
     {
         vars = ManagerVars.GetManagerVars();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        my_body = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
+        //绘制射线
+        Debug.DrawRay(rayDown.position, Vector2.down * 1, Color.red);
+        Debug.DrawRay(rayLeft.position, Vector2.left * 2f, Color.red);
+        Debug.DrawRay(rayRight.position, Vector2.right * 2f, Color.red);
+
+
+        if (!GameManager.Instance.IsGameStarted || GameManager.Instance.IsGameOver
+            || GameManager.Instance.IsGamePaused)
+            return;
+
         // 游戏开始可以操作
         if (GameManager.Instance.IsGameStarted)
         {
@@ -40,9 +65,84 @@ public class PlayerController : MonoBehaviour
                 }
                 Jump();
             }
-
         }
+
+        // 游戏结束--掉下平台
+        if (my_body.velocity.y < 0 && !GameManager.Instance.IsGameOver && !IsRayPlatform())
+        {
+            spriteRenderer.sortingLayerName = "Default";
+            GetComponent<BoxCollider2D>().enabled = false;
+
+            GameManager.Instance.IsGameOver = true;
+            Debug.Log("掉下平台，游戏结束！");
+            // 调用结束面板
+        }
+
+        // 游戏结束--碰到障碍物
+        if (isJumping && !GameManager.Instance.IsGameOver && IsRayObstacle())
+        {
+            GameManager.Instance.IsGameOver = true;
+            Destroy(gameObject);
+            Debug.Log("碰到障碍物，游戏结束！");
+        }
+
+
+
     }
+
+    /// <summary>
+    /// 射线检测,是否检测到平台
+    /// </summary>
+    private bool IsRayPlatform()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(rayDown.position, Vector2.down, 1f, platfromLayer);
+        if (hit.collider != null)
+        {
+            // Debug.Log("射线hit了");
+            // Debug.Log(hit.collider.tag);
+            if (hit.collider.tag == "Platfrom") //碰撞到平台了
+            {
+                // Debug.Log("射线碰到platform");
+                return true;
+            }
+            // Debug.Log("射线没有hit平台");
+        }
+        // Debug.Log("射线碰撞失败");
+        return false;
+
+    }
+
+/// <summary>
+/// 射线检测。是否检测到碰撞障碍物
+/// </summary>
+/// <returns></returns>
+    private bool IsRayObstacle()
+    {
+        RaycastHit2D hitLeft = Physics2D.Raycast(rayLeft.position, Vector2.left, 2f, obstacleLayer);
+        RaycastHit2D hitRight = Physics2D.Raycast(rayRight.position, Vector2.right, 2f, obstacleLayer);
+
+        if (hitLeft.collider != null)
+        {
+            Debug.Log("碰到左边障碍物");
+            Debug.Log(hitLeft.collider.tag);
+            if (hitLeft.collider.tag == "Obstacle")
+            {
+                return true;
+            }
+        }
+        if (hitRight.collider != null)
+        {
+            Debug.Log("碰到右边障碍物");
+            Debug.Log(hitRight.collider.tag);
+            if (hitRight.collider.tag == "Obstacle")
+            {
+                return true;
+            }
+        }
+        Debug.Log("没有碰到障碍物");
+        return false;
+    }
+
 
 
     /// <summary>
@@ -55,14 +155,14 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(-1, 1, 1);
 
-            transform.DOMoveX(nextPlatformLeft.x, 0.2f).SetEase(Ease.InOutQuad);
-            transform.DOMoveY(nextPlatformLeft.y + 0.8f, 0.15f).SetEase(Ease.InOutQuad);
+            transform.DOMoveX(nextPlatformLeft.x, 0.2f);
+            transform.DOMoveY(nextPlatformLeft.y + 0.8f, 0.15f);
         }
         else
         {
 
-            transform.DOMoveX(nextPlatformRight.x, 0.2f).SetEase(Ease.InOutQuad);
-            transform.DOMoveY(nextPlatformRight.y + 0.8f, 0.15f).SetEase(Ease.InOutQuad);
+            transform.DOMoveX(nextPlatformRight.x, 0.2f);
+            transform.DOMoveY(nextPlatformRight.y + 0.8f, 0.15f);
             transform.localScale = Vector3.one;
         }
     }

@@ -26,7 +26,7 @@ public class CameraFollow : MonoBehaviour
         if (target != null)
         {
             float posX = Mathf.SmoothDamp(transform.position.x, target.position.x - offset.x, ref velocity.x, 0.05f); // 摄像机要平滑移动的X距离
-            float posY = Mathf.SmoothDamp(transform.position.y, target.position.x - offset.y, ref velocity.y, 0.05f); // 摄像机要平滑移动的Y距离
+            float posY = Mathf.SmoothDamp(transform.position.y, target.position.y - offset.y, ref velocity.y, 0.05f); // 摄像机要平滑移动的Y距离
             if (posY > transform.position.y)
             {
                 transform.position = new Vector3(posX, posY, transform.position.z);

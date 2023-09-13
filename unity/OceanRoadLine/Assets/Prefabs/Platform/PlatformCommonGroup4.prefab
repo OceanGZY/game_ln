@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4995812200786470337}
   - component: {fileID: 568271986911391979}
   - component: {fileID: 5450802999398188809}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlatformCommonGroup4
   m_TagString: Platfrom
   m_Icon: {fileID: 0}
@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderers:
   - {fileID: 1374333753442650586}
+  obstacle: {fileID: 0}
 --- !u!1 &3805165798204571128
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,9 +135,9 @@ GameObject:
   - component: {fileID: 5660247990265733305}
   - component: {fileID: 1276312187119201759}
   - component: {fileID: 2376706446432993509}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Obstacle (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -196,7 +197,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2070819869
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300010, guid: 20da7e56cbb26b3498b25fb61fa9a7ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -240,7 +241,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.010655522, y: 0.5114563}
+  m_Offset: {x: 0, y: 0.45}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -251,7 +252,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.28398514, y: 0.48345625}
+  m_Size: {x: 0.37, y: 0.51}
   m_EdgeRadius: 0
 --- !u!1 &4666148063189609445
 GameObject:
@@ -264,9 +265,9 @@ GameObject:
   - component: {fileID: 2950609726674157391}
   - component: {fileID: 8061788410997721713}
   - component: {fileID: 287646262612367125}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Obstacle
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -326,7 +327,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2070819869
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300010, guid: 20da7e56cbb26b3498b25fb61fa9a7ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -370,7 +371,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.010655522, y: 0.5114563}
+  m_Offset: {x: 0, y: 0.38}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -381,7 +382,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.28398514, y: 0.48345625}
+  m_Size: {x: 0.31, y: 0.47}
   m_EdgeRadius: 0
 --- !u!1 &5946131844958235463
 GameObject:

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2632687319827657063}
   - component: {fileID: 5360097408507678865}
   - component: {fileID: 4687970736224197567}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Obstacle
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2070819869
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300008, guid: 20da7e56cbb26b3498b25fb61fa9a7ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -117,7 +117,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.010655522, y: 0.5114563}
+  m_Offset: {x: 0.010655522, y: 0.39}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -128,7 +128,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.28398514, y: 0.48345625}
+  m_Size: {x: 0.4, y: 0.42}
   m_EdgeRadius: 0
 --- !u!1 &2757047793953523042
 GameObject:
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 3913426254127493720}
   - component: {fileID: 8726593390278404810}
   - component: {fileID: -1408250654697585458}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlatformGrassGroup1
   m_TagString: Platfrom
   m_Icon: {fileID: 0}
@@ -252,6 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderers:
   - {fileID: 309933233887888415}
+  obstacle: {fileID: 516979373980853563}
 --- !u!1 &3695991330610960707
 GameObject:
   m_ObjectHideFlags: 0
