@@ -32,9 +32,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/Assembly-CSharp.csproj",
-      "projectName": "Assembly-CSharp",
-      "projectPath": "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/Assembly-CSharp.csproj",
+      "projectUniqueName": "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/Assembly-CSharp-Editor-firstpass.csproj",
+      "projectName": "Assembly-CSharp-Editor-firstpass",
+      "projectPath": "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/Assembly-CSharp-Editor-firstpass.csproj",
       "packagesPath": "/Users/gaozhiyong/.nuget/packages/",
       "outputPath": "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/obj/",
       "projectStyle": "PackageReference",
