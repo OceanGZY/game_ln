@@ -28,6 +28,7 @@ public class ManagerVars : ScriptableObject
 
     public List<GameObject> winterPlatformGroup = new List<GameObject>();
 
+    
     public GameObject characterPre;
 
     public GameObject spikePlatformGroupLeftPre;
@@ -35,5 +36,7 @@ public class ManagerVars : ScriptableObject
     public GameObject spikePlatformGroupRightPre;
 
     public GameObject deathEffectPre;
+
+    public GameObject diamondtPre;
 
 }

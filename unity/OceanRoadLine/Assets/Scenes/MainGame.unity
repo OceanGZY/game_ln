@@ -766,6 +766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initSpawnCount: 5
+  diamonList: []
 --- !u!4 &450870015
 Transform:
   m_ObjectHideFlags: 0
@@ -1888,7 +1889,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -852255771
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 5
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -6688,6 +6689,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startSpawnPos: {x: 0, y: -2.4, z: 0}
+  mileStoneCount: 10
+  fallTime: 2
+  minFallTime: 0.5
+  mutiple: 0.9
 --- !u!4 &1714594259
 Transform:
   m_ObjectHideFlags: 0

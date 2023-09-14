@@ -13,6 +13,14 @@ public class PlatformSpawner : MonoBehaviour
 {
     public Vector3 startSpawnPos;  // 初始生成位置
 
+    public int mileStoneCount = 10;   // 里程碑数
+
+    public float fallTime;  // 掉落时间
+
+    public float minFallTime; // 最小掉落时间
+
+    public float mutiple; // 掉落系数
+
     private ManagerVars vars;
 
     private Vector3 platformSpawnPos; // 下一个平台生成的位置
@@ -28,7 +36,7 @@ public class PlatformSpawner : MonoBehaviour
     /// </summary>
     private int spawnPlatformCount;
 
-    private bool spikeSpawnLeft=false;  //钉子是否生成在左边 ，反之右边
+    private bool spikeSpawnLeft = false;  //钉子是否生成在左边 ，反之右边
 
     private Vector3 spikeDirPlatformPos; // 钉子方向平台的位置
 
@@ -131,7 +139,7 @@ public class PlatformSpawner : MonoBehaviour
                 }
                 SpawnSpikePlatformGroup(value, ranObstacleDir);
 
-                isSpawnSpike =true;
+                isSpawnSpike = true;
                 affterSpwanSpikePlatformCount = 4;
 
                 if (spikeSpawnLeft)
@@ -144,6 +152,16 @@ public class PlatformSpawner : MonoBehaviour
                 }
             }
         }
+
+        // 随机在平台上显示金币
+        int ranSpawnDiamond = Random.Range(0, 8);
+        if (ranSpawnDiamond >= 6 && GameManager.Instance.PlayerIsMove)
+        {
+            GameObject go = ObjectPool.Instance.GetDiamond();
+            go.transform.position = new Vector3(platformSpawnPos.x, platformSpawnPos.y + 0.5f, 0);
+            go.SetActive(true);
+        }
+
 
         if (isLeftSpawn)
         { //如果是向左生成
@@ -168,26 +186,26 @@ public class PlatformSpawner : MonoBehaviour
     {
         GameObject go = ObjectPool.Instance.GetNormalPlatform();
         go.transform.position = platformSpawnPos;
-        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, ranObstacleDir);
+        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, fallTime, ranObstacleDir);
         go.SetActive(true);
     }
 
     private void SpawnCommonPlatformGroup(int ranObstacleDir) //生成通用组合
     {
-        
+
         GameObject go = ObjectPool.Instance.GetCommonPlatformGroup();
         go.transform.position = platformSpawnPos;
-        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, ranObstacleDir);
+        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, fallTime, ranObstacleDir);
         go.SetActive(true);
     }
 
 
     private void SpawnGrassPlatformGroup(int ranObstacleDir) // 生成草地组合
     {
-        
+
         GameObject go = ObjectPool.Instance.GetGrassPlatformGroup();
         go.transform.position = platformSpawnPos;
-        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, ranObstacleDir);
+        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, fallTime, ranObstacleDir);
         go.SetActive(true);
     }
 
@@ -195,7 +213,7 @@ public class PlatformSpawner : MonoBehaviour
     {
         GameObject go = ObjectPool.Instance.GetWinterPlatformGroup();
         go.transform.position = platformSpawnPos;
-        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, ranObstacleDir);
+        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, fallTime, ranObstacleDir);
         go.SetActive(true);
     }
 
@@ -214,7 +232,7 @@ public class PlatformSpawner : MonoBehaviour
         }
 
         go.transform.position = platformSpawnPos;
-        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, ranObstacleDir);
+        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, fallTime, ranObstacleDir);
         go.SetActive(true);
 
     }
@@ -254,7 +272,7 @@ public class PlatformSpawner : MonoBehaviour
                         spikeDirPlatformPos = new Vector3(spikeDirPlatformPos.x + vars.nextXPos, spikeDirPlatformPos.y + vars.nextYPos, 0);
                     }
                 }
-                temp.GetComponent<PlatformScript>().Init(selectPlatformSprite, 1);
+                temp.GetComponent<PlatformScript>().Init(selectPlatformSprite, fallTime, 1);
                 temp.SetActive(true);
             }
         }
@@ -288,5 +306,31 @@ public class PlatformSpawner : MonoBehaviour
     private void OnDestroy()
     {
         EventCenter.RemoveListener(EventDefine.DecidePath, DecidePath);
+    }
+
+
+    private void Update()
+    {// 游戏在运行状态时，平台才可以往下掉
+        if (GameManager.Instance.IsGameStarted && !GameManager.Instance.IsGameOver && !GameManager.Instance.IsGamePaused)
+        {
+            UpdateFallTime();
+        }
+
+    }
+
+
+    private void UpdateFallTime()
+    {
+        if (GameManager.Instance.GameScore > mileStoneCount) //如果分数超过里程碑 则更新
+        {
+            mileStoneCount *= 2;
+            fallTime *= mutiple;
+            if (fallTime < minFallTime)
+            {
+                fallTime = minFallTime;
+            }
+
+        }
+
     }
 }

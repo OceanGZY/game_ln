@@ -1,6 +1,10 @@
-public enum EventDefine{
+public enum EventDefine
+{
     ShowGamePanel,
     DecidePath,
     AddScore,
-    UpdateShowScore
+    UpdateShowScore,
+    PlayerMove,
+    PickupDiamond,
+    UpdateDiamonCount
 };

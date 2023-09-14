@@ -31,13 +31,24 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public bool IsGamePaused { get; set; }
 
+    public bool PlayerIsMove { get; set; } // 玩家是否开始移动
+
+    public int GameScore { get { return gameScore; } }
+
+
+    public int GameDiamondCount { get { return diamondCount; } }
+
 
     private int gameScore;
+
+    private int diamondCount;
 
     private void Awake()
     {
         Instance = this;
         EventCenter.AddListener(EventDefine.AddScore, AddGameSocre);
+        EventCenter.AddListener(EventDefine.PickupDiamond, AddDiamondCount);
+        EventCenter.AddListener(EventDefine.PlayerMove, PlayerMove);
     }
 
 
@@ -45,17 +56,29 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         EventCenter.RemoveListener(EventDefine.AddScore, AddGameSocre);
+        EventCenter.RemoveListener(EventDefine.PickupDiamond, AddDiamondCount);
+        EventCenter.RemoveListener(EventDefine.PlayerMove, PlayerMove);
     }
 
 
-    private void AddGameSocre()
+    private void AddGameSocre() // 加游戏分
     {
-        if (IsGameOver || !IsGameStarted || !IsGamePaused)
-        {
-            gameScore++;
-            EventCenter.Broadcast(EventDefine.UpdateShowScore, gameScore);
-        }
+        if (IsGameOver || !IsGameStarted || IsGamePaused) return;
+        gameScore++;
+        EventCenter.Broadcast(EventDefine.UpdateShowScore, gameScore);
 
+    }
+
+
+    private void AddDiamondCount()
+    { //加钻石
+        diamondCount++;
+        EventCenter.Broadcast(EventDefine.UpdateDiamonCount, diamondCount);
+    }
+
+    private void PlayerMove()
+    { //玩家移动
+        PlayerIsMove = true;
     }
 
 }

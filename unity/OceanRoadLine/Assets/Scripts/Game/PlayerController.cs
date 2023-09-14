@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
 
     private GameObject lastHitGo = null;
 
+    private bool isMove = false;
+
 
 
 
@@ -39,8 +41,8 @@ public class PlayerController : MonoBehaviour
     {
         //绘制射线
         Debug.DrawRay(rayDown.position, Vector2.down * 1, Color.red);
-        Debug.DrawRay(rayLeft.position, Vector2.left * 0.15f, Color.red);
-        Debug.DrawRay(rayRight.position, Vector2.right * 0.15f, Color.red);
+        Debug.DrawRay(rayLeft.position, Vector2.left * 0.2f, Color.red);
+        Debug.DrawRay(rayRight.position, Vector2.right * 0.2f, Color.red);
 
         if (EventSystem.current.IsPointerOverGameObject())
         { // 如果碰到的是UI 则返回掉
@@ -60,6 +62,12 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && isJumping == false)
             {
+                if (!isMove)
+                {
+                    EventCenter.Broadcast(EventDefine.PlayerMove);
+                    isMove = true;
+                }
+
                 isJumping = true;
                 Vector3 mousePos = Input.mousePosition; //获取鼠标位置
                                                         // 如果X <= 屏幕的一半 则在左边,否则右边
@@ -80,7 +88,6 @@ public class PlayerController : MonoBehaviour
         {
             spriteRenderer.sortingLayerName = "Default";
             GetComponent<BoxCollider2D>().enabled = false;
-
             GameManager.Instance.IsGameOver = true;
             Debug.Log("掉下平台，游戏结束！");
             // 调用结束面板
@@ -97,6 +104,15 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
             Debug.Log("碰到障碍物，游戏结束！");
         }
+
+        // 游戏结束--平台掉落，人也掉落的时候,掉出去画面了
+        if (transform.position.y - Camera.main.transform.position.y < -6 && !GameManager.Instance.IsGameOver && !GameManager.Instance.IsGamePaused)
+        {
+            GameManager.Instance.IsGameOver = true;
+            gameObject.SetActive(false);
+            Debug.Log("人物掉出画面，游戏结束！");
+        }
+
     }
 
     /// <summary>
@@ -142,8 +158,8 @@ public class PlayerController : MonoBehaviour
     /// <returns></returns>
     private bool IsRayObstacle()
     {
-        RaycastHit2D hitLeft = Physics2D.Raycast(rayLeft.position, Vector2.left, 0.15f, obstacleLayer);
-        RaycastHit2D hitRight = Physics2D.Raycast(rayRight.position, Vector2.right, 0.15f, obstacleLayer);
+        RaycastHit2D hitLeft = Physics2D.Raycast(rayLeft.position, Vector2.left, 0.2f, obstacleLayer);
+        RaycastHit2D hitRight = Physics2D.Raycast(rayRight.position, Vector2.right, 0.2f, obstacleLayer);
 
         if (hitLeft.collider != null)
         {
@@ -208,4 +224,23 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+
+    /// <summary>
+    ///     重叠检测
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            // 吃到钻石了
+            Debug.Log("吃到钻石了");
+            EventCenter.Broadcast(EventDefine.PickupDiamond);
+            other.gameObject.SetActive(false);
+
+        }
+    }
+
+
 }

@@ -26,6 +26,9 @@ public class ObjectPool : MonoBehaviour
 
     private List<GameObject> deathEffectList = new List<GameObject>();
 
+    public List<GameObject> diamonList = new List<GameObject>();
+
+
     private ManagerVars vars;
 
     private void Awake()
@@ -83,6 +86,11 @@ public class ObjectPool : MonoBehaviour
         for (int i = 0; i < initSpawnCount; i++)
         {// 死亡特效
             InstantiateObject(vars.deathEffectPre, ref deathEffectList);
+        }
+
+        for (int i = 0; i < initSpawnCount; i++)
+        {// 钻石
+            InstantiateObject(vars.diamondtPre, ref diamonList);
         }
 
     }
@@ -223,6 +231,23 @@ public class ObjectPool : MonoBehaviour
             }
         }
         return InstantiateObject(vars.deathEffectPre, ref deathEffectList);
+    }
+
+
+    /// <summary>
+    /// 获取daimaond
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetDiamond()
+    {
+        for (int i = 0; i < diamonList.Count; i++)
+        {
+            if (!diamonList[i].activeInHierarchy)
+            { // 没有在场景中显示，则可以返回出去
+                return diamonList[i];
+            }
+        }
+        return InstantiateObject(vars.diamondtPre, ref diamonList);
     }
 
 

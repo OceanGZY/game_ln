@@ -1,0 +1,108 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/Assembly-CSharp.csproj": {}
+  },
+  "projects": {
+    "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/Assembly-CSharp-firstpass.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/Assembly-CSharp-firstpass.csproj",
+        "projectName": "Assembly-CSharp-firstpass",
+        "projectPath": "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/Assembly-CSharp-firstpass.csproj",
+        "packagesPath": "/Users/gaozhiyong/.nuget/packages/",
+        "outputPath": "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/gaozhiyong/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.306/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/Assembly-CSharp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/Assembly-CSharp.csproj",
+        "projectName": "Assembly-CSharp",
+        "projectPath": "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/Assembly-CSharp.csproj",
+        "packagesPath": "/Users/gaozhiyong/.nuget/packages/",
+        "outputPath": "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/gaozhiyong/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/Assembly-CSharp-firstpass.csproj": {
+                "projectPath": "/Users/gaozhiyong/Documents/GitHub/game_ln/unity/OceanRoadLine/Assembly-CSharp-firstpass.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.306/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
