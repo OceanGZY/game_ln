@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -40,12 +41,46 @@ public class GameManager : MonoBehaviour
 
     public bool PlayerIsMove { get; set; } // 玩家是否开始移动
 
-    public int GameScore { get { return gameScore; } }
+    public int GetGameScore() { return gameScore; }
+    public void SetGameScore(int score) { gameScore = score; }
 
-    public int GameDiamond { get { return diamondCount; } }
+    public int GetGameDiamond() { return diamondCount; }
 
+    public void SetGameDiamond(int count) { diamondCount = count; }
 
-    public int GameDiamondCount { get { return diamondCount; } }
+    public void SaveScoreArr(int score)
+    {
+        List<int> scoreList = bsetScoreArr.ToList();
+        scoreList.Sort((x, y) => (-x.CompareTo(y))); // 从大到小排序
+        bsetScoreArr = scoreList.ToArray();
+
+        // 50 , 20 ,10
+        int index = -1;
+
+        for (int i = 0; i < bsetScoreArr.Length; i++)
+        {
+            if (score >= bsetScoreArr[i])
+            {
+                index = i;
+            }
+        }
+        if (index == -1) return;
+
+        for (int i = bsetScoreArr.Length - 1; i > index; i--)
+        {
+            bsetScoreArr[i] = bsetScoreArr[i - 1];
+        }
+
+        bsetScoreArr[index] = score;
+
+        Save();
+
+    }
+
+    public int GameMaxScore()
+    {
+        return bsetScoreArr.Max();
+    }
 
 
     public bool GetSkinIsUnlock(int index) { return skinUnlock[index]; } // 查询当前皮肤是否解锁
@@ -87,6 +122,10 @@ public class GameManager : MonoBehaviour
         EventCenter.AddListener(EventDefine.AddScore, AddGameSocre);
         EventCenter.AddListener(EventDefine.PickupDiamond, AddDiamondCount);
         EventCenter.AddListener(EventDefine.PlayerMove, PlayerMove);
+        if (GameData.IsAgiainGame)
+        {
+            IsGameStarted = true;
+        }
 
         InitGameData();
 
@@ -202,5 +241,17 @@ public class GameManager : MonoBehaviour
             Debug.Log("读取数据失败");
             Debug.Log(e.Message);
         }
+    }
+
+    public void ResetGame()
+    {
+        isFirstGame = false;
+        isMusicOn = true;
+        bsetScoreArr = new int[3];
+        selectedSkin = 0;
+        skinUnlock = new bool[vars.skinSpriteList.Count];
+        skinUnlock[0] = true;
+        allDiamondCount = 10;
+        Save();
     }
 }

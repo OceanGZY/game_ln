@@ -141,6 +141,7 @@ public class ShopPanel : MonoBehaviour
     {
         Debug.Log("选择");
         EventCenter.Broadcast(EventDefine.ChangeSkin, currentSkinIndex);
+        EventCenter.Broadcast(EventDefine.Hint,"选择角色成功");
         GameManager.Instance.SelectedSkin = currentSkinIndex; // 设置选中的角色索引序号
     }
 
@@ -161,11 +162,13 @@ public class ShopPanel : MonoBehaviour
             GameManager.Instance.SetAllDiamond(tempLast); // 最新的钻石余额
             GameManager.Instance.SetSkinIsUnlock(currentSkinIndex); // 已经解锁
             skin_select_parent.GetChild(currentSkinIndex).GetChild(0).GetComponent<Image>().color = Color.white;
+            EventCenter.Broadcast(EventDefine.Hint, "解锁成功");
         }
         else
         {
             Debug.Log("钻石不足，钻石量为");
             Debug.Log(GameManager.Instance.GetAllDiamond());
+            EventCenter.Broadcast(EventDefine.Hint, "钻石不足");
             return;
         }
     }

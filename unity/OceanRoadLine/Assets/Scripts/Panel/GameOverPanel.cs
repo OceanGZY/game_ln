@@ -90,8 +90,18 @@ public class GameOverPanel : MonoBehaviour
     /// </summary>
     private void Show()
     {
-        score_text.text = GameManager.Instance.GameScore.ToString();
-        diamond_num.text = "+" + GameManager.Instance.GameDiamond.ToString();
+        if (GameManager.Instance.GetGameScore() > GameManager.Instance.GameMaxScore())
+        {
+            max_score_text.text = "新纪录!  " + GameManager.Instance.GetGameScore().ToString();
+        }
+        else
+        {
+            max_score_text.text = "最高分:" + GameManager.Instance.GameMaxScore().ToString();
+        }
+        GameManager.Instance.SaveScoreArr(GameManager.Instance.GetGameScore());
+        score_text.text = GameManager.Instance.GetGameScore().ToString();
+        diamond_num.text = "+" + GameManager.Instance.GetGameDiamond().ToString();
+        GameManager.Instance.SetAllDiamond(GameManager.Instance.GetGameDiamond()); // 更新总钻石数量
         gameObject.SetActive(true);
     }
 

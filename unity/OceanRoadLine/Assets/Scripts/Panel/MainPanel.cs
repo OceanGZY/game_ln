@@ -14,6 +14,8 @@ public class MainPanel : MonoBehaviour
 
     private Button btn_volume;
 
+    private Button btn_reset;
+
     private ManagerVars vars;
 
     private void Awake()
@@ -47,7 +49,11 @@ public class MainPanel : MonoBehaviour
         btn_rank.onClick.AddListener(OnRankBtnClick);
 
         btn_volume = transform.Find("ControllBtns/BtnVolume").GetComponent<Button>();
-        btn_rank.onClick.AddListener(OnVolumeBtnClick);
+        btn_volume.onClick.AddListener(OnVolumeBtnClick);
+
+
+        btn_reset = transform.Find("ControllBtns/BtnReset").GetComponent<Button>();
+        btn_reset.onClick.AddListener(OnResetBtnClick);
     }
 
 
@@ -75,7 +81,7 @@ public class MainPanel : MonoBehaviour
     */
     private void OnRankBtnClick()
     {
-
+        EventCenter.Broadcast(EventDefine.ShowRankPanel);
     }
 
     /*
@@ -84,6 +90,16 @@ public class MainPanel : MonoBehaviour
     private void OnVolumeBtnClick()
     {
 
+    }
+
+
+    /// <summary>
+    /// 重置按钮被点击
+    /// </summary>
+    private void OnResetBtnClick()
+    {
+        Debug.Log("重置按钮被点击");
+        EventCenter.Broadcast(EventDefine.ShowResetPanel);
     }
 
     /// <summary>

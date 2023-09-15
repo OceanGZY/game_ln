@@ -321,7 +321,7 @@ public class PlatformSpawner : MonoBehaviour
 
     private void UpdateFallTime()
     {
-        if (GameManager.Instance.GameScore > mileStoneCount) //如果分数超过里程碑 则更新
+        if (GameManager.Instance.GetGameScore() > mileStoneCount) //如果分数超过里程碑 则更新
         {
             mileStoneCount *= 2;
             fallTime *= mutiple;

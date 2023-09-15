@@ -12,5 +12,9 @@ public enum EventDefine
 
     ShowMainPanel,
 
-    ChangeSkin
+    ChangeSkin,
+    Hint,
+    ShowResetPanel,
+
+    ShowRankPanel
 };

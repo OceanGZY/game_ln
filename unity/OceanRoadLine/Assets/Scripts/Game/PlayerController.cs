@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.IsGameStarted)
         {
 
-            if (Input.GetMouseButtonDown(0) && isJumping == false)
+            if (Input.GetMouseButtonDown(0) && isJumping == false && nextPlatformLeft != Vector3.zero)
             {
                 if (!isMove)
                 {
