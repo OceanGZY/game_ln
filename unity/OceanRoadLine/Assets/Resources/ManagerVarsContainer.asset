@@ -37,6 +37,23 @@ MonoBehaviour:
   - {fileID: 7988813406758484626, guid: c5644a573c53c4a34bb92d5c2b7ae7d2, type: 3}
   - {fileID: 2341790166194461564, guid: e9886b32e5cd149519ee5085b38dc5cb, type: 3}
   - {fileID: 6327384454613631983, guid: 7bbaef724c93b46c6a39fc6b95b0fc10, type: 3}
+  skinSpriteList:
+  - {fileID: 21300000, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300004, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300008, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300012, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  skinNameList:
+  - GZY
+  - WSQ
+  - ZY
+  - SQ
+  skinPriceList: 05000000010000000a00000014000000
+  skinBackSpriteList:
+  - {fileID: 21300002, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300006, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300010, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300014, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  skinChooseItemPre: {fileID: 7272137354377354720, guid: 4d8b3b316f4154d0d82e425e23c35fed, type: 3}
   characterPre: {fileID: 4055795375795834199, guid: c105b1c59c9414a31a645c87c0c3b1d4, type: 3}
   spikePlatformGroupLeftPre: {fileID: 3558721051764135524, guid: f20ee4b04aed3435cae3ec7ac61177c2, type: 3}
   spikePlatformGroupRightPre: {fileID: 1241394974134726166, guid: c040306549caf47739a7390f7c86e9c3, type: 3}

@@ -31,12 +31,22 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        EventCenter.AddListener<int>(EventDefine.ChangeSkin, ChangeSkin);
         vars = ManagerVars.GetManagerVars();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         my_body = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        ChangeSkin(GameManager.Instance.SelectedSkin);
+    }
+
+    private void OnDestroy()
+    {
+        EventCenter.RemoveListener<int>(EventDefine.ChangeSkin, ChangeSkin);
+    }
     private void Update()
     {
         //绘制射线
@@ -90,6 +100,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = false;
             GameManager.Instance.IsGameOver = true;
             Debug.Log("掉下平台，游戏结束！");
+            StartCoroutine(DelayShowGameOverPanel());
             // 调用结束面板
         }
 
@@ -101,18 +112,31 @@ public class PlayerController : MonoBehaviour
             go.transform.position = transform.position;
             go.SetActive(true);
             GameManager.Instance.IsGameOver = true;
-            Destroy(gameObject);
+            spriteRenderer.enabled = false;
             Debug.Log("碰到障碍物，游戏结束！");
+            StartCoroutine(DelayShowGameOverPanel());
         }
 
         // 游戏结束--平台掉落，人也掉落的时候,掉出去画面了
         if (transform.position.y - Camera.main.transform.position.y < -6 && !GameManager.Instance.IsGameOver && !GameManager.Instance.IsGamePaused)
         {
             GameManager.Instance.IsGameOver = true;
-            gameObject.SetActive(false);
             Debug.Log("人物掉出画面，游戏结束！");
+            StartCoroutine(DelayShowGameOverPanel());
         }
 
+
+
+    }
+
+    /// <summary>
+    /// 协程等待1后，显示结束洁面
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator DelayShowGameOverPanel()
+    {
+        yield return new WaitForSeconds(1f);
+        EventCenter.Broadcast(EventDefine.ShowGameOverPanel);
     }
 
     /// <summary>
@@ -243,4 +267,12 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 更换皮肤
+    /// </summary>
+    /// <param name="index"></param>
+    private void ChangeSkin(int index)
+    {
+        spriteRenderer.sprite = vars.skinBackSpriteList[index];
+    }
 }

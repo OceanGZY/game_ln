@@ -6,5 +6,11 @@ public enum EventDefine
     UpdateShowScore,
     PlayerMove,
     PickupDiamond,
-    UpdateDiamonCount
+    UpdateDiamonCount,
+    ShowGameOverPanel,
+    ShowShopPanel,
+
+    ShowMainPanel,
+
+    ChangeSkin
 };

@@ -14,9 +14,25 @@ public class MainPanel : MonoBehaviour
 
     private Button btn_volume;
 
+    private ManagerVars vars;
+
     private void Awake()
     {
+        vars = ManagerVars.GetManagerVars();
+        EventCenter.AddListener(EventDefine.ShowMainPanel, Show);
+        EventCenter.AddListener<int>(EventDefine.ChangeSkin, ChangeSkin);
         Init();
+    }
+
+    private void Start()
+    {
+        if (GameData.IsAgiainGame)
+        {
+            EventCenter.Broadcast(EventDefine.ShowGamePanel);
+            gameObject.SetActive(false);
+        }
+
+        ChangeSkin(GameManager.Instance.SelectedSkin);
     }
 
     private void Init()
@@ -40,7 +56,7 @@ public class MainPanel : MonoBehaviour
     */
     private void OnStartBtnClick()
     {
-        GameManager.Instance.IsGameStarted = true ;
+        GameManager.Instance.IsGameStarted = true;
         // GameManager.Instance.IsGameOver = false ;
         EventCenter.Broadcast(EventDefine.ShowGamePanel);
         gameObject.SetActive(false);
@@ -51,7 +67,7 @@ public class MainPanel : MonoBehaviour
     */
     private void OnShopBtnClick()
     {
-
+        EventCenter.Broadcast(EventDefine.ShowShopPanel);
     }
 
     /*
@@ -68,6 +84,26 @@ public class MainPanel : MonoBehaviour
     private void OnVolumeBtnClick()
     {
 
+    }
+
+    /// <summary>
+    /// 更换皮肤
+    /// </summary>
+    /// <param name="index"></param>
+    private void ChangeSkin(int index)
+    {
+        btn_shop.transform.GetChild(0).GetComponent<Image>().sprite = vars.skinSpriteList[index];
+    }
+
+    private void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    private void OnDestroy()
+    {
+        EventCenter.RemoveListener(EventDefine.ShowMainPanel, Show);
+        EventCenter.RemoveListener<int>(EventDefine.ChangeSkin, ChangeSkin);
     }
 
 }

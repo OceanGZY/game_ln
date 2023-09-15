@@ -59,9 +59,11 @@
     <Compile Include="Assets/Scripts/Game/PlatformScript.cs" />
     <Compile Include="Assets/Scripts/Game/ObjectPool.cs" />
     <Compile Include="Assets/Scripts/Panel/GameOverPanel.cs" />
+    <Compile Include="Assets/Scripts/Panel/ShopPanel.cs" />
     <Compile Include="Assets/Scripts/Common/EventCenter.cs" />
     <Compile Include="Assets/Scripts/Game/CameraFollow.cs" />
     <Compile Include="Assets/Scripts/Game/GameManager.cs" />
+    <Compile Include="Assets/Scripts/Game/GameData.cs" />
     <Compile Include="Assets/Scripts/Common/CallBack.cs" />
     <Compile Include="Assets/Scripts/Game/PlatformSpawner.cs" />
     <Compile Include="Assets/Scripts/Common/EventDefine.cs" />

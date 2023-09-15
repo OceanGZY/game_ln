@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameOverPanel : MonoBehaviour
@@ -23,7 +24,13 @@ public class GameOverPanel : MonoBehaviour
 
     private void Awake()
     {
+        EventCenter.AddListener(EventDefine.ShowGameOverPanel, Show);
         Init();
+    }
+
+    private void OnDestroy()
+    {
+        EventCenter.RemoveListener(EventDefine.ShowGameOverPanel, Show);
     }
 
     private void Init()
@@ -43,7 +50,7 @@ public class GameOverPanel : MonoBehaviour
 
         diamond_num = transform.Find("Diamond/DiamondNum").GetComponent<TextMeshProUGUI>();
 
-        // gameObject.SetActive(false);
+        gameObject.SetActive(false);
 
 
     }
@@ -62,6 +69,8 @@ public class GameOverPanel : MonoBehaviour
     private void OnRestartBtnClick()
     {
         Debug.Log("OnRestartBtnClick");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 重新加载当前激活的场景
+        GameData.IsAgiainGame = true; // 重新开始游戏 
     }
 
 
@@ -71,7 +80,19 @@ public class GameOverPanel : MonoBehaviour
     private void OnHomeBtnClick()
     {
         Debug.Log("OnHomeBtnClick");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 重新加载当前激活的场景
+        GameData.IsAgiainGame = false;
+    }
 
+
+    /// <summary>
+    /// 显示panel
+    /// </summary>
+    private void Show()
+    {
+        score_text.text = GameManager.Instance.GameScore.ToString();
+        diamond_num.text = "+" + GameManager.Instance.GameDiamond.ToString();
+        gameObject.SetActive(true);
     }
 
 }
