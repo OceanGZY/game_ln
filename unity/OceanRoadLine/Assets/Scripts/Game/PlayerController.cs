@@ -26,16 +26,22 @@ public class PlayerController : MonoBehaviour
 
     private bool isMove = false;
 
+    private AudioSource audioSource;
+
 
 
 
     private void Awake()
     {
         EventCenter.AddListener<int>(EventDefine.ChangeSkin, ChangeSkin);
+        EventCenter.AddListener<bool>(EventDefine.MusicIsOn, MusicIsOn);
+
         vars = ManagerVars.GetManagerVars();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         my_body = GetComponent<Rigidbody2D>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -46,6 +52,22 @@ public class PlayerController : MonoBehaviour
     private void OnDestroy()
     {
         EventCenter.RemoveListener<int>(EventDefine.ChangeSkin, ChangeSkin);
+        EventCenter.RemoveListener<bool>(EventDefine.MusicIsOn, MusicIsOn);
+
+    }
+
+    private bool IsPointerOverGameObject(Vector2 mousePosition)
+    {
+        // 创建点击事件
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = mousePosition;
+
+        List<RaycastResult> rayResults = new List<RaycastResult>();
+
+        // 向点击位置发射一条射线
+        EventSystem.current.RaycastAll(eventData, rayResults);
+
+        return rayResults.Count > 0;
     }
     private void Update()
     {
@@ -54,10 +76,25 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(rayLeft.position, Vector2.left * 0.2f, Color.red);
         Debug.DrawRay(rayRight.position, Vector2.right * 0.2f, Color.red);
 
-        if (EventSystem.current.IsPointerOverGameObject())
-        { // 如果碰到的是UI 则返回掉
-            return;
-        }
+
+        // if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        // {
+        //     int fingerId = Input.GetTouch(0).fingerId;
+        //     if (EventSystem.current.IsPointerOverGameObject(fingerId))
+        //     {
+        //         return;
+        //     }
+        // }
+        // else
+        // {
+        //     if (EventSystem.current.IsPointerOverGameObject())
+        //     { // 如果碰到的是UI 则返回掉
+        //         return;
+        //     }
+        // }
+
+        if (IsPointerOverGameObject(Input.mousePosition)) return;
+
 
         if (!GameManager.Instance.IsGameStarted || GameManager.Instance.IsGameOver
             || GameManager.Instance.IsGamePaused)
@@ -77,7 +114,7 @@ public class PlayerController : MonoBehaviour
                     EventCenter.Broadcast(EventDefine.PlayerMove);
                     isMove = true;
                 }
-
+                audioSource.PlayOneShot(vars.jumpClip);
                 isJumping = true;
                 Vector3 mousePos = Input.mousePosition; //获取鼠标位置
                                                         // 如果X <= 屏幕的一半 则在左边,否则右边
@@ -96,6 +133,7 @@ public class PlayerController : MonoBehaviour
         // 游戏结束--掉下平台
         if (my_body.velocity.y < 0 && !GameManager.Instance.IsGameOver && !IsRayPlatform())
         {
+            audioSource.PlayOneShot(vars.fallClip);
             spriteRenderer.sortingLayerName = "Default";
             GetComponent<BoxCollider2D>().enabled = false;
             GameManager.Instance.IsGameOver = true;
@@ -107,6 +145,7 @@ public class PlayerController : MonoBehaviour
         // 游戏结束--碰到障碍物
         if (isJumping && !GameManager.Instance.IsGameOver && IsRayObstacle())
         {
+            audioSource.PlayOneShot(vars.hitClip);
             // 死亡特效
             GameObject go = Instantiate(ObjectPool.Instance.GetDeathEffect());
             go.transform.position = transform.position;
@@ -120,6 +159,7 @@ public class PlayerController : MonoBehaviour
         // 游戏结束--平台掉落，人也掉落的时候,掉出去画面了
         if (transform.position.y - Camera.main.transform.position.y < -6 && !GameManager.Instance.IsGameOver && !GameManager.Instance.IsGamePaused)
         {
+            audioSource.PlayOneShot(vars.fallClip);
             GameManager.Instance.IsGameOver = true;
             Debug.Log("人物掉出画面，游戏结束！");
             StartCoroutine(DelayShowGameOverPanel());
@@ -258,6 +298,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Pickup"))
         {
+            audioSource.PlayOneShot(vars.diamondClip);
             // 吃到钻石了
             Debug.Log("吃到钻石了");
             EventCenter.Broadcast(EventDefine.PickupDiamond);
@@ -274,5 +315,11 @@ public class PlayerController : MonoBehaviour
     private void ChangeSkin(int index)
     {
         spriteRenderer.sprite = vars.skinBackSpriteList[index];
+    }
+
+    // 音效是否开启
+    private void MusicIsOn(bool isOn)
+    {
+        audioSource.mute = !isOn;
     }
 }

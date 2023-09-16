@@ -16,5 +16,7 @@ public enum EventDefine
     Hint,
     ShowResetPanel,
 
-    ShowRankPanel
+    ShowRankPanel,
+    PlayClickAudio,
+    MusicIsOn
 };

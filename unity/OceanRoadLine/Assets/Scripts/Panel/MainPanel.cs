@@ -33,8 +33,9 @@ public class MainPanel : MonoBehaviour
             EventCenter.Broadcast(EventDefine.ShowGamePanel);
             gameObject.SetActive(false);
         }
-
+        SoundCheck();
         ChangeSkin(GameManager.Instance.SelectedSkin);
+
     }
 
     private void Init()
@@ -62,6 +63,7 @@ public class MainPanel : MonoBehaviour
     */
     private void OnStartBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         GameManager.Instance.IsGameStarted = true;
         // GameManager.Instance.IsGameOver = false ;
         EventCenter.Broadcast(EventDefine.ShowGamePanel);
@@ -73,6 +75,7 @@ public class MainPanel : MonoBehaviour
     */
     private void OnShopBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         EventCenter.Broadcast(EventDefine.ShowShopPanel);
     }
 
@@ -81,6 +84,7 @@ public class MainPanel : MonoBehaviour
     */
     private void OnRankBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         EventCenter.Broadcast(EventDefine.ShowRankPanel);
     }
 
@@ -89,6 +93,24 @@ public class MainPanel : MonoBehaviour
     */
     private void OnVolumeBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
+        GameManager.Instance.SetIsMusicOn(!GameManager.Instance.GetIsMusicOn());
+        SoundCheck();
+
+    }
+
+
+    private void SoundCheck()
+    {
+        if (GameManager.Instance.GetIsMusicOn())
+        {
+            btn_volume.transform.GetChild(0).GetComponent<Image>().sprite = vars.musicOn;
+        }
+        else
+        {
+            btn_volume.transform.GetChild(0).GetComponent<Image>().sprite = vars.musicOff;
+        }
+        EventCenter.Broadcast(EventDefine.MusicIsOn, GameManager.Instance.GetIsMusicOn());
 
     }
 
@@ -98,6 +120,7 @@ public class MainPanel : MonoBehaviour
     /// </summary>
     private void OnResetBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         Debug.Log("重置按钮被点击");
         EventCenter.Broadcast(EventDefine.ShowResetPanel);
     }
@@ -108,6 +131,7 @@ public class MainPanel : MonoBehaviour
     /// <param name="index"></param>
     private void ChangeSkin(int index)
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         btn_shop.transform.GetChild(0).GetComponent<Image>().sprite = vars.skinSpriteList[index];
     }
 

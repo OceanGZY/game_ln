@@ -46,6 +46,7 @@ public class GamePanel : MonoBehaviour
 
     private void OnPauseBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio); 
         btn_pause.gameObject.SetActive(false);
         btn_resume.gameObject.SetActive(true); // 游戏GamePanel中ResumeBtn显示
 
@@ -56,6 +57,7 @@ public class GamePanel : MonoBehaviour
 
     private void OnResumeBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio); 
         btn_resume.gameObject.SetActive(false);
         btn_pause.gameObject.SetActive(true); // 游戏GamePanel中PauseBtn显示
 

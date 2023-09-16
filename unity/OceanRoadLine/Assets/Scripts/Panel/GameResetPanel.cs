@@ -48,6 +48,7 @@ public class GameResetPanel : MonoBehaviour
 
     private void OnNoBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio); 
         img_bg.DOColor(new Color(img_bg.color.r, img_bg.color.g, img_bg.color.b, 0), 0.3f);
         dialog.transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
         {
@@ -59,6 +60,7 @@ public class GameResetPanel : MonoBehaviour
 
     private void OnYesBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio); 
         GameManager.Instance.ResetGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 

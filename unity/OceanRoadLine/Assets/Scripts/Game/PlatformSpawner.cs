@@ -154,7 +154,7 @@ public class PlatformSpawner : MonoBehaviour
         }
 
         // 随机在平台上显示金币
-        int ranSpawnDiamond = Random.Range(0, 8);
+        int ranSpawnDiamond = Random.Range(0, 20);
         if (ranSpawnDiamond >= 6 && GameManager.Instance.PlayerIsMove)
         {
             GameObject go = ObjectPool.Instance.GetDiamond();

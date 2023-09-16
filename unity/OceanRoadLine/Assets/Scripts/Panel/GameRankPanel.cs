@@ -48,20 +48,25 @@ public class GameRankPanel : MonoBehaviour
     private void ShowDialog()
     {
         Debug.Log("触发了重置");
-        // no1_text.text = GameData.Instance.sco.ToString();
+        int[] socres = GameManager.Instance.GetBestScoreArr();
+
+        no1_text.text = socres[0].ToString();
+        no2_text.text = socres[1].ToString();
+        no3_text.text = socres[2].ToString();
 
         gameObject.SetActive(true);
-        btn_back.GetComponent<Image>().DOColor(new Color(btn_back.GetComponent<Image>().color.r, btn_back.GetComponent<Image>().color.g, btn_back.GetComponent<Image>().color.b, 0.3f), 0.3f);
+        btn_back.GetComponent<Image>().DOColor(new Color(btn_back.GetComponent<Image>().color.r, btn_back.GetComponent<Image>().color.g, btn_back.GetComponent<Image>().color.b, 0.5f), 0.3f);
         dialog.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
     }
 
     private void OnDestroy()
     {
-        EventCenter.RemoveListener(EventDefine.ShowResetPanel, ShowDialog);
+        EventCenter.RemoveListener(EventDefine.ShowRankPanel, ShowDialog);
     }
 
     private void OnBackBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio); 
         btn_back.GetComponent<Image>().DOColor(new Color(btn_back.GetComponent<Image>().color.r, btn_back.GetComponent<Image>().color.g, btn_back.GetComponent<Image>().color.b, 0), 0.3f);
         dialog.transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
         {

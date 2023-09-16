@@ -77,11 +77,22 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public int[] GetBestScoreArr()
+    {
+        List<int> scoreList = bsetScoreArr.ToList();
+        scoreList.Sort((x, y) => (-x.CompareTo(y))); // 从大到小排序
+        bsetScoreArr = scoreList.ToArray();
+
+        return bsetScoreArr;
+    }
     public int GameMaxScore()
     {
         return bsetScoreArr.Max();
     }
 
+    public void SetIsMusicOn(bool isOn) { isMusicOn = isOn; Save(); } // 设置音乐开关
+
+    public bool GetIsMusicOn() { return isMusicOn; }
 
     public bool GetSkinIsUnlock(int index) { return skinUnlock[index]; } // 查询当前皮肤是否解锁
 

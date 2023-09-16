@@ -60,7 +60,9 @@ public class GameOverPanel : MonoBehaviour
     /// </summary>
     private void OnRankBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         Debug.Log("OnRankBtnClick");
+        EventCenter.Broadcast(EventDefine.ShowRankPanel);
     }
 
     /// <summary>
@@ -68,6 +70,7 @@ public class GameOverPanel : MonoBehaviour
     /// </summary>
     private void OnRestartBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         Debug.Log("OnRestartBtnClick");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 重新加载当前激活的场景
         GameData.IsAgiainGame = true; // 重新开始游戏 
@@ -79,6 +82,7 @@ public class GameOverPanel : MonoBehaviour
     /// </summary>
     private void OnHomeBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         Debug.Log("OnHomeBtnClick");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 重新加载当前激活的场景
         GameData.IsAgiainGame = false;
@@ -101,7 +105,9 @@ public class GameOverPanel : MonoBehaviour
         GameManager.Instance.SaveScoreArr(GameManager.Instance.GetGameScore());
         score_text.text = GameManager.Instance.GetGameScore().ToString();
         diamond_num.text = "+" + GameManager.Instance.GetGameDiamond().ToString();
-        GameManager.Instance.SetAllDiamond(GameManager.Instance.GetGameDiamond()); // 更新总钻石数量
+
+        int newtemp = GameManager.Instance.GetAllDiamond() + GameManager.Instance.GetGameDiamond();
+        GameManager.Instance.SetAllDiamond(newtemp); // 更新总钻石数量
         gameObject.SetActive(true);
     }
 

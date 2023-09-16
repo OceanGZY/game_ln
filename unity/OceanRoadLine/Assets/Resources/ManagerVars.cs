@@ -34,10 +34,13 @@ public class ManagerVars : ScriptableObject
 
     public List<string> skinNameList = new List<string>(); //所有皮肤的名字
 
-     public List<int> skinPriceList = new List<int>(); // 所有皮肤的价格
+    public List<int> skinPriceList = new List<int>(); // 所有皮肤的价格
 
 
-     public List<Sprite> skinBackSpriteList = new List<Sprite>(); //所有的皮肤背后
+    public List<Sprite> skinBackSpriteList = new List<Sprite>(); //所有的皮肤背后
+
+
+    public AudioClip jumpClip, fallClip, hitClip, diamondClip, buttonClip;
 
     public GameObject skinChooseItemPre;  // 被选中的skin
 
@@ -52,4 +55,5 @@ public class ManagerVars : ScriptableObject
 
     public GameObject diamondtPre;
 
+    public Sprite musicOn,musicOff;
 }

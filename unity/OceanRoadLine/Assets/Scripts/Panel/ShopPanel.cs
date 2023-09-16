@@ -129,6 +129,7 @@ public class ShopPanel : MonoBehaviour
     /// </summary>
     private void OnBackBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio); 
         EventCenter.Broadcast(EventDefine.ShowMainPanel);
         Debug.Log("返回");
         gameObject.SetActive(false);
@@ -139,6 +140,7 @@ public class ShopPanel : MonoBehaviour
     /// </summary>
     private void OnSelectedBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio); 
         Debug.Log("选择");
         EventCenter.Broadcast(EventDefine.ChangeSkin, currentSkinIndex);
         EventCenter.Broadcast(EventDefine.Hint,"选择角色成功");
@@ -150,6 +152,7 @@ public class ShopPanel : MonoBehaviour
     /// </summary>
     private void OnBuyBtnClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio); 
         Debug.Log("购买");
         int price = vars.skinPriceList[currentSkinIndex];
         Debug.Log("当前价格");
