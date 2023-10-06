@@ -19,3 +19,5 @@
 **/ACT_GAME/
 **/*.meta
 **/Base_Learn
+**/__ExternalActors__/
+**/__ExternalObjects__/
