@@ -71,12 +71,25 @@ public:
 protected:
 
 	UFUNCTION(BlueprintCallable)
-	void CreateGameSession(); // 被蓝图调用的函数
+	void CreateGameSession(); // 被蓝图调用的函数,创建session
 
+	UFUNCTION(BlueprintCallable)
+	void JoinGameSession(); // 被蓝图调用的函数，加入session
 
-	void OnCreateSessionComplete(FName SessionName,bool bWasSuccessful); // 回调函数
+	void OnCreateSessionComplete(FName SessionName,bool bWasSuccessful); // 创建session 的回调函数
+
+	void OnFindSessionComplete(bool bWasSuccessful);
+
+	void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result);
+
 
 private:
 	FOnCreateSessionCompleteDelegate CreateSessionCompleteDelegate;
+
+	FOnFindSessionsCompleteDelegate FindSessionsCompleteDelegate;
+
+	TSharedPtr<FOnlineSessionSearch> SessionSearch;
+
+	FOnJoinSessionCompleteDelegate JoinSessionCompleteDelegate;
 };
 
