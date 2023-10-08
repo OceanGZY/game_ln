@@ -3,9 +3,12 @@
 
 #include "Menu.h"
 #include "Components/Button.h"
+#include "MultiplayerSessionsSubsystem.h"
 
-void UMenu::MenuSetup()
+void UMenu::MenuSetup(int32 NumOfPublicConnections, FString TypeOfMatch)
 {
+	NumPublicConnections = NumOfPublicConnections;
+	MatchType = TypeOfMatch;
 	AddToViewport();
 	SetVisibility(ESlateVisibility::Visible);
 
@@ -22,6 +25,15 @@ void UMenu::MenuSetup()
 			PlayerController->SetInputMode(InputModeData);
 			PlayerController->SetShowMouseCursor(true);
 		}
+	}
+
+	UGameInstance* GameInstance = GetGameInstance();
+	if (GameInstance) {
+		MultiplayerSessionsSubsystem = GameInstance->GetSubsystem<UMultiplayerSessionsSubsystem>();
+	}
+
+	if (MultiplayerSessionsSubsystem) {
+		MultiplayerSessionsSubsystem->MultiplayerOnCreateSessionComplete.AddDynamic(this,&ThisClass::OncreateSession);
 	}
 }
 
@@ -42,15 +54,36 @@ bool UMenu::Initialize()
 	return true;
 }
 
+void UMenu::NativeDestruct()
+{
+	MenuTearDown();
+	Super::NativeDestruct();
+}
+
+void UMenu::OncreateSession(bool bWasUseful)
+{
+	if (bWasUseful) {
+		if (GEngine) {
+			GEngine->AddOnScreenDebugMessage(
+				-1,
+				15.f,
+				FColor::Yellow,
+				FString::Printf(TEXT("session创建成功"))
+			);
+		}
+	}
+}
+
 void UMenu::HostBtnClicked()
 {
-	if (GEngine) {
-		GEngine->AddOnScreenDebugMessage(
-			-1,
-			15.f,
-			FColor::Yellow,
-			FString::Printf(TEXT("检索服务器按钮被点击"))
-		);
+	if (MultiplayerSessionsSubsystem) {
+		MultiplayerSessionsSubsystem->CreateSession(NumPublicConnections,MatchType); 
+	
+		UWorld* World = GetWorld();
+		if (World) {
+			World->ServerTravel("/Game/ThirdPerson/Maps/Lobby?listen");
+		}
+	
 	}
 }
 
@@ -63,5 +96,19 @@ void UMenu::JoinBtnClicked()
 			FColor::Yellow,
 			FString::Printf(TEXT("加入服务器按钮被点击"))
 		);
+	}
+}
+
+void UMenu::MenuTearDown()
+{
+	RemoveFromParent();
+	UWorld* World = GetWorld();
+	if (World) {
+		APlayerController* PlayerController = World->GetFirstPlayerController();
+		if (PlayerController) {
+			FInputModeGameOnly InputModeData;
+			PlayerController->SetInputMode(InputModeData);
+			PlayerController->SetShowMouseCursor(false);
+		}
 	}
 }

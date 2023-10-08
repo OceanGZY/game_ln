@@ -5,7 +5,10 @@
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "Interfaces/OnlineSessionInterface.h"
+#include "OnlineSessionSettings.h"
 #include "MultiplayerSessionsSubsystem.generated.h"
+// 自定义委托
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMultiplayerOnCreateSessionComplete, bool, bWasSuccessful);
 /**
  * 
  */
@@ -28,6 +31,9 @@ public:
 
 	void StartSession(); // 开启session
 
+	// 自定义的MultiplayerOnCreateSessionComplete 代理
+	FMultiplayerOnCreateSessionComplete MultiplayerOnCreateSessionComplete;
+
 
 protected:
 
@@ -45,6 +51,7 @@ protected:
 
 private:
 	IOnlineSessionPtr SessionInterface;
+	TSharedPtr<FOnlineSessionSettings> LastSessionSettings;
 
 	// to add to the online session interface delagate list
 	// will bind MultiplayerSessionsSubsystem internal callbacks to these

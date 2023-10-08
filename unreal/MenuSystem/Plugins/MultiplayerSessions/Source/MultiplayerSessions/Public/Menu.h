@@ -17,10 +17,14 @@ class MULTIPLAYERSESSIONS_API UMenu : public UUserWidget
 public:
 	
 	UFUNCTION(BlueprintCallable)
-	void MenuSetup();
+	void MenuSetup(int32 NumOfPublicConnections =4,FString TypeOfMatch= FString(TEXT("FreeForAll")));
 	
 protected:
 	virtual bool Initialize() override; 
+	virtual void NativeDestruct() override ;
+
+	// 在MultiplayerSessionsSubsystem上 触发的  自定义代理 的回调
+	void OncreateSession(bool bWasUseful);
 
 private:
 
@@ -35,4 +39,12 @@ private:
 
 	UFUNCTION(BlueprintCallable)
 	void JoinBtnClicked();
+
+	void MenuTearDown();
+
+	// 自制的MultiplayerSessionsSubsystem
+	class UMultiplayerSessionsSubsystem* MultiplayerSessionsSubsystem;
+
+	int32 NumPublicConnections;
+	FString MatchType{ TEXT("FreeForAll") };
 };
