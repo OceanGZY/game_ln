@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Interfaces/OnlineSessionInterface.h"
 #include "Menu.generated.h"
-
 /**
  * 
  */
@@ -24,7 +24,15 @@ protected:
 	virtual void NativeDestruct() override ;
 
 	// 在MultiplayerSessionsSubsystem上 触发的  自定义代理 的回调
+
+	UFUNCTION()
 	void OncreateSession(bool bWasUseful);
+	void OnFindSessions(const TArray<FOnlineSessionSearchResult>& SessionResults, bool bWasSuccessful);
+	void OnJoinSession(EOnJoinSessionCompleteResult::Type Result);
+	UFUNCTION()
+	void OnDestroySession(bool bWasSuccessful);
+	UFUNCTION()
+	void OnStartSession(bool bWasSuccessful);
 
 private:
 
