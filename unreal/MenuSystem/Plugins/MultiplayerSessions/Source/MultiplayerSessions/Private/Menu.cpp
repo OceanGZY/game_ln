@@ -7,10 +7,12 @@
 #include "OnlineSessionSettings.h"
 #include "OnlineSubsystem.h"
 
-void UMenu::MenuSetup(int32 NumOfPublicConnections, FString TypeOfMatch)
+void UMenu::MenuSetup(int32 NumOfPublicConnections, FString TypeOfMatch,FString LobbyPath)
 {
 	NumPublicConnections = NumOfPublicConnections;
 	MatchType = TypeOfMatch;
+	PathToLobby = FString::Printf(TEXT("%s?listen"), *LobbyPath);
+
 	AddToViewport();
 	SetVisibility(ESlateVisibility::Visible);
 
@@ -36,6 +38,10 @@ void UMenu::MenuSetup(int32 NumOfPublicConnections, FString TypeOfMatch)
 
 	if (MultiplayerSessionsSubsystem) {
 		MultiplayerSessionsSubsystem->MultiplayerOnCreateSessionComplete.AddDynamic(this,&ThisClass::OncreateSession);
+		MultiplayerSessionsSubsystem->MultiplayerOnFindSessionsComplete.AddUObject(this, &ThisClass::OnFindSessions);
+		MultiplayerSessionsSubsystem->MultiplayerOnJoinSessionComplete.AddUObject(this, &ThisClass::OnJoinSession);
+		MultiplayerSessionsSubsystem->MultiplayerOnDestroySessionComplete.AddDynamic(this, &ThisClass::OnDestroySession);
+		MultiplayerSessionsSubsystem->MultiplayerOnStartSessionComplete.AddDynamic(this, &ThisClass::OnStartSession);
 	}
 }
 
@@ -70,9 +76,25 @@ void UMenu::OncreateSession(bool bWasUseful)
 				-1,
 				15.f,
 				FColor::Yellow,
-				FString::Printf(TEXT("session创建成功"))
+				FString::Printf(TEXT("session create success!"))
 			);
 		}
+		UWorld* World = GetWorld();
+		if (World) {
+			World->ServerTravel(PathToLobby);
+		}
+	}
+	else {
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(
+				-1,
+				15.f,
+				FColor::Red,
+				FString(TEXT("Failed to create session!"))
+			);
+		}
+		HostBtn->SetIsEnabled(true);
 	}
 }
 
@@ -92,6 +114,9 @@ void UMenu::OnFindSessions(const TArray<FOnlineSessionSearchResult>& SessionResu
 			MultiplayerSessionsSubsystem->JoinSession(Result);
 			return;
 		}
+	}
+	if (!bWasSuccessful || SessionResults.Num() == 0) {
+		JoinBtn->SetIsEnabled(true);
 	}
 }
 
@@ -113,6 +138,9 @@ void UMenu::OnJoinSession(EOnJoinSessionCompleteResult::Type Result)
 			}
 		}
 	}
+	if (Result != EOnJoinSessionCompleteResult::Success) {
+		JoinBtn->SetIsEnabled(true);
+	}
 }
 
 void UMenu::OnDestroySession(bool bWasSuccessful)
@@ -125,26 +153,26 @@ void UMenu::OnStartSession(bool bWasSuccessful)
 
 void UMenu::HostBtnClicked()
 {
+	HostBtn->SetIsEnabled(false);
 	if (MultiplayerSessionsSubsystem) {
 		MultiplayerSessionsSubsystem->CreateSession(NumPublicConnections,MatchType); 
-	
-		UWorld* World = GetWorld();
-		if (World) {
-			World->ServerTravel("/Game/ThirdPerson/Maps/Lobby?listen");
-		}
-	
 	}
 }
 
 void UMenu::JoinBtnClicked()
 {
+	JoinBtn->SetIsEnabled(false);
 	if (GEngine) {
 		GEngine->AddOnScreenDebugMessage(
 			-1,
 			15.f,
 			FColor::Yellow,
-			FString::Printf(TEXT("加入服务器按钮被点击"))
+			FString::Printf(TEXT("join btn clicked"))
 		);
+	}
+	if (MultiplayerSessionsSubsystem)
+	{
+		MultiplayerSessionsSubsystem->FindSessions(10000);
 	}
 }
 
