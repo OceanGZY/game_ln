@@ -30,12 +30,26 @@ public:
 
 protected:
 
-
 private:
 	UPROPERTY(VisibleAnywhere,Category=Camera)
 	class USpringArmComponent* CameraBoom;
 
 	UPROPERTY(VisibleAnywhere ,Category=Camera)
 	class UCameraComponent* FollowCamera;
+
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Input",meta=(AllowPrivateAccess = "true"))
+	class UInputMappingContext* DeafultInputMappingContext;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+	class UInputAction* IA_Move;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+	class UInputAction* IA_Look;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+	class UInputAction* IA_Jump;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+	class UInputAction* IA_Attack;
 
 };
