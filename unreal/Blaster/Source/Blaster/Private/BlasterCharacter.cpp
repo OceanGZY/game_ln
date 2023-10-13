@@ -52,8 +52,38 @@ void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	}
 
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent)) {
-
+		if (IA_Move) {
+			EnhancedInputComponent->BindAction(IA_Move, ETriggerEvent::Triggered,this,&ABlasterCharacter::Move);
+		}
+		if (IA_Look) {
+			EnhancedInputComponent->BindAction(IA_Look,ETriggerEvent::Triggered,this,&ABlasterCharacter::Look);
+		}
+		if (IA_Jump) {
+			EnhancedInputComponent->BindAction(IA_Jump, ETriggerEvent::Triggered, this, &ACharacter::Jump);
+			EnhancedInputComponent->BindAction(IA_Jump, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+		}
+		if (IA_Attack) {
+			EnhancedInputComponent->BindAction(IA_Attack, ETriggerEvent::Triggered, this, &ABlasterCharacter::Attack);
+		}
 	}
+}
 
+void ABlasterCharacter::Move(const FInputActionValue& Value)
+{
+	FVector2D MovementVector = Value.Get<FVector2D>();
+	if (Controller != nullptr) {
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0,Rotation.Yaw,0);
+
+		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+	}
+}
+
+void ABlasterCharacter::Look(const FInputActionValue& Value)
+{
+}
+
+void ABlasterCharacter::Attack(const FInputActionValue& Value)
+{
 }
 

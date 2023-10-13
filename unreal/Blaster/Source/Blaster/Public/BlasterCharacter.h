@@ -29,6 +29,9 @@ public:
 public:
 
 protected:
+	void Move(const FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
+	void Attack(const FInputActionValue& Value);
 
 private:
 	UPROPERTY(VisibleAnywhere,Category=Camera)
