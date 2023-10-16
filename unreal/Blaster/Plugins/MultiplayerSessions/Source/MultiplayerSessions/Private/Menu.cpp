@@ -138,9 +138,6 @@ void UMenu::OnJoinSession(EOnJoinSessionCompleteResult::Type Result)
 			}
 		}
 	}
-	if (Result != EOnJoinSessionCompleteResult::Success) {
-		JoinBtn->SetIsEnabled(true);
-	}
 }
 
 void UMenu::OnDestroySession(bool bWasSuccessful)
