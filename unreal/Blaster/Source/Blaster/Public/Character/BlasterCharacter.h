@@ -31,7 +31,11 @@ private:
 	UPROPERTY(VisibleAnywhere,Category="Camera")
 	class USpringArmComponent* CameraBoom;
 
+	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	class UCameraComponent* FollowCamera;
+
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,meta=(AllowPrivateAccess="true"), Category = "HUD")
+	class UWidgetComponent* OverHeadWidget;
 
 protected:
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Enhanced Input")

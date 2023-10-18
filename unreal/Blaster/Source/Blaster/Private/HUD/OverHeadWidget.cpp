@@ -18,18 +18,26 @@ void UOverHeadWidget::ShowPlayerNetRole(APawn* InPawn)
 	switch (LocalRole)
 	{
 	case ROLE_None:
+		Role = FString("None");
 		break;
 	case ROLE_SimulatedProxy:
+		Role = FString("SimulatedProxy");
 		break;
 	case ROLE_AutonomousProxy:
+		Role = FString("AutonomousProxy");
 		break;
 	case ROLE_Authority:
+		Role = FString("Authority");
 		break;
 	case ROLE_MAX:
+		Role = FString("Max");
 		break;
 	default:
 		break;
 	}
+
+	FString LocalRoleString = FString::Printf(TEXT("Local Role:%s"), *Role);
+	SetDisplayText(LocalRoleString);
 }
 
 void UOverHeadWidget::NativeDestruct()
