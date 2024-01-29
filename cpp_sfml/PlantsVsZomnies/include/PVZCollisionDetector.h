@@ -3,7 +3,7 @@
 // 碰撞检测
 
 #include "SFML/Graphics.hpp"
-#include "PVZDimensions.h"
+// #include "PVZDimensions.h"
 
 class PVZCollisionDetector
 {

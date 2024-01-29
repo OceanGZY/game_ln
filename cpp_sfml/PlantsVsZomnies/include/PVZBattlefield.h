@@ -2,21 +2,13 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-01-29 19:52:06
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-01-29 19:55:03
- * @FilePath: /cpp_sfml/PlantsVsZomnies/include/PVZBattlefield.h
- * @Description: 注释信息
- */
-/*
- * @Author: OCEAN.GZY
- * @Date: 2024-01-29 19:52:06
- * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-01-29 19:52:17
+ * @LastEditTime: 2024-01-29 23:46:58
  * @FilePath: /cpp_sfml/PlantsVsZomnies/include/PVZBattlefield.h
  * @Description: 注释信息
  */
 #pragma once
 
-#include "PVZDimensions.h"
+// #include "PVZDimensions.h"
 #include "PVZCollisionDetector.h"
 
 class PVZBattlefield

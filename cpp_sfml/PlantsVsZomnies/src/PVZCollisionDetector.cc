@@ -2,11 +2,18 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-01-29 17:13:25
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-01-29 20:06:47
+ * @LastEditTime: 2024-01-29 23:40:34
  * @FilePath: /cpp_sfml/PlantsVsZomnies/src/PVZCollisionDetector.cc
  * @Description: 注释信息
  */
 #include "PVZCollisionDetector.h"
+
+namespace OCEANPVZ
+{
+    extern sf::Vector2f beginning_space;
+    extern sf::Vector2f size;
+    extern sf::Vector2f choose_character_pos;
+} // namespace name
 
 PVZCollisionDetector::PVZCollisionDetector()
 {

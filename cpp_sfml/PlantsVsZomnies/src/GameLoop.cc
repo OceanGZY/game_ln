@@ -2,11 +2,17 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-01-29 19:45:47
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-01-29 20:06:01
+ * @LastEditTime: 2024-01-29 23:47:43
  * @FilePath: /cpp_sfml/PlantsVsZomnies/src/GameLoop.cc
  * @Description: 注释信息
  */
 #include "GameLoop.h"
+
+namespace OCEANPVZ
+{
+    extern sf::Vector2i current_size;
+
+} // namespace name
 
 GameLoop::GameLoop()
 {
@@ -41,6 +47,7 @@ void GameLoop::run()
                     battlefield->mouse_button_released(window);
                 }
             default:
+                continue;
             }
         }
 
