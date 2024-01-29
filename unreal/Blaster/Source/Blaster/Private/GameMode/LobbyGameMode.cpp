@@ -16,7 +16,7 @@ void ALobbyGameMode::PostLogin(APlayerController* NewPlayer)
 			FString::FromInt(NumberOfPlayers)
 		);
 	}
-	if (NumberOfPlayers == 2)  // 如果玩家超过2个，则跳转到游戏内
+	if (NumberOfPlayers == 1)  // 如果玩家超过2个，则跳转到游戏内
 	{
 		UWorld* World = GetWorld();
 		if (World) {

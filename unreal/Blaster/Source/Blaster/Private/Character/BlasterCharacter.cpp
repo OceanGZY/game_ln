@@ -9,6 +9,10 @@
 #include "EnhancedInput/Public/EnhancedInputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Weapons/WeaponGun.h"
+#include "Net/UnrealNetwork.h" //导入后表示， 生命周期控制
+#include "BlasterComponents/CombatComponent.h"
+
 // Sets default values
 ABlasterCharacter::ABlasterCharacter()
 {
@@ -30,6 +34,9 @@ ABlasterCharacter::ABlasterCharacter()
 	OverHeadWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("OverHeadWidget"));
 	OverHeadWidget->SetupAttachment(RootComponent);
 
+	Combat = CreateDefaultSubobject<UCombatComponent>(TEXT("CombatComponent"));
+	Combat->SetIsReplicated(true);
+
 }
 
 // Called when the game starts or when spawned
@@ -43,7 +50,6 @@ void ABlasterCharacter::BeginPlay()
 void ABlasterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -71,8 +77,44 @@ void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 		PEI->BindAction(InputJump, ETriggerEvent::Triggered, this, &ABlasterCharacter::Jump);
 		PEI->BindAction(InputJump, ETriggerEvent::Completed, this, &ABlasterCharacter::StopJumping);
 		PEI->BindAction(InputAttack, ETriggerEvent::Triggered, this, &ABlasterCharacter::Attack);
+		PEI->BindAction(InputEquip, ETriggerEvent::Triggered, this, &ABlasterCharacter::Equip);
 	}
 	
+}
+
+void ABlasterCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME_CONDITION(ABlasterCharacter, OverlappingWeapon, COND_OwnerOnly);
+}
+
+void ABlasterCharacter::SetOverlappingWeapon(AWeaponGun* WeaponGun)
+{
+	if (OverlappingWeapon) {
+		OverlappingWeapon->ShowPickupWidget(false);
+	}
+	OverlappingWeapon = WeaponGun;
+
+	if (IsLocallyControlled()) {
+		if (OverlappingWeapon) {
+			OverlappingWeapon->ShowPickupWidget(true);
+		}
+	}
+}
+
+void ABlasterCharacter::PostInitializeComponents()
+{
+}
+
+void ABlasterCharacter::OnRep_OverlappingWeapon(AWeaponGun* LastWeaponGun)
+{
+	if (OverlappingWeapon) {
+		OverlappingWeapon->ShowPickupWidget(true);
+	}
+	if (LastWeaponGun) {
+		LastWeaponGun->ShowPickupWidget(true);
+	}
 }
 
 void ABlasterCharacter::Move(const FInputActionValue& Value)
@@ -111,6 +153,10 @@ void ABlasterCharacter::Look(const FInputActionValue& Value)
 }
 
 void ABlasterCharacter::Attack(const FInputActionValue& Value)
+{
+}
+
+void ABlasterCharacter::Equip()
 {
 }
 

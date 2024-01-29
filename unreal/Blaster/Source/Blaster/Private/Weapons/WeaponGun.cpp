@@ -3,6 +3,8 @@
 
 #include "Weapons/WeaponGun.h"
 #include "Components/SphereComponent.h"
+#include "Components/WidgetComponent.h"
+#include "Character/BlasterCharacter.h"
 // Sets default values
 AWeaponGun::AWeaponGun()
 {
@@ -24,17 +26,47 @@ AWeaponGun::AWeaponGun()
 	AreaSphere->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
 	AreaSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
+	PickUpWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("PickUpWidget"));
+	PickUpWidget->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
 void AWeaponGun::BeginPlay()
 {
 	Super::BeginPlay();
-	if ( HasAuthority()
-		//GetLocalRole() == ENetRole::ROLE_Authority
-		) {
-		AreaSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-		AreaSphere->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
+
+	AreaSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	AreaSphere->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
+	AreaSphere->OnComponentBeginOverlap.AddDynamic(this,&AWeaponGun::OnSphereOverlap);
+	AreaSphere->OnComponentEndOverlap.AddDynamic(this,&AWeaponGun::OnSphereEndOverlap);
+
+	if (PickUpWidget) {
+		PickUpWidget->SetVisibility(false);
+	}
+}
+
+void AWeaponGun::OnSphereOverlap(
+	UPrimitiveComponent* OverlappedComponent,
+	AActor* OtherActor, UPrimitiveComponent* OtherComp, 
+	int32 OtherBodyIndex, 
+	bool bFromSweep, 
+	const FHitResult& SweepResult)
+{
+	ABlasterCharacter* BlasterCharacter = Cast<ABlasterCharacter>(OtherActor);
+	if (BlasterCharacter) {
+		BlasterCharacter->SetOverlappingWeapon(this);
+	}
+}
+
+void AWeaponGun::OnSphereEndOverlap(
+	UPrimitiveComponent* OverlappedComponent,
+	AActor* OtherActor,
+	UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex)
+{
+	ABlasterCharacter* BlasterCharacter = Cast<ABlasterCharacter>(OtherActor);
+	if (BlasterCharacter) {
+		BlasterCharacter->SetOverlappingWeapon(nullptr);
 	}
 }
 
@@ -43,5 +75,12 @@ void AWeaponGun::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AWeaponGun::ShowPickupWidget(bool bShowWidget)
+{
+	if (PickUpWidget) {
+		PickUpWidget->SetVisibility(bShowWidget);
+	}
 }
 

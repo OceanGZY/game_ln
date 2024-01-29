@@ -26,6 +26,12 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	void SetOverlappingWeapon(class AWeaponGun* WeaponGun);
+
+	virtual void PostInitializeComponents() override;
+
 private:
 
 	UPROPERTY(VisibleAnywhere,Category="Camera")
@@ -36,6 +42,15 @@ private:
 
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,meta=(AllowPrivateAccess="true"), Category = "HUD")
 	class UWidgetComponent* OverHeadWidget;
+
+	UPROPERTY(ReplicatedUsing = OnRep_OverlappingWeapon)
+	class AWeaponGun* OverlappingWeapon;
+
+	UFUNCTION()
+	void OnRep_OverlappingWeapon(AWeaponGun* LastWeaponGun);
+
+	UPROPERTY(VisibleAnywhere)
+	class UCombatComponent* Combat;
 
 protected:
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Enhanced Input")
@@ -53,6 +68,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
 	class UInputAction* InputJump;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UInputAction* InputEquip;
+
 public:
 	void Move(const FInputActionValue& Value);
 
@@ -60,6 +78,8 @@ public:
 
 	void Attack(const FInputActionValue& Value);
 
-	 virtual void Jump() override;
-	 virtual void StopJumping() override;
+	void Equip();
+
+	virtual void Jump() override;
+	virtual void StopJumping() override;
 };
