@@ -47,7 +47,7 @@ void GameLoop::run()
                     battlefield->mouse_button_released(window);
                 }
             default:
-                continue;
+                break;
             }
         }
 
