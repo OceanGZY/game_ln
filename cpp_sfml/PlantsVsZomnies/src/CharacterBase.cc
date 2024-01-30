@@ -2,8 +2,8 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-01-30 19:17:59
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-01-30 19:36:06
- * @FilePath: /cpp_sfml/PlantsVsZomnies/src/CharacterBase.cc
+ * @LastEditTime: 2024-01-30 22:16:05
+ * @FilePath: \cpp_sfml\PlantsVsZomnies\src\CharacterBase.cc
  * @Description: 注释信息
  */
 #include "CharacterBase.h"
@@ -50,7 +50,7 @@ int CharacterBase::attack()
 
 bool CharacterBase::was_hit_and_check_ifdied(int damage)
 {
-    health -= damage;
+    health += damage;
     if (health < 0)
     {
         return true;

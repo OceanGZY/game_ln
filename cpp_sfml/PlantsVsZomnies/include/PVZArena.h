@@ -4,6 +4,11 @@
 #include "PVZField.h"
 #include "PVZTextures.h"
 #include "PVZCollisionDetector.h"
+#include "PVZSun.h"
+#include "PVZNut.h"
+#include "PVZPea.h"
+#include "PVZPotato.h"
+#include "PVZSunFlower.h"
 
 extern PVZTextures *all;
 
@@ -18,5 +23,5 @@ public:
     PVZArena(/* args */);
     ~PVZArena();
 
-    void next_frame(sf::RenderWindow * window);
+    void next_frame(sf::RenderWindow *window);
 };
