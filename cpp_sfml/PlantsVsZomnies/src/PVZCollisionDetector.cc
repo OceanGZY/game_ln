@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-01-29 17:13:25
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-01-30 11:03:15
+ * @LastEditTime: 2024-01-29 23:40:34
  * @FilePath: /cpp_sfml/PlantsVsZomnies/src/PVZCollisionDetector.cc
  * @Description: 注释信息
  */
@@ -47,7 +47,7 @@ sf::Vector2i PVZCollisionDetector::check_if_mouse_inside_choose(sf::RenderWindow
     sf::Vector2f pos = sf::Vector2f(mouse.x / OCEANPVZ::size.x, mouse.y / OCEANPVZ::size.y);
     if ((pos.x < 4 && pos.y < 1) && (mouse.x >= 0 && mouse.y >= 0))
     {
-        return sf::Vector2i(pos.y, pos.x);
+        return sf::Vector2i(pos.x, pos.y);
     }
     return sf::Vector2i(-1, -1);
 }

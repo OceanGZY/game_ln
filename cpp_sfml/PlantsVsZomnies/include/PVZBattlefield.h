@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-01-29 19:52:06
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-01-30 14:36:40
+ * @LastEditTime: 2024-01-31 16:34:57
  * @FilePath: /cpp_sfml/PlantsVsZomnies/include/PVZBattlefield.h
  * @Description: 注释信息
  */
@@ -11,17 +11,26 @@
 // #include "PVZDimensions.h"
 #include "PVZCollisionDetector.h"
 #include "PVZArena.h"
+#include "PVZChooseCharacter.h"
+#include "PVZSun.h"
 
 class PVZBattlefield
 {
 private:
     PVZArena *arena;
+    PVZChooseCharacter *choose_character;
+    PVZSun *sun;
+
+    PVZArena::PVZPlantType plant_type;
 
     sf::Vector2i pos;
     int wave = 0;
     const int MAX_WAVE = 5;
 
     void display(sf::RenderWindow *window);
+
+    void move_zombies();
+    void collisions();
 
 public:
     PVZBattlefield(/* args */);

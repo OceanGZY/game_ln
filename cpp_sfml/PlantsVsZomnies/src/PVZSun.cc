@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-01-30 19:09:33
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-01-30 19:15:57
+ * @LastEditTime: 2024-01-31 16:53:16
  * @FilePath: /cpp_sfml/PlantsVsZomnies/src/PVZSun.cc
  * @Description: 注释信息
  */
@@ -15,7 +15,7 @@ namespace OCEANPVZ
 
 PVZSun::PVZSun()
 {
-    if (font.loadFromFile("./resources/fonts/arial.ttf"))
+    if (!font.loadFromFile("./resources/fonts/arial.ttf"))
     {
         exit(EXIT_FAILURE);
     }

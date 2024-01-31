@@ -15,7 +15,7 @@ extern PVZTextures *all;
 class PVZChooseCharacter
 {
 private:
-    PVZField *field;
+    PVZField *choose_frame;
     PVZLoadingRectangular *choose_rect[4];
     PVZSun *sun;
 
@@ -38,5 +38,8 @@ public:
 
     void display(sf::RenderWindow *window);
 
-    PVZArena::PlantType return_plant_type_ifpossible(sf::Vector2i pos);
+    PVZArena::PVZPlantType return_plant_type_ifpossible(sf::Vector2i pos);
+
+    int return_cost(PVZArena::PVZPlantType type);
+    void clear_selection();
 };

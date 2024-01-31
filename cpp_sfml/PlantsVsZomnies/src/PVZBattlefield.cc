@@ -3,11 +3,25 @@
 void PVZBattlefield::display(sf::RenderWindow *window)
 {
     arena->next_frame(window);
+
+    choose_character->display(window);
+}
+
+void PVZBattlefield::collisions()
+{
+}
+
+void PVZBattlefield::move_zombies()
+{
 }
 
 PVZBattlefield::PVZBattlefield()
 {
-    arena = new PVZArena();
+    sun = new PVZSun();
+    arena = new PVZArena(sun);
+    choose_character = new PVZChooseCharacter(sun);
+    plant_type = PVZArena::NONE;
+    pos = sf::Vector2i(-1, -1);
 }
 
 PVZBattlefield::~PVZBattlefield()
