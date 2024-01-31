@@ -2,8 +2,8 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-01-29 19:45:47
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-01-31 17:45:09
- * @FilePath: /cpp_sfml/PlantsVsZomnies/src/GameLoop.cc
+ * @LastEditTime: 2024-01-31 21:56:11
+ * @FilePath: \cpp_sfml\PlantsVsZomnies\src\GameLoop.cc
  * @Description: 注释信息
  */
 #include "GameLoop.h"
@@ -41,13 +41,13 @@ void GameLoop::run()
             case sf::Event::EventType::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Right)
                 {
-                    LOG_INFO("sf::Mouse::Right点击");
+                    // LOG_INFO("sf::Mouse::Right点击");
                     battlefield->mouse_button_pressed(window);
                 }
             case sf::Event::EventType::MouseButtonReleased:
                 if (event.mouseButton.button == sf::Mouse::Right)
                 {
-                    LOG_INFO("sf::Mouse::Right释放");
+                    // LOG_INFO("sf::Mouse::Right释放");
                     battlefield->mouse_button_released(window);
                 }
             default:

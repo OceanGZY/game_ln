@@ -2,8 +2,8 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-01-31 16:32:17
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-01-31 17:41:46
- * @FilePath: /cpp_sfml/PlantsVsZomnies/src/PVZBattlefield.cc
+ * @LastEditTime: 2024-01-31 21:51:28
+ * @FilePath: \cpp_sfml\PlantsVsZomnies\src\PVZBattlefield.cc
  * @Description: 注释信息
  */
 #include "PVZBattlefield.h"
@@ -59,7 +59,7 @@ void PVZBattlefield::mouse_button_released(sf::RenderWindow *window)
 {
     sf::Vector2i on_area_pos = PVZCollisionDetector::check_if_mouse_inside_field(window);
 
-    if (plant_type == PVZArena::PVZPlantType::NONE && on_area_pos == sf::Vector2i(-1, -1))
+    if (plant_type != PVZArena::PVZPlantType::NONE && on_area_pos != sf::Vector2i(-1, -1))
     {
         if (arena->create_character(plant_type, on_area_pos))
         {
