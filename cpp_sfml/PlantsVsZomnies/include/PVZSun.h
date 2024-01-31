@@ -1,3 +1,11 @@
+/*
+ * @Author: OCEAN.GZY
+ * @Date: 2024-01-31 16:22:48
+ * @LastEditors: OCEAN.GZY
+ * @LastEditTime: 2024-01-31 17:10:37
+ * @FilePath: /cpp_sfml/PlantsVsZomnies/include/PVZSun.h
+ * @Description: 注释信息
+ */
 #pragma once
 
 #include "SFML/Graphics.hpp"
@@ -9,6 +17,8 @@ private:
     sf::Font font;
 
     int quantity = 100;
+
+    std::string sunstr;
 
 public:
     PVZSun(/* args */);
