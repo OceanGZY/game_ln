@@ -1,3 +1,11 @@
+/*
+ * @Author: OCEAN.GZY
+ * @Date: 2024-01-31 16:32:17
+ * @LastEditors: OCEAN.GZY
+ * @LastEditTime: 2024-01-31 23:23:01
+ * @FilePath: /cpp_sfml/PlantsVsZomnies/include/PVZArena.h
+ * @Description: 注释信息
+ */
 #pragma once
 
 #include "SFML/Graphics.hpp"
@@ -11,11 +19,11 @@
 
 #include <vector>
 
-
 class PVZArena
 {
 private:
     PVZField *field;
+
     CharacterBase *plants[5][9];
     PVZSun *sun;
 

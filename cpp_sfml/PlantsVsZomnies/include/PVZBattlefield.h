@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-01-29 19:52:06
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-01-31 16:34:57
+ * @LastEditTime: 2024-01-31 23:23:38
  * @FilePath: /cpp_sfml/PlantsVsZomnies/include/PVZBattlefield.h
  * @Description: 注释信息
  */
@@ -13,6 +13,7 @@
 #include "PVZArena.h"
 #include "PVZChooseCharacter.h"
 #include "PVZSun.h"
+#include "PVZZombieBunch.h"
 
 class PVZBattlefield
 {
@@ -20,6 +21,7 @@ private:
     PVZArena *arena;
     PVZChooseCharacter *choose_character;
     PVZSun *sun;
+    PVZZombieBunch *zombies_bunch;
 
     PVZArena::PVZPlantType plant_type;
 

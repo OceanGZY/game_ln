@@ -2,15 +2,25 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-01-31 16:32:17
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-01-31 21:51:28
- * @FilePath: \cpp_sfml\PlantsVsZomnies\src\PVZBattlefield.cc
+ * @LastEditTime: 2024-02-01 19:34:16
+ * @FilePath: /cpp_sfml/PlantsVsZomnies/src/PVZBattlefield.cc
  * @Description: 注释信息
  */
 #include "PVZBattlefield.h"
+#include "PVZLogger.h"
 
 void PVZBattlefield::display(sf::RenderWindow *window)
 {
     arena->next_frame(window);
+
+    if (zombies_bunch->display_and_check_if_alldied(window) && wave < MAX_WAVE)
+    {
+
+        delete zombies_bunch;
+        // wave++;
+        zombies_bunch = new PVZZombieBunch(wave);
+        zombies_bunch->display_and_check_if_alldied(window);
+    }
 
     choose_character->display(window);
 }
@@ -21,6 +31,8 @@ void PVZBattlefield::collisions()
 
 void PVZBattlefield::move_zombies()
 {
+    // LOG_INFO("PVZBattlefield::move_zombies()");
+    zombies_bunch->move();
 }
 
 PVZBattlefield::PVZBattlefield()
@@ -28,6 +40,10 @@ PVZBattlefield::PVZBattlefield()
     sun = new PVZSun();
     arena = new PVZArena(sun);
     choose_character = new PVZChooseCharacter(sun);
+    zombies_bunch = new PVZZombieBunch(wave);
+    // LOG_INFO("PVZBattlefield::PVZBattlefield() ->zombies_bunch初始化啦");
+    
+
     plant_type = PVZArena::NONE;
     pos = sf::Vector2i(-1, -1);
 }
@@ -38,6 +54,7 @@ PVZBattlefield::~PVZBattlefield()
 
 void PVZBattlefield::next_frame(sf::RenderWindow *window)
 {
+    move_zombies();
     display(window);
 }
 

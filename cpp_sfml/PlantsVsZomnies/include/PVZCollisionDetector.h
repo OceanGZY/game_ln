@@ -1,3 +1,11 @@
+/*
+ * @Author: OCEAN.GZY
+ * @Date: 2024-01-29 23:25:11
+ * @LastEditors: OCEAN.GZY
+ * @LastEditTime: 2024-01-31 22:31:24
+ * @FilePath: /cpp_sfml/PlantsVsZomnies/include/PVZCollisionDetector.h
+ * @Description: 注释信息
+ */
 #pragma once
 
 // 碰撞检测
