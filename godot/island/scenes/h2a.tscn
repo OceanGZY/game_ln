@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh2tla0ovp21c"]
+
+[ext_resource type="PackedScene" uid="uid://bkmp0o6pnwglj" path="res://scenes/scene.tscn" id="1_p0q2k"]
+[ext_resource type="Texture2D" uid="uid://b6tslra7o4ibx" path="res://assets/H2A/roomsignBG.png" id="2_118nb"]
+
+[node name="Background" instance=ExtResource("1_p0q2k")]
+texture = ExtResource("2_118nb")

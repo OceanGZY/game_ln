@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://dew8rwcf5s6lt"]
+
+[ext_resource type="PackedScene" uid="uid://bkmp0o6pnwglj" path="res://scenes/scene.tscn" id="1_4p3jt"]
+[ext_resource type="Texture2D" uid="uid://koe5i3e705t1" path="res://assets/H2/H2.png" id="2_x1vca"]
+[ext_resource type="Script" path="res://objects/Teleporter.gd" id="3_c8po3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vxog8"]
+radius = 54.4518
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4rf8i"]
+size = Vector2(219, 380)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rm5up"]
+size = Vector2(195, 474)
+
+[node name="Background" instance=ExtResource("1_4p3jt")]
+texture = ExtResource("2_x1vca")
+
+[node name="ToH1" type="Area2D" parent="." index="0"]
+scale = Vector2(1, 0.984212)
+script = ExtResource("3_c8po3")
+TargetPath = "res://scenes/h1.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToH1" index="0"]
+position = Vector2(-667, -329)
+shape = SubResource("CircleShape2D_vxog8")
+
+[node name="ToH3" type="Area2D" parent="." index="1"]
+position = Vector2(21, -226)
+script = ExtResource("3_c8po3")
+TargetPath = "res://scenes/h3.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToH3" index="0"]
+position = Vector2(19.5, -8)
+shape = SubResource("RectangleShape2D_4rf8i")
+
+[node name="ToH4" type="Area2D" parent="." index="2"]
+position = Vector2(780, 21)
+script = ExtResource("3_c8po3")
+TargetPath = "res://scenes/h4.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToH4" index="0"]
+position = Vector2(78.5, -75)
+shape = SubResource("RectangleShape2D_rm5up")
