@@ -6,7 +6,7 @@ class Flags:
 	
 	var _flags=[]
 	
-	func has(flag:String):
+	func has(flag:String)->bool:
 		return flag in _flags
 	func add(flag:String):
 		if flag in _flags:
