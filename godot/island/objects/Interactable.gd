@@ -7,11 +7,14 @@ signal interact
 @export var CustomTexture:Texture:
 	set=set_texture,
 	get=get_texture
+@export var allow_item =false
 
 
 
 func _input_event(viewport, event, shape_idx):
 	if not event.is_action_pressed("interact"):
+		return
+	if not allow_item and GameState.inventory.active_item:
 		return
 	_interact()
 	

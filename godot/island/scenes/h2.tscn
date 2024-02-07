@@ -1,16 +1,16 @@
 [gd_scene load_steps=16 format=3 uid="uid://dew8rwcf5s6lt"]
 
 [ext_resource type="PackedScene" uid="uid://bkmp0o6pnwglj" path="res://scenes/scene.tscn" id="1_4p3jt"]
-[ext_resource type="Texture2D" uid="uid://c6dvvg2rfuwfq" path="res://assets/H2/H2.png" id="2_x1vca"]
+[ext_resource type="Texture2D" uid="uid://koe5i3e705t1" path="res://assets/H2/H2.png" id="2_x1vca"]
 [ext_resource type="Script" path="res://scripts/h2.gd" id="3_23u0b"]
 [ext_resource type="Script" path="res://objects/Teleporter.gd" id="3_c8po3"]
 [ext_resource type="Script" path="res://objects/Interactable.gd" id="4_w78aj"]
 [ext_resource type="PackedScene" uid="uid://1ruw4prs2uml" path="res://ui/dialog_bubble.tscn" id="5_0b073"]
-[ext_resource type="Texture2D" uid="uid://bnt2sdyib1tgv" path="res://assets/H2/key.png" id="7_2c056"]
+[ext_resource type="Texture2D" uid="uid://ewjelt4fmrsy" path="res://assets/H2/key.png" id="7_2c056"]
 [ext_resource type="Script" path="res://objects/SceneItem.gd" id="7_vqte8"]
 [ext_resource type="Resource" uid="uid://tw6h86g5oore" path="res://items/key.tres" id="8_143hl"]
 [ext_resource type="Resource" uid="uid://bckgp3nrih4bm" path="res://items/mail.tres" id="10_olhw4"]
-[ext_resource type="Texture2D" uid="uid://56d4vq1clbdr" path="res://assets/H4/mail_piece.png" id="11_8lxqs"]
+[ext_resource type="Texture2D" uid="uid://cb0dx6e4friaj" path="res://assets/H4/mail_piece.png" id="11_8lxqs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxog8"]
 radius = 54.4518
@@ -57,7 +57,9 @@ shape = SubResource("RectangleShape2D_rm5up")
 
 [node name="Granny" type="Area2D" parent="." index="3"]
 position = Vector2(-392, -36)
+scale = Vector2(0.801316, 1.01041)
 script = ExtResource("4_w78aj")
+allow_item = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Granny" index="0"]
 position = Vector2(-43.5, 43)
@@ -75,11 +77,13 @@ position = Vector2(-90, 84)
 script = ExtResource("7_vqte8")
 item = ExtResource("8_143hl")
 CustomTexture = ExtResource("7_2c056")
+allow_item = null
 
 [node name="SceneMailItem" type="Area2D" parent="." index="5"]
 position = Vector2(159, 89)
 script = ExtResource("7_vqte8")
 item = ExtResource("10_olhw4")
 CustomTexture = ExtResource("11_8lxqs")
+allow_item = null
 
 [connection signal="interact" from="Granny" to="." method="_on_granny_interact"]

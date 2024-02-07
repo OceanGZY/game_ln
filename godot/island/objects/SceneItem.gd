@@ -23,6 +23,9 @@ func set_item(v):
 func _interact():
 	super._interact()
 	GameState.flags.add(_get_flag())
+	GameState.inventory.add_item(item)
+	
+	
 	# 设置图片替身 给替身做动画，用于表示拾取
 	var sprite := Sprite2D.new()
 	sprite.texture = item.SceneTextue
