@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dqs207sng4gcm"]
 
 [ext_resource type="PackedScene" uid="uid://bkmp0o6pnwglj" path="res://scenes/scene.tscn" id="1_wghvh"]
-[ext_resource type="Texture2D" uid="uid://deq0s1wnvl5ab" path="res://assets/H3/H3.png" id="2_gr63w"]
+[ext_resource type="Texture2D" uid="uid://cs8ehobgx1ps6" path="res://assets/H3/H3.png" id="2_gr63w"]
 [ext_resource type="Script" path="res://objects/Teleporter.gd" id="3_1gmp4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sky7e"]

@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dew8rwcf5s6lt"]
+[gd_scene load_steps=11 format=3 uid="uid://dew8rwcf5s6lt"]
 
 [ext_resource type="PackedScene" uid="uid://bkmp0o6pnwglj" path="res://scenes/scene.tscn" id="1_4p3jt"]
-[ext_resource type="Texture2D" uid="uid://koe5i3e705t1" path="res://assets/H2/H2.png" id="2_x1vca"]
+[ext_resource type="Texture2D" uid="uid://c6dvvg2rfuwfq" path="res://assets/H2/H2.png" id="2_x1vca"]
+[ext_resource type="Script" path="res://scripts/h2.gd" id="3_23u0b"]
 [ext_resource type="Script" path="res://objects/Teleporter.gd" id="3_c8po3"]
+[ext_resource type="Script" path="res://objects/Interactable.gd" id="4_w78aj"]
+[ext_resource type="PackedScene" uid="uid://1ruw4prs2uml" path="res://ui/dialog_bubble.tscn" id="5_0b073"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxog8"]
 radius = 54.4518
@@ -13,8 +16,12 @@ size = Vector2(219, 380)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rm5up"]
 size = Vector2(195, 474)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dclxj"]
+size = Vector2(263, 544)
+
 [node name="Background" instance=ExtResource("1_4p3jt")]
 texture = ExtResource("2_x1vca")
+script = ExtResource("3_23u0b")
 
 [node name="ToH1" type="Area2D" parent="." index="0"]
 scale = Vector2(1, 0.984212)
@@ -42,3 +49,20 @@ TargetPath = "res://scenes/h4.tscn"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ToH4" index="0"]
 position = Vector2(78.5, -75)
 shape = SubResource("RectangleShape2D_rm5up")
+
+[node name="Granny" type="Area2D" parent="." index="3"]
+position = Vector2(-392, -36)
+script = ExtResource("4_w78aj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Granny" index="0"]
+position = Vector2(-43.5, 43)
+shape = SubResource("RectangleShape2D_dclxj")
+
+[node name="DialogBubble" parent="Granny" index="1" instance=ExtResource("5_0b073")]
+visible = false
+offset_left = 78.0
+offset_top = 83.0
+offset_right = 78.0
+offset_bottom = 83.0
+
+[connection signal="interact" from="Granny" to="." method="_on_granny_interact"]

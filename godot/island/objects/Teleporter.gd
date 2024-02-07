@@ -7,4 +7,4 @@ class_name Teleporter
 
 func _interact():
 	super._interact()
-	get_tree().change_scene_to_file(TargetPath)
+	SceneChanger.change_scene(TargetPath)
