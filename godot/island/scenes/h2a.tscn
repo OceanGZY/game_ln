@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dh2tla0ovp21c"]
+[gd_scene load_steps=7 format=3 uid="uid://dh2tla0ovp21c"]
 
 [ext_resource type="PackedScene" uid="uid://bkmp0o6pnwglj" path="res://scenes/scene.tscn" id="1_p0q2k"]
-[ext_resource type="Texture2D" uid="uid://bi0q6l0bsc5je" path="res://assets/H2A/roomsignBG.png" id="2_118nb"]
+[ext_resource type="Texture2D" uid="uid://b6tslra7o4ibx" path="res://assets/H2A/roomsignBG.png" id="2_118nb"]
 [ext_resource type="Script" path="res://objects/Interactable.gd" id="3_hdyb0"]
+[ext_resource type="Script" path="res://minigame/H2ABoard.gd" id="4_ufs4l"]
+[ext_resource type="Resource" uid="uid://bp2euhvtkrheg" path="res://minigame/easy.tres" id="5_xhsu4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cdb27"]
 radius = 77.9295
@@ -16,3 +18,9 @@ script = ExtResource("3_hdyb0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" index="0"]
 shape = SubResource("CircleShape2D_cdb27")
+
+[node name="Board" type="Node2D" parent="." index="1"]
+position = Vector2(-46, -5)
+script = ExtResource("4_ufs4l")
+radius = 350.0
+config = ExtResource("5_xhsu4")
