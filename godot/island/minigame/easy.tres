@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="H2AConfig" load_steps=2 format=3 uid="uid://871omksgg0tg"]
+
+[ext_resource type="Script" path="res://minigame/H2AConfig.gd" id="1_53aq2"]
+
+[resource]
+script = ExtResource("1_53aq2")
+placements = [0, 1, 2, 3, 4, 5]
+connections = {
+0: [],
+1: [],
+2: [],
+3: [],
+4: [],
+5: []
+}
