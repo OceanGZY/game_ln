@@ -1,16 +1,16 @@
 [gd_scene load_steps=16 format=3 uid="uid://dew8rwcf5s6lt"]
 
 [ext_resource type="PackedScene" uid="uid://bkmp0o6pnwglj" path="res://scenes/scene.tscn" id="1_4p3jt"]
-[ext_resource type="Texture2D" uid="uid://koe5i3e705t1" path="res://assets/H2/H2.png" id="2_x1vca"]
+[ext_resource type="Texture2D" uid="uid://c6dvvg2rfuwfq" path="res://assets/H2/H2.png" id="2_x1vca"]
 [ext_resource type="Script" path="res://scripts/h2.gd" id="3_23u0b"]
 [ext_resource type="Script" path="res://objects/Teleporter.gd" id="3_c8po3"]
 [ext_resource type="Script" path="res://objects/Interactable.gd" id="4_w78aj"]
 [ext_resource type="PackedScene" uid="uid://1ruw4prs2uml" path="res://ui/dialog_bubble.tscn" id="5_0b073"]
-[ext_resource type="Texture2D" uid="uid://ewjelt4fmrsy" path="res://assets/H2/key.png" id="7_2c056"]
+[ext_resource type="Texture2D" uid="uid://bnt2sdyib1tgv" path="res://assets/H2/key.png" id="7_2c056"]
 [ext_resource type="Script" path="res://objects/SceneItem.gd" id="7_vqte8"]
 [ext_resource type="Resource" uid="uid://tw6h86g5oore" path="res://items/key.tres" id="8_143hl"]
 [ext_resource type="Script" path="res://objects/FlagsSwitch.gd" id="10_63ily"]
-[ext_resource type="Texture2D" uid="uid://baq4t4pablf3p" path="res://assets/H2/door.png" id="11_hllfa"]
+[ext_resource type="Texture2D" uid="uid://cla4v5b0gkta3" path="res://assets/H2/door.png" id="11_hllfa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxog8"]
 radius = 54.4518
@@ -18,11 +18,11 @@ radius = 54.4518
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rm5up"]
 size = Vector2(195, 474)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dclxj"]
-size = Vector2(263, 544)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4rf8i"]
 size = Vector2(219, 380)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dclxj"]
+size = Vector2(263, 544)
 
 [node name="Background" instance=ExtResource("1_4p3jt")]
 texture = ExtResource("2_x1vca")
@@ -46,24 +46,7 @@ TargetPath = "res://scenes/h4.tscn"
 position = Vector2(78.5, -75)
 shape = SubResource("RectangleShape2D_rm5up")
 
-[node name="Granny" type="Area2D" parent="." index="2"]
-position = Vector2(-392, -36)
-scale = Vector2(0.801316, 1.01041)
-script = ExtResource("4_w78aj")
-allow_item = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Granny" index="0"]
-position = Vector2(-43.5, 43)
-shape = SubResource("RectangleShape2D_dclxj")
-
-[node name="DialogBubble" parent="Granny" index="1" instance=ExtResource("5_0b073")]
-visible = false
-offset_left = 78.0
-offset_top = 83.0
-offset_right = 78.0
-offset_bottom = 83.0
-
-[node name="SceneKeyItem" type="Area2D" parent="." index="3"]
+[node name="SceneKeyItem" type="Area2D" parent="." index="2"]
 position = Vector2(-33, 368)
 rotation = -1.38579
 script = ExtResource("7_vqte8")
@@ -71,7 +54,7 @@ item = ExtResource("8_143hl")
 CustomTexture = ExtResource("7_2c056")
 allow_item = null
 
-[node name="FlagsSwitch" type="Node2D" parent="." index="4"]
+[node name="FlagsSwitch" type="Node2D" parent="." index="3"]
 script = ExtResource("10_63ily")
 flag = "h2a_unlocked"
 
@@ -89,5 +72,22 @@ TargetPath = "res://scenes/h3.tscn"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlagsSwitch/ToH3" index="0"]
 position = Vector2(18, 14)
 shape = SubResource("RectangleShape2D_4rf8i")
+
+[node name="Granny" type="Area2D" parent="." index="4"]
+position = Vector2(-392, -36)
+scale = Vector2(0.801316, 1.01041)
+script = ExtResource("4_w78aj")
+allow_item = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Granny" index="0"]
+position = Vector2(-43.5, 43)
+shape = SubResource("RectangleShape2D_dclxj")
+
+[node name="DialogBubble" parent="Granny" index="1" instance=ExtResource("5_0b073")]
+visible = false
+offset_left = 78.0
+offset_top = 83.0
+offset_right = 78.0
+offset_bottom = 83.0
 
 [connection signal="interact" from="Granny" to="." method="_on_granny_interact"]

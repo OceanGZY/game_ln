@@ -97,3 +97,9 @@ func _check():
 	GameState.flags.add("h2a_unlocked")
 	SceneChanger.change_scene("res://scenes/h2.tscn")
 	
+	
+func reset():
+	for stone in _stone_map.values():
+		_move_stone(stone,config.placements[stone.target_slot])
+		
+	
