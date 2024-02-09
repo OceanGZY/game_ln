@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=3 uid="uid://dh2tla0ovp21c"]
 
 [ext_resource type="PackedScene" uid="uid://bkmp0o6pnwglj" path="res://scenes/scene.tscn" id="1_p0q2k"]
-[ext_resource type="Texture2D" uid="uid://bi0q6l0bsc5je" path="res://assets/H2A/roomsignBG.png" id="2_118nb"]
+[ext_resource type="Texture2D" uid="uid://b6tslra7o4ibx" path="res://assets/H2A/roomsignBG.png" id="2_118nb"]
 [ext_resource type="Script" path="res://scenes/h2a.gd" id="3_24k0l"]
 [ext_resource type="Script" path="res://objects/Interactable.gd" id="3_hdyb0"]
 [ext_resource type="Script" path="res://objects/Teleporter.gd" id="3_ow2s5"]
 [ext_resource type="Script" path="res://minigame/H2ABoard.gd" id="4_ufs4l"]
 [ext_resource type="Resource" uid="uid://bp2euhvtkrheg" path="res://minigame/easy.tres" id="5_xhsu4"]
-[ext_resource type="Texture2D" uid="uid://bagcccinf3xjw" path="res://assets/H2A/gearbg.png" id="7_xqnn8"]
-[ext_resource type="Texture2D" uid="uid://sxjrlxu1nega" path="res://assets/H2A/gear.png" id="8_nkyu6"]
+[ext_resource type="Texture2D" uid="uid://bvtrf5175jxnw" path="res://assets/H2A/gearbg.png" id="7_xqnn8"]
+[ext_resource type="Texture2D" uid="uid://diav3nnffnqxu" path="res://assets/H2A/gear.png" id="8_nkyu6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_68yib"]
 radius = 64.195

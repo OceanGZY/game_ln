@@ -1,5 +1,7 @@
 extends Sprite2D
 
+class_name Scene
+
 #@onready var background = $"."
 
 
