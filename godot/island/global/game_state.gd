@@ -105,15 +105,15 @@ func back_to_title():
 	SceneChanger.change_scene("res://ui/title_screen.tscn")
 
 func save_game():
+	#print("保存了游戏")
+	#print(get_tree().current_scene.scene_file_path)
+	#print(get_tree().current_scene.scene_file_path.get_file())
 	var file = FileAccess.open(SVAE_PATH,FileAccess.WRITE)
-	printraw(get_scene_file_path())
 	var data = {
 		inventory_dict = inventory.to_dict(),
 		flags_dict = flags.to_dict(),
-		#current_scene_name = get_tree().current_scene.filename.get_file().get_name()
-		current_scene_name = get_scene_file_path().get_file().get_basename()	
+		current_scene_name = get_tree().current_scene.scene_file_path.get_file()
 	}
-	
 	var json = JSON.stringify(data)
 	file.store_string(json)
 
@@ -123,7 +123,7 @@ func load_game():
 	var data = JSON.parse_string(json)
 	inventory.from_dict(data.inventory_dict)
 	flags.from_dict(data.flags_dict)
-	SceneChanger.change_scene("res://scenes/%s.tscn" %  data.current_scene_name)
+	SceneChanger.change_scene("res://scenes/%s"%data.current_scene_name)
 
 func new_game():
 	inventory.reset()

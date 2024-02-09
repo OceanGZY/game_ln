@@ -2,6 +2,8 @@ extends Sprite2D
 
 class_name Scene
 
+@export_file("*.mp3") var music_override_file;
+
 #@onready var background = $"."
 
 

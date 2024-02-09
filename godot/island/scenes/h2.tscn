@@ -1,16 +1,16 @@
 [gd_scene load_steps=16 format=3 uid="uid://dew8rwcf5s6lt"]
 
 [ext_resource type="PackedScene" uid="uid://bkmp0o6pnwglj" path="res://scenes/scene.tscn" id="1_4p3jt"]
-[ext_resource type="Texture2D" uid="uid://koe5i3e705t1" path="res://assets/H2/H2.png" id="2_x1vca"]
+[ext_resource type="Texture2D" uid="uid://c6dvvg2rfuwfq" path="res://assets/H2/H2.png" id="2_x1vca"]
 [ext_resource type="Script" path="res://scripts/h2.gd" id="3_23u0b"]
 [ext_resource type="Script" path="res://objects/Teleporter.gd" id="3_c8po3"]
 [ext_resource type="Script" path="res://objects/Interactable.gd" id="4_w78aj"]
 [ext_resource type="PackedScene" uid="uid://1ruw4prs2uml" path="res://ui/dialog_bubble.tscn" id="5_0b073"]
-[ext_resource type="Texture2D" uid="uid://ewjelt4fmrsy" path="res://assets/H2/key.png" id="7_2c056"]
+[ext_resource type="Texture2D" uid="uid://bnt2sdyib1tgv" path="res://assets/H2/key.png" id="7_2c056"]
 [ext_resource type="Script" path="res://objects/SceneItem.gd" id="7_vqte8"]
 [ext_resource type="Resource" uid="uid://tw6h86g5oore" path="res://items/key.tres" id="8_143hl"]
 [ext_resource type="Script" path="res://objects/FlagsSwitch.gd" id="10_63ily"]
-[ext_resource type="Texture2D" uid="uid://baq4t4pablf3p" path="res://assets/H2/door.png" id="11_hllfa"]
+[ext_resource type="Texture2D" uid="uid://cla4v5b0gkta3" path="res://assets/H2/door.png" id="11_hllfa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxog8"]
 radius = 54.4518
