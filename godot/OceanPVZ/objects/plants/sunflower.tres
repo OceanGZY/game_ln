@@ -11,9 +11,13 @@
 [resource]
 script = ExtResource("6_f7gsu")
 plant_name = "向日葵"
+plant_attack = 0
+plant_cold_time = 10
+plant_life = 50
+plant_sun = 50
 card_can_choose_texture = ExtResource("1_2paag")
-card_canot_choose_testure = ExtResource("2_t4l7a")
-card_choose_mask_testure = ExtResource("3_kt6kj")
+card_canot_choose_texture = ExtResource("2_t4l7a")
+card_choose_mask_texture = ExtResource("3_kt6kj")
 day_card_can_choose_texture = ExtResource("4_v5waf")
-day_card_canot_choose_testure = ExtResource("5_5fven")
+day_card_canot_choose_texture = ExtResource("5_5fven")
 plant_texture = ExtResource("6_u6vev")
