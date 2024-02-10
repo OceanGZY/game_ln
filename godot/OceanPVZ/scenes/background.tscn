@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://dp2xy6kxipv3t"]
+
+[ext_resource type="Texture2D" uid="uid://boanye4hjfo6s" path="res://assets/Images/Background/background1.jpg" id="1_05xf3"]
+[ext_resource type="Texture2D" uid="uid://dhqxb0648b3i3" path="res://assets/Images/UI/ChooserBackground.png" id="2_ld746"]
+[ext_resource type="Script" path="res://objects/PlantCard.gd" id="3_of8ky"]
+[ext_resource type="Resource" uid="uid://mwb5trxyrauk" path="res://objects/plants/sunflower.tres" id="4_q3gkr"]
+[ext_resource type="Resource" uid="uid://c2cawae18hq8k" path="res://objects/plants/peashooter.tres" id="4_xdlr8"]
+[ext_resource type="Texture2D" uid="uid://coae5n0aaw47f" path="res://assets/Images/Card/card_sunflower2.png" id="5_171m2"]
+[ext_resource type="Texture2D" uid="uid://blwk2l8b7x11j" path="res://assets/Images/Card/card_peashooter2.png" id="5_epcmo"]
+
+[node name="Background" type="Node2D"]
+
+[node name="GrassLand" type="Sprite2D" parent="."]
+position = Vector2(630, 289)
+texture = ExtResource("1_05xf3")
+
+[node name="CardBoard" type="Sprite2D" parent="."]
+position = Vector2(382, 48)
+texture = ExtResource("2_ld746")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardBoard"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.0
+offset_top = -43.5
+offset_right = -261.0
+offset_bottom = -43.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="PlantCard" type="Area2D" parent="CardBoard/HBoxContainer"]
+script = ExtResource("3_of8ky")
+plant = ExtResource("4_xdlr8")
+base_texture = ExtResource("5_epcmo")
+
+[node name="PlantCard2" type="Area2D" parent="CardBoard/HBoxContainer"]
+position = Vector2(-54, 0)
+script = ExtResource("3_of8ky")
+plant = ExtResource("4_q3gkr")
+base_texture = ExtResource("5_171m2")
+
+[node name="PlantCard3" type="Area2D" parent="CardBoard/HBoxContainer"]
+position = Vector2(63, 0)
+script = ExtResource("3_of8ky")
+plant = ExtResource("4_q3gkr")
+base_texture = ExtResource("5_171m2")
+
+[node name="PlantCard4" type="Area2D" parent="CardBoard/HBoxContainer"]
+position = Vector2(118, 0)
+script = ExtResource("3_of8ky")
+plant = ExtResource("4_q3gkr")
+base_texture = ExtResource("5_171m2")
+
+[node name="PlantCard5" type="Area2D" parent="CardBoard/HBoxContainer"]
+position = Vector2(172, 0)
+script = ExtResource("3_of8ky")
+plant = ExtResource("4_q3gkr")
+base_texture = ExtResource("5_171m2")

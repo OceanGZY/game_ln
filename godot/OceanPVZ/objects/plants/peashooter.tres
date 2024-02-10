@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PlantResource" load_steps=8 format=3 uid="uid://c2cawae18hq8k"]
+
+[ext_resource type="Texture2D" uid="uid://dw7ygwa8s3sjs" path="res://assets/Images/Card/card_peashooter.png" id="1_d2lyl"]
+[ext_resource type="Texture2D" uid="uid://blwk2l8b7x11j" path="res://assets/Images/Card/card_peashooter2.png" id="2_rhbli"]
+[ext_resource type="Texture2D" uid="uid://4mwsy4invaf0" path="res://assets/Images/Card/card_bk.jpg" id="3_d3jsy"]
+[ext_resource type="Texture2D" uid="uid://3jf80ov2nx7d" path="res://assets/Images/Cards/DayCards/Peashooter.png" id="4_uaes5"]
+[ext_resource type="Texture2D" uid="uid://dk6yr2caes11e" path="res://assets/Images/Cards/DayCards/PeashooterG.png" id="5_esjcx"]
+[ext_resource type="Texture2D" uid="uid://cd0uj3l7jdv2g" path="res://assets/Images/Plants/Peashooter/Peashooter_1.png" id="6_lonbm"]
+[ext_resource type="Script" path="res://objects/PlantResource.gd" id="7_x25bu"]
+
+[resource]
+script = ExtResource("7_x25bu")
+plant_name = "豌豆射手"
+card_can_choose_texture = ExtResource("1_d2lyl")
+card_canot_choose_testure = ExtResource("2_rhbli")
+card_choose_mask_testure = ExtResource("3_d3jsy")
+day_card_can_choose_texture = ExtResource("4_uaes5")
+day_card_canot_choose_testure = ExtResource("5_esjcx")
+plant_texture = ExtResource("6_lonbm")

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PlantResource" load_steps=8 format=3 uid="uid://mwb5trxyrauk"]
+
+[ext_resource type="Texture2D" uid="uid://bruch8fp8cyke" path="res://assets/Images/Card/card_sunflower.png" id="1_2paag"]
+[ext_resource type="Texture2D" uid="uid://coae5n0aaw47f" path="res://assets/Images/Card/card_sunflower2.png" id="2_t4l7a"]
+[ext_resource type="Texture2D" uid="uid://4mwsy4invaf0" path="res://assets/Images/Card/card_bk.jpg" id="3_kt6kj"]
+[ext_resource type="Texture2D" uid="uid://5l3lvxpdg2kh" path="res://assets/Images/Cards/DayCards/SunFlower.png" id="4_v5waf"]
+[ext_resource type="Texture2D" uid="uid://dq45y67x50ljr" path="res://assets/Images/Cards/DayCards/SunFlowerG.png" id="5_5fven"]
+[ext_resource type="Script" path="res://objects/PlantResource.gd" id="6_f7gsu"]
+[ext_resource type="Texture2D" uid="uid://ccah4v0fng2a1" path="res://assets/Images/Plants/SunFlower/SunFlower_1.png" id="6_u6vev"]
+
+[resource]
+script = ExtResource("6_f7gsu")
+plant_name = "向日葵"
+card_can_choose_texture = ExtResource("1_2paag")
+card_canot_choose_testure = ExtResource("2_t4l7a")
+card_choose_mask_testure = ExtResource("3_kt6kj")
+day_card_can_choose_texture = ExtResource("4_v5waf")
+day_card_canot_choose_testure = ExtResource("5_5fven")
+plant_texture = ExtResource("6_u6vev")
