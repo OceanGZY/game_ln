@@ -30,7 +30,7 @@ func set_base_texture(v):
 	var sprite = Sprite2D.new()
 	sprite.texture = base_texture
 	add_child(sprite)
-	
+
 	var rect := RectangleShape2D.new()
 	rect.extents = base_texture.get_size()/2
 	
