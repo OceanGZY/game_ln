@@ -2,15 +2,18 @@
 extends Node2D
 class_name PlantCardItem
 
-signal interact
+signal create_new_plant
+
 
 @export var plant:PlantResource:
 	set=set_plant
-	
+
+var plant_type:GameState.PlantType = GameState.PlantType.Sunflower
 var card:Area2D
 var sprite:Sprite2D
 var mask:Sprite2D
 var coldtime:int
+var cplant
 
 func _ready():
 	if Engine.is_editor_hint():
@@ -19,16 +22,6 @@ func _ready():
 	mask.hide()
 	GameState.sun_manager.connect("changed",check_ready)
 	
-	
-func _on_interact_card(viewport, event, shape_idx):
-	if not event.is_action_pressed("interact"):
-		return
-	_interact()
-	GameState.sun_manager.add_sun()
-	
-func _interact():
-	emit_signal("interact")
- 
 
 func set_plant(v):
 	plant =v
@@ -36,12 +29,14 @@ func set_plant(v):
 	for node in get_children():
 		if node.owner ==null:
 			node.queue_free()
-			
+	
+	plant_type = plant.plant_type
+	
 	card = Area2D.new()
 	sprite = Sprite2D.new()
 	sprite.texture = plant.card_canot_choose_texture
 	card.add_child(sprite)
-
+	
 	var rect := RectangleShape2D.new()
 	rect.extents = plant.card_canot_choose_texture.get_size()/2
 	
@@ -68,3 +63,16 @@ func check_ready():
 		sprite.texture = plant.card_can_choose_texture
 	else:
 		sprite.texture = plant.card_canot_choose_texture
+
+
+func _on_interact_card(viewport, event, shape_idx):
+	if GameState.sun_manager.SunCount < plant.plant_sun:
+		return
+	if event.is_action_pressed("interact"):
+		_interact()
+		GameState.sun_manager.use_sun(plant.plant_sun)
+
+	
+func _interact():
+	emit_signal("create_new_plant")
+	

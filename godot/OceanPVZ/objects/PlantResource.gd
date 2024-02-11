@@ -1,6 +1,7 @@
 extends Resource
 class_name PlantResource
 
+@export var plant_type:GameState.PlantType
 @export var plant_name:String
 @export var plant_attack:int
 @export var plant_cold_time:int

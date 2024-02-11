@@ -1,0 +1,130 @@
+[gd_scene load_steps=20 format=3 uid="uid://byuskku1sqcca"]
+
+[ext_resource type="Texture2D" uid="uid://cd0uj3l7jdv2g" path="res://assets/Images/Plants/Peashooter/Peashooter_1.png" id="1_l8x26"]
+[ext_resource type="Texture2D" uid="uid://bqov3ctiexa76" path="res://assets/Images/Plants/Peashooter/Peashooter_2.png" id="2_o61oa"]
+[ext_resource type="Texture2D" uid="uid://bfxf8va7ygutn" path="res://assets/Images/Plants/Peashooter/Peashooter_3.png" id="3_dbi85"]
+[ext_resource type="Texture2D" uid="uid://kfk53ec48och" path="res://assets/Images/Plants/Peashooter/Peashooter_4.png" id="4_ibr00"]
+[ext_resource type="Texture2D" uid="uid://be58bi6f67jne" path="res://assets/Images/Plants/Peashooter/Peashooter_5.png" id="5_15ft0"]
+[ext_resource type="Texture2D" uid="uid://c76gckrnp0i0i" path="res://assets/Images/Plants/Peashooter/Peashooter_6.png" id="6_ktsa4"]
+[ext_resource type="Texture2D" uid="uid://c8cvhbbsq0vx" path="res://assets/Images/Plants/Peashooter/Peashooter_7.png" id="7_xt84v"]
+[ext_resource type="Texture2D" uid="uid://cn6ni1wu7wl3v" path="res://assets/Images/Plants/Peashooter/Peashooter_8.png" id="8_tjet1"]
+[ext_resource type="Texture2D" uid="uid://3wyrghiccwcu" path="res://assets/Images/Plants/Peashooter/Peashooter_9.png" id="9_gosl1"]
+[ext_resource type="Texture2D" uid="uid://cmdirsten1mlr" path="res://assets/Images/Plants/Peashooter/Peashooter_10.png" id="10_gw21n"]
+[ext_resource type="Texture2D" uid="uid://14bmvrtsin16" path="res://assets/Images/Plants/Peashooter/Peashooter_11.png" id="11_6b2d4"]
+[ext_resource type="Texture2D" uid="uid://xvsqh4f35bj0" path="res://assets/Images/Plants/Peashooter/Peashooter_12.png" id="12_tmvm8"]
+[ext_resource type="Texture2D" uid="uid://w0pgka7nf4ul" path="res://assets/Images/Plants/Peashooter/Peashooter_13.png" id="13_xpqks"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hkwp3"]
+radius = 27.0
+height = 72.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uhwum"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_l8x26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_o61oa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dbi85")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ibr00")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_15ft0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ktsa4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xt84v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tjet1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_gosl1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_gw21n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6b2d4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_tmvm8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_xpqks")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_krpcp"]
+length = 2.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["idle"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b4qia"]
+_data = {
+"idle": SubResource("Animation_krpcp")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vtqoo"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pjdx8"]
+states/Start/position = Vector2(203.333, 100.889)
+states/idle/node = SubResource("AnimationNodeAnimation_vtqoo")
+states/idle/position = Vector2(346, 106.107)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_hkwp3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uhwum")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.611883
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b4qia")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b4qia")
+}
+tree_root = SubResource("AnimationNodeStateMachine_pjdx8")
+anim_player = NodePath("../AnimationPlayer")
