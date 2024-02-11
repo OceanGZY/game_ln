@@ -56,9 +56,9 @@ func check_enable(type):
 
 
 func plant_action():
-	if plant_type == GameState.PlantType.Sunflower:
-		produce_sun()
-	
+	#if plant_type == GameState.PlantType.Sunflower:
+		#produce_sun()
+	print("plant_action")
 
-func produce_sun():
-	print("生产了一个太阳")
+#func produce_sun():
+	#print("生产了一个太阳")
