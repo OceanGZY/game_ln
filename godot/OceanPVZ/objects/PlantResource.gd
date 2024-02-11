@@ -7,6 +7,7 @@ class_name PlantResource
 @export var plant_cold_time:int
 @export var plant_life:int
 @export var plant_sun:int
+@export var plant_attack_time:int
 
 @export var card_can_choose_texture:Texture2D
 @export var card_canot_choose_texture:Texture2D

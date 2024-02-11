@@ -1,6 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://byuskku1sqcca"]
+[gd_scene load_steps=22 format=3 uid="uid://byuskku1sqcca"]
 
 [ext_resource type="Texture2D" uid="uid://cd0uj3l7jdv2g" path="res://assets/Images/Plants/Peashooter/Peashooter_1.png" id="1_l8x26"]
+[ext_resource type="Script" path="res://objects/Plants.gd" id="1_o6faj"]
+[ext_resource type="Resource" uid="uid://c2cawae18hq8k" path="res://objects/plants/peashooter.tres" id="2_7v2md"]
 [ext_resource type="Texture2D" uid="uid://bqov3ctiexa76" path="res://assets/Images/Plants/Peashooter/Peashooter_2.png" id="2_o61oa"]
 [ext_resource type="Texture2D" uid="uid://bfxf8va7ygutn" path="res://assets/Images/Plants/Peashooter/Peashooter_3.png" id="3_dbi85"]
 [ext_resource type="Texture2D" uid="uid://kfk53ec48och" path="res://assets/Images/Plants/Peashooter/Peashooter_4.png" id="4_ibr00"]
@@ -14,11 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://xvsqh4f35bj0" path="res://assets/Images/Plants/Peashooter/Peashooter_12.png" id="12_tmvm8"]
 [ext_resource type="Texture2D" uid="uid://w0pgka7nf4ul" path="res://assets/Images/Plants/Peashooter/Peashooter_13.png" id="13_xpqks"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hkwp3"]
-radius = 27.0
-height = 72.0
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_uhwum"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_xpih3"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -62,11 +60,11 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
 }]
 
-[sub_resource type="Animation" id="Animation_krpcp"]
-length = 2.6
+[sub_resource type="Animation" id="Animation_cfq7f"]
+length = 1.3
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -75,7 +73,7 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
@@ -93,38 +91,39 @@ tracks/1/keys = {
 "values": ["idle"]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b4qia"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j2du1"]
 _data = {
-"idle": SubResource("Animation_krpcp")
+"idle": SubResource("Animation_cfq7f")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vtqoo"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7a5p7"]
 animation = &"idle"
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pjdx8"]
-states/Start/position = Vector2(203.333, 100.889)
-states/idle/node = SubResource("AnimationNodeAnimation_vtqoo")
-states/idle/position = Vector2(346, 106.107)
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_npcbc"]
+advance_mode = 2
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_klj6v"]
+states/idle/node = SubResource("AnimationNodeAnimation_7a5p7")
+states/idle/position = Vector2(360, 100.444)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_npcbc")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_hkwp3")
+[node name="Peashooter" type="CharacterBody2D"]
+script = ExtResource("1_o6faj")
+plant = ExtResource("2_7v2md")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_uhwum")
+sprite_frames = SubResource("SpriteFrames_xpih3")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.611883
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_b4qia")
+"": SubResource("AnimationLibrary_j2du1")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_b4qia")
+"": SubResource("AnimationLibrary_j2du1")
 }
-tree_root = SubResource("AnimationNodeStateMachine_pjdx8")
+tree_root = SubResource("AnimationNodeStateMachine_klj6v")
 anim_player = NodePath("../AnimationPlayer")

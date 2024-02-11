@@ -6,6 +6,7 @@ extends Node2D
 @onready var grid_container = $GrassLand/Grass/GridContainer
 
 var cplant
+var cplant_type
 
 func _ready():
 	current_sun.text = str(GameState.sun_manager.SunCount)
@@ -20,10 +21,11 @@ func create_grass():
 	for i in range(45):
 		var temp = load(grass_cell).instantiate()
 		grid_container.add_child(temp)
-		print("temp.has_plant",temp.has_plant)
+		#print("temp.has_plant",temp.has_plant)
 		temp.gui_input.connect(_on_interact_grass_cell.bind(temp))
 
 func create_new_plant(type:GameState.PlantType):
+	cplant_type =type
 	var plant_source = GameState.plant_manager.get_plant_item(type)
 	var temp = load(plant_source)
 	cplant = temp.instantiate()
@@ -44,5 +46,6 @@ func _on_interact_grass_cell(event,cell):
 		cplant.modulate.a=1
 		cplant.position = cell.global_position+Vector2(40,48)
 		cell.has_plant=true
+		GameState.plant_manager.create_plant(cplant_type)
 		GameState.hand_manager.set_has_plant(false)
 		cplant=null
