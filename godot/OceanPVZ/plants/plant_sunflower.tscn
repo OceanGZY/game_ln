@@ -1,0 +1,150 @@
+[gd_scene load_steps=26 format=3 uid="uid://dn0dsfevfwreo"]
+
+[ext_resource type="Texture2D" uid="uid://o4r00auhsasu" path="res://assets/Images/Plants/SunFlower/sunflower20.png" id="1_5h887"]
+[ext_resource type="Texture2D" uid="uid://d06t0ijxb51aa" path="res://assets/Images/Plants/SunFlower/sunflower21.png" id="2_21nge"]
+[ext_resource type="Texture2D" uid="uid://bthedpseguhvj" path="res://assets/Images/Plants/SunFlower/sunflower22.png" id="3_wn5h0"]
+[ext_resource type="Texture2D" uid="uid://dtsvqkkmvq1vq" path="res://assets/Images/Plants/SunFlower/sunflower23.png" id="4_54cdv"]
+[ext_resource type="Texture2D" uid="uid://bj5hyt83ntarm" path="res://assets/Images/Plants/SunFlower/sunflower24.png" id="5_6aura"]
+[ext_resource type="Texture2D" uid="uid://c0ekea8utsq2d" path="res://assets/Images/Plants/SunFlower/sunflower25.png" id="6_onvor"]
+[ext_resource type="Texture2D" uid="uid://l1x00mmcm250" path="res://assets/Images/Plants/SunFlower/sunflower26.png" id="7_62kh1"]
+[ext_resource type="Texture2D" uid="uid://t6tpvaf3f1hq" path="res://assets/Images/Plants/SunFlower/sunflower27.png" id="8_voj5i"]
+[ext_resource type="Texture2D" uid="uid://3odvulf40q1o" path="res://assets/Images/Plants/SunFlower/sunflower28.png" id="9_e0fvi"]
+[ext_resource type="Texture2D" uid="uid://6jm0m33xhs1t" path="res://assets/Images/Plants/SunFlower/sunflower29.png" id="10_rhy13"]
+[ext_resource type="Texture2D" uid="uid://6wghx054dc06" path="res://assets/Images/Plants/SunFlower/sunflower210.png" id="11_57l3m"]
+[ext_resource type="Texture2D" uid="uid://vowp05x74cht" path="res://assets/Images/Plants/SunFlower/sunflower211.png" id="12_y2yjp"]
+[ext_resource type="Texture2D" uid="uid://d3ggbsgpkfwxq" path="res://assets/Images/Plants/SunFlower/sunflower212.png" id="13_f885q"]
+[ext_resource type="Texture2D" uid="uid://vlcknscnioid" path="res://assets/Images/Plants/SunFlower/sunflower213.png" id="14_teotu"]
+[ext_resource type="Texture2D" uid="uid://dkxf2vf4kjjoi" path="res://assets/Images/Plants/SunFlower/sunflower214.png" id="15_h7ccf"]
+[ext_resource type="Texture2D" uid="uid://h8a3vyvk61b5" path="res://assets/Images/Plants/SunFlower/sunflower215.png" id="16_hk5wi"]
+[ext_resource type="Texture2D" uid="uid://b7p4qm7871eoi" path="res://assets/Images/Plants/SunFlower/sunflower216.png" id="17_7gut5"]
+[ext_resource type="Texture2D" uid="uid://b6gpek6ump00s" path="res://assets/Images/Plants/SunFlower/sunflower217.png" id="18_uo15j"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_54or8"]
+radius = 31.0
+height = 84.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1i6a3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5h887")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_21nge")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wn5h0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_54cdv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6aura")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_onvor")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_62kh1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_voj5i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_e0fvi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_rhy13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_57l3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_y2yjp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_f885q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_teotu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_h7ccf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_hk5wi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_7gut5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_uo15j")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_dcafh"]
+length = 3.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["idle"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y3lgl"]
+_data = {
+"idle": SubResource("Animation_dcafh")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f4g7f"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ppnn3"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_etrgd"]
+states/idle/node = SubResource("AnimationNodeAnimation_f4g7f")
+states/idle/position = Vector2(359.5, 97.625)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ppnn3")]
+
+[node name="Sunflower" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_54or8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1i6a3")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y3lgl")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y3lgl")
+}
+tree_root = SubResource("AnimationNodeStateMachine_etrgd")
+anim_player = NodePath("../AnimationPlayer")

@@ -1,23 +1,21 @@
-[gd_resource type="Resource" script_class="PlantResource" load_steps=8 format=3 uid="uid://mwb5trxyrauk"]
+[gd_resource type="Resource" script_class="PlantResource" load_steps=7 format=3 uid="uid://mwb5trxyrauk"]
 
-[ext_resource type="Texture2D" uid="uid://bruch8fp8cyke" path="res://assets/Images/Card/card_sunflower.png" id="1_2paag"]
-[ext_resource type="Texture2D" uid="uid://coae5n0aaw47f" path="res://assets/Images/Card/card_sunflower2.png" id="2_t4l7a"]
-[ext_resource type="Texture2D" uid="uid://4mwsy4invaf0" path="res://assets/Images/Card/card_bk.jpg" id="3_kt6kj"]
-[ext_resource type="Texture2D" uid="uid://5l3lvxpdg2kh" path="res://assets/Images/Cards/DayCards/SunFlower.png" id="4_v5waf"]
-[ext_resource type="Texture2D" uid="uid://dq45y67x50ljr" path="res://assets/Images/Cards/DayCards/SunFlowerG.png" id="5_5fven"]
+[ext_resource type="Texture2D" uid="uid://hc6wbywvxqlt" path="res://assets/Images/Card/card_sunflower.png" id="1_2paag"]
+[ext_resource type="Texture2D" uid="uid://b2p0qosp8j277" path="res://assets/Images/Card/card_sunflower2.png" id="2_t4l7a"]
+[ext_resource type="Texture2D" uid="uid://wqxfvkn1ufdo" path="res://assets/Images/Cards/DayCards/SunFlower.png" id="4_v5waf"]
+[ext_resource type="Texture2D" uid="uid://yy5gc0auxv6e" path="res://assets/Images/Cards/DayCards/SunFlowerG.png" id="5_5fven"]
 [ext_resource type="Script" path="res://objects/PlantResource.gd" id="6_f7gsu"]
-[ext_resource type="Texture2D" uid="uid://ccah4v0fng2a1" path="res://assets/Images/Plants/SunFlower/SunFlower_1.png" id="6_u6vev"]
+[ext_resource type="Texture2D" uid="uid://coswkrt81kvql" path="res://assets/Images/Plants/SunFlower/SunFlower_1.png" id="6_u6vev"]
 
 [resource]
 script = ExtResource("6_f7gsu")
 plant_name = "向日葵"
 plant_attack = 0
-plant_cold_time = 10
+plant_cold_time = 5
 plant_life = 50
 plant_sun = 50
 card_can_choose_texture = ExtResource("1_2paag")
 card_canot_choose_texture = ExtResource("2_t4l7a")
-card_choose_mask_texture = ExtResource("3_kt6kj")
 day_card_can_choose_texture = ExtResource("4_v5waf")
 day_card_canot_choose_texture = ExtResource("5_5fven")
 plant_texture = ExtResource("6_u6vev")

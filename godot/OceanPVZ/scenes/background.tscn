@@ -1,34 +1,64 @@
-[gd_scene load_steps=5 format=3 uid="uid://dp2xy6kxipv3t"]
+[gd_scene load_steps=8 format=3 uid="uid://dp2xy6kxipv3t"]
 
-[ext_resource type="Texture2D" uid="uid://boanye4hjfo6s" path="res://assets/Images/Background/background1.jpg" id="1_05xf3"]
-[ext_resource type="Texture2D" uid="uid://dhqxb0648b3i3" path="res://assets/Images/UI/ChooserBackground.png" id="2_ld746"]
+[ext_resource type="Texture2D" uid="uid://t02w21xbjup1" path="res://assets/Images/Background/background1.jpg" id="1_05xf3"]
+[ext_resource type="Script" path="res://scripts/background.gd" id="1_ovgv4"]
+[ext_resource type="Texture2D" uid="uid://cqsa1r00mjk61" path="res://assets/Images/UI/ChooserBackground.png" id="2_ld746"]
+[ext_resource type="PackedScene" uid="uid://dn0dsfevfwreo" path="res://plants/plant_sunflower.tscn" id="3_lt8m1"]
 [ext_resource type="Script" path="res://objects/PlantCardItem.gd" id="3_t8fbl"]
-[ext_resource type="Resource" uid="uid://mwb5trxyrauk" path="res://objects/plants/sunflower.tres" id="4_6rqgy"]
+[ext_resource type="Resource" uid="uid://mwb5trxyrauk" path="res://objects/plants/sunflower.tres" id="4_rdugy"]
+[ext_resource type="Resource" uid="uid://c2cawae18hq8k" path="res://objects/plants/peashooter.tres" id="5_nmnlk"]
 
 [node name="Background" type="Node2D"]
+script = ExtResource("1_ovgv4")
 
 [node name="GrassLand" type="Sprite2D" parent="."]
 position = Vector2(630, 289)
 texture = ExtResource("1_05xf3")
 
+[node name="Sunflower" parent="GrassLand" instance=ExtResource("3_lt8m1")]
+position = Vector2(-405, 23)
+
 [node name="CardBoard" type="Sprite2D" parent="."]
 position = Vector2(382, 48)
 texture = ExtResource("2_ld746")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CardBoard"]
-anchors_preset = 8
-anchor_left = 0.5
+[node name="PlantCards" type="HBoxContainer" parent="CardBoard"]
+custom_minimum_size = Vector2(440, 80)
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -261.0
-offset_top = -43.5
-offset_right = -261.0
-offset_bottom = -43.5
-grow_horizontal = 2
+offset_left = -708.0
+offset_top = -83.5
+offset_right = -268.0
+offset_bottom = -3.5
+grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="PlantCardItem" type="Node2D" parent="CardBoard/HBoxContainer"]
+[node name="PlantCardItem" type="Node2D" parent="CardBoard/PlantCards"]
+position = Vector2(28, 38)
 script = ExtResource("3_t8fbl")
-plant = ExtResource("4_6rqgy")
+plant = ExtResource("4_rdugy")
+
+[node name="PlantCardItem2" type="Node2D" parent="CardBoard/PlantCards"]
+position = Vector2(84, 38)
+script = ExtResource("3_t8fbl")
+plant = ExtResource("5_nmnlk")
+
+[node name="CurrentSun" type="Label" parent="CardBoard"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -71.0
+offset_right = -194.0
+offset_bottom = -45.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "300"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -2,6 +2,7 @@
 extends Node2D
 class_name PlantCardItem
 
+signal interact
 
 @export var plant:PlantResource:
 	set=set_plant
@@ -13,22 +14,21 @@ var coldtime:int
 
 func _ready():
 	if Engine.is_editor_hint():
-		print(Engine.is_editor_hint())
 		return
-	connect("coldtimeout",wait_mask)
 	check_ready()
-	coldtime = plant.plant_cold_time
-
-func _input(event):
+	mask.hide()
+	GameState.sun_manager.connect("changed",check_ready)
+	
+	
+func _on_interact_card(viewport, event, shape_idx):
 	if not event.is_action_pressed("interact"):
 		return
-	print("被点击了")
-	wait_mask(coldtime)
-
-func _process(delta):
-	if coldtime>0:
-		coldtime-=delta
-	check_ready()
+	_interact()
+	GameState.sun_manager.add_sun()
+	
+func _interact():
+	emit_signal("interact")
+ 
 
 func set_plant(v):
 	plant =v
@@ -48,12 +48,14 @@ func set_plant(v):
 	var collider:= CollisionShape2D.new()
 	collider.shape = rect
 	card.add_child(collider)
-	
+	card.input_event.connect(_on_interact_card)
 	add_child(card)
+	
 	mask = Sprite2D.new()
 	mask.texture = load("res://assets/Images/Card/card_bk.jpg")
 	add_child(mask)
 	mask.modulate.a=0.5
+	
 	
 func wait_mask(time):
 	var tween =  create_tween()
@@ -61,5 +63,8 @@ func wait_mask(time):
 	tween.tween_property(mask,"modulate:a",0,time)
 	
 func check_ready():
-	if GameState.SunCout >= plant.plant_sun:
+	print(GameState.sun_manager.SunCount)
+	if GameState.sun_manager.SunCount >= plant.plant_sun:
 		sprite.texture = plant.card_can_choose_texture
+	else:
+		sprite.texture = plant.card_canot_choose_texture
