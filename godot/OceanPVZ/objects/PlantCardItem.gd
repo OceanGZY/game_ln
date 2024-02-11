@@ -2,7 +2,7 @@
 extends Node2D
 class_name PlantCardItem
 
-signal create_new_plant
+signal create_new_plant(type:GameState.PlantType)
 
 
 @export var plant:PlantResource:
@@ -66,13 +66,10 @@ func check_ready():
 
 
 func _on_interact_card(viewport, event, shape_idx):
-	if GameState.sun_manager.SunCount < plant.plant_sun:
+	if GameState.sun_manager.SunCount < plant.plant_sun or GameState.hand_manager.had_plant: 
 		return
 	if event.is_action_pressed("interact"):
-		_interact()
+		GameState.hand_manager.add_plant(plant_type)
 		GameState.sun_manager.use_sun(plant.plant_sun)
 
-	
-func _interact():
-	emit_signal("create_new_plant")
 	

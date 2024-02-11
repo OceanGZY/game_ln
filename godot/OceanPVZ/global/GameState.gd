@@ -25,9 +25,6 @@ class PlantManager:
 		PlantType.Sunflower:"res://plants/plant_sunflower.tscn",
 		PlantType.Peashooter:"res://plants/plant_peashooter.tscn",
 	}
-	
-	func add_plant_item(type:PlantType):
-		pass
 		
 	func get_plant_item(type:PlantType):
 		return all_plants[type]
@@ -35,11 +32,15 @@ class PlantManager:
 
 
 class HandManager:
-	signal changed
+	signal create_new
+	
+	var had_plant:bool
 	
 	func add_plant(type:PlantType):
-		pass
-
+		emit_signal("create_new",type)
+	
+	func set_has_plant(ishas:bool):
+		had_plant =ishas
 
 var sun_manager:SunManager = SunManager.new()
 var plant_manager:PlantManager=PlantManager.new()
