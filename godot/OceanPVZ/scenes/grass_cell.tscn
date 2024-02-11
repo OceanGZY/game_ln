@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cde1jkws7i7gi"]
+[gd_scene load_steps=3 format=3 uid="uid://cde1jkws7i7gi"]
+
+[ext_resource type="Script" path="res://scripts/grass_cell.gd" id="1_0yftc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7e02"]
 size = Vector2(80, 96)
@@ -13,11 +15,10 @@ offset_right = -1198.0
 offset_bottom = -502.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0yftc")
 
 [node name="Cell" type="Area2D" parent="."]
 
 [node name="CellRect" type="CollisionShape2D" parent="Cell"]
 position = Vector2(40, 48)
 shape = SubResource("RectangleShape2D_q7e02")
-
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
