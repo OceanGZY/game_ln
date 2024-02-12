@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dp2xy6kxipv3t"]
+[gd_scene load_steps=10 format=3 uid="uid://dp2xy6kxipv3t"]
 
 [ext_resource type="Texture2D" uid="uid://t02w21xbjup1" path="res://assets/Images/Background/background1.jpg" id="1_05xf3"]
 [ext_resource type="Script" path="res://scripts/background.gd" id="1_ovgv4"]
 [ext_resource type="Texture2D" uid="uid://cqsa1r00mjk61" path="res://assets/Images/UI/ChooserBackground.png" id="2_ld746"]
+[ext_resource type="PackedScene" uid="uid://c8exxvt5yrs0b" path="res://zombies/BaseZombie.tscn" id="3_fohod"]
 [ext_resource type="Script" path="res://objects/PlantCardItem.gd" id="3_t8fbl"]
 [ext_resource type="Resource" uid="uid://mwb5trxyrauk" path="res://objects/plants/sunflower.tres" id="4_rdugy"]
 [ext_resource type="Resource" uid="uid://c2cawae18hq8k" path="res://objects/plants/peashooter.tres" id="5_nmnlk"]
@@ -83,6 +84,8 @@ offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 9
+
+[node name="Zombie" parent="GrassLand" instance=ExtResource("3_fohod")]
 
 [node name="CardBoard" type="Sprite2D" parent="."]
 position = Vector2(382, 48)

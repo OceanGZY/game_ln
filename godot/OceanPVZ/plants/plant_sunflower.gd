@@ -10,7 +10,7 @@ func _ready():
 
 func plant_action():
 	super.plant_action()
-	print("运行到这里了")
+	#print("运行到这里了")
 	sun = load(sun_res).instantiate()
 	add_child(sun)
 	sun.position= sun.position+Vector2(5,5)

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="PlantResource" load_steps=7 format=3 uid="uid://c2cawae18hq8k"]
 
-[ext_resource type="Texture2D" uid="uid://dw7ygwa8s3sjs" path="res://assets/Images/Card/card_peashooter.png" id="1_d2lyl"]
-[ext_resource type="Texture2D" uid="uid://blwk2l8b7x11j" path="res://assets/Images/Card/card_peashooter2.png" id="2_rhbli"]
-[ext_resource type="Texture2D" uid="uid://4mwsy4invaf0" path="res://assets/Images/Card/card_bk.jpg" id="3_5qc1o"]
-[ext_resource type="Texture2D" uid="uid://3jf80ov2nx7d" path="res://assets/Images/Cards/DayCards/Peashooter.png" id="4_uaes5"]
-[ext_resource type="Texture2D" uid="uid://dk6yr2caes11e" path="res://assets/Images/Cards/DayCards/PeashooterG.png" id="5_esjcx"]
+[ext_resource type="Texture2D" uid="uid://b3iduc8sgoue8" path="res://assets/Images/Card/card_peashooter.png" id="1_d2lyl"]
+[ext_resource type="Texture2D" uid="uid://cqkx0g7qeuw4g" path="res://assets/Images/Card/card_peashooter2.png" id="2_rhbli"]
+[ext_resource type="Texture2D" uid="uid://cyq0wfb5g0kgg" path="res://assets/Images/Card/card_bk.jpg" id="3_5qc1o"]
+[ext_resource type="Texture2D" uid="uid://j45btt3rucvw" path="res://assets/Images/Cards/DayCards/Peashooter.png" id="4_uaes5"]
+[ext_resource type="Texture2D" uid="uid://kd25to3wicb7" path="res://assets/Images/Cards/DayCards/PeashooterG.png" id="5_esjcx"]
 [ext_resource type="Script" path="res://objects/PlantResource.gd" id="7_x25bu"]
 
 [resource]
@@ -15,7 +15,7 @@ plant_attack = 50
 plant_cold_time = 20
 plant_life = 100
 plant_sun = 100
-plant_attack_time = 2
+plant_attack_time = 5
 card_can_choose_texture = ExtResource("1_d2lyl")
 card_canot_choose_texture = ExtResource("2_rhbli")
 day_card_can_choose_texture = ExtResource("3_5qc1o")

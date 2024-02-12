@@ -1,8 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://byuskku1sqcca"]
+[gd_scene load_steps=21 format=3 uid="uid://byuskku1sqcca"]
 
+[ext_resource type="Script" path="res://plants/plant_peashooter.gd" id="1_go0ub"]
 [ext_resource type="Texture2D" uid="uid://um3vciluijw0" path="res://assets/Images/Plants/Peashooter/Peashooter_1.png" id="1_l8x26"]
-[ext_resource type="Script" path="res://objects/Plants.gd" id="1_o6faj"]
-[ext_resource type="Resource" uid="uid://c2cawae18hq8k" path="res://objects/plants/peashooter.tres" id="2_7v2md"]
 [ext_resource type="Texture2D" uid="uid://dpj855ki8rcp5" path="res://assets/Images/Plants/Peashooter/Peashooter_2.png" id="2_o61oa"]
 [ext_resource type="Texture2D" uid="uid://dq4q3q5gg4yrc" path="res://assets/Images/Plants/Peashooter/Peashooter_3.png" id="3_dbi85"]
 [ext_resource type="Texture2D" uid="uid://bphppip4tkvan" path="res://assets/Images/Plants/Peashooter/Peashooter_4.png" id="4_ibr00"]
@@ -108,14 +107,14 @@ states/idle/position = Vector2(360, 100.444)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_npcbc")]
 
 [node name="Peashooter" type="CharacterBody2D"]
-script = ExtResource("1_o6faj")
-plant = ExtResource("2_7v2md")
+script = ExtResource("1_go0ub")
+bullet_res = "res://plants/plant_peashooter_bullet.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xpih3")
 animation = &"idle"
 autoplay = "idle"
-frame = 10
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
