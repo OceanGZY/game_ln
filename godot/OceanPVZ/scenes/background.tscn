@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dp2xy6kxipv3t"]
+[gd_scene load_steps=9 format=3 uid="uid://dp2xy6kxipv3t"]
 
 [ext_resource type="Texture2D" uid="uid://t02w21xbjup1" path="res://assets/Images/Background/background1.jpg" id="1_05xf3"]
 [ext_resource type="Script" path="res://scripts/background.gd" id="1_ovgv4"]
@@ -7,8 +7,11 @@
 [ext_resource type="Resource" uid="uid://mwb5trxyrauk" path="res://objects/plants/sunflower.tres" id="4_rdugy"]
 [ext_resource type="Resource" uid="uid://c2cawae18hq8k" path="res://objects/plants/peashooter.tres" id="5_nmnlk"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ufv18"]
-size = Vector2(1038, 513)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hh2j1"]
+size = Vector2(793, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_754um"]
+size = Vector2(119, 638)
 
 [node name="Background" type="Node2D"]
 script = ExtResource("1_ovgv4")
@@ -18,12 +21,47 @@ grass_cell = "res://scenes/grass_cell.tscn"
 position = Vector2(630, 289)
 texture = ExtResource("1_05xf3")
 
-[node name="Land" type="RigidBody2D" parent="GrassLand"]
-position = Vector2(-446, -223)
+[node name="Land" type="StaticBody2D" parent="GrassLand"]
+position = Vector2(-431, -130)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrassLand/Land"]
-position = Vector2(509, 246.5)
-shape = SubResource("RectangleShape2D_ufv18")
+position = Vector2(322.5, 3)
+shape = SubResource("RectangleShape2D_hh2j1")
+
+[node name="Land2" type="StaticBody2D" parent="GrassLand"]
+position = Vector2(-431, -30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrassLand/Land2"]
+position = Vector2(351, 7.5)
+shape = SubResource("RectangleShape2D_hh2j1")
+
+[node name="Land3" type="StaticBody2D" parent="GrassLand"]
+position = Vector2(-431, 76)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrassLand/Land3"]
+position = Vector2(351, 7.5)
+shape = SubResource("RectangleShape2D_hh2j1")
+
+[node name="Land4" type="StaticBody2D" parent="GrassLand"]
+position = Vector2(-431, 164)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrassLand/Land4"]
+position = Vector2(357, 7.5)
+shape = SubResource("RectangleShape2D_hh2j1")
+
+[node name="Land5" type="StaticBody2D" parent="GrassLand"]
+position = Vector2(-431, 260)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrassLand/Land5"]
+position = Vector2(351, 7.5)
+shape = SubResource("RectangleShape2D_hh2j1")
+
+[node name="Land6" type="StaticBody2D" parent="GrassLand"]
+position = Vector2(-438, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrassLand/Land6"]
+position = Vector2(-78.5, 7)
+shape = SubResource("RectangleShape2D_754um")
 
 [node name="Grass" type="Control" parent="GrassLand"]
 layout_mode = 3
@@ -38,6 +76,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = 7.0
+offset_right = -3.0
+offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 9

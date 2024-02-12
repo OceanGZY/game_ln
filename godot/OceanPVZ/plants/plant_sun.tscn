@@ -24,8 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://b1yssftfkh8qw" path="res://assets/Images/Effect/Sun/Sun_21.png" id="21_biynw"]
 [ext_resource type="Texture2D" uid="uid://bh8khj3uth40t" path="res://assets/Images/Effect/Sun/Sun_22.png" id="22_a44l4"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_r6byn"]
-radius = 20.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_3j26p"]
+radius = 15.6
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u5s6t"]
 animations = [{
@@ -101,26 +101,27 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Control" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
+[node name="RigidBody2D" type="RigidBody2D"]
 script = ExtResource("1_fin0g")
 
-[node name="Sun" type="Area2D" parent="."]
-position = Vector2(20, 20)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3j26p")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sun"]
-shape = SubResource("CircleShape2D_r6byn")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sun"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_u5s6t")
 autoplay = "default"
-frame = 8
-frame_progress = 0.353316
+frame_progress = 0.142291
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 3
+anchors_preset = 0
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[connection signal="gui_input" from="Control" to="." method="_on_gui_input"]
