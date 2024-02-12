@@ -20,7 +20,7 @@ class SunManager:
 
 class PlantManager:
 	signal changed
-	signal created(type:PlantType)
+	#signal created(type:PlantType)
 	
 	var all_plants:Dictionary={
 		PlantType.Sunflower:"res://plants/plant_sunflower.tscn",
@@ -30,9 +30,9 @@ class PlantManager:
 	func get_plant_item(type:PlantType):
 		return all_plants[type]
 		
-	func create_plant(type:PlantType):
-		#print("发送创建了植物的信号",type)
-		emit_signal("created",type)
+	#func create_plant(type:PlantType):
+		##print("发送创建了植物的信号",type)
+		#emit_signal("created",type)
 	
 
 

@@ -40,7 +40,7 @@ func _ready():
 	timer.wait_time = plant_attack_time
 	add_child(timer)
 	timer.timeout.connect(plant_action)
-	GameState.plant_manager.connect("created",check_enable)
+	#GameState.plant_manager.connect("created",check_enable)
 	
 #func _process(delta):
 	#if is_init:
@@ -48,11 +48,11 @@ func _ready():
 		#if plant_type == GameState.PlantType.Sunflower:
 			#produce_sun()
 	
-func check_enable(type):
-	#print(" check_enable(type)",type)
-	#print("plant_type",plant_type)
-	if type == plant_type:
-		timer.start()
+#func check_enable(type):
+	##print(" check_enable(type)",type)
+	##print("plant_type",plant_type)
+	#if type == plant_type:
+		#timer.start()
 
 
 func plant_action():

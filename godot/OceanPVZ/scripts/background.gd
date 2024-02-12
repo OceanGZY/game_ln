@@ -46,6 +46,7 @@ func _on_interact_grass_cell(event,cell):
 		cplant.modulate.a=1
 		cplant.position = cell.global_position+Vector2(40,48)
 		cell.has_plant=true
-		GameState.plant_manager.create_plant(cplant_type)
+		#GameState.plant_manager.create_plant(cplant_type)
+		cplant.timer.start()
 		GameState.hand_manager.set_has_plant(false)
 		cplant=null
