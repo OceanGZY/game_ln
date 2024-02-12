@@ -10,3 +10,4 @@ func _on_body_entered(body):
 	print("碰到了一个物体")
 	var sprite= get_node("Sprite2D")
 	sprite.texture = load("res://assets/Images/Effect/PeaBulletHit.png")
+

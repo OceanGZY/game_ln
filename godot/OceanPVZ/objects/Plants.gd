@@ -37,7 +37,7 @@ func _ready():
 	add_child(collider)
 	
 	timer= Timer.new()
-	timer.wait_time = plant_attack_time
+	timer.wait_time = plant_attack_time if plant_attack_time>0  else 5
 	add_child(timer)
 	timer.timeout.connect(plant_action)
 	#GameState.plant_manager.connect("created",check_enable)

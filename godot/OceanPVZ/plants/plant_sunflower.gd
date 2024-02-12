@@ -13,7 +13,7 @@ func plant_action():
 	#print("运行到这里了")
 	sun = load(sun_res).instantiate()
 	add_child(sun)
-	sun.position= sun.position+Vector2(5,5)
+	sun.position= sun.position+Vector2(15,0)
 	#print("sun.position",sun.position)
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)

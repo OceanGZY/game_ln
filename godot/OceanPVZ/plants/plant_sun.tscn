@@ -102,6 +102,7 @@ animations = [{
 }]
 
 [node name="RigidBody2D" type="RigidBody2D"]
+collision_mask = 7
 script = ExtResource("1_fin0g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
