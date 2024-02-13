@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ckr666vxdrqx2"]
 
-[ext_resource type="Texture2D" uid="uid://cswb5do8rrj7q" path="res://pistol/pistol.png" id="1_t4ocf"]
+[ext_resource type="Texture2D" uid="uid://dk5qtli72i2nm" path="res://pistol/pistol.png" id="1_t4ocf"]
 [ext_resource type="Script" path="res://game/scripts/gun.gd" id="1_tpptd"]
-[ext_resource type="AudioStream" uid="uid://2mb31jqfado8" path="res://gun.mp3" id="3_r087y"]
+[ext_resource type="AudioStream" uid="uid://cluqhhnt8lf6g" path="res://gun.mp3" id="3_r087y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qdtvk"]
 radius = 403.243

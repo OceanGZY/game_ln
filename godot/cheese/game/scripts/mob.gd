@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal mob_die
 #var player
 @onready var player = get_node("/root/Game/Player")
 @onready var slime = $Slime
@@ -24,4 +25,5 @@ func take_damage():
 		queue_free()
 		get_parent().add_child(smoke)
 		smoke.global_position=global_position
+		mob_die.emit()
 		

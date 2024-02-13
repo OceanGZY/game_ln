@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bkq4vwnkj1mfq" path="res://game/player.tscn" id="1_8atrj"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_ini4w"]
 [ext_resource type="PackedScene" uid="uid://dwfx60bwkbsby" path="res://game/pine_tree.tscn" id="2_ebgsd"]
-[ext_resource type="AudioStream" uid="uid://coildv7ma22h6" path="res://bgm.wav" id="4_3q1hh"]
+[ext_resource type="AudioStream" uid="uid://uuonchn4fb87" path="res://bgm.wav" id="4_3q1hh"]
 
 [sub_resource type="Curve2D" id="Curve2D_587qk"]
 _data = {
@@ -21,6 +21,16 @@ layer = -30
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 1920.0
 offset_bottom = 1080.0
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_left = 18.0
+offset_top = 30.0
+offset_right = 423.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.435294, 0.0470588, 1)
+theme_override_font_sizes/font_size = 52
+text = "分数:0"
+vertical_alignment = 1
 
 [node name="Player" parent="." instance=ExtResource("1_8atrj")]
 position = Vector2(960, 542)
@@ -109,3 +119,4 @@ stream = ExtResource("4_3q1hh")
 [connection signal="player_die" from="Player" to="." method="_on_player_player_die"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="GameOver/RestartBtm" to="." method="_on_restart_btm_pressed"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
