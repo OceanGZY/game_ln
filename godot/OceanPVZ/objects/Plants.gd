@@ -2,9 +2,6 @@
 extends CharacterBody2D
 class_name Plants
 
-signal create_sun
-signal do_attack
-
 @export var plant:PlantResource:
 	set=set_plant
 
@@ -26,9 +23,13 @@ func set_plant(v):
 	plant_cold_time=plant.plant_cold_time
 	plant_life=plant.plant_life
 	plant_attack_time = plant.plant_attack_time
+	
 
 
 func _ready():
+	print("plant.plant_type",plant_type)
+	print("plant.plant_attack:",plant_attack)
+	print("plant.plant_attack_time:",plant_attack_time)
 	var collider = CollisionShape2D.new()
 	var capsule_shape = CapsuleShape2D.new()
 	capsule_shape.radius=31
@@ -41,6 +42,10 @@ func _ready():
 	add_child(timer)
 	timer.timeout.connect(plant_action)
 	#GameState.plant_manager.connect("created",check_enable)
+	
+func _process(delta):
+	if plant_life<=0:
+		queue_free()
 	
 #func _process(delta):
 	#if is_init:

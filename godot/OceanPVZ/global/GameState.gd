@@ -3,6 +3,7 @@ extends Node
 enum CardState{COOLING,WAITSUN,READY}
 
 enum PlantType{Sunflower,Peashooter}
+enum ZombieType{BaseZombie}
 
 
 class SunManager:
@@ -17,6 +18,17 @@ class SunManager:
 	func use_sun(count):
 		SunCount-=count
 		emit_signal("changed")
+
+
+class ResouseManager:
+	var resoures_paths:Dictionary={
+		PlantType.Sunflower:"res://objects/plants/sunflower.tres",
+		PlantType.Peashooter:"res://objects/plants/peashooter.tres",
+	}
+	
+	func get_resoure_item(type:PlantType):
+		return resoures_paths[type]
+
 
 class PlantManager:
 	signal changed
@@ -48,6 +60,7 @@ class HandManager:
 		had_plant =ishas
 
 var sun_manager:SunManager = SunManager.new()
+var resouse_manager:ResouseManager = ResouseManager.new()
 var plant_manager:PlantManager=PlantManager.new()
 var hand_manager:HandManager = HandManager.new()
 

@@ -29,6 +29,7 @@ func create_new_plant(type:GameState.PlantType):
 	var plant_source = GameState.plant_manager.get_plant_item(type)
 	var temp = load(plant_source)
 	cplant = temp.instantiate()
+	cplant.plant=load(GameState.resouse_manager.get_resoure_item(type))
 	cplant.modulate.a=0.5
 	add_child(cplant)
 	GameState.hand_manager.set_has_plant(true)
@@ -50,3 +51,4 @@ func _on_interact_grass_cell(event,cell):
 		cplant.timer.start()
 		GameState.hand_manager.set_has_plant(false)
 		cplant=null
+

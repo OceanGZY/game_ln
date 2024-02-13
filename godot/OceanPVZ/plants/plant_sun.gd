@@ -10,6 +10,5 @@ func _on_gui_input(event):
 		tween.tween_property(self,"scale",Vector2.ONE, 0.3).from(Vector2.ONE*1.2)
 		tween.tween_property(self,"position",-to_global(Vector2.ONE), 0.5)
 		tween.parallel().tween_property(self,"scale",Vector2.ONE*0.01, 0.5).from(Vector2.ONE)
+		tween.tween_callback(GameState.sun_manager.add_sun)
 		tween.tween_callback(queue_free)
-		GameState.sun_manager.add_sun()
-		

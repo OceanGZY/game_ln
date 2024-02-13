@@ -1,15 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://cd0kkbdvw06re"]
 
 [ext_resource type="Script" path="res://plants/plant_peashooter_bullet.gd" id="1_8hd0j"]
-[ext_resource type="Texture2D" uid="uid://by514sq8m866i" path="res://assets/Images/Effect/PeaBullet.png" id="1_yhc46"]
+[ext_resource type="Texture2D" uid="uid://dscij288fskyw" path="res://assets/Images/Effect/PeaBullet.png" id="1_yhc46"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oyfrd"]
-radius = 12.0
+radius = 16.13
 
 [node name="PeashooterBullet" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 5
+mass = 0.1
 gravity_scale = 0.0
+max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_8hd0j")
 
@@ -22,6 +24,8 @@ position = Vector2(-11, 0)
 texture = ExtResource("1_yhc46")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1.5, 0)
+scale = Vector2(1.15, 1)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

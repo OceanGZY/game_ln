@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="PlantResource" load_steps=7 format=3 uid="uid://mwb5trxyrauk"]
 
-[ext_resource type="Texture2D" uid="uid://hc6wbywvxqlt" path="res://assets/Images/Card/card_sunflower.png" id="1_2paag"]
-[ext_resource type="Texture2D" uid="uid://b2p0qosp8j277" path="res://assets/Images/Card/card_sunflower2.png" id="2_t4l7a"]
-[ext_resource type="Texture2D" uid="uid://cyq0wfb5g0kgg" path="res://assets/Images/Card/card_bk.jpg" id="3_77vxj"]
-[ext_resource type="Texture2D" uid="uid://wqxfvkn1ufdo" path="res://assets/Images/Cards/DayCards/SunFlower.png" id="4_v5waf"]
-[ext_resource type="Texture2D" uid="uid://yy5gc0auxv6e" path="res://assets/Images/Cards/DayCards/SunFlowerG.png" id="5_5fven"]
+[ext_resource type="Texture2D" uid="uid://bruch8fp8cyke" path="res://assets/Images/Card/card_sunflower.png" id="1_2paag"]
+[ext_resource type="Texture2D" uid="uid://coae5n0aaw47f" path="res://assets/Images/Card/card_sunflower2.png" id="2_t4l7a"]
+[ext_resource type="Texture2D" uid="uid://4mwsy4invaf0" path="res://assets/Images/Card/card_bk.jpg" id="3_77vxj"]
+[ext_resource type="Texture2D" uid="uid://5l3lvxpdg2kh" path="res://assets/Images/Cards/DayCards/SunFlower.png" id="4_v5waf"]
+[ext_resource type="Texture2D" uid="uid://dq45y67x50ljr" path="res://assets/Images/Cards/DayCards/SunFlowerG.png" id="5_5fven"]
 [ext_resource type="Script" path="res://objects/PlantResource.gd" id="6_f7gsu"]
 
 [resource]

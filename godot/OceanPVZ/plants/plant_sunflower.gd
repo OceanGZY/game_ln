@@ -8,6 +8,9 @@ func _ready():
 	super._ready()
 	print("向日葵初始化了")
 
+func _process(delta):
+	super._process(delta)
+
 func plant_action():
 	super.plant_action()
 	#print("运行到这里了")

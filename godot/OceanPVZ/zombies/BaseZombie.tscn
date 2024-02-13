@@ -1,117 +1,117 @@
-[gd_scene load_steps=134 format=3 uid="uid://c8exxvt5yrs0b"]
+[gd_scene load_steps=131 format=3 uid="uid://c8exxvt5yrs0b"]
 
 [ext_resource type="Script" path="res://zombies/base_zombie.gd" id="1_3cyfd"]
-[ext_resource type="Texture2D" uid="uid://cqh1oyx2jnsvp" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_1.png" id="1_xxu5g"]
-[ext_resource type="Texture2D" uid="uid://y2wv6u1buo0p" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_1.png" id="2_75cip"]
-[ext_resource type="Texture2D" uid="uid://pg7m63tt5vyg" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_1.png" id="2_714t3"]
-[ext_resource type="Texture2D" uid="uid://duhavabb20m8s" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_1.png" id="2_iuqw2"]
-[ext_resource type="Texture2D" uid="uid://42wue10c1gth" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_1.png" id="2_k5n0s"]
-[ext_resource type="Texture2D" uid="uid://dxvyihb18c153" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_2.png" id="2_n1npp"]
-[ext_resource type="Texture2D" uid="uid://e4hbu84wkbiv" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_2.png" id="3_gbvqm"]
-[ext_resource type="Texture2D" uid="uid://blqb4marx38b8" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_2.png" id="3_llgem"]
-[ext_resource type="Texture2D" uid="uid://wb01feweh3px" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_2.png" id="3_oxdu7"]
-[ext_resource type="Texture2D" uid="uid://nlomxlypo3ed" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_3.png" id="3_pjj05"]
-[ext_resource type="Texture2D" uid="uid://dhmr5u7t7pl70" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_2.png" id="3_qibn1"]
-[ext_resource type="Texture2D" uid="uid://dowtu4hv1x5q" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_4.png" id="4_4fx7v"]
-[ext_resource type="Texture2D" uid="uid://opfosngk6kkd" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_3.png" id="4_vpnt6"]
-[ext_resource type="Texture2D" uid="uid://bjpies32ik08m" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_3.png" id="4_wfb4n"]
-[ext_resource type="Texture2D" uid="uid://clukq8lh8fabg" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_3.png" id="4_xcdg1"]
-[ext_resource type="Texture2D" uid="uid://bjwoqxfjxafjg" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_3.png" id="4_yekf3"]
-[ext_resource type="Texture2D" uid="uid://bdag4k30767h3" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_4.png" id="5_3gjge"]
-[ext_resource type="Texture2D" uid="uid://r6y4dndbb3k7" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_4.png" id="5_b4mbu"]
-[ext_resource type="Texture2D" uid="uid://byg0yed0hvojv" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_4.png" id="5_lkxom"]
-[ext_resource type="Texture2D" uid="uid://ddno26s5a87uw" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_5.png" id="5_vcpk0"]
-[ext_resource type="Texture2D" uid="uid://p52qfvrcce8t" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_4.png" id="5_xdn1f"]
-[ext_resource type="Texture2D" uid="uid://c72ndvyuvwcln" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_5.png" id="6_3usfb"]
-[ext_resource type="Texture2D" uid="uid://c6h8772afjig3" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_5.png" id="6_61hf4"]
-[ext_resource type="Texture2D" uid="uid://dv00qg53gg0at" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_5.png" id="6_hegcy"]
-[ext_resource type="Texture2D" uid="uid://cbmbacmgj5682" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_5.png" id="6_v5gex"]
-[ext_resource type="Texture2D" uid="uid://b3wmwred7ltf4" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_6.png" id="6_wbv27"]
-[ext_resource type="Texture2D" uid="uid://bdqlar3urje2i" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_7.png" id="7_anp3q"]
-[ext_resource type="Texture2D" uid="uid://c5yyeajs32w13" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_6.png" id="7_ce88w"]
-[ext_resource type="Texture2D" uid="uid://bt06mc2u22o57" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_6.png" id="7_i786x"]
-[ext_resource type="Texture2D" uid="uid://bxdejsrapudb3" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_6.png" id="7_qvsrv"]
-[ext_resource type="Texture2D" uid="uid://bei251yec018a" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_6.png" id="7_ydx4b"]
-[ext_resource type="Texture2D" uid="uid://clun4nky5ga7g" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_7.png" id="8_bd5jy"]
-[ext_resource type="Texture2D" uid="uid://cyarsuo4xpoou" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_8.png" id="8_f5l5e"]
-[ext_resource type="Texture2D" uid="uid://17ai6smiapu1" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_7.png" id="8_foqh3"]
-[ext_resource type="Texture2D" uid="uid://bxc1kexgir0hw" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_7.png" id="8_n2we0"]
-[ext_resource type="Texture2D" uid="uid://grbv2nyh8s51" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_7.png" id="8_nm3k5"]
-[ext_resource type="Texture2D" uid="uid://cvcfbppieb5qj" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_8.png" id="9_c3x7y"]
-[ext_resource type="Texture2D" uid="uid://bi1ewblqa5jgx" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_8.png" id="9_jsd2w"]
-[ext_resource type="Texture2D" uid="uid://clmge33fjegej" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_8.png" id="9_m4f7i"]
-[ext_resource type="Texture2D" uid="uid://bhvoix4jauji" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_9.png" id="9_p1eai"]
-[ext_resource type="Texture2D" uid="uid://blf7vwloesdfo" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_8.png" id="9_yj86p"]
-[ext_resource type="Texture2D" uid="uid://81mda4r8fq1m" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_9.png" id="10_2g388"]
-[ext_resource type="Texture2D" uid="uid://b1ggoc8u0p6il" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_9.png" id="10_2ls7a"]
-[ext_resource type="Texture2D" uid="uid://b0ag5uxwebxei" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_10.png" id="10_aesly"]
-[ext_resource type="Texture2D" uid="uid://dyjr14ag3k7m7" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_9.png" id="10_bai8g"]
-[ext_resource type="Texture2D" uid="uid://bevwpd68mms2s" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_9.png" id="10_iacmu"]
-[ext_resource type="Texture2D" uid="uid://bef3pp42i6cb3" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_11.png" id="11_8b6jg"]
-[ext_resource type="Texture2D" uid="uid://c0dt0wi2xj08p" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_10.png" id="11_b0nhe"]
-[ext_resource type="Texture2D" uid="uid://dtl1hbwbq8suc" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_10.png" id="11_b3s3e"]
-[ext_resource type="Texture2D" uid="uid://brcbm1cdihsmc" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_10.png" id="11_heiho"]
-[ext_resource type="Texture2D" uid="uid://cakmhdawu1r0s" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_10.png" id="11_snak3"]
-[ext_resource type="Texture2D" uid="uid://cjii5k56b78ty" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_11.png" id="12_d07xy"]
-[ext_resource type="Texture2D" uid="uid://orqfarbdr071" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_11.png" id="12_gs3wk"]
-[ext_resource type="Texture2D" uid="uid://tmnrvohcyjdm" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_11.png" id="12_n0gvi"]
-[ext_resource type="Texture2D" uid="uid://cb37gp2sx4p1b" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_12.png" id="12_se7i5"]
-[ext_resource type="Texture2D" uid="uid://b7x1clqexersh" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_12.png" id="13_bkon1"]
-[ext_resource type="Texture2D" uid="uid://28atrddt4nj2" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_13.png" id="13_dkf6d"]
-[ext_resource type="Texture2D" uid="uid://nlmse8m60vdq" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_12.png" id="13_p4uem"]
-[ext_resource type="Texture2D" uid="uid://cgp78ol0qtfdp" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_14.png" id="14_mq5wq"]
-[ext_resource type="Texture2D" uid="uid://wqfbf55iw717" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_13.png" id="14_n8jqt"]
-[ext_resource type="Texture2D" uid="uid://bcmplvpy25b1h" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_13.png" id="14_u5l8h"]
-[ext_resource type="Texture2D" uid="uid://dso7v6g6mci8n" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_15.png" id="15_1pxi6"]
-[ext_resource type="Texture2D" uid="uid://ca1dtsclsf6xt" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_14.png" id="15_radog"]
-[ext_resource type="Texture2D" uid="uid://cjcld14mixqy5" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_14.png" id="15_uxahd"]
-[ext_resource type="Texture2D" uid="uid://brd2maum7exjj" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_15.png" id="16_8sww5"]
-[ext_resource type="Texture2D" uid="uid://4ukrjx530pwd" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_15.png" id="16_86gpp"]
-[ext_resource type="Texture2D" uid="uid://cpdmm0urtwhg1" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_16.png" id="16_chkfe"]
-[ext_resource type="Texture2D" uid="uid://cw8bt3037eyw2" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_17.png" id="17_2oxid"]
-[ext_resource type="Texture2D" uid="uid://bvdi4k2w6ux02" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_16.png" id="17_tvofu"]
-[ext_resource type="Texture2D" uid="uid://8fek8dj4by0m" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_16.png" id="17_ud0ru"]
-[ext_resource type="Texture2D" uid="uid://bslfyfeg86uco" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_18.png" id="18_bsdhs"]
-[ext_resource type="Texture2D" uid="uid://bokhpdpgcs0m6" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_17.png" id="18_nq75l"]
-[ext_resource type="Texture2D" uid="uid://kc1idcmox78s" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_17.png" id="18_sn6oi"]
-[ext_resource type="Texture2D" uid="uid://c3qklsh1sumh3" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_18.png" id="19_jabsd"]
-[ext_resource type="Texture2D" uid="uid://c4481yabldkno" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_18.png" id="19_sess1"]
-[ext_resource type="Texture2D" uid="uid://bh6c3v0ttlt5x" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_19.png" id="19_upg6q"]
-[ext_resource type="Texture2D" uid="uid://dpdo0wa10mlta" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_20.png" id="20_skam1"]
-[ext_resource type="Texture2D" uid="uid://dcsdqnsp26dbc" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_19.png" id="20_tliky"]
-[ext_resource type="Texture2D" uid="uid://fs50qmglh2vx" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_21.png" id="21_eaw3j"]
-[ext_resource type="Texture2D" uid="uid://cskwa4ss6ajir" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_20.png" id="21_nn4c0"]
-[ext_resource type="Texture2D" uid="uid://bcm7ufxkxbuvh" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_1.png" id="22_fmf8p"]
-[ext_resource type="Texture2D" uid="uid://bjuube44l5lh7" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_2.png" id="23_5an3o"]
-[ext_resource type="Texture2D" uid="uid://c8j2bdxnco7du" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_3.png" id="24_agvww"]
-[ext_resource type="Texture2D" uid="uid://d4fditte2om8f" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_4.png" id="25_d5sxi"]
-[ext_resource type="Texture2D" uid="uid://btb7e0ayd1ej7" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_5.png" id="26_k40v5"]
-[ext_resource type="Texture2D" uid="uid://dgxjwx8aduoh2" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_6.png" id="27_bta4w"]
-[ext_resource type="Texture2D" uid="uid://bhbiw8nctq748" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_7.png" id="28_rv1j5"]
-[ext_resource type="Texture2D" uid="uid://bqyopcstqsvgt" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_8.png" id="29_0dgpa"]
-[ext_resource type="Texture2D" uid="uid://b67lraen8tnkf" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_9.png" id="30_xgt1n"]
-[ext_resource type="Texture2D" uid="uid://bx1j70ng30lf7" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_10.png" id="31_tun0i"]
-[ext_resource type="Texture2D" uid="uid://d06jq4hbv5jkx" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_11.png" id="32_4ypg8"]
-[ext_resource type="Texture2D" uid="uid://6qf4pvrl0xd3" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_12.png" id="33_vftqa"]
-[ext_resource type="Texture2D" uid="uid://2t4xgpmpxocl" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_13.png" id="34_pbhp1"]
-[ext_resource type="Texture2D" uid="uid://dx4hqwl5fuwnv" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_14.png" id="35_i8idq"]
-[ext_resource type="Texture2D" uid="uid://erkp5j3tujw5" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_15.png" id="36_urp78"]
-[ext_resource type="Texture2D" uid="uid://cwdsxtoianc6h" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_16.png" id="37_q4o23"]
-[ext_resource type="Texture2D" uid="uid://ceh5bdyiqjyeu" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_17.png" id="38_obamx"]
-[ext_resource type="Texture2D" uid="uid://c2b1rob5h1snk" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_18.png" id="39_l1bb2"]
-[ext_resource type="Texture2D" uid="uid://enhbiwamj2a4" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_19.png" id="40_j6t1f"]
-[ext_resource type="Texture2D" uid="uid://ddmgxcu47ayii" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_20.png" id="41_irr43"]
-[ext_resource type="Texture2D" uid="uid://dc53r61nwalt2" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_21.png" id="42_pd85t"]
-[ext_resource type="Texture2D" uid="uid://cmpkue06lohg7" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_22.png" id="43_optvj"]
-[ext_resource type="Texture2D" uid="uid://b2bvxhbh7kq6x" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_23.png" id="44_vmjab"]
-[ext_resource type="Texture2D" uid="uid://c07d4smueo3yw" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_24.png" id="45_s52q7"]
-[ext_resource type="Texture2D" uid="uid://cwi08e4nxykib" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_25.png" id="46_iwbsv"]
-[ext_resource type="Texture2D" uid="uid://c12a43ioj7shd" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_26.png" id="47_f1hwc"]
-[ext_resource type="Texture2D" uid="uid://cjjq24tgoga16" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_27.png" id="48_olxjr"]
-[ext_resource type="Texture2D" uid="uid://lw73bpn2vq14" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_28.png" id="49_skuus"]
-[ext_resource type="Texture2D" uid="uid://hxv8f064vmtt" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_29.png" id="50_vc0wo"]
-[ext_resource type="Texture2D" uid="uid://dy8gcrkv2wxkg" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_30.png" id="51_xd6ro"]
-[ext_resource type="Texture2D" uid="uid://bw8joqk4a5j7r" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_31.png" id="52_7csqq"]
+[ext_resource type="Texture2D" uid="uid://drvtuh5y3w1qm" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_1.png" id="1_xxu5g"]
+[ext_resource type="Texture2D" uid="uid://dfbjlv2k0jrdu" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_1.png" id="2_75cip"]
+[ext_resource type="Texture2D" uid="uid://3ec0pi2iwewk" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_1.png" id="2_714t3"]
+[ext_resource type="Texture2D" uid="uid://bhllr4m4ruvhk" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_1.png" id="2_iuqw2"]
+[ext_resource type="Texture2D" uid="uid://ca6cmhdvkioo5" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_1.png" id="2_k5n0s"]
+[ext_resource type="Texture2D" uid="uid://crrr08c0waqyu" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_2.png" id="2_n1npp"]
+[ext_resource type="Texture2D" uid="uid://c6oo8ibw3388s" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_2.png" id="3_gbvqm"]
+[ext_resource type="Texture2D" uid="uid://470ecsiu2h25" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_2.png" id="3_llgem"]
+[ext_resource type="Texture2D" uid="uid://4in40yu23g1m" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_2.png" id="3_oxdu7"]
+[ext_resource type="Texture2D" uid="uid://787ganhtmwq1" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_3.png" id="3_pjj05"]
+[ext_resource type="Texture2D" uid="uid://64re1oa0cqxx" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_2.png" id="3_qibn1"]
+[ext_resource type="Texture2D" uid="uid://d082cf0u1dqu3" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_4.png" id="4_4fx7v"]
+[ext_resource type="Texture2D" uid="uid://dy4icylc2ivpv" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_3.png" id="4_vpnt6"]
+[ext_resource type="Texture2D" uid="uid://djdj1mq50oh3o" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_3.png" id="4_wfb4n"]
+[ext_resource type="Texture2D" uid="uid://cp4ukskpef7ok" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_3.png" id="4_xcdg1"]
+[ext_resource type="Texture2D" uid="uid://bdr8qgagueh8o" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_3.png" id="4_yekf3"]
+[ext_resource type="Texture2D" uid="uid://dxcl5fump704o" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_4.png" id="5_3gjge"]
+[ext_resource type="Texture2D" uid="uid://b7h8b6iy8egyu" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_4.png" id="5_b4mbu"]
+[ext_resource type="Texture2D" uid="uid://b7648uy1gj2m8" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_4.png" id="5_lkxom"]
+[ext_resource type="Texture2D" uid="uid://dwywrag1ab8sj" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_5.png" id="5_vcpk0"]
+[ext_resource type="Texture2D" uid="uid://4hl78tj80kve" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_4.png" id="5_xdn1f"]
+[ext_resource type="Texture2D" uid="uid://bysikwuvnaung" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_5.png" id="6_3usfb"]
+[ext_resource type="Texture2D" uid="uid://df48orye74wp" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_5.png" id="6_61hf4"]
+[ext_resource type="Texture2D" uid="uid://esb3a265ec5m" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_5.png" id="6_hegcy"]
+[ext_resource type="Texture2D" uid="uid://bhstcjdyilbtn" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_5.png" id="6_v5gex"]
+[ext_resource type="Texture2D" uid="uid://dyd12m6hltup1" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_6.png" id="6_wbv27"]
+[ext_resource type="Texture2D" uid="uid://csfpuq8wbb641" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_7.png" id="7_anp3q"]
+[ext_resource type="Texture2D" uid="uid://s6m3yeuaxsx5" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_6.png" id="7_ce88w"]
+[ext_resource type="Texture2D" uid="uid://bdhhiobxbbdis" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_6.png" id="7_i786x"]
+[ext_resource type="Texture2D" uid="uid://b8357loqqym85" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_6.png" id="7_qvsrv"]
+[ext_resource type="Texture2D" uid="uid://kltgdm3d48wa" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_6.png" id="7_ydx4b"]
+[ext_resource type="Texture2D" uid="uid://c6xc6f47op71i" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_7.png" id="8_bd5jy"]
+[ext_resource type="Texture2D" uid="uid://s4s1ktb0gngt" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_8.png" id="8_f5l5e"]
+[ext_resource type="Texture2D" uid="uid://cwue4d53jevom" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_7.png" id="8_foqh3"]
+[ext_resource type="Texture2D" uid="uid://b2niw2ff54sta" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_7.png" id="8_n2we0"]
+[ext_resource type="Texture2D" uid="uid://5o51j4i1d25y" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_7.png" id="8_nm3k5"]
+[ext_resource type="Texture2D" uid="uid://pl05qkdfob4l" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_8.png" id="9_c3x7y"]
+[ext_resource type="Texture2D" uid="uid://cjaqrgetyw5bc" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_8.png" id="9_jsd2w"]
+[ext_resource type="Texture2D" uid="uid://bnmhpkwsv73vc" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_8.png" id="9_m4f7i"]
+[ext_resource type="Texture2D" uid="uid://b78c7nm5yafvn" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_9.png" id="9_p1eai"]
+[ext_resource type="Texture2D" uid="uid://ns3whqgxgenf" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_8.png" id="9_yj86p"]
+[ext_resource type="Texture2D" uid="uid://dea4a3a0dwlr4" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_9.png" id="10_2g388"]
+[ext_resource type="Texture2D" uid="uid://cxegdijv4hg7d" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_9.png" id="10_2ls7a"]
+[ext_resource type="Texture2D" uid="uid://bkx3olwalopik" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_10.png" id="10_aesly"]
+[ext_resource type="Texture2D" uid="uid://bxt7cqoj0j6ow" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_9.png" id="10_bai8g"]
+[ext_resource type="Texture2D" uid="uid://hxnr11qfuaf7" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_9.png" id="10_iacmu"]
+[ext_resource type="Texture2D" uid="uid://chao2e61ajyo6" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_11.png" id="11_8b6jg"]
+[ext_resource type="Texture2D" uid="uid://ce7ptgc3px5pk" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_10.png" id="11_b0nhe"]
+[ext_resource type="Texture2D" uid="uid://cilswt8rsaq5w" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_10.png" id="11_b3s3e"]
+[ext_resource type="Texture2D" uid="uid://be1ecxul0la7k" path="res://assets/Images/Zombies/Zombie/Die/ZombieDie_10.png" id="11_heiho"]
+[ext_resource type="Texture2D" uid="uid://dyqkbxkfo3tv" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_10.png" id="11_snak3"]
+[ext_resource type="Texture2D" uid="uid://bg5pp5qqecxft" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_11.png" id="12_d07xy"]
+[ext_resource type="Texture2D" uid="uid://d0qamynuqgxgj" path="res://assets/Images/Zombies/Zombie/LostHeadEat/ZombieLostHeadAttack_11.png" id="12_gs3wk"]
+[ext_resource type="Texture2D" uid="uid://d3jiaj2xdp4sg" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_11.png" id="12_n0gvi"]
+[ext_resource type="Texture2D" uid="uid://c2ms6hr6173y3" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_12.png" id="12_se7i5"]
+[ext_resource type="Texture2D" uid="uid://b800wk6tsbuj1" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_12.png" id="13_bkon1"]
+[ext_resource type="Texture2D" uid="uid://ckmnnt47djuh7" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_13.png" id="13_dkf6d"]
+[ext_resource type="Texture2D" uid="uid://d020uw64gt6i3" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_12.png" id="13_p4uem"]
+[ext_resource type="Texture2D" uid="uid://dm507u3dyfg36" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_14.png" id="14_mq5wq"]
+[ext_resource type="Texture2D" uid="uid://1c0txxdddgjn" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_13.png" id="14_n8jqt"]
+[ext_resource type="Texture2D" uid="uid://bou1nsmwv2gfv" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_13.png" id="14_u5l8h"]
+[ext_resource type="Texture2D" uid="uid://cqv03h37a1www" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_15.png" id="15_1pxi6"]
+[ext_resource type="Texture2D" uid="uid://bfgpvj2805fav" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_14.png" id="15_radog"]
+[ext_resource type="Texture2D" uid="uid://bygqrhnx8isqu" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_14.png" id="15_uxahd"]
+[ext_resource type="Texture2D" uid="uid://c5sbu7d6ol863" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_15.png" id="16_8sww5"]
+[ext_resource type="Texture2D" uid="uid://0lqyd6000xvr" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_15.png" id="16_86gpp"]
+[ext_resource type="Texture2D" uid="uid://bs7jxoxgmvo5m" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_16.png" id="16_chkfe"]
+[ext_resource type="Texture2D" uid="uid://ctfvnfpmumapg" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_17.png" id="17_2oxid"]
+[ext_resource type="Texture2D" uid="uid://bhpqlqn7krxgg" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_16.png" id="17_tvofu"]
+[ext_resource type="Texture2D" uid="uid://jy5o5jvkxytf" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_16.png" id="17_ud0ru"]
+[ext_resource type="Texture2D" uid="uid://k4n7xh3dfcf7" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_18.png" id="18_bsdhs"]
+[ext_resource type="Texture2D" uid="uid://b4levlp7g8gcx" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_17.png" id="18_nq75l"]
+[ext_resource type="Texture2D" uid="uid://b82jiutm0gx17" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_17.png" id="18_sn6oi"]
+[ext_resource type="Texture2D" uid="uid://dl6kkc34xlyvg" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_18.png" id="19_jabsd"]
+[ext_resource type="Texture2D" uid="uid://bhecpm8qj5yui" path="res://assets/Images/Zombies/Zombie/LostHeadMove/ZombieLostHead_18.png" id="19_sess1"]
+[ext_resource type="Texture2D" uid="uid://c2bagor3w3nvc" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_19.png" id="19_upg6q"]
+[ext_resource type="Texture2D" uid="uid://bypbuvx3r5xiy" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_20.png" id="20_skam1"]
+[ext_resource type="Texture2D" uid="uid://ckgr61pxtenyf" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_19.png" id="20_tliky"]
+[ext_resource type="Texture2D" uid="uid://dmw8wea3bcn30" path="res://assets/Images/Zombies/Zombie/Eat/ZombieAttack_21.png" id="21_eaw3j"]
+[ext_resource type="Texture2D" uid="uid://b5c3t7xy4wrvx" path="res://assets/Images/Zombies/Zombie/Borm/BoomDie_20.png" id="21_nn4c0"]
+[ext_resource type="Texture2D" uid="uid://ct3sry3vng4y6" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_1.png" id="22_fmf8p"]
+[ext_resource type="Texture2D" uid="uid://cpl1sn0lyi0qg" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_2.png" id="23_5an3o"]
+[ext_resource type="Texture2D" uid="uid://d1pas34mx2wh3" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_3.png" id="24_agvww"]
+[ext_resource type="Texture2D" uid="uid://batc3cwmxnuok" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_4.png" id="25_d5sxi"]
+[ext_resource type="Texture2D" uid="uid://c8vudaa00mxme" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_5.png" id="26_k40v5"]
+[ext_resource type="Texture2D" uid="uid://18snvlvmsg7p" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_6.png" id="27_bta4w"]
+[ext_resource type="Texture2D" uid="uid://buxrs4743l675" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_7.png" id="28_rv1j5"]
+[ext_resource type="Texture2D" uid="uid://bbmbxmhh1t130" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_8.png" id="29_0dgpa"]
+[ext_resource type="Texture2D" uid="uid://cpibfwdqgaoxy" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_9.png" id="30_xgt1n"]
+[ext_resource type="Texture2D" uid="uid://cv8tjlop8ep8r" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_10.png" id="31_tun0i"]
+[ext_resource type="Texture2D" uid="uid://bgtlfhweom7cc" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_11.png" id="32_4ypg8"]
+[ext_resource type="Texture2D" uid="uid://switvh7ua6h0" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_12.png" id="33_vftqa"]
+[ext_resource type="Texture2D" uid="uid://c75qvq0byw53u" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_13.png" id="34_pbhp1"]
+[ext_resource type="Texture2D" uid="uid://bq42rhr550kjf" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_14.png" id="35_i8idq"]
+[ext_resource type="Texture2D" uid="uid://bculuk0nric5o" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_15.png" id="36_urp78"]
+[ext_resource type="Texture2D" uid="uid://c0gigbkxpa6eo" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_16.png" id="37_q4o23"]
+[ext_resource type="Texture2D" uid="uid://oextwgc6rsm1" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_17.png" id="38_obamx"]
+[ext_resource type="Texture2D" uid="uid://r7v050x0xx6d" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_18.png" id="39_l1bb2"]
+[ext_resource type="Texture2D" uid="uid://cgaxop3upl7l8" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_19.png" id="40_j6t1f"]
+[ext_resource type="Texture2D" uid="uid://dcnp7nbu7kmba" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_20.png" id="41_irr43"]
+[ext_resource type="Texture2D" uid="uid://klc2pv0agqcx" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_21.png" id="42_pd85t"]
+[ext_resource type="Texture2D" uid="uid://dhc4wt5a5ft0y" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_22.png" id="43_optvj"]
+[ext_resource type="Texture2D" uid="uid://wpw23p6atwvu" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_23.png" id="44_vmjab"]
+[ext_resource type="Texture2D" uid="uid://hvcm5q0dfewf" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_24.png" id="45_s52q7"]
+[ext_resource type="Texture2D" uid="uid://13enqxg1178l" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_25.png" id="46_iwbsv"]
+[ext_resource type="Texture2D" uid="uid://cqkqc0bpqtgm2" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_26.png" id="47_f1hwc"]
+[ext_resource type="Texture2D" uid="uid://bh8b8akc8myp6" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_27.png" id="48_olxjr"]
+[ext_resource type="Texture2D" uid="uid://cvb5y05n3qps7" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_28.png" id="49_skuus"]
+[ext_resource type="Texture2D" uid="uid://bbf82oqmhc6o2" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_29.png" id="50_vc0wo"]
+[ext_resource type="Texture2D" uid="uid://bv8xroqthjsnd" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_30.png" id="51_xd6ro"]
+[ext_resource type="Texture2D" uid="uid://duktp5htkeba2" path="res://assets/Images/Zombies/Zombie/Move1/Zombie2_31.png" id="52_7csqq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y0mxs"]
 radius = 29.0
@@ -483,13 +483,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Animation" id="Animation_pd5ff"]
+[sub_resource type="Animation" id="Animation_2trsh"]
 length = 4.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../AnimatedSprite2D:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -501,7 +501,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../AnimatedSprite2D:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -511,13 +511,13 @@ tracks/1/keys = {
 "values": ["boom_die"]
 }
 
-[sub_resource type="Animation" id="Animation_5tcdm"]
+[sub_resource type="Animation" id="Animation_1kxbx"]
 length = 2.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../AnimatedSprite2D:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -529,7 +529,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../AnimatedSprite2D:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -539,13 +539,13 @@ tracks/1/keys = {
 "values": ["die"]
 }
 
-[sub_resource type="Animation" id="Animation_onn75"]
+[sub_resource type="Animation" id="Animation_ll272"]
 length = 2.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../AnimatedSprite2D:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -557,7 +557,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../AnimatedSprite2D:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -567,13 +567,13 @@ tracks/1/keys = {
 "values": ["loas_head_eat"]
 }
 
-[sub_resource type="Animation" id="Animation_gxg1x"]
+[sub_resource type="Animation" id="Animation_0ixvf"]
 length = 3.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../AnimatedSprite2D:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -585,7 +585,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../AnimatedSprite2D:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -595,13 +595,13 @@ tracks/1/keys = {
 "values": ["lost_head_move"]
 }
 
-[sub_resource type="Animation" id="Animation_evgc0"]
+[sub_resource type="Animation" id="Animation_ukt6g"]
 length = 4.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../AnimatedSprite2D:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -613,7 +613,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../AnimatedSprite2D:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -623,13 +623,13 @@ tracks/1/keys = {
 "values": ["normal_eat"]
 }
 
-[sub_resource type="Animation" id="Animation_c7sub"]
+[sub_resource type="Animation" id="Animation_prtag"]
 length = 6.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../AnimatedSprite2D:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -641,7 +641,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../AnimatedSprite2D:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -651,21 +651,18 @@ tracks/1/keys = {
 "values": ["normal_move"]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ey7ii"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fccxj"]
 _data = {
-"boom_die": SubResource("Animation_pd5ff"),
-"die": SubResource("Animation_5tcdm"),
-"loas_head_eat": SubResource("Animation_onn75"),
-"lost_head_move": SubResource("Animation_gxg1x"),
-"normal_eat": SubResource("Animation_evgc0"),
-"normal_move": SubResource("Animation_c7sub")
+"boom_die": SubResource("Animation_2trsh"),
+"die": SubResource("Animation_1kxbx"),
+"loas_head_eat": SubResource("Animation_ll272"),
+"lost_head_move": SubResource("Animation_0ixvf"),
+"normal_eat": SubResource("Animation_ukt6g"),
+"normal_move": SubResource("Animation_prtag")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ea4m7"]
-animation = &"loas_head_eat"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g1g3a"]
-animation = &"lost_head_move"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_onto8"]
+animation = &"die"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bjmab"]
 animation = &"normal_eat"
@@ -678,44 +675,35 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ixr6c"]
 advance_mode = 2
-advance_expression = "hited_plant"
+advance_condition = &"is_hited_plant"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nxaws"]
 advance_mode = 2
-advance_expression = "not hited_plant"
+advance_condition = &"not_hited"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n57bs"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0h0va"]
 advance_mode = 2
-advance_expression = "half_life and not hited_plant"
+advance_condition = &"is_die"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kbpe6"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iyn6k"]
 advance_mode = 2
-advance_expression = "hited_plant"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_olg4l"]
-advance_mode = 2
-advance_expression = "not hited_plant"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7t05i"]
-advance_mode = 2
-advance_expression = "half_life and hited_plant"
+advance_condition = &"is_die"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2ei6m"]
+states/End/position = Vector2(1291.33, 101.333)
 states/Start/position = Vector2(354, 92)
-states/loas_head_eat/node = SubResource("AnimationNodeAnimation_ea4m7")
-states/loas_head_eat/position = Vector2(726.78, 186.133)
-states/lost_head_move/node = SubResource("AnimationNodeAnimation_g1g3a")
-states/lost_head_move/position = Vector2(733.28, 82.6325)
+states/die/node = SubResource("AnimationNodeAnimation_onto8")
+states/die/position = Vector2(723.627, 69.1425)
 states/normal_eat/node = SubResource("AnimationNodeAnimation_bjmab")
-states/normal_eat/position = Vector2(535.03, 184.051)
+states/normal_eat/position = Vector2(540.641, 211.384)
 states/normal_move/node = SubResource("AnimationNodeAnimation_wkplh")
-states/normal_move/position = Vector2(536.78, 84.3012)
-transitions = ["Start", "normal_move", SubResource("AnimationNodeStateMachineTransition_2qlt4"), "normal_move", "normal_eat", SubResource("AnimationNodeStateMachineTransition_ixr6c"), "normal_eat", "normal_move", SubResource("AnimationNodeStateMachineTransition_nxaws"), "normal_move", "lost_head_move", SubResource("AnimationNodeStateMachineTransition_n57bs"), "lost_head_move", "loas_head_eat", SubResource("AnimationNodeStateMachineTransition_kbpe6"), "loas_head_eat", "lost_head_move", SubResource("AnimationNodeStateMachineTransition_olg4l"), "normal_eat", "loas_head_eat", SubResource("AnimationNodeStateMachineTransition_7t05i")]
-graph_offset = Vector2(264.96, 27.1425)
+states/normal_move/position = Vector2(540.113, -76.1928)
+transitions = ["Start", "normal_move", SubResource("AnimationNodeStateMachineTransition_2qlt4"), "normal_move", "normal_eat", SubResource("AnimationNodeStateMachineTransition_ixr6c"), "normal_eat", "normal_move", SubResource("AnimationNodeStateMachineTransition_nxaws"), "normal_move", "die", SubResource("AnimationNodeStateMachineTransition_0h0va"), "normal_eat", "die", SubResource("AnimationNodeStateMachineTransition_iyn6k")]
+graph_offset = Vector2(-63.04, -99.5144)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("1_3cyfd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -724,20 +712,21 @@ shape = SubResource("CapsuleShape2D_y0mxs")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-27, -14)
 sprite_frames = SubResource("SpriteFrames_yil7t")
-animation = &"normal_move"
+animation = &"boom_die"
 autoplay = "normal_move"
-frame = 22
+frame_progress = 0.606004
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("")
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ey7ii")
+"": SubResource("AnimationLibrary_fccxj")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("")
 libraries = {
-"": SubResource("AnimationLibrary_ey7ii")
+"": SubResource("AnimationLibrary_fccxj")
 }
 tree_root = SubResource("AnimationNodeStateMachine_2ei6m")
-anim_player = NodePath("../AnimationPlayer")
+anim_player = NodePath("../AnimationPlayer2")
+parameters/conditions/is_die = false
+parameters/conditions/is_hited_plant = false
+parameters/conditions/not_hited = false
