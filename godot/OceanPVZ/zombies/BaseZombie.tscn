@@ -714,6 +714,8 @@ transitions = ["Start", "normal_move", SubResource("AnimationNodeStateMachineTra
 graph_offset = Vector2(264.96, 27.1425)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_3cyfd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
