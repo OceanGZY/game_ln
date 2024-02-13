@@ -77,6 +77,8 @@ Settings/Show_Tooltips=true
 config/name="Cheese"
 run/main_scene="res://game/game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
+boot_splash/image="res://OCEANGAME.png"
 config/icon="res://icon.png"
 
 [display]

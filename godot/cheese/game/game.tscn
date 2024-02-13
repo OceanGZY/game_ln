@@ -1,18 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://bemis7q0pouvt"]
+[gd_scene load_steps=6 format=3 uid="uid://bemis7q0pouvt"]
 
 [ext_resource type="PackedScene" uid="uid://bkq4vwnkj1mfq" path="res://game/player.tscn" id="1_8atrj"]
+[ext_resource type="Script" path="res://game/game.gd" id="1_ini4w"]
 [ext_resource type="PackedScene" uid="uid://dwfx60bwkbsby" path="res://game/pine_tree.tscn" id="2_ebgsd"]
-[ext_resource type="PackedScene" uid="uid://b0lx6meskm26a" path="res://game/mob.tscn" id="3_cyxu5"]
+[ext_resource type="AudioStream" uid="uid://coildv7ma22h6" path="res://bgm.wav" id="4_3q1hh"]
+
+[sub_resource type="Curve2D" id="Curve2D_587qk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -386, -240, 0, 0, 0, 0, 2198, -247, 0, 0, 0, 0, 2230, 1148, 0, 0, 0, 0, -394, 1170, 0, 0, 0, 0, -394, -239)
+}
+point_count = 5
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_ini4w")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -30
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="Player" parent="." instance=ExtResource("1_8atrj")]
-position = Vector2(800, 512)
+position = Vector2(960, 542)
+
+[node name="Path2D" type="Path2D" parent="Player"]
+position = Vector2(-960, -500.514)
+scale = Vector2(1, 1.16796)
+curve = SubResource("Curve2D_587qk")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
+position = Vector2(-386, -240)
+rotation = -0.00270897
 
 [node name="StaticBody2D" parent="." instance=ExtResource("2_ebgsd")]
 position = Vector2(1373, 306)
@@ -35,17 +55,57 @@ position = Vector2(404, 699)
 [node name="StaticBody2D7" parent="." instance=ExtResource("2_ebgsd")]
 position = Vector2(879, 894)
 
-[node name="Mob" parent="." instance=ExtResource("3_cyxu5")]
-position = Vector2(530, 472)
+[node name="Timer" type="Timer" parent="."]
+autostart = true
 
-[node name="Mob2" parent="." instance=ExtResource("3_cyxu5")]
-position = Vector2(1077, 334)
+[node name="GameOver" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="Mob3" parent="." instance=ExtResource("3_cyxu5")]
-position = Vector2(1325, 719)
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.752941, 0.752941, 0.752941, 0.466667)
 
-[node name="Mob4" parent="." instance=ExtResource("3_cyxu5")]
-position = Vector2(647, 837)
+[node name="Label" type="Label" parent="GameOver/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -251.0
+offset_top = -273.0
+offset_right = 249.0
+offset_bottom = -133.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "游戏结束！"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Mob5" parent="." instance=ExtResource("3_cyxu5")]
-position = Vector2(1702, 253)
+[node name="RestartBtm" type="Button" parent="GameOver"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -244.0
+offset_top = 30.0
+offset_right = 164.0
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 80
+text = "再来一局"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_3q1hh")
+
+[connection signal="player_die" from="Player" to="." method="_on_player_player_die"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="GameOver/RestartBtm" to="." method="_on_restart_btm_pressed"]
