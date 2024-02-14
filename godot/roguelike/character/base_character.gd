@@ -4,7 +4,7 @@ class_name BaseCharacter
 
 @export var accerelation:int = 40
 @export var max_spped:int = 100
-@onready var animated_sprite_2d = get_node("")
+@onready var animated_sprite_2d = get_node("AnimatedSprite2D")
 
 
 const FRICTION :float =0.5 # 摩擦力
