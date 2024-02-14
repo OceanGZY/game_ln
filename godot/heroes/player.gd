@@ -21,7 +21,9 @@ func _physics_process(delta:float) -> void:
 	velocity.x = move_toward(velocity.x,direction* RUN_SPEED, acceleration*delta)
 	velocity.y += gravity*delta 
 	
+	print("coyote_timer.time_left",coyote_timer.time_left)
 	var can_jump := is_on_floor() or coyote_timer.time_left>0 # coyote_timer实现在空中连跳
+	print("jump_request_timer.time_left",jump_request_timer.time_left)
 	var should_jump := can_jump and  jump_request_timer.time_left>0
 	if should_jump:
 		velocity.y = JUMP_VELOCITY
@@ -54,7 +56,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		jump_request_timer.start() # 实现在接触地面前就会起跳
 	
-	if event.is_action_released("jump") and velocity.y < JUMP_VELOCITY /2:
-		velocity.y = JUMP_VELOCITY /2 # 如果松开跳跃键以后, 速度比跳跃速度小,则加速跳跃结束 --- >松的越早跳的低, 即为 大小跳
+	if event.is_action_released("jump"):
+		jump_request_timer.stop()
+		if velocity.y < JUMP_VELOCITY /2:
+			velocity.y = JUMP_VELOCITY /2 # 如果松开跳跃键以后, 速度比跳跃速度小,则加速跳跃结束 --- >松的越早跳的低, 即为 大小跳
 	
 	
