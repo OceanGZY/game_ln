@@ -73,3 +73,10 @@ func transition_state(from:ACTState,to:ACTState) -> void:
 		ACTState.RUN:
 			animation_player.play("run")
 	
+
+
+func _on_hurt_box_hurt(hitbox: Variant) -> void:
+	print("Ouch!")
+	stats.health -=1
+	if stats.health ==0:
+		queue_free()
