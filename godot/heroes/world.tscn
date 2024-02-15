@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://cpix171x17lrb"]
 
-[ext_resource type="Texture2D" uid="uid://c6ogy257hmxt0" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="1_kciok"]
+[ext_resource type="Texture2D" uid="uid://chivdqjksj7a7" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="1_kciok"]
 [ext_resource type="Script" path="res://world.gd" id="1_snigp"]
 [ext_resource type="PackedScene" uid="uid://cnshc3jqtbc8s" path="res://player.tscn" id="2_68n4d"]
-[ext_resource type="Texture2D" uid="uid://lcjp0wcbyy8e" path="res://assets/Legacy-Fantasy - High Forest 2.3/Background/Background.png" id="4_kmkfm"]
-[ext_resource type="Texture2D" uid="uid://44rn2ybbcyc" path="res://assets/Legacy-Fantasy - High Forest 2.3/Trees/Background.png" id="5_tkrnj"]
+[ext_resource type="Texture2D" uid="uid://ckot1heissd5x" path="res://assets/Legacy-Fantasy - High Forest 2.3/Background/Background.png" id="4_kmkfm"]
+[ext_resource type="Texture2D" uid="uid://xutinaay2s1a" path="res://assets/Legacy-Fantasy - High Forest 2.3/Trees/Background.png" id="5_tkrnj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_40irv"]
 texture = ExtResource("1_kciok")

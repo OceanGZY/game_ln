@@ -76,7 +76,7 @@ func tick_phycis(state:ACTState,delta:float)->void:
 		ACTState.FALL:
 			move(default_gravity,delta)
 		ACTState.LANDING:
-			move(default_gravity,delta)
+			stand(delta)
 	is_first_tick= false
 
 func move(gravity:float,delta:float)->void:
@@ -86,6 +86,14 @@ func move(gravity:float,delta:float)->void:
 	velocity.y += gravity*delta
 	if not is_zero_approx(direction):
 		sprite_2d.flip_h= direction <0
+	move_and_slide()
+	
+
+func stand(delta:float)->void:
+	var acceleration := FLOOR_ACCELERATION if is_on_floor() else AIR_ACCELERATION
+	velocity.x = move_toward(velocity.x,0.0, acceleration*delta)
+	velocity.y += default_gravity * delta
+	
 	move_and_slide()
 	
 	
