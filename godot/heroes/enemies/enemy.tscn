@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmtyjgyt1ny5m"]
+[gd_scene load_steps=6 format=3 uid="uid://dmtyjgyt1ny5m"]
 
 [ext_resource type="Script" path="res://classes/StateMachine.gd" id="1_57mwv"]
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_qgqk4"]
+[ext_resource type="Script" path="res://classes/HitBox.gd" id="2_v7gne"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ed1m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5oemn"]
 radius = 13.0
@@ -11,6 +14,12 @@ collision_layer = 4
 script = ExtResource("1_qgqk4")
 
 [node name="Graphics" type="Node2D" parent="."]
+
+[node name="HitBox" type="Area2D" parent="Graphics"]
+script = ExtResource("2_v7gne")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/HitBox"]
+shape = SubResource("RectangleShape2D_8ed1m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -13)

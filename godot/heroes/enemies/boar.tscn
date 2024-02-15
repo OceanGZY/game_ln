@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://7th7lg6roqn0"]
+[gd_scene load_steps=15 format=3 uid="uid://7th7lg6roqn0"]
 
 [ext_resource type="PackedScene" uid="uid://dmtyjgyt1ny5m" path="res://enemies/enemy.tscn" id="1_nepjt"]
 [ext_resource type="Texture2D" uid="uid://bvmhdfyw2syr3" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Run/Run-Sheet.png" id="2_fpc4g"]
@@ -6,6 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://cce0fyuekdgeq" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Hit-Vanish/Hit-Sheet.png" id="2_usujy"]
 [ext_resource type="Script" path="res://enemies/boar.gd" id="2_wd45t"]
 [ext_resource type="Texture2D" uid="uid://cwx8opmoywpvu" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Walk/Walk-Base-Sheet.png" id="4_rlov0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ht2x0"]
+radius = 13.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1do2"]
+size = Vector2(35, 7)
 
 [sub_resource type="Animation" id="Animation_m14ru"]
 resource_name = "idle"
@@ -326,6 +332,20 @@ target_position = Vector2(0, 5)
 position = Vector2(-9, -15)
 target_position = Vector2(-85, 0)
 collision_mask = 2
+
+[node name="HitBox" parent="Graphics" index="4"]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/HitBox" index="0"]
+position = Vector2(0, -13)
+shape = SubResource("CircleShape2D_ht2x0")
+debug_color = Color(0.976471, 0.152941, 0, 0.419608)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/HitBox" index="1"]
+position = Vector2(-0.5, -9)
+shape = SubResource("RectangleShape2D_c1do2")
+debug_color = Color(0.956863, 0, 0.533333, 0.419608)
 
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {

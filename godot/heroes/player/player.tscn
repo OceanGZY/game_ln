@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://cnshc3jqtbc8s"]
+[gd_scene load_steps=19 format=3 uid="uid://cnshc3jqtbc8s"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8ove2"]
 [ext_resource type="Texture2D" uid="uid://utvcjwmee2hl" path="res://assets/generic_char_v0.2/png/blue/char_blue_1.png" id="1_je7wr"]
 [ext_resource type="Texture2D" uid="uid://whntivefshyi" path="res://assets/generic_char_v0.2/png/blue/char_blue_2.png" id="2_myq7f"]
 [ext_resource type="Script" path="res://classes/StateMachine.gd" id="3_sjcrk"]
+[ext_resource type="Script" path="res://classes/HurtBox.gd" id="5_wu8vh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_13xrn"]
 size = Vector2(14, 26)
@@ -894,6 +895,9 @@ _data = {
 "wall_sliding": SubResource("Animation_u6s3q")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h3et0"]
+size = Vector2(14, 26)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_8ove2")
@@ -921,13 +925,12 @@ script = ExtResource("3_sjcrk")
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics"]
-position = Vector2(5.21, -22.15)
-texture = ExtResource("2_myq7f")
-flip_h = true
-hframes = 4
+position = Vector2(0, -28)
+texture = ExtResource("1_je7wr")
+hframes = 6
 frame = 1
 region_enabled = true
-region_rect = Rect2(0, 168, 224, 56)
+region_rect = Rect2(0, 0, 336, 56)
 
 [node name="HandChecker" type="RayCast2D" parent="Graphics"]
 position = Vector2(0, -26)
@@ -936,3 +939,13 @@ target_position = Vector2(9, 0)
 [node name="FootChecker" type="RayCast2D" parent="Graphics"]
 position = Vector2(0, -4)
 target_position = Vector2(9, 0)
+
+[node name="HurtBox" type="Area2D" parent="Graphics"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("5_wu8vh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/HurtBox"]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_h3et0")
+debug_color = Color(0.831373, 0.137255, 0.882353, 0.419608)
