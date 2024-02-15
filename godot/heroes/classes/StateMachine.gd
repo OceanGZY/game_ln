@@ -5,6 +5,9 @@ var current_state:int=-1:
 	set(v):
 		owner.transition_state(current_state,v)
 		current_state=v
+		state_time = 0
+
+var state_time:float
 
 func _ready() -> void:
 	await owner.ready # 等待owner的eady信号
@@ -17,4 +20,5 @@ func _physics_process(delta: float) -> void:
 			break
 		current_state = next_state
 	
-	owner.tick_phycis(current_state,delta)
+	owner.tick_physics(current_state,delta)
+	state_time += delta

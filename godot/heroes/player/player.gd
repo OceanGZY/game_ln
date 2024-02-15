@@ -5,24 +5,41 @@ enum ACTState{
 	RUNNING,
 	JUMP,
 	FALL,
-	LANDING
+	LANDING,
+	WALLSLIDING,
+	WALLJUMP,
+	ATTACK1,
+	ATTACK2,
+	ATTACK3,
 }
 
-const GROUND_STATES:=[ACTState.IDLE,ACTState.RUNNING,ACTState.LANDING]
-
+const GROUND_STATES:=[
+	ACTState.IDLE,ACTState.RUNNING,ACTState.LANDING,
+	ACTState.ATTACK1,ACTState.ATTACK2,ACTState.ATTACK3
+]
 const RUN_SPEED := 100.0
 const JUMP_VELOCITY := -320.0
 const FLOOR_ACCELERATION:=RUN_SPEED/0.2
-const AIR_ACCELERATION:=RUN_SPEED/0.02
+const AIR_ACCELERATION:=RUN_SPEED/0.1
+const WALL_JUMP_VELOCITY:= Vector2(500,-280)
 
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var jump_request_timer: Timer = $JumpRequestTimer
 
-@onready var sprite_2d:Sprite2D = $Sprite2D
+#@onready var sprite_2d:Sprite2D = $Sprite2D
+
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
+@onready var graphics: Node2D = $Graphics
+
+@onready var hand_checker: RayCast2D = $Graphics/HandChecker
+@onready var foot_checker: RayCast2D = $Graphics/FootChecker
+@onready var state_macine: StateMacine = $StateMacine
+
+@export var can_comboo:bool = false
 
 var default_gravity := ProjectSettings.get("physics/2d/default_gravity") as float
 var is_first_tick:=false
+var is_comboo_requested := false
 
 #func _physics_process(delta:float) -> void:
 	#var direction := Input.get_axis("move_left","move_right")
@@ -65,18 +82,37 @@ var is_first_tick:=false
 			#coyote_timer.stop()
 
 
-func tick_phycis(state:ACTState,delta:float)->void:
+func tick_physics(state:ACTState,delta:float)->void:
 	match state:
 		ACTState.IDLE:
 			move(default_gravity,delta)
+		
 		ACTState.RUNNING:
 			move(default_gravity,delta)
+		
 		ACTState.JUMP:
 			move(0.0 if is_first_tick else default_gravity,delta)
+		
 		ACTState.FALL:
 			move(default_gravity,delta)
+		
 		ACTState.LANDING:
-			stand(delta)
+			stand(0.0,delta)
+		
+		ACTState.WALLSLIDING:
+			move(default_gravity / 3 ,delta)
+			graphics.scale.x = get_wall_normal().x
+		
+		ACTState.WALLJUMP:
+			if state_macine.state_time <0.1:
+				stand(0.0 if is_first_tick else default_gravity,delta)
+				graphics.scale.x = get_wall_normal().x
+			else:
+				move(default_gravity,delta)
+		
+		ACTState.ATTACK1,ACTState.ATTACK2,ACTState.ATTACK3:
+			stand(default_gravity,delta)
+		
 	is_first_tick= false
 
 func move(gravity:float,delta:float)->void:
@@ -85,11 +121,11 @@ func move(gravity:float,delta:float)->void:
 	velocity.x = move_toward(velocity.x,direction* RUN_SPEED, acceleration*delta)
 	velocity.y += gravity*delta
 	if not is_zero_approx(direction):
-		sprite_2d.flip_h= direction <0
+		graphics.scale.x = -1 if direction <0 else 1
 	move_and_slide()
 	
 
-func stand(delta:float)->void:
+func stand(gravity:float,delta:float)->void:
 	var acceleration := FLOOR_ACCELERATION if is_on_floor() else AIR_ACCELERATION
 	velocity.x = move_toward(velocity.x,0.0, acceleration*delta)
 	velocity.y += default_gravity * delta
@@ -106,40 +142,85 @@ func _unhandled_input(event: InputEvent) -> void:
 		jump_request_timer.stop()
 		if velocity.y < JUMP_VELOCITY /2:
 			velocity.y = JUMP_VELOCITY /2 # 如果松开跳跃键以后, 速度比跳跃速度小,则加速跳跃结束 --- >松的越早跳的低, 即为 大小跳
-
+			
+	if event.is_action_pressed("attack") and can_comboo:
+		is_comboo_requested=true
+		
+	
+	
+	
 func get_next_state(state:ACTState)->ACTState:
 	var can_jump := is_on_floor() or coyote_timer.time_left>0 # coyote_timer实现在空中连跳
 	var should_jump := can_jump and  jump_request_timer.time_left>0
 	if should_jump:
 		return ACTState.JUMP
 	
+	if state in GROUND_STATES and not is_on_floor():
+		return ACTState.FALL
+		
 	var direction := Input.get_axis("move_left","move_right")
 	var is_stand_idle := is_zero_approx(direction) and is_zero_approx(velocity.x) 
 	
 	match state:
 		ACTState.IDLE:
-			if not is_on_floor():
-				return ACTState.FALL
+			if Input.is_action_just_pressed("attack"):
+				return ACTState.ATTACK1
 			if not is_stand_idle:
 				return ACTState.RUNNING
+		
 		ACTState.RUNNING:
-			if not is_on_floor():
-				return ACTState.FALL
+			if Input.is_action_just_pressed("attack"):
+				return ACTState.ATTACK1
 			if is_stand_idle:
 				return ACTState.IDLE
+		
 		ACTState.JUMP:
 			if velocity.y >=0:
 				return ACTState.FALL
+		
 		ACTState.FALL:
 			if is_on_floor():
 				return ACTState.LANDING if is_stand_idle else ACTState.IDLE
-		ACTState.LANDING:
+			if can_wall_slide():
+				return ACTState.WALLSLIDING
+		
+		ACTState.LANDING:	
+			if not is_stand_idle:
+				return ACTState.RUNNING
 			if not animation_player.is_playing():
 				return ACTState.IDLE
+		
+		ACTState.WALLSLIDING:
+			if jump_request_timer.time_left >0:
+				return ACTState.WALLJUMP
+			if is_on_floor():
+				return ACTState.IDLE
+			if not is_on_wall():
+				return ACTState.FALL
+		
+		ACTState.WALLJUMP:
+			if can_wall_slide() and not is_first_tick:
+				return ACTState.WALLSLIDING
+			if velocity.y >=0:
+				return ACTState.FALL
+		
+		ACTState.ATTACK1:
+			if not animation_player.is_playing():
+				return ACTState.ATTACK2 if is_comboo_requested else ACTState.IDLE
+		
+		ACTState.ATTACK2:
+			if not animation_player.is_playing():
+				return ACTState.ATTACK3 if is_comboo_requested else ACTState.IDLE
+
+		ACTState.ATTACK3:
+			if not animation_player.is_playing():
+				return ACTState.IDLE
+
 	
 	return state
 	
 func transition_state(from:ACTState,to:ACTState) -> void:
+	
 	# 判断from的类型 和to的类型
 	if from not in GROUND_STATES  and to in GROUND_STATES:
 		coyote_timer.stop()
@@ -161,8 +242,39 @@ func transition_state(from:ACTState,to:ACTState) -> void:
 			animation_player.play("fall")
 			if from in GROUND_STATES:
 				coyote_timer.start()
+		
 		ACTState.LANDING:
 			animation_player.play("landing")
+		
+		ACTState.WALLSLIDING:
+			animation_player.play("wall_sliding")
+		
+		ACTState.WALLJUMP:
+			animation_player.play("jump")
+			velocity= WALL_JUMP_VELOCITY
+			velocity.x *= get_wall_normal().x # get_wall_normal().x为墙的法线向量
+			jump_request_timer.stop()
 			
-	is_first_tick= true
+		ACTState.ATTACK1:
+			animation_player.play("attack1")
+			is_comboo_requested=false
+		
+		ACTState.ATTACK2:
+			animation_player.play("attack2")
+			is_comboo_requested=false
+
+		ACTState.ATTACK3:
+			animation_player.play("attack3")
+			is_comboo_requested=false
 	
+	# 时间膨胀效果
+	#if to == ACTState.WALLJUMP:
+		#Engine.time_scale= 0.3
+	#else:
+		#Engine.time_scale=1.0
+		
+	is_first_tick= true
+
+
+func can_wall_slide()->bool:
+	return is_on_wall() and hand_checker.is_colliding() and foot_checker.is_colliding()
