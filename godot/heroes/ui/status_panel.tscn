@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwm12sihyakv8"]
+[gd_scene load_steps=9 format=3 uid="uid://dwm12sihyakv8"]
 
 [ext_resource type="Texture2D" uid="uid://ml1hepqkykiu" path="res://assets/Legacy-Fantasy - High Forest 2.3/HUD/Base-01.png" id="1_30pts"]
 [ext_resource type="Script" path="res://ui/status_panel.gd" id="1_oaq1a"]
@@ -24,6 +24,10 @@ region = Rect2(307, 21, 58, 6)
 atlas = ExtResource("1_30pts")
 region = Rect2(308, 118, 56, 4)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpyks"]
+atlas = ExtResource("1_30pts")
+region = Rect2(308, 86, 56, 4)
+
 [node name="StatusPanel" type="HBoxContainer"]
 script = ExtResource("1_oaq1a")
 
@@ -42,7 +46,16 @@ layout_mode = 2
 size_flags_vertical = 4
 max_value = 1.0
 step = 0.0
-value = 1.0
+value = 0.8
 texture_over = SubResource("AtlasTexture_f7no0")
 texture_progress = SubResource("AtlasTexture_h83ya")
+texture_progress_offset = Vector2(1, 1)
+
+[node name="EasedHealthBar" type="TextureProgressBar" parent="HealthBar"]
+show_behind_parent = true
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.0
+value = 1.0
+texture_progress = SubResource("AtlasTexture_mpyks")
 texture_progress_offset = Vector2(1, 1)
