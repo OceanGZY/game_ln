@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpix171x17lrb"]
+[gd_scene load_steps=11 format=3 uid="uid://cpix171x17lrb"]
 
 [ext_resource type="Texture2D" uid="uid://chivdqjksj7a7" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="1_kciok"]
 [ext_resource type="Script" path="res://environments/world.gd" id="1_snigp"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ckot1heissd5x" path="res://assets/Legacy-Fantasy - High Forest 2.3/Background/Background.png" id="4_kmkfm"]
 [ext_resource type="Texture2D" uid="uid://xutinaay2s1a" path="res://assets/Legacy-Fantasy - High Forest 2.3/Trees/Background.png" id="5_tkrnj"]
 [ext_resource type="PackedScene" uid="uid://7th7lg6roqn0" path="res://enemies/boar.tscn" id="6_frici"]
+[ext_resource type="Script" path="res://classes/Interactable.gd" id="7_1ae4a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_40irv"]
 texture = ExtResource("1_kciok")
@@ -470,6 +471,9 @@ terrain_set_0/terrain_0/name = "Trunk"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_40irv")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ae77s"]
+size = Vector2(33, 36.5)
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_snigp")
 metadata/_edit_horizontal_guides_ = [400.0]
@@ -582,3 +586,10 @@ drag_vertical_enabled = true
 
 [node name="Boar" parent="." instance=ExtResource("6_frici")]
 position = Vector2(-541, 164)
+
+[node name="Interactable" type="Area2D" parent="."]
+script = ExtResource("7_1ae4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+position = Vector2(-433.5, 284.25)
+shape = SubResource("RectangleShape2D_ae77s")

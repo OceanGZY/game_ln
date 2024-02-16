@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Player
+
 enum ACTState{
 	IDLE,
 	RUNNING,
@@ -42,11 +44,14 @@ const KNOCKBACK_AMOUT:= 200.0
 @export var can_comboo:bool = false
 @onready var stats: Stats = $Stats
 @onready var invincible_timer: Timer = $InvincibleTimer
+@onready var interaction_icon: AnimatedSprite2D = $InteractionIcon
+
 
 var default_gravity := ProjectSettings.get("physics/2d/default_gravity") as float
 var is_first_tick:=false
 var is_comboo_requested := false
 var pending_damage:Damage
+var interacting_with:Array[Interactable]
 
 
 #func _physics_process(delta:float) -> void:
@@ -91,6 +96,8 @@ var pending_damage:Damage
 
 
 func tick_physics(state:ACTState,delta:float)->void:
+	interaction_icon.visible = not interacting_with.is_empty()
+	
 	if invincible_timer.time_left >0:
 		graphics.modulate.a = sin(Time.get_ticks_msec() /20 ) *0.5 +0.5
 	else:
@@ -158,8 +165,24 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 	if event.is_action_pressed("attack") and can_comboo:
 		is_comboo_requested=true
-		
 	
+	if event.is_action_pressed("interact") and not interacting_with.is_empty():
+		interacting_with.back().interact()
+		
+		
+
+func register_interactable(v :Interactable) ->void:
+	if state_macine.current_state == ACTState.DYING:
+		return
+	
+	if v in interacting_with:
+		return
+	interacting_with.append(v)
+
+func unregister_interactable(v :Interactable) ->void:
+	if not v in interacting_with:
+		return
+	interacting_with.erase(v)
 	
 	
 func get_next_state(state:ACTState)-> int:
@@ -303,6 +326,7 @@ func transition_state(from:ACTState,to:ACTState) -> void:
 		ACTState.DYING:
 			animation_player.play("die")
 			invincible_timer.stop()
+			interacting_with.clear()
 	
 	# 时间膨胀效果
 	#if to == ACTState.WALLJUMP:
