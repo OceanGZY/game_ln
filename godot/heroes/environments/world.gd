@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var tile_map: TileMap = $TileMap
 @onready var camera_2d: Camera2D = $Player/Camera2D
+@onready var player: Player = $Player
 
 
 func _ready() -> void:
@@ -23,4 +24,9 @@ func _ready() -> void:
 	#print(camera_2d.limit_bottom)
 	#print("limit_right",camera_2d.limit_right)
 	
+	camera_2d.reset_smoothing() # 将相机立即设置到目标位置
+
+
+func update_player(pos:Vector2) -> void:
+	player.global_position = pos
 	camera_2d.reset_smoothing() # 将相机立即设置到目标位置

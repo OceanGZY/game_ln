@@ -69,11 +69,11 @@ func get_next_state(state:ACTState)->int:
 	
 
 func transition_state(from:ACTState,to:ACTState) -> void:
-	print("[%s] %s => %s" %[
-		Engine.get_physics_frames(),
-		ACTState.keys()[from] if from !=-1 else "<START>",
-		ACTState.keys()[to]		
-	])
+	#print("[%s] %s => %s" %[
+		#Engine.get_physics_frames(),
+		#ACTState.keys()[from] if from !=-1 else "<START>",
+		#ACTState.keys()[to]		
+	#])
 	
 	match to:
 		ACTState.IDLE:
@@ -93,7 +93,7 @@ func transition_state(from:ACTState,to:ACTState) -> void:
 		ACTState.HURT:
 			animation_player.play("hit")
 			stats.health -= pending_damage.amount
-			print(stats.health)
+			#print(stats.health)
 			
 			var dir:= pending_damage.source.global_position.direction_to(global_position)
 			velocity = dir * KNOCKBACK_AMOUT
@@ -106,7 +106,6 @@ func transition_state(from:ACTState,to:ACTState) -> void:
 			
 		ACTState.DYING:
 			animation_player.play("die")
-	
 
 
 func _on_hurt_box_hurt(hitbox: Variant) -> void:

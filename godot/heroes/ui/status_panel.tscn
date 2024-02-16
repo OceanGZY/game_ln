@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwm12sihyakv8"]
+[gd_scene load_steps=11 format=3 uid="uid://dwm12sihyakv8"]
 
-[ext_resource type="Texture2D" uid="uid://ml1hepqkykiu" path="res://assets/Legacy-Fantasy - High Forest 2.3/HUD/Base-01.png" id="1_30pts"]
+[ext_resource type="Texture2D" uid="uid://dib2ccx2mqvyw" path="res://assets/Legacy-Fantasy - High Forest 2.3/HUD/Base-01.png" id="1_30pts"]
 [ext_resource type="Script" path="res://ui/status_panel.gd" id="1_oaq1a"]
-[ext_resource type="Texture2D" uid="uid://utvcjwmee2hl" path="res://assets/generic_char_v0.2/png/blue/char_blue_1.png" id="2_ebsk0"]
+[ext_resource type="Texture2D" uid="uid://bn2ten45mvow3" path="res://assets/generic_char_v0.2/png/blue/char_blue_1.png" id="2_ebsk0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uhqsg"]
 content_margin_left = 3.0
@@ -28,6 +28,14 @@ region = Rect2(308, 118, 56, 4)
 atlas = ExtResource("1_30pts")
 region = Rect2(308, 86, 56, 4)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_avr6h"]
+atlas = ExtResource("1_30pts")
+region = Rect2(307, 6, 58, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5nk0"]
+atlas = ExtResource("1_30pts")
+region = Rect2(308, 39, 56, 2)
+
 [node name="StatusPanel" type="HBoxContainer"]
 script = ExtResource("1_oaq1a")
 
@@ -41,7 +49,11 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_nu45k")
 stretch_mode = 5
 
-[node name="HealthBar" type="TextureProgressBar" parent="."]
+[node name="V" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="HealthBar" type="TextureProgressBar" parent="V"]
 layout_mode = 2
 size_flags_vertical = 4
 max_value = 1.0
@@ -51,11 +63,21 @@ texture_over = SubResource("AtlasTexture_f7no0")
 texture_progress = SubResource("AtlasTexture_h83ya")
 texture_progress_offset = Vector2(1, 1)
 
-[node name="EasedHealthBar" type="TextureProgressBar" parent="HealthBar"]
+[node name="EasedHealthBar" type="TextureProgressBar" parent="V/HealthBar"]
 show_behind_parent = true
+layout_mode = 0
 size_flags_vertical = 4
 max_value = 1.0
 step = 0.0
 value = 1.0
 texture_progress = SubResource("AtlasTexture_mpyks")
+texture_progress_offset = Vector2(1, 1)
+
+[node name="EnergyBar" type="TextureProgressBar" parent="V"]
+layout_mode = 2
+max_value = 1.0
+step = 0.0
+value = 0.48
+texture_over = SubResource("AtlasTexture_avr6h")
+texture_progress = SubResource("AtlasTexture_h5nk0")
 texture_progress_offset = Vector2(1, 1)
