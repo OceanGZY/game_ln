@@ -11,6 +11,8 @@ enum ACTState{
 	ATTACK1,
 	ATTACK2,
 	ATTACK3,
+	HURT,
+	DYING
 }
 
 const GROUND_STATES:=[
@@ -22,6 +24,8 @@ const JUMP_VELOCITY := -320.0
 const FLOOR_ACCELERATION:=RUN_SPEED/0.2
 const AIR_ACCELERATION:=RUN_SPEED/0.1
 const WALL_JUMP_VELOCITY:= Vector2(500,-280)
+
+const KNOCKBACK_AMOUT:= 200.0
 
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var jump_request_timer: Timer = $JumpRequestTimer
@@ -36,10 +40,14 @@ const WALL_JUMP_VELOCITY:= Vector2(500,-280)
 @onready var state_macine: StateMacine = $StateMacine
 
 @export var can_comboo:bool = false
+@onready var stats: Stats = $Stats
+@onready var invincible_timer: Timer = $InvincibleTimer
 
 var default_gravity := ProjectSettings.get("physics/2d/default_gravity") as float
 var is_first_tick:=false
 var is_comboo_requested := false
+var pending_damage:Damage
+
 
 #func _physics_process(delta:float) -> void:
 	#var direction := Input.get_axis("move_left","move_right")
@@ -83,6 +91,11 @@ var is_comboo_requested := false
 
 
 func tick_physics(state:ACTState,delta:float)->void:
+	if invincible_timer.time_left >0:
+		graphics.modulate.a = sin(Time.get_ticks_msec() /20 ) *0.5 +0.5
+	else:
+		graphics.modulate.a = 1
+	
 	match state:
 		ACTState.IDLE:
 			move(default_gravity,delta)
@@ -149,7 +162,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	
 	
-func get_next_state(state:ACTState)->ACTState:
+func get_next_state(state:ACTState)-> int:
+	if stats.health ==0:
+		return  StateMacine.KEEP_CURRENT if state==ACTState.DYING else ACTState.DYING
+	if pending_damage:
+		#print("有待处理的伤害")
+		return ACTState.HURT
+	
+	
 	var can_jump := is_on_floor() or coyote_timer.time_left>0 # coyote_timer实现在空中连跳
 	var should_jump := can_jump and  jump_request_timer.time_left>0
 	if should_jump:
@@ -215,9 +235,13 @@ func get_next_state(state:ACTState)->ACTState:
 		ACTState.ATTACK3:
 			if not animation_player.is_playing():
 				return ACTState.IDLE
-
+		
+		ACTState.HURT:
+			if not animation_player.is_playing():
+				return ACTState.IDLE
+			
 	
-	return state
+	return StateMacine.KEEP_CURRENT
 	
 func transition_state(from:ACTState,to:ACTState) -> void:
 	
@@ -266,6 +290,19 @@ func transition_state(from:ACTState,to:ACTState) -> void:
 		ACTState.ATTACK3:
 			animation_player.play("attack3")
 			is_comboo_requested=false
+			
+		ACTState.HURT:
+			animation_player.play("hurt")
+			stats.health -= pending_damage.amount
+			var dir:= pending_damage.source.global_position.direction_to(global_position)
+			velocity = dir * KNOCKBACK_AMOUT
+			
+			pending_damage =null
+			invincible_timer.start()
+			
+		ACTState.DYING:
+			animation_player.play("die")
+			invincible_timer.stop()
 	
 	# 时间膨胀效果
 	#if to == ACTState.WALLJUMP:
@@ -278,3 +315,17 @@ func transition_state(from:ACTState,to:ACTState) -> void:
 
 func can_wall_slide()->bool:
 	return is_on_wall() and hand_checker.is_colliding() and foot_checker.is_colliding()
+
+
+func _on_hurt_box_hurt(hitbox: Variant) -> void:
+	print(invincible_timer.time_left)
+	if invincible_timer.time_left>0:
+		return
+	
+	pending_damage = Damage.new()
+	pending_damage.amount = 1
+	pending_damage.source = hitbox.owner
+	
+	
+func die()->void:
+	get_tree().reload_current_scene()

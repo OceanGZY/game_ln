@@ -32,3 +32,7 @@ func move(speed:float,delta:float):
 	velocity.y += default_gravity * delta
 	
 	move_and_slide()
+
+
+func die() ->void:
+	queue_free()

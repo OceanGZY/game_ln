@@ -1,6 +1,9 @@
 extends Node
 class_name StateMacine
 
+
+const KEEP_CURRENT = -1
+
 var current_state:int=-1:
 	set(v):
 		owner.transition_state(current_state,v)
@@ -16,7 +19,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	while true:
 		var next_state = owner.get_next_state(current_state) as int
-		if current_state == next_state:
+		if KEEP_CURRENT == next_state:
 			break
 		current_state = next_state
 	
