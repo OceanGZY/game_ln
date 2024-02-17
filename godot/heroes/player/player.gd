@@ -211,6 +211,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("slide"):
 		slide_request_timer.start()
 		
+	if event.is_action_pressed("ui_cancel"):
+		Game.back_to_title()
 		
 
 func register_interactable(v :Interactable) ->void:
@@ -433,4 +435,4 @@ func _on_hurt_box_hurt(hitbox: Variant) -> void:
 	
 	
 func die()->void:
-	get_tree().reload_current_scene()
+	Game.back_to_title()

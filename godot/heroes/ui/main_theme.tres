@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://yewbn3vxp6b7"]
+
+[ext_resource type="FontFile" uid="uid://bww5ocx8elu2g" path="res://assets/SmileySans-Oblique.ttf" id="1_ia7e0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8jtkq"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+
+[resource]
+default_font = ExtResource("1_ia7e0")
+Button/styles/disabled = SubResource("StyleBoxEmpty_8jtkq")
+Button/styles/hover = SubResource("StyleBoxEmpty_8jtkq")
+Button/styles/normal = SubResource("StyleBoxEmpty_8jtkq")
+Button/styles/pressed = SubResource("StyleBoxEmpty_8jtkq")

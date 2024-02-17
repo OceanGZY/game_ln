@@ -1,13 +1,13 @@
 [gd_scene load_steps=33 format=3 uid="uid://cnshc3jqtbc8s"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8ove2"]
-[ext_resource type="Texture2D" uid="uid://utvcjwmee2hl" path="res://assets/generic_char_v0.2/png/blue/char_blue_1.png" id="1_je7wr"]
-[ext_resource type="Texture2D" uid="uid://whntivefshyi" path="res://assets/generic_char_v0.2/png/blue/char_blue_2.png" id="2_myq7f"]
+[ext_resource type="Texture2D" uid="uid://bn2ten45mvow3" path="res://assets/generic_char_v0.2/png/blue/char_blue_1.png" id="1_je7wr"]
+[ext_resource type="Texture2D" uid="uid://3tq3f20104jo" path="res://assets/generic_char_v0.2/png/blue/char_blue_2.png" id="2_myq7f"]
 [ext_resource type="Script" path="res://classes/StateMachine.gd" id="3_sjcrk"]
 [ext_resource type="Script" path="res://classes/HurtBox.gd" id="5_wu8vh"]
 [ext_resource type="Script" path="res://classes/HitBox.gd" id="6_r4op2"]
 [ext_resource type="PackedScene" uid="uid://dwm12sihyakv8" path="res://ui/status_panel.tscn" id="8_hfbdg"]
-[ext_resource type="Texture2D" uid="uid://doqq3kisi4agu" path="res://assets/gdb-keyboard-2.png" id="9_mcfrc"]
+[ext_resource type="Texture2D" uid="uid://b8vgajoqv3aax" path="res://assets/gdb-keyboard-2.png" id="9_mcfrc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_13xrn"]
 size = Vector2(14, 26)

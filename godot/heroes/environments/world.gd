@@ -1,6 +1,7 @@
 extends Node2D
+class_name World
 
-@onready var tile_map: TileMap = $TileMap
+@onready var tile_map: TileMap = $TileMap2
 @onready var camera_2d: Camera2D = $Player/Camera2D
 @onready var player: Player = $Player
 
@@ -32,7 +33,7 @@ func update_player(pos:Vector2,direction:Player.Direction) -> void:
 	player.fall_from_y = pos.y
 	player.direction = direction
 	camera_2d.reset_smoothing() # 将相机立即设置到目标位置
-
+	camera_2d.force_update_scroll()
 
 func to_dict()->Dictionary:
 	var enemies_alive :=[]
@@ -49,3 +50,4 @@ func from_dict(dict:Dictionary)->void:
 		var path:= get_path_to(node) as String
 		if path not in dict.enemies_alive:
 			node.queue_free()
+

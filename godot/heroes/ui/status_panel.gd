@@ -16,13 +16,13 @@ func _ready() -> void:
 	update_energy()
 	
 	# 处理tree退出的时候， update的父节点为空的情况
-	tree_exited.connect(
-		func():
-			stats.health_changed.disconnect(update_health)
-			stats.energy_changed.disconnect(update_health)
+	tree_exited.connect(func ():
+		stats.health_changed.disconnect(update_health)
+		stats.energy_changed.disconnect(update_energy)
 	)
 
 func update_health(skip_anim:=false)-> void:
+	print(stats.health)
 	var percentage:= stats.health / float(stats.max_health)
 	health_bar.value = percentage
 	if skip_anim:
