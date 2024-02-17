@@ -118,6 +118,9 @@ var fall_from_y:float
 			#coyote_timer.stop()
 
 
+func _ready() -> void:
+	stand(default_gravity,0.01)
+
 func tick_physics(state:ACTState,delta:float)->void:
 	interaction_icon.visible = not interacting_with.is_empty()
 	
