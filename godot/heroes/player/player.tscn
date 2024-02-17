@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cnshc3jqtbc8s"]
+[gd_scene load_steps=33 format=3 uid="uid://cnshc3jqtbc8s"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8ove2"]
 [ext_resource type="Texture2D" uid="uid://utvcjwmee2hl" path="res://assets/generic_char_v0.2/png/blue/char_blue_1.png" id="1_je7wr"]
@@ -11,57 +11,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_13xrn"]
 size = Vector2(14, 26)
-
-[sub_resource type="Animation" id="Animation_65782"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Graphics/Sprite2D:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Rect2(168, 112, 168, 56)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Graphics/Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Graphics/Sprite2D:vframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Graphics/Sprite2D:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
 
 [sub_resource type="Animation" id="Animation_c4yb0"]
 resource_name = "attack3"
@@ -2060,7 +2009,6 @@ tracks/11/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pgxyf"]
 _data = {
-"RESET": SubResource("Animation_65782"),
 "attack1": SubResource("Animation_c4yb0"),
 "attack2": SubResource("Animation_vkmvh"),
 "attack3": SubResource("Animation_vn6qh"),
@@ -2115,7 +2063,6 @@ animations = [{
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_8ove2")
-can_comboo = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -13)
@@ -2140,11 +2087,12 @@ script = ExtResource("3_sjcrk")
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics"]
-position = Vector2(0, -28)
+position = Vector2(7, -28)
 texture = ExtResource("2_myq7f")
-hframes = 3
+hframes = 8
+frame = 4
 region_enabled = true
-region_rect = Rect2(168, 112, 168, 56)
+region_rect = Rect2(0, 224, 448, 56)
 
 [node name="HandChecker" type="RayCast2D" parent="Graphics"]
 position = Vector2(0, -26)
@@ -2157,7 +2105,6 @@ target_position = Vector2(9, 0)
 [node name="HurtBox" type="Area2D" parent="Graphics"]
 collision_layer = 8
 collision_mask = 0
-monitorable = false
 script = ExtResource("5_wu8vh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/HurtBox"]
@@ -2173,17 +2120,14 @@ script = ExtResource("6_r4op2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/HitBox"]
 position = Vector2(17, -17)
 shape = SubResource("RectangleShape2D_14ctt")
-disabled = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Graphics/HitBox"]
 position = Vector2(10.5, -15.5)
 shape = SubResource("RectangleShape2D_5kk65")
-disabled = true
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Graphics/HitBox"]
 position = Vector2(18.5, -18.5)
 shape = SubResource("RectangleShape2D_vy3pv")
-disabled = true
 
 [node name="InvincibleTimer" type="Timer" parent="."]
 wait_time = 2.0

@@ -9,9 +9,8 @@ extends HBoxContainer
 func _ready() -> void:
 	if not stats:
 		stats = Game.player_stats
-	
 	stats.health_changed.connect(update_health)
-	update_health(true) # 只在第一次同步的时候做动画
+	update_health(true) # 只在第一的时候展示动画
 	
 	stats.energy_changed.connect(update_energy)
 	update_energy()

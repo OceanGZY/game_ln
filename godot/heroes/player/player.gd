@@ -434,3 +434,4 @@ func _on_hurt_box_hurt(hitbox: Variant) -> void:
 	
 func die()->void:
 	get_tree().reload_current_scene()
+	Game.player_stats.reset()

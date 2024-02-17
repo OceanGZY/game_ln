@@ -26,3 +26,7 @@ signal  energy_changed
 
 func _process(delta: float) -> void:
 	energy += energy_regen
+
+func reset():
+	health = max_health
+	energy = max_energy
