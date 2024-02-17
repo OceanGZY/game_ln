@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpix171x17lrb"]
+[gd_scene load_steps=15 format=3 uid="uid://cpix171x17lrb"]
 
 [ext_resource type="Texture2D" uid="uid://chivdqjksj7a7" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="1_kciok"]
 [ext_resource type="Script" path="res://environments/world.gd" id="1_snigp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://classes/Interactable.gd" id="7_1ae4a"]
 [ext_resource type="PackedScene" uid="uid://dgrfpcxq4qlry" path="res://environments/minegate.tscn" id="8_w520w"]
 [ext_resource type="Script" path="res://classes/EntryPoint.gd" id="9_fukjm"]
+[ext_resource type="PackedScene" uid="uid://bqrgyn85attn2" path="res://environments/save_stone.tscn" id="10_i62df"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_40irv"]
 texture = ExtResource("1_kciok")
@@ -632,3 +633,6 @@ shape = SubResource("RectangleShape2D_p33i6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TempLocPoint2"]
 position = Vector2(-80, 378)
 shape = SubResource("RectangleShape2D_p33i6")
+
+[node name="SaveStone" parent="." instance=ExtResource("10_i62df")]
+position = Vector2(-242, 311)

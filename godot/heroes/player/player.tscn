@@ -2133,22 +2133,20 @@ shape = SubResource("RectangleShape2D_vy3pv")
 wait_time = 2.0
 one_shot = true
 
-[node name="FollowPlayer" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("8_hfbdg")]
+[node name="FollowPlayer" parent="." instance=ExtResource("8_hfbdg")]
 visible = false
 offset_left = -54.0
 offset_top = -60.0
 offset_right = 34.0
 offset_bottom = -34.0
-stats = NodePath("")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="StatusPanelFixedUI" parent="CanvasLayer" node_paths=PackedStringArray("stats") instance=ExtResource("8_hfbdg")]
+[node name="StatusPanelFixedUI" parent="CanvasLayer" instance=ExtResource("8_hfbdg")]
 offset_left = 14.0
 offset_top = 14.0
 offset_right = 102.0
 offset_bottom = 40.0
-stats = NodePath("")
 
 [node name="InteractionIcon" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -45)
