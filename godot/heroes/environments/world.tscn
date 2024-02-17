@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://cpix171x17lrb"]
 
-[ext_resource type="Texture2D" uid="uid://c6ogy257hmxt0" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="1_kciok"]
+[ext_resource type="Texture2D" uid="uid://chivdqjksj7a7" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="1_kciok"]
 [ext_resource type="Script" path="res://environments/world.gd" id="1_snigp"]
 [ext_resource type="PackedScene" uid="uid://cnshc3jqtbc8s" path="res://player/player.tscn" id="2_68n4d"]
-[ext_resource type="Texture2D" uid="uid://lcjp0wcbyy8e" path="res://assets/Legacy-Fantasy - High Forest 2.3/Background/Background.png" id="4_kmkfm"]
-[ext_resource type="Texture2D" uid="uid://44rn2ybbcyc" path="res://assets/Legacy-Fantasy - High Forest 2.3/Trees/Background.png" id="5_tkrnj"]
+[ext_resource type="Texture2D" uid="uid://ckot1heissd5x" path="res://assets/Legacy-Fantasy - High Forest 2.3/Background/Background.png" id="4_kmkfm"]
+[ext_resource type="Texture2D" uid="uid://xutinaay2s1a" path="res://assets/Legacy-Fantasy - High Forest 2.3/Trees/Background.png" id="5_tkrnj"]
 [ext_resource type="PackedScene" uid="uid://7th7lg6roqn0" path="res://enemies/boar.tscn" id="6_frici"]
 [ext_resource type="Script" path="res://classes/Interactable.gd" id="7_1ae4a"]
 [ext_resource type="PackedScene" uid="uid://dgrfpcxq4qlry" path="res://environments/minegate.tscn" id="8_w520w"]
@@ -489,6 +489,7 @@ layer_0/tile_data = PackedInt32Array(-458678, 262144, 2, -524214, 262144, 2, -58
 [node name="LeftEntryPoint" type="Marker2D" parent="TileMap"]
 position = Vector2(-659, 221)
 script = ExtResource("9_fukjm")
+direction = -1
 
 [node name="RightEntryPoint" type="Marker2D" parent="TileMap"]
 position = Vector2(-79, 337)
@@ -499,10 +500,13 @@ position = Vector2(-746, 171)
 rotation = 3.14159
 scale = Vector2(1, -1)
 path = "res://environments/world.tscn"
+entry_point = "RightEntryPoint"
 
 [node name="MinegateRight" parent="TileMap" instance=ExtResource("8_w520w")]
 position = Vector2(4, 320)
 path = "res://environments/world.tscn"
+entry_point = "LeftEntryPoint"
+metadata/_edit_pinned_properties_ = [&"entry_point"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -594,7 +598,7 @@ region_enabled = true
 region_rect = Rect2(704, 0, 96, 256)
 
 [node name="Player" parent="." instance=ExtResource("2_68n4d")]
-position = Vector2(-679, 169)
+position = Vector2(-666, 236)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-36, -43)
@@ -605,7 +609,7 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="Boar" parent="." instance=ExtResource("6_frici")]
-position = Vector2(-541, 164)
+position = Vector2(-541, 172)
 
 [node name="Interactable" type="Area2D" parent="."]
 script = ExtResource("7_1ae4a")

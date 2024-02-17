@@ -2,6 +2,11 @@ extends CharacterBody2D
 
 class_name Player
 
+enum Direction{
+	LEFT=-1,
+	RIGHT=1
+}
+
 enum ACTState{
 	IDLE,
 	RUNNING,
@@ -51,7 +56,14 @@ const LANDING_HEIGHT:=100
 @onready var state_macine: StateMacine = $StateMacine
 
 @export var can_comboo:bool = false
-@onready var stats: Stats = $Stats
+@export var direction:= Direction.RIGHT:
+	set(v):
+		direction = v
+		if not is_node_ready():
+			await ready
+		graphics.scale.x = direction
+
+@onready var stats: Stats = Game.player_stats
 @onready var invincible_timer: Timer = $InvincibleTimer
 @onready var interaction_icon: AnimatedSprite2D = $InteractionIcon
 @onready var slide_request_timer: Timer = $SlideRequestTimer
@@ -66,11 +78,11 @@ var fall_from_y:float
 
 
 #func _physics_process(delta:float) -> void:
-	#var direction := Input.get_axis("move_left","move_right")
+	#var movement := Input.get_axis("move_left","move_right")
 #
-	##velocity.x = direction * RUN_SPEED
+	##velocity.x = movement * RUN_SPEED
 	#var acceleration = FLOOR_ACCELERATION if is_on_floor() else AIR_ACCELERATION
-	#velocity.x = move_toward(velocity.x,direction* RUN_SPEED, acceleration*delta)
+	#velocity.x = move_toward(velocity.x,movement* RUN_SPEED, acceleration*delta)
 	#velocity.y += gravity*delta 
 	#
 	##print("coyote_timer.time_left",coyote_timer.time_left)
@@ -83,7 +95,7 @@ var fall_from_y:float
 		#jump_request_timer.stop()
 	#
 	#if is_on_floor():
-		#if is_zero_approx(direction) and is_zero_approx(velocity.x): # x分量几乎为0
+		#if is_zero_approx(movement) and is_zero_approx(velocity.x): # x分量几乎为0
 			#animation_player.play("idle")
 		#else:
 			#animation_player.play("running")
@@ -93,8 +105,8 @@ var fall_from_y:float
 		#animation_player.play("fall")
 		#
 		#
-	#if not is_zero_approx(direction):
-		#sprite_2d.flip_h= direction <0
+	#if not is_zero_approx(movement):
+		#sprite_2d.flip_h= movement <0
 	#
 	#var was_on_floor := is_on_floor()
 	#move_and_slide()
@@ -132,12 +144,12 @@ func tick_physics(state:ACTState,delta:float)->void:
 		
 		ACTState.WALLSLIDING:
 			move(default_gravity / 3 ,delta)
-			graphics.scale.x = get_wall_normal().x
+			direction = Direction.LEFT if get_wall_normal().x<0 else Direction.RIGHT
 		
 		ACTState.WALLJUMP:
 			if state_macine.state_time <0.1:
 				stand(0.0 if is_first_tick else default_gravity,delta)
-				graphics.scale.x = get_wall_normal().x
+				direction = Direction.LEFT if get_wall_normal().x<0 else Direction.RIGHT
 			else:
 				move(default_gravity,delta)
 		
@@ -156,12 +168,12 @@ func tick_physics(state:ACTState,delta:float)->void:
 	is_first_tick= false
 
 func move(gravity:float,delta:float)->void:
-	var direction := Input.get_axis("move_left","move_right")
+	var movement := Input.get_axis("move_left","move_right")
 	var acceleration = FLOOR_ACCELERATION if is_on_floor() else AIR_ACCELERATION
-	velocity.x = move_toward(velocity.x,direction* RUN_SPEED, acceleration*delta)
+	velocity.x = move_toward(velocity.x,movement* RUN_SPEED, acceleration*delta)
 	velocity.y += gravity*delta
-	if not is_zero_approx(direction):
-		graphics.scale.x = -1 if direction <0 else 1
+	if not is_zero_approx(movement):
+		direction = Direction.LEFT if movement <0 else Direction.RIGHT
 	move_and_slide()
 	
 func slide(delta:float)->void:
@@ -228,8 +240,8 @@ func get_next_state(state:ACTState)-> int:
 	if state in GROUND_STATES and not is_on_floor():
 		return ACTState.FALL
 		
-	var direction := Input.get_axis("move_left","move_right")
-	var is_stand_idle := is_zero_approx(direction) and is_zero_approx(velocity.x) 
+	var movement := Input.get_axis("move_left","move_right")
+	var is_stand_idle := is_zero_approx(movement) and is_zero_approx(velocity.x) 
 	
 	match state:
 		ACTState.IDLE:
