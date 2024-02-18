@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxhlhrvgecjsh"]
+
+[ext_resource type="PackedScene" uid="uid://d3arnes8p8p0i" path="res://character/enemy/enemy.tscn" id="1_050v2"]
+[ext_resource type="Script" path="res://character/enemy/flying_creature.gd" id="2_hjnyl"]
+[ext_resource type="Texture2D" uid="uid://dp5js1i6x8ive" path="res://assets/enemies/flying creature/fly_anim_f0.png" id="2_vj5r8"]
+[ext_resource type="Texture2D" uid="uid://pdb7led7tw71" path="res://assets/enemies/flying creature/fly_anim_f1.png" id="3_3clk1"]
+[ext_resource type="Texture2D" uid="uid://cj6eqcvp6t6hb" path="res://assets/enemies/flying creature/fly_anim_f2.png" id="4_oc36v"]
+[ext_resource type="Texture2D" uid="uid://bhtwd75x7qxcv" path="res://assets/enemies/flying creature/fly_anim_f3.png" id="5_jwecc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6rq7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vj5r8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3clk1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_oc36v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jwecc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vj5r8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3clk1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_oc36v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jwecc")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yc8r1"]
+radius = 6.0
+
+[node name="FlyingCreature" instance=ExtResource("1_050v2")]
+script = ExtResource("2_hjnyl")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_6rq7s")
+animation = &"idle"
+autoplay = "idle"
+frame = 3
+frame_progress = 0.0872768
+
+[node name="CollisionShape2D" parent="." index="3"]
+shape = SubResource("CircleShape2D_yc8r1")

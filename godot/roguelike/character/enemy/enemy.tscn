@@ -1,7 +1,55 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3arnes8p8p0i"]
+[gd_scene load_steps=6 format=3 uid="uid://d3arnes8p8p0i"]
 
 [ext_resource type="PackedScene" uid="uid://bkk1pfq71q56v" path="res://character/base_character.tscn" id="1_s8lh1"]
 [ext_resource type="Script" path="res://character/enemy/enemy.gd" id="2_47sqr"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_jby2i"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_kgfyp"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gdh3o"]
+_data = {
+"idle": SubResource("Animation_kgfyp")
+}
+
 [node name="Enemy" instance=ExtResource("1_s8lh1")]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("2_47sqr")
+speed = 50
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_jby2i")
+animation = &"run"
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_gdh3o")
+}
+
+[node name="Node2D" type="Node2D" parent="." index="4"]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Node2D" index="0"]
+avoidance_enabled = true
+radius = 6.0
+max_speed = 50.0
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="Node2D" index="1"]
+wait_time = 0.1
+autostart = true
+
+[connection signal="velocity_computed" from="Node2D/NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="Node2D/Timer" to="." method="_on_timer_timeout"]

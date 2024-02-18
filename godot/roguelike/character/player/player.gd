@@ -1,4 +1,6 @@
 extends BaseCharacter
+class_name Player
+
 @onready var sword = get_node("Sword")
 @onready var sword_animation_player = sword.get_node("SwordAnimationPlayer")
 @onready var sword_slash_sprite = sword.get_node("SlashSprite")
