@@ -38,4 +38,8 @@ func get_input():
 		mov_direction += Vector2.LEFT
 	if Input.is_action_pressed("ui_right"):
 		mov_direction += Vector2.RIGHT
-		
+
+func _on_hurt_box_hurt(hitbox: HitBox) -> void:
+	var pending_damage:= Damge.new()
+	pending_damage.damage = hitbox.damage
+	pending_damage.soure = hitbox.owner
