@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3arnes8p8p0i"]
+[gd_scene load_steps=8 format=3 uid="uid://d3arnes8p8p0i"]
 
 [ext_resource type="PackedScene" uid="uid://bkk1pfq71q56v" path="res://character/base_character.tscn" id="1_s8lh1"]
 [ext_resource type="Script" path="res://character/enemy/enemy.gd" id="2_47sqr"]
+[ext_resource type="Script" path="res://classes/HitBox.gd" id="3_4vvqf"]
+[ext_resource type="Script" path="res://classes/HurtBox.gd" id="4_o7p6g"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jby2i"]
 animations = [{
@@ -28,7 +30,9 @@ _data = {
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("2_47sqr")
-speed = 50
+speed = 10
+life = 5
+damage = 1
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_jby2i")
@@ -45,11 +49,21 @@ libraries = {
 avoidance_enabled = true
 radius = 6.0
 max_speed = 50.0
-debug_enabled = true
 
 [node name="Timer" type="Timer" parent="Node2D" index="1"]
 wait_time = 0.1
 autostart = true
 
+[node name="HitBox" type="Area2D" parent="." index="5"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("3_4vvqf")
+
+[node name="HurtBox" type="Area2D" parent="." index="6"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("4_o7p6g")
+
 [connection signal="velocity_computed" from="Node2D/NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="Node2D/Timer" to="." method="_on_timer_timeout"]
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

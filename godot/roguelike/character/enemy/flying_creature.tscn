@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxhlhrvgecjsh"]
+[gd_scene load_steps=11 format=3 uid="uid://cxhlhrvgecjsh"]
 
 [ext_resource type="PackedScene" uid="uid://d3arnes8p8p0i" path="res://character/enemy/enemy.tscn" id="1_050v2"]
 [ext_resource type="Script" path="res://character/enemy/flying_creature.gd" id="2_hjnyl"]
@@ -47,6 +47,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_yc8r1"]
 radius = 6.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jkaql"]
+size = Vector2(12, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t4gyi"]
+radius = 6.0
+
 [node name="FlyingCreature" instance=ExtResource("1_050v2")]
 script = ExtResource("2_hjnyl")
 
@@ -59,3 +65,11 @@ frame_progress = 0.0872768
 
 [node name="CollisionShape2D" parent="." index="3"]
 shape = SubResource("CircleShape2D_yc8r1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource("RectangleShape2D_jkaql")
+debug_color = Color(0.94902, 0, 0.568627, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CircleShape2D_t4gyi")
+debug_color = Color(0, 0.603922, 0.666667, 0.419608)

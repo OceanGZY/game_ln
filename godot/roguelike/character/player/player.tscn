@@ -7,8 +7,8 @@
 [ext_resource type="Script" path="res://character/player/player_finite_state_machine.gd" id="3_vrjre"]
 [ext_resource type="Texture2D" uid="uid://6ol2pq3fxiuo" path="res://assets/heroes/knight/weapon_sword_1.png" id="6_a00te"]
 [ext_resource type="Texture2D" uid="uid://cs52t5blc5hlj" path="res://assets/effects (new)/slash_effect_anim_spritesheet.png" id="7_276fu"]
-[ext_resource type="Script" path="res://classes/hit_box.gd" id="7_f3sdn"]
-[ext_resource type="Script" path="res://classes/hurt_box.gd" id="9_3e8jn"]
+[ext_resource type="Script" path="res://classes/HitBox.gd" id="7_ydyo2"]
+[ext_resource type="Script" path="res://classes/HurtBox.gd" id="9_5oq3u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_20cvy"]
 atlas = ExtResource("2_a623a")
@@ -388,12 +388,13 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8i7bc"]
-radius = 5.0
+radius = 6.0
 
 [node name="Player" instance=ExtResource("1_cipe4")]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("2_lg2e0")
+life = 5
 
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("3_vrjre")
@@ -401,7 +402,6 @@ script = ExtResource("3_vrjre")
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_63ts8")
 animation = &"idle"
-frame_progress = 0.664178
 
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {
@@ -424,9 +424,9 @@ texture = ExtResource("6_a00te")
 offset = Vector2(5, -4)
 
 [node name="HitBox" type="Area2D" parent="Sword/Node2D/Sprite2D" index="0"]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 16
-script = ExtResource("7_f3sdn")
+script = ExtResource("7_ydyo2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/Node2D/Sprite2D/HitBox" index="0"]
 position = Vector2(5.65684, -4.24262)
@@ -450,12 +450,14 @@ libraries = {
 }
 
 [node name="HurtBox" type="Area2D" parent="." index="5"]
-collision_layer = 16
-collision_mask = 8
-script = ExtResource("9_3e8jn")
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("9_5oq3u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("CircleShape2D_8i7bc")
 debug_color = Color(0.803922, 0.337255, 0.635294, 0.419608)
+
+[node name="Camera2D" type="Camera2D" parent="." index="6"]
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

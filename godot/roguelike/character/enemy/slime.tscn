@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dyepr7qulgrmr"]
+[gd_scene load_steps=19 format=3 uid="uid://dyepr7qulgrmr"]
 
 [ext_resource type="PackedScene" uid="uid://d3arnes8p8p0i" path="res://character/enemy/enemy.tscn" id="1_h2emh"]
 [ext_resource type="Script" path="res://character/enemy/slime.gd" id="2_faw7m"]
@@ -67,6 +67,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_q6a5k"]
 radius = 7.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hd8k"]
+size = Vector2(16, 12)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kbrdj"]
+radius = 7.07107
+
 [node name="Slime" instance=ExtResource("1_h2emh")]
 script = ExtResource("2_faw7m")
 
@@ -77,3 +83,10 @@ frame_progress = 0.640122
 
 [node name="CollisionShape2D" parent="." index="3"]
 shape = SubResource("CircleShape2D_q6a5k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource("RectangleShape2D_2hd8k")
+debug_color = Color(0.956863, 0, 0.529412, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CircleShape2D_kbrdj")

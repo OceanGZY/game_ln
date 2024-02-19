@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c4sxki5qckfau"]
+[gd_scene load_steps=19 format=3 uid="uid://c4sxki5qckfau"]
 
 [ext_resource type="PackedScene" uid="uid://d3arnes8p8p0i" path="res://character/enemy/enemy.tscn" id="1_l7gk8"]
 [ext_resource type="Script" path="res://character/enemy/goblin.gd" id="2_i7q2u"]
@@ -64,7 +64,13 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6yxo8"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_qfu2u"]
+radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boq3g"]
+size = Vector2(13, 11)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5bre3"]
 radius = 6.0
 
 [node name="Goblin" instance=ExtResource("1_l7gk8")]
@@ -77,4 +83,13 @@ frame = 4
 frame_progress = 0.783174
 
 [node name="CollisionShape2D" parent="." index="3"]
-shape = SubResource("CircleShape2D_6yxo8")
+shape = SubResource("CircleShape2D_qfu2u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_boq3g")
+debug_color = Color(0.996078, 0, 0.211765, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CircleShape2D_5bre3")
+debug_color = Color(0.513726, 0.423529, 1, 0.419608)
