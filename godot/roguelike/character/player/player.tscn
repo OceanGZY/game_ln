@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://chxr5udyvtxss"]
+[gd_scene load_steps=34 format=3 uid="uid://chxr5udyvtxss"]
 
 [ext_resource type="PackedScene" uid="uid://bkk1pfq71q56v" path="res://character/base_character.tscn" id="1_cipe4"]
 [ext_resource type="Texture2D" uid="uid://dvufulrivv3jo" path="res://assets/heroes/knight/knight_idle_spritesheet.png" id="2_a623a"]
@@ -390,11 +390,13 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_8i7bc"]
 radius = 6.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rel1o"]
+bg_color = Color(0.192157, 0.721569, 0, 1)
+
 [node name="Player" instance=ExtResource("1_cipe4")]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("2_lg2e0")
-life = 5
 
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("3_vrjre")
@@ -402,6 +404,7 @@ script = ExtResource("3_vrjre")
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_63ts8")
 animation = &"idle"
+frame = 1
 
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {
@@ -457,5 +460,26 @@ script = ExtResource("9_5oq3u")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("CircleShape2D_8i7bc")
 debug_color = Color(0.803922, 0.337255, 0.635294, 0.419608)
+
+[node name="LifePanel" type="ProgressBar" parent="." index="6"]
+offset_left = -10.0
+offset_top = -14.0
+offset_right = 180.0
+offset_bottom = 13.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/fill = SubResource("StyleBoxFlat_rel1o")
+max_value = 1.0
+step = 0.0
+value = 1.0
+
+[node name="CharacterState" parent="." index="7"]
+max_health = 100
+health_regen = 0.5
+weapon_type = 1
+
+[node name="Camera2D" type="Camera2D" parent="." index="8"]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

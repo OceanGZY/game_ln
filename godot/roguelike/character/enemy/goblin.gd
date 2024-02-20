@@ -3,8 +3,5 @@ extends Enemy
 
 func _ready() -> void:
 	super()
-	life = 10
-	damage= 1
-
-#func _on_hurt_box_hurt(hit_source: HitBox) -> void:
-	#print("被layer打了： ",hit_source)
+	character_state.max_health = 10
+	print("哥布林的僧生命值",character_state.helath)

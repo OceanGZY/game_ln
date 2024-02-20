@@ -1,6 +1,9 @@
 extends CanvasLayer
 
 @onready var loading_page: ColorRect = $LoadingPage
+@onready var global_player_state: State = $GlobalPlayerState
+
+
 
 func _ready() -> void:
 	loading_page.color.a =0

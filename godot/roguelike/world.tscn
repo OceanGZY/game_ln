@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ns4rsq0ci3f4"]
+[gd_scene load_steps=13 format=3 uid="uid://ns4rsq0ci3f4"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_0limt"]
 [ext_resource type="Texture2D" uid="uid://b7ru61yps016s" path="res://assets/full tilemap.png" id="2_ejrd7"]
@@ -54,6 +54,12 @@ sources/0 = SubResource("TileSetAtlasSource_5j0p8")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6a138"]
 size = Vector2(50, 48)
 
+[sub_resource type="Curve2D" id="Curve2D_5cmst"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -71.2819, -69, 0, 0, 0, 0, 249.536, -73.9489, 0, 0, 0, 0, 213.826, 133.46, 0, 0, 0, 0, 25.6026, 153.119, 0, 0, 0, 0, -70.369, 149.187, 0, 0, 0, 0, -80.7845, -57.2383)
+}
+point_count = 6
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_0limt")
 
@@ -92,11 +98,6 @@ vertices = PackedVector2Array(22, -21, -23, -21, -24, 23, 24, 24)
 [node name="Player" parent="." instance=ExtResource("3_x82ic")]
 position = Vector2(54, 85)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-
 [node name="Goblin" parent="." instance=ExtResource("4_77bq0")]
 position = Vector2(52, 150)
 
@@ -105,3 +106,33 @@ position = Vector2(124, 20)
 
 [node name="FlyingCreature" parent="Slime" instance=ExtResource("6_5elbv")]
 position = Vector2(-100, 7)
+
+[node name="Alert" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 190.0
+offset_top = 120.5
+offset_right = 290.0
+offset_bottom = 149.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "游戏开始～"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="EnemyBornPath" type="Path2D" parent="."]
+position = Vector2(126.586, 90.2294)
+scale = Vector2(1.34415, 1.01732)
+curve = SubResource("Curve2D_5cmst")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="EnemyBornPath"]
+position = Vector2(-71.2819, -69)
+rotation = -0.0154248
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

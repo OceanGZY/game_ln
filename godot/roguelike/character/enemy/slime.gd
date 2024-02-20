@@ -2,5 +2,6 @@ extends Enemy
 
 func _ready() -> void:
 	super()
-	life = 3
-	damage= 1
+	character_state.max_health = 5
+	print("史莱姆的僧生命值",character_state.helath)
+

@@ -4,9 +4,8 @@ class_name HitBox
 
 signal hit(other:HurtBox)
 
-@export var damage:float =1.0
-@export var knock_back_force:int =300
-
+var damage:float =1.0
+var knock_back_force:int =300
 var knock_back_direction:Vector2 =Vector2.ZERO
 
 

@@ -2,10 +2,6 @@
 extends BaseCharacter
 class_name Enemy
 
-@export var speed:int =50
-@export var life:int =5
-@export var damage:int=1
-
 @onready var player:CharacterBody2D = get_tree().current_scene.get_node("Player")
 @onready var navigation_agent_2d: NavigationAgent2D = $Node2D/NavigationAgent2D
 @onready var hurt_box: HurtBox = $HurtBox
@@ -16,6 +12,7 @@ var force_back_velocity:Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	animated_sprite_2d.play("idle")
+	hit_box.damage = character_state.damage
 
 func _on_timer_timeout() -> void:
 	navigation_agent_2d.target_position = player.global_position
@@ -23,7 +20,7 @@ func _on_timer_timeout() -> void:
 	#print("player.position",player.position)
 	
 func  _physics_process(delta: float) -> void:
-	if life<=0:
+	if character_state.helath<=0:
 		hit_box.monitoring = false
 		hurt_box.monitorable = false
 		var tween:= create_tween()
@@ -38,7 +35,7 @@ func  _physics_process(delta: float) -> void:
 		#velocity = direction * speed
 		#move_and_slide()
 		#print("导航走向player的方向:", direction)
-		navigation_agent_2d.velocity =  force_back_velocity if force_back_velocity != Vector2.ZERO else direction * speed 
+		navigation_agent_2d.velocity =  force_back_velocity if force_back_velocity != Vector2.ZERO else direction * character_state.speed 
 		force_back_velocity = Vector2.ZERO
 		
 
@@ -51,7 +48,7 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 
 func _on_hurt_box_hurt(hit_source: HitBox) -> void:
 	print("父类被layer打了： ",hit_source)
-	life -= hit_source.damage
+	character_state.helath -= hit_source.damage
 	hit_source.knock_back_direction =   hit_source.global_position.direction_to(global_position).normalized()
 	#print("击退方向：",hit_source.knock_back_direction)
 	force_back_velocity =  hit_source.knock_back_force * hit_source.knock_back_direction

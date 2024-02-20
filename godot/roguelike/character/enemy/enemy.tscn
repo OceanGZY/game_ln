@@ -30,9 +30,6 @@ _data = {
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("2_47sqr")
-speed = 50
-life = 5
-damage = 1
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_jby2i")

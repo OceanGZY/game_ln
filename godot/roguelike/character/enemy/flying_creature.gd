@@ -2,5 +2,5 @@ extends Enemy
 
 func _ready() -> void:
 	super()
-	life = 1
-	damage= 1
+	print("flying的僧生命值",character_state.helath)
+

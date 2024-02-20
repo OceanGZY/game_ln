@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxemxwx7q4gxv"]
+[gd_scene load_steps=3 format=3 uid="uid://cxemxwx7q4gxv"]
 
 [ext_resource type="Script" path="res://global/Game.gd" id="1_qinag"]
+[ext_resource type="Script" path="res://classes/State.gd" id="2_7urms"]
 
 [node name="Game" type="CanvasLayer"]
 script = ExtResource("1_qinag")
+
+[node name="GlobalPlayerState" type="Node" parent="."]
+script = ExtResource("2_7urms")
 
 [node name="LoadingPage" type="ColorRect" parent="."]
 anchors_preset = 15

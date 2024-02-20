@@ -17,6 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+AllEnums="*res://global/AllEnums.gd"
+AllConfigs="*res://global/AllConfigs.gd"
 Game="*res://global/Game.tscn"
 
 [display]
