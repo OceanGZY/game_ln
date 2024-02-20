@@ -75,6 +75,7 @@ radius = 7.07107
 
 [node name="Slime" instance=ExtResource("1_h2emh")]
 script = ExtResource("2_faw7m")
+speed = 50
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_bjimr")

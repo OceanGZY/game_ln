@@ -1,0 +1,119 @@
+[gd_scene load_steps=9 format=3 uid="uid://cc2p7bgg18s5l"]
+
+[ext_resource type="Script" path="res://ui/title_screen.gd" id="1_mqllb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cn4ia"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u1xrs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a5unc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fetd1"]
+
+[sub_resource type="Animation" id="Animation_rgqdw"]
+resource_name = "new_animation"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ControllBtns:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(480, 122), Vector2(350, 122)]
+}
+
+[sub_resource type="Animation" id="Animation_xnewb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ControllBtns:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(480, 122)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_53la8"]
+_data = {
+"RESET": SubResource("Animation_xnewb"),
+"new_animation": SubResource("Animation_rgqdw")
+}
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mqllb")
+
+[node name="GameName" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 25.0
+offset_bottom = 97.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 52
+text = "ROGOUE LIKE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ControllBtns" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -148.0
+offset_right = 72.0
+offset_bottom = -47.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="NewGame" type="Button" parent="ControllBtns"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cn4ia")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1xrs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_a5unc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fetd1")
+text = "新的游戏"
+
+[node name="AboutGame" type="Button" parent="ControllBtns"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cn4ia")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1xrs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_a5unc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fetd1")
+text = "关于游戏"
+
+[node name="ExitGame" type="Button" parent="ControllBtns"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cn4ia")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1xrs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_a5unc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fetd1")
+text = "退出游戏"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_53la8")
+}
+autoplay = "new_animation"
+
+[connection signal="pressed" from="ControllBtns/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="ControllBtns/AboutGame" to="." method="_on_about_game_pressed"]
+[connection signal="pressed" from="ControllBtns/ExitGame" to="." method="_on_exit_game_pressed"]

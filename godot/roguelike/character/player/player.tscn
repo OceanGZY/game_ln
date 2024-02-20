@@ -458,6 +458,4 @@ script = ExtResource("9_5oq3u")
 shape = SubResource("CircleShape2D_8i7bc")
 debug_color = Color(0.803922, 0.337255, 0.635294, 0.419608)
 
-[node name="Camera2D" type="Camera2D" parent="." index="6"]
-
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

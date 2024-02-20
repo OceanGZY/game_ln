@@ -75,6 +75,7 @@ radius = 6.0
 
 [node name="Goblin" instance=ExtResource("1_l7gk8")]
 script = ExtResource("2_i7q2u")
+speed = 50
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_hovbl")

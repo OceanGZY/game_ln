@@ -2,7 +2,7 @@
 extends BaseCharacter
 class_name Enemy
 
-@export var speed:int =10
+@export var speed:int =50
 @export var life:int =5
 @export var damage:int=1
 

@@ -30,7 +30,7 @@ _data = {
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("2_47sqr")
-speed = 10
+speed = 50
 life = 5
 damage = 1
 
