@@ -11,14 +11,20 @@ class_name Player
 
 
 func _ready():
-	life_panel.value = character_state.helath  / character_state.max_health
+	life_panel.value = character_state.health  / character_state.max_health
 	hit_box.damage = character_state.damage
+	
 	hit_box.knock_back_direction = character_state.knock_back_direction
-	hit_box.knock_back_force = character_state.knock_back_force
-	current_player_state_panel.state_data = character_state
-	current_player_state_panel.state_data.emit_signal("current_state_changed")
+	hit_box.knock_back_force = character_state.knock_back_force	
 	
+	current_player_state_panel.cur_data = character_state
 	
+	character_state.score_changed.connect(current_player_state_panel.update_current_state_panel_score)
+	character_state.coins_changed.connect(current_player_state_panel.update_current_state_panel_coins)
+	character_state.health_changed.connect(current_player_state_panel.update_current_state_panel_health)
+	character_state.level_changed.connect(current_player_state_panel.update_current_state_panel_level)
+	character_state.experience_changed.connect(current_player_state_panel.update_current_state_panel_experience)
+	character_state.damage_changed.connect(current_player_state_panel.update_current_state_panel_damage)
 	
 	sword_slash_sprite.hide()
 	sword.visible=false
@@ -28,8 +34,8 @@ func _ready():
 
 
 func _process(delta):
-	life_panel.value = character_state.helath  / float(character_state.max_health)
-	character_state.helath += character_state.health_regen *delta
+	life_panel.value = character_state.health  / float(character_state.max_health)
+	character_state.health += character_state.health_regen *delta
 	var mouse_direction = (get_global_mouse_position()-global_position).normalized()
 	if mouse_direction.x>0 and animated_sprite_2d.flip_h:
 		animated_sprite_2d.flip_h =false
@@ -72,8 +78,8 @@ func _on_hurt_box_hurt(hit_source) -> void:
 	#pending_damage.soure = hitbox.owner
 	print("敌人撞住我了")
 	print(hit_source)
-	character_state.helath -= hit_source.damage
-	print("玩家剩余血量",character_state.helath)
+	character_state.health -= hit_source.damage
+	print("玩家剩余血量",character_state.health)
 	var tween:=create_tween()
 	tween.tween_property(self,"self_modulate",Color(255,0,0),0.1)
 	tween.tween_property(self,"self_modulate",Color(255,255,255),0.1)

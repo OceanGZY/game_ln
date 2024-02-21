@@ -11,13 +11,17 @@ const Gobilin=preload(AllConfigs.GOBLIN_RES)
 const Slime=preload(AllConfigs.SLIME_RES)
 const Flying=preload(AllConfigs.FLYING_RES)
 
-@export var gcout:=10
-@export var scout:=10
-@export var fcout:=20
+@export var gcout:=100
+@export var scout:=100
+@export var fcout:=200
 
 
 func _ready() -> void:
 	print("游戏开始")
+	spawn_enemy(AllEnums.EnemyType.GOBLIN)
+	spawn_enemy(AllEnums.EnemyType.FLYING)
+	spawn_enemy(AllEnums.EnemyType.SLIME)
+	spawn_enemy(AllEnums.EnemyType.GOBLIN)
 	var tween:= create_tween()
 	tween.tween_property(alert,"visible",false,1)
 	var used:= tile_map.get_used_rect()
@@ -29,6 +33,7 @@ func _ready() -> void:
 	camera_2d.limit_left = used.position.x * tile_size.x
 	print(used.position,used.end)
 	camera_2d.reset_smoothing() #将相机的位置立即设置为其当前平滑的目标位置
+	
 
 func _process(delta: float) -> void:
 	if gcout<=0 and scout <=0 and fcout<=0:
@@ -50,6 +55,8 @@ func spawn_enemy(enmey_type)->void:
 	enemy_born_path.progress_ratio = randf()
 	enemy.global_position = enemy_born_path.global_position
 	add_child(enemy)
+	enemy.enemy_die.connect(update_socre.bind(enmey_type))
+	
 
 
 func _on_timer_timeout() -> void:
@@ -59,3 +66,21 @@ func _on_timer_timeout() -> void:
 		spawn_enemy(AllEnums.EnemyType.SLIME)
 	if fcout>0:
 		spawn_enemy(AllEnums.EnemyType.FLYING)
+
+
+func update_socre(v:AllEnums.EnemyType):
+	var x:=0 
+	var y:=0
+	match v:
+		AllEnums.EnemyType.FLYING:
+			x=1
+			y=10
+		AllEnums.EnemyType.SLIME:
+			x=3
+			y=10
+		AllEnums.EnemyType.GOBLIN:
+			x=5
+			y=10	
+	
+	player.character_state.experience += x
+	player.character_state.score += y

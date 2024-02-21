@@ -1,11 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://ns4rsq0ci3f4"]
+[gd_scene load_steps=10 format=3 uid="uid://ns4rsq0ci3f4"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_0limt"]
 [ext_resource type="Texture2D" uid="uid://b7ru61yps016s" path="res://assets/full tilemap.png" id="2_ejrd7"]
 [ext_resource type="PackedScene" uid="uid://chxr5udyvtxss" path="res://character/player/player.tscn" id="3_x82ic"]
-[ext_resource type="PackedScene" uid="uid://c4sxki5qckfau" path="res://character/enemy/goblin.tscn" id="4_77bq0"]
-[ext_resource type="PackedScene" uid="uid://dyepr7qulgrmr" path="res://character/enemy/slime.tscn" id="5_wvjk5"]
-[ext_resource type="PackedScene" uid="uid://cxhlhrvgecjsh" path="res://character/enemy/flying_creature.tscn" id="6_5elbv"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_cjvq2"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -98,15 +95,6 @@ vertices = PackedVector2Array(22, -21, -23, -21, -24, 23, 24, 24)
 [node name="Player" parent="." instance=ExtResource("3_x82ic")]
 position = Vector2(54, 85)
 
-[node name="Goblin" parent="." instance=ExtResource("4_77bq0")]
-position = Vector2(52, 150)
-
-[node name="Slime" parent="." instance=ExtResource("5_wvjk5")]
-position = Vector2(124, 20)
-
-[node name="FlyingCreature" parent="Slime" instance=ExtResource("6_5elbv")]
-position = Vector2(-100, 7)
-
 [node name="Alert" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -123,7 +111,7 @@ theme_override_font_sizes/font_size = 20
 text = "游戏开始～"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 3.0
 autostart = true
 
 [node name="EnemyBornPath" type="Path2D" parent="."]

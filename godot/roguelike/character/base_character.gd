@@ -8,7 +8,6 @@ class_name BaseCharacter
 @onready var character_state: CurrentState = $CharacterState
 
 #const FRICTION :float =0.5 # 摩擦力
-
 #var mov_direction :Vector2 =Vector2.ZERO
 
 func _physics_process(delta):

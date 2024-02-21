@@ -2,6 +2,8 @@
 extends BaseCharacter
 class_name Enemy
 
+signal enemy_die
+
 @onready var player:CharacterBody2D = get_tree().current_scene.get_node("Player")
 @onready var navigation_agent_2d: NavigationAgent2D = $Node2D/NavigationAgent2D
 @onready var hurt_box: HurtBox = $HurtBox
@@ -13,6 +15,7 @@ var force_back_velocity:Vector2 = Vector2.ZERO
 func _ready() -> void:
 	animated_sprite_2d.play("idle")
 	hit_box.damage = character_state.damage
+	character_state.died.connect(_on_died)
 
 func _on_timer_timeout() -> void:
 	navigation_agent_2d.target_position = player.global_position
@@ -20,15 +23,7 @@ func _on_timer_timeout() -> void:
 	#print("player.position",player.position)
 	
 func  _physics_process(delta: float) -> void:
-	if character_state.helath<=0:
-		#navigation_agent_2d
-		hit_box.monitoring = false
-		hurt_box.monitorable = false
-		var tween:= create_tween()
-		tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_LINEAR)
-		tween.tween_property(self,"scale",Vector2.ZERO,0.5).from(Vector2.ONE)
-		tween.tween_callback(queue_free)
-	else:
+	if character_state.health >0:
 		var direction: = to_local(navigation_agent_2d.get_next_path_position()).normalized()
 		#print("navigation_agent_2d.get_next_path_position()",navigation_agent_2d.get_next_path_position())
 		#print("to_local(navigation_agent_2d.get_next_path_position())",to_local(navigation_agent_2d.get_next_path_position()))
@@ -49,7 +44,7 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 
 func _on_hurt_box_hurt(hit_source: HitBox) -> void:
 	print("父类被layer打了： ",hit_source)
-	character_state.helath -= hit_source.damage
+	character_state.health -= hit_source.damage
 	hit_source.knock_back_direction =   hit_source.global_position.direction_to(global_position).normalized()
 	#print("击退方向：",hit_source.knock_back_direction)
 	force_back_velocity =  hit_source.knock_back_force * hit_source.knock_back_direction
@@ -60,6 +55,14 @@ func _on_hurt_box_hurt(hit_source: HitBox) -> void:
 	#print(modulate)
 	tween.tween_property(self,"modulate",Color(1, 0.388235, 0.278431, 1),0.2)
 	tween.tween_property(self,"modulate",Color(1,1,1,1),0.2)
+	
+func _on_died():
+	hit_box.set_deferred("monitoring",false)
+	hurt_box.set_deferred("monitorable", false)
+	var tween:= create_tween()
+	tween.tween_property(self,"scale",Vector2.ZERO,0.1).from(Vector2.ONE)
+	tween.tween_callback(queue_free)
+	enemy_die.emit()
 	
 	
 	
