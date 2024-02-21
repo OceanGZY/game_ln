@@ -92,4 +92,4 @@ debug_color = Color(0.956863, 0, 0.529412, 0.419608)
 shape = SubResource("CircleShape2D_kbrdj")
 
 [node name="CharacterState" parent="." index="7"]
-max_health = 8
+max_health = 2

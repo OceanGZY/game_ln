@@ -6,6 +6,8 @@ class_name Player
 @onready var sword_slash_sprite = sword.get_node("SlashSprite")
 @onready var life_panel: ProgressBar = $LifePanel
 @onready var hit_box: HitBox = $Sword/Node2D/Sprite2D/HitBox
+@onready var joy_stick: Control = $JoyStick.get_node("MobileJoy")
+@onready var current_player_state_panel: Control = $CanvasLayer/PlayerStatePanel
 
 
 func _ready():
@@ -13,6 +15,11 @@ func _ready():
 	hit_box.damage = character_state.damage
 	hit_box.knock_back_direction = character_state.knock_back_direction
 	hit_box.knock_back_force = character_state.knock_back_force
+	current_player_state_panel.state_data = character_state
+	current_player_state_panel.state_data.emit_signal("current_state_changed")
+	
+	
+	
 	sword_slash_sprite.hide()
 	sword.visible=false
 	match character_state.weapon_type:
@@ -54,7 +61,11 @@ func get_input():
 		character_state.mov_direction += Vector2.LEFT
 	if Input.is_action_pressed("move_right"):
 		character_state.mov_direction += Vector2.RIGHT
-
+	
+	if joy_stick.direction != Vector2.ZERO:
+		character_state.mov_direction = joy_stick.direction
+	
+	
 func _on_hurt_box_hurt(hit_source) -> void:
 	#var pending_damage:= Damge.new()
 	#pending_damage.damage = hitbox.damage

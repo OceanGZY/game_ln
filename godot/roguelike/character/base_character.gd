@@ -5,7 +5,7 @@ class_name BaseCharacter
 #@export var accerelation:int = 40
 #@export var max_spped:int = 100
 @onready var animated_sprite_2d = get_node("AnimatedSprite2D")
-@onready var character_state: State = $CharacterState
+@onready var character_state: CurrentState = $CharacterState
 
 #const FRICTION :float =0.5 # 摩擦力
 

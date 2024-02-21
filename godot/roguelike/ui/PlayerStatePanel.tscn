@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhs2waxxru6so"]
+
+[ext_resource type="Script" path="res://ui/PlayerStatePanel.gd" id="1_tbcp7"]
+[ext_resource type="Script" path="res://classes/CurrentState.gd" id="2_hbjjl"]
+
+[node name="PlayerStatePanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tbcp7")
+
+[node name="CurrentState" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 128.0
+scale = Vector2(0.5, 0.5)
+alignment = 1
+
+[node name="Level" type="Label" parent="CurrentState"]
+layout_mode = 2
+text = "等级:"
+
+[node name="Attack" type="Label" parent="CurrentState"]
+layout_mode = 2
+text = "攻击:"
+
+[node name="Experience" type="Label" parent="CurrentState"]
+layout_mode = 2
+text = "经验:"
+
+[node name="Life" type="Label" parent="CurrentState"]
+layout_mode = 2
+text = "生命:"
+
+[node name="StateData" type="Node" parent="."]
+script = ExtResource("2_hbjjl")

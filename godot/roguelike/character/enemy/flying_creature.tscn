@@ -58,8 +58,6 @@ script = ExtResource("2_hjnyl")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_6rq7s")
-animation = &"idle"
-autoplay = "idle"
 frame = 3
 frame_progress = 0.0872768
 
@@ -75,4 +73,4 @@ shape = SubResource("CircleShape2D_t4gyi")
 debug_color = Color(0, 0.603922, 0.666667, 0.419608)
 
 [node name="CharacterState" parent="." index="7"]
-max_health = 10
+max_health = 1

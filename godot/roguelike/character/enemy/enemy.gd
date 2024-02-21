@@ -21,6 +21,7 @@ func _on_timer_timeout() -> void:
 	
 func  _physics_process(delta: float) -> void:
 	if character_state.helath<=0:
+		#navigation_agent_2d
 		hit_box.monitoring = false
 		hurt_box.monitorable = false
 		var tween:= create_tween()

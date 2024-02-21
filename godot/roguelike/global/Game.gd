@@ -1,12 +1,11 @@
 extends CanvasLayer
 
 @onready var loading_page: ColorRect = $LoadingPage
-@onready var global_player_state: State = $GlobalPlayerState
-
-
+@onready var global_player_state: CurrentState = $GlobalPlayerState
 
 func _ready() -> void:
 	loading_page.color.a =0
+
 
 func change_scene(path:String)->void:
 	var tree:= get_tree()

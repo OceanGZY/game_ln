@@ -78,7 +78,6 @@ script = ExtResource("2_i7q2u")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_hovbl")
-animation = &"idle"
 frame = 4
 frame_progress = 0.783174
 
@@ -93,6 +92,3 @@ debug_color = Color(0.996078, 0, 0.211765, 0.419608)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("CircleShape2D_5bre3")
 debug_color = Color(0.513726, 0.423529, 1, 0.419608)
-
-[node name="CharacterState" parent="." index="7"]
-max_health = 8

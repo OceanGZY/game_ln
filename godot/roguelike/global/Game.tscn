@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxemxwx7q4gxv"]
 
 [ext_resource type="Script" path="res://global/Game.gd" id="1_qinag"]
-[ext_resource type="Script" path="res://classes/State.gd" id="2_7urms"]
+[ext_resource type="Script" path="res://classes/CurrentState.gd" id="2_7urms"]
 
 [node name="Game" type="CanvasLayer"]
 script = ExtResource("1_qinag")

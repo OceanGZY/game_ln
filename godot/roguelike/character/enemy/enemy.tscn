@@ -33,7 +33,7 @@ script = ExtResource("2_47sqr")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_jby2i")
-animation = &"run"
+animation = &"idle"
 
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {

@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq40k60vguvkw"]
+
+[ext_resource type="Script" path="res://ui/MobileJoy.gd" id="1_ij455"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_uwrl5"]
+radius = 20.0
+height = 40.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_2k5fj"]
+radius = 5.0
+height = 10.0
+
+[node name="JoyStick" type="CanvasLayer"]
+
+[node name="MobileJoy" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0.360784)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ij455")
+
+[node name="OutJoy" type="MeshInstance2D" parent="MobileJoy"]
+modulate = Color(0.662745, 0.662745, 0.662745, 1)
+mesh = SubResource("SphereMesh_uwrl5")
+
+[node name="InJoy" type="MeshInstance2D" parent="MobileJoy/OutJoy"]
+modulate = Color(0.392157, 0.392157, 0.392157, 1)
+mesh = SubResource("SphereMesh_2k5fj")

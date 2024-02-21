@@ -133,6 +133,6 @@ curve = SubResource("Curve2D_5cmst")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="EnemyBornPath"]
 position = Vector2(-71.2819, -69)
-rotation = -0.0154248
+rotation = -0.0154247
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

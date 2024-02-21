@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Roguelike"
-run/main_scene="res://ui/Title_screen.tscn"
+run/main_scene="res://ui/TitleScreen.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
@@ -70,3 +70,4 @@ move_up={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

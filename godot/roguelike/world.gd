@@ -20,7 +20,6 @@ func _ready() -> void:
 	print("游戏开始")
 	var tween:= create_tween()
 	tween.tween_property(alert,"visible",false,1)
-	
 	var used:= tile_map.get_used_rect()
 	var tile_size := tile_map.tile_set.tile_size
 	

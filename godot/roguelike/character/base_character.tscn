@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://character/base_character.gd" id="1_48c4r"]
 [ext_resource type="Script" path="res://character/finite_state_machine.gd" id="2_ctkd0"]
-[ext_resource type="Script" path="res://classes/State.gd" id="3_ht020"]
+[ext_resource type="Script" path="res://classes/CurrentState.gd" id="3_xtl5x"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_48c4r")
@@ -17,4 +17,4 @@ script = ExtResource("2_ctkd0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="CharacterState" type="Node" parent="."]
-script = ExtResource("3_ht020")
+script = ExtResource("3_xtl5x")
