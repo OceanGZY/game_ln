@@ -48,6 +48,7 @@ func _on_hurt_box_hurt(hit_source: HitBox) -> void:
 	hit_source.knock_back_direction =   hit_source.global_position.direction_to(global_position).normalized()
 	#print("击退方向：",hit_source.knock_back_direction)
 	force_back_velocity =  hit_source.knock_back_force * hit_source.knock_back_direction
+	navigation_agent_2d.velocity  = force_back_velocity
 	#print("击退速度",force_back_velocity)
 	var tween := create_tween()
 	tween.set_ease(Tween.EASE_OUT_IN ).set_trans(Tween.TRANS_LINEAR)
