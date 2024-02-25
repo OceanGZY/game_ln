@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://b42qt7usib5g6"]
+
+[ext_resource type="PackedScene" uid="uid://csvfphjgv8mdq" path="res://character/character_base.tscn" id="1_8g6fy"]
+[ext_resource type="Script" path="res://character/player/player_base.gd" id="2_ai3nw"]
+[ext_resource type="Texture2D" uid="uid://lq4u6bo0tjm7" path="res://character/player/assets/player0/creature-sheet.png" id="3_qpmwy"]
+[ext_resource type="Texture2D" uid="uid://bbl3ennd60vws" path="res://character/player/assets/可可爱爱.png" id="4_lmtm4"]
+[ext_resource type="PackedScene" uid="uid://uphfj4bau10b" path="res://ui/mobile_control.tscn" id="4_rnbyq"]
+[ext_resource type="Texture2D" uid="uid://ceriomgasulk0" path="res://character/player/assets/震惊.png" id="6_wdf8p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6784e"]
+atlas = ExtResource("3_qpmwy")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrdve"]
+atlas = ExtResource("3_qpmwy")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7x4e8"]
+atlas = ExtResource("3_qpmwy")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ey6kb"]
+atlas = ExtResource("3_qpmwy")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ai4v5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6784e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrdve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7x4e8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ey6kb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_lmtm4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wdf8p")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 3.0
+}]
+
+[node name="Player" instance=ExtResource("1_8g6fy")]
+script = ExtResource("2_ai3nw")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_ai4v5")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.957706
+
+[node name="MobileControl" parent="." index="2" instance=ExtResource("4_rnbyq")]
