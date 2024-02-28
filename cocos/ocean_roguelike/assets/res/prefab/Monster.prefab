@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "Player",
+    "_name": "Monster",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Player",
+    "_name": "Monster",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -116,7 +116,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "b02b9e58-90f7-439d-b948-60b51c52fa6b@f9941",
+      "__uuid__": "36104e62-f300-4ee4-9bcc-7cd3a6a08bed@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -153,12 +153,12 @@
     "playOnLoad": true,
     "_clips": [
       {
-        "__uuid__": "343242a5-2f3c-4ed8-8ec1-e30393d5dfc1",
+        "__uuid__": "c3cacb9c-beff-4616-9537-f4e92c65294d",
         "__expectedType__": "cc.AnimationClip"
       }
     ],
     "_defaultClip": {
-      "__uuid__": "343242a5-2f3c-4ed8-8ec1-e30393d5dfc1",
+      "__uuid__": "c3cacb9c-beff-4616-9537-f4e92c65294d",
       "__expectedType__": "cc.AnimationClip"
     },
     "_id": ""
