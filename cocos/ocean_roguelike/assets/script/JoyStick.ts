@@ -2,6 +2,14 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-02-27 23:41:02
  * @LastEditors: OCEAN.GZY
+ * @LastEditTime: 2024-02-29 00:03:06
+ * @FilePath: /ocean_roguelike/assets/script/JoyStick.ts
+ * @Description: 注释信息
+ */
+/*
+ * @Author: OCEAN.GZY
+ * @Date: 2024-02-27 23:41:02
+ * @LastEditors: OCEAN.GZY
  * @LastEditTime: 2024-02-28 00:01:21
  * @FilePath: /ocean_roguelike/assets/script/JoyStick.ts
  * @Description: 注释信息
