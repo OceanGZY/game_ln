@@ -3,7 +3,7 @@ import { Vec2, v2, Vec3 } from 'cc';
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 23:07:39
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-02-29 00:17:45
+ * @LastEditTime: 2024-02-29 16:36:43
  * @FilePath: /ocean_roguelike/assets/script/Monster.ts
  * @Description: 注释信息
  */
@@ -26,7 +26,7 @@ export class Monster extends Component {
         // console.log("Global.player.worldPosition",Global.player.worldPosition);
         this.aimDirection = v2(Global.player.worldPosition.x - this.node.worldPosition.x, Global.player.worldPosition.y - this.node.worldPosition.y).normalize();
 
-        console.log("this.aimDirection", this.aimDirection);
+        // console.log("this.aimDirection", this.aimDirection);
 
         const x = this.node.position.x;
         const y = this.node.position.y;
@@ -40,8 +40,8 @@ export class Monster extends Component {
         const nx = x + this.aimDirection.x * this.moveSpeed * deltaTime;
         const ny = y + this.aimDirection.y * this.moveSpeed * deltaTime;
 
-        console.log("new nx",nx);
-        console.log("new ny",ny);
+        // console.log("new nx",nx);
+        // console.log("new ny",ny);
         
         this.node.setPosition(nx, ny);
     }
