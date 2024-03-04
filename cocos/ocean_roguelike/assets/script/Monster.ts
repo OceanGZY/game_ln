@@ -14,7 +14,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Monster')
 export class Monster extends Component {
 
-    moveSpeed: number = 20;
+    moveSpeed: number = 50;
     aimDirection: Vec2 = v2(0, 0);
     body: RigidBody2D
 

@@ -2,8 +2,8 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 00:02:08
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-04 17:12:59
- * @FilePath: /ocean_roguelike/assets/script/Player.ts
+ * @LastEditTime: 2024-03-04 21:37:15
+ * @FilePath: \ocean_roguelike\assets\script\Player.ts
  * @Description: 注释信息
  */
 import { JoyStick } from './JoyStick';
@@ -16,7 +16,7 @@ export class Player extends Component {
     @property(JoyStick) joyStick: JoyStick;
     @property(Prefab) weapon: Prefab;
 
-    moveSpeed: number = 2;
+    moveSpeed: number = 5;
     body: RigidBody2D
     weaponPoint: Node
 
