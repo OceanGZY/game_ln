@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bkq4vwnkj1mfq" path="res://game/player.tscn" id="1_8atrj"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_ini4w"]
 [ext_resource type="PackedScene" uid="uid://dwfx60bwkbsby" path="res://game/pine_tree.tscn" id="2_ebgsd"]
-[ext_resource type="AudioStream" uid="uid://uuonchn4fb87" path="res://bgm.wav" id="4_3q1hh"]
+[ext_resource type="AudioStream" uid="uid://coildv7ma22h6" path="res://bgm.wav" id="4_3q1hh"]
 
 [sub_resource type="Curve2D" id="Curve2D_587qk"]
 _data = {

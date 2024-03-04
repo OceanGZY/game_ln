@@ -1,9 +1,9 @@
-import { Vec2, v2, Vec3 } from 'cc';
+import { Vec2, v2, Vec3, RigidBody2D } from 'cc';
 /*
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 23:07:39
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-02-29 16:36:43
+ * @LastEditTime: 2024-03-04 19:50:19
  * @FilePath: /ocean_roguelike/assets/script/Monster.ts
  * @Description: 注释信息
  */
@@ -16,9 +16,10 @@ export class Monster extends Component {
 
     moveSpeed: number = 20;
     aimDirection: Vec2 = v2(0, 0);
+    body: RigidBody2D
 
     start() {
-
+        this.body = this.getComponent(RigidBody2D);
     }
 
     update(deltaTime: number) {
@@ -28,8 +29,8 @@ export class Monster extends Component {
 
         // console.log("this.aimDirection", this.aimDirection);
 
-        const x = this.node.position.x;
-        const y = this.node.position.y;
+        // const x = this.node.position.x;
+        // const y = this.node.position.y;
 
         if (this.aimDirection.x >= 0) {
             this.node.setScale(1, 1, 1);
@@ -37,13 +38,13 @@ export class Monster extends Component {
             this.node.setScale(-1, 1, 1);
         }
 
-        const nx = x + this.aimDirection.x * this.moveSpeed * deltaTime;
-        const ny = y + this.aimDirection.y * this.moveSpeed * deltaTime;
+        const nx = this.aimDirection.x * this.moveSpeed * deltaTime;
+        const ny = this.aimDirection.y * this.moveSpeed * deltaTime;
 
         // console.log("new nx",nx);
         // console.log("new ny",ny);
-        
-        this.node.setPosition(nx, ny);
+
+        this.body.linearVelocity = v2(nx, ny);
     }
 
 }
