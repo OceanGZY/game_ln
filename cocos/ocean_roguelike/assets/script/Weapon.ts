@@ -1,10 +1,10 @@
-import { v2 } from 'cc';
+import { Vec2, v2 } from 'cc';
 /*
  * @Author: OCEAN.GZY
  * @Date: 2024-03-04 17:17:57
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-04 23:03:49
- * @FilePath: \ocean_roguelike\assets\script\Weapon.ts
+ * @LastEditTime: 2024-03-05 23:35:35
+ * @FilePath: /ocean_roguelike/assets/script/Weapon.ts
  * @Description: 注释信息
  */
 import { _decorator, Component, Node, instantiate, Prefab, RigidBody2D } from 'cc';
@@ -15,27 +15,21 @@ export class Weapon extends Component {
 
     @property(Prefab) bullet: Prefab
 
-    firePoint: Node
-    i:number = 0;
-
+    // 以秒为单位的时间间隔
+    interval: number = 1;
 
     start() {
-        this.firePoint = this.node.getChildByName("FirePoint");
+        this.schedule(function () {
+            var firePoint = this.node.getChildByName("FirePoint");
+            var _bullet = instantiate(this.bullet);
+            _bullet.setPosition(firePoint.position);
+            let _bullet_body = _bullet.getComponent(RigidBody2D);
+            this.node.addChild(_bullet);
+        }, this.interval);
     }
 
     update(deltaTime: number) {
-       
-        console.log(this.i);
-        if (Math.round(this.i / 5)==1) {
-            var _bullet = instantiate(this.bullet);
-            _bullet.setPosition(this.firePoint.position);
-
-            let _bullet_body = _bullet.getComponent(RigidBody2D);
-            this.node.addChild(_bullet);
-
-            _bullet_body.linearVelocity = v2(10, 0);
-        }
-        this.i = this.i+deltaTime;
     }
+
 }
 
