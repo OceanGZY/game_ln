@@ -4,7 +4,7 @@ import { Monster } from './Monster';
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 22:05:38
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-02 21:54:15
+ * @LastEditTime: 2024-03-06 17:42:49
  * @FilePath: /ocean_roguelike/assets/script/Main.ts
  * @Description: 注释信息
  */
@@ -23,11 +23,11 @@ export class Main extends Component {
     }
 
     start() {
-        // PhysicsSystem2D.instance.debugDrawFlags = EPhysics2DDrawFlags.Aabb |
-        //     EPhysics2DDrawFlags.Pair |
-        //     EPhysics2DDrawFlags.CenterOfMass |
-        //     EPhysics2DDrawFlags.Joint |
-        //     EPhysics2DDrawFlags.Shape;
+        PhysicsSystem2D.instance.debugDrawFlags = EPhysics2DDrawFlags.Aabb |
+            EPhysics2DDrawFlags.Pair |
+            EPhysics2DDrawFlags.CenterOfMass |
+            EPhysics2DDrawFlags.Joint |
+            EPhysics2DDrawFlags.Shape;
 
     }
 

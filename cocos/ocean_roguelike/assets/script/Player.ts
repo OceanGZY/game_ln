@@ -1,14 +1,15 @@
+import { BoxCollider2D } from 'cc';
 /*
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 00:02:08
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-05 22:58:05
+ * @LastEditTime: 2024-03-06 17:56:53
  * @FilePath: /ocean_roguelike/assets/script/Player.ts
  * @Description: 注释信息
  */
 import { JoyStick } from './JoyStick';
 import { Weapon } from './Weapon';
-import { _decorator, Collider2D, Component, Contact2DType, instantiate, IPhysics2DContact, Node, PhysicsSystem2D, Prefab, RigidBody2D, v2 } from 'cc';
+import { _decorator, CircleCollider2D, Collider2D, Component, Contact2DType, instantiate, IPhysics2DContact, Node, PhysicsSystem2D, Prefab, RigidBody2D, v2 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Player')
@@ -22,22 +23,29 @@ export class Player extends Component {
     weaponPoint: Node;
     curWeapon: Node;
 
+
     start() {
         // 注册单个碰撞体的回调函数
-        let collider = this.getComponent(Collider2D);
+        let collider = this.getComponent(BoxCollider2D);
         if (collider) {
             collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
             collider.on(Contact2DType.END_CONTACT, this.onEndContact, this);
             collider.on(Contact2DType.PRE_SOLVE, this.onPreSolve, this);
             collider.on(Contact2DType.POST_SOLVE, this.onPostSolve, this);
         }
-
         this.body = this.getComponent(RigidBody2D);
-        this.weaponPoint = this.node.getChildByName("WeaponPoint");
 
+
+        let attackArea = this.getComponent(CircleCollider2D);
+        if (attackArea) {
+            console.log("player具备attackArea节点，并且有attackAreaCollider组件", attackArea);
+        }
+
+
+
+        this.weaponPoint = this.node.getChildByName("WeaponPoint");
         this.curWeapon = instantiate(this.weapon);
         this.curWeapon.setPosition(this.weaponPoint.position);
-
         this.node.addChild(this.curWeapon);
     }
 
@@ -56,11 +64,9 @@ export class Player extends Component {
         var angle = radian / Math.PI * 180;
 
         this.curWeapon.angle = angle;
-        console.log(" var angle = radian/Math.PI * 180;", angle);
-
+        // console.log(" var angle = radian/Math.PI * 180;", angle);
 
         this.body.linearVelocity = v2(nx, ny);
-
 
     }
 

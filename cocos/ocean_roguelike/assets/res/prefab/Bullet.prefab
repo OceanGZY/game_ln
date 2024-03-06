@@ -185,7 +185,7 @@
     "__prefab": {
       "__id__": 9
     },
-    "enabledContactListener": true,
+    "enabledContactListener": false,
     "bullet": true,
     "awakeOnLoad": true,
     "_group": 8,
