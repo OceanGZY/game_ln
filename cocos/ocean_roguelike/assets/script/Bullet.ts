@@ -2,12 +2,14 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-03-05 10:09:22
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-06 16:45:00
+ * @LastEditTime: 2024-03-07 22:11:16
  * @FilePath: /ocean_roguelike/assets/script/Bullet.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, Node, RigidBody, RigidBody2D, v2, Vec2, } from 'cc';
+import { _decorator, BoxCollider2D, Collider2D, Component, Contact2DType, IPhysics2DContact, RigidBody2D, v2, Vec2, } from 'cc';
 import { Global } from './Global';
+import { Player } from './Player';
+import { Monster } from './Monster';
 const { ccclass, property } = _decorator;
 
 @ccclass('Bullet')
@@ -16,18 +18,38 @@ export class Bullet extends Component {
     speed: number = 20;
     fireDirection: Vec2 = v2(20, 0);
 
-    
-    protected onLoad(): void {
-        if (Global.player.getComponent(RigidBody2D).linearVelocity.length() > 0) {
-            this.fireDirection = Global.player.getComponent(RigidBody2D).linearVelocity.normalize();
+    bulletCollider: BoxCollider2D;
+    damage: number = 5;
+
+
+    start() {
+        console.log(Player.fireDirection);
+        if (Player.fireDirection.length() > 0) {
+            this.fireDirection = Player.fireDirection.normalize();
         }
-        this.getComponent(RigidBody2D).linearVelocity = this.fireDirection.multiplyScalar(this.speed);
+
+        if (this.node && this.getComponent(RigidBody2D)) {
+            this.getComponent(RigidBody2D).linearVelocity = this.fireDirection.multiplyScalar(this.speed);
+            this.node.angle = Global.weaponAngle;
+        }
+
+        if (this.node && this.getComponent(BoxCollider2D)) {
+            this.bulletCollider = this.getComponent(BoxCollider2D);
+            this.bulletCollider.on(Contact2DType.BEGIN_CONTACT, this.onHitEnemy, this);
+        }
     }
 
     update(deltaTime: number) {
-        if (this.node.position.length() > 200) {
-            // console.log("分出去了80距离");
+        if (this.node && this.node.position.length() > 200) {
             this.node.destroy();
+        }
+    }
+
+    onHitEnemy(selfCollider: Collider2D, otherCollider: Collider2D, concat: IPhysics2DContact | null) {
+        if (otherCollider.group == 4) {
+            var hitenemy = otherCollider.node;
+            console.log(hitenemy);
+            hitenemy.emit("hurt",this.damage);
         }
     }
 }
