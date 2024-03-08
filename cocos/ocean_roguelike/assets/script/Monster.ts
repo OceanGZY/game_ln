@@ -1,9 +1,9 @@
-import { Vec2, v2, Vec3, RigidBody2D, PlaceMethod } from 'cc';
+import { Vec2, v2, Vec3, RigidBody2D, PlaceMethod, BoxCollider2D, Contact2DType, IPhysics2DContact } from 'cc';
 /*
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 23:07:39
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-07 22:18:33
+ * @LastEditTime: 2024-03-08 20:45:53
  * @FilePath: /ocean_roguelike/assets/script/Monster.ts
  * @Description: 注释信息
  */
@@ -19,10 +19,13 @@ export class Monster extends Component {
     aimDirection: Vec2 = v2(0, 0);
     body: RigidBody2D;
     life: number = 5;
+    bodyCollider: BoxCollider2D;
 
     start() {
         this.body = this.getComponent(RigidBody2D);
         this.node.on("hurt", this.onHurt, this);
+        this.bodyCollider = this.getComponent(BoxCollider2D);
+        this.bodyCollider.on(Contact2DType.BEGIN_CONTACT, this.onHitPlayer, this);
     }
 
     update(deltaTime: number) {
@@ -59,9 +62,13 @@ export class Monster extends Component {
     }
 
     onHurt(damage: number) {
-        console.log("收到伤害是：", damage)
+        // console.log("收到伤害是：", damage)
         this.life -= damage;
-        console.log("现在的敌人生命值:", this.life);
+        // console.log("现在的敌人生命值:", this.life);
+    }
+
+    onHitPlayer(selfCollider: BoxCollider2D, otherCollider: BoxCollider2D, contact: IPhysics2DContact | null) {
+        // console.log("敌人撞到什么东西了");
     }
 
 }

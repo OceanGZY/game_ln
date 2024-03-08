@@ -1,9 +1,9 @@
-import { BoxCollider2D, Vec2 } from 'cc';
+import { BoxCollider2D, ProgressBar, Vec2 } from 'cc';
 /*
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 00:02:08
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-07 22:15:10
+ * @LastEditTime: 2024-03-08 17:56:14
  * @FilePath: /ocean_roguelike/assets/script/Player.ts
  * @Description: 注释信息
  */
@@ -23,6 +23,9 @@ export class Player extends Component {
     body: RigidBody2D;
     weaponPoint: Node;
     curWeapon: Node;
+    life: number = 100;
+    maxLife: number = 100;
+    lifeBar: ProgressBar;
 
     static enemiesInArea: Node[] = [];
 
@@ -39,13 +42,15 @@ export class Player extends Component {
         }
         this.body = this.getComponent(RigidBody2D);
 
+        this.lifeBar = this.node.getChildByName("LifeBar").getComponent(ProgressBar);
+
+        this.node.on("hurt", this.onHurt, this);
 
         let attackArea = this.getComponent(CircleCollider2D);
         if (attackArea) {
             console.log("player具备attackArea节点，并且有attackAreaCollider组件", attackArea);
             attackArea.on(Contact2DType.BEGIN_CONTACT, this.onEnemyInAttackArea, this);
         }
-
 
 
         this.weaponPoint = this.node.getChildByName("WeaponPoint");
@@ -55,6 +60,11 @@ export class Player extends Component {
     }
 
     update(deltaTime: number) {
+        if (this.life < 0) {
+            this.node.destroy();
+            return;
+        }
+        this.lifeBar.progress = this.life / this.maxLife;
         const direction = this.joyStick.getJoyDir();
         // if (direction.x >= 0) {
         //     this.node.setScale(1, 1, 1);
@@ -102,7 +112,7 @@ export class Player extends Component {
 
     onEnemyInAttackArea(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
         // 每次处理完碰撞体接触逻辑时被调用
-        console.log('敌人在攻击范围内');
+        // console.log('敌人在攻击范围内');
         if (Player.enemiesInArea.indexOf(otherCollider.node) === -1) {
             Player.enemiesInArea.push(otherCollider.node);
         }
@@ -111,6 +121,10 @@ export class Player extends Component {
 
     getWorldPosition() {
         return this.node.worldPosition;
+    }
+
+    onHurt(damage: number) {
+        this.life -= damage;
     }
 }
 
