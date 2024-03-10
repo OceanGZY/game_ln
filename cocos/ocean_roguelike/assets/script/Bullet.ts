@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-03-05 10:09:22
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-07 22:11:16
+ * @LastEditTime: 2024-03-08 20:59:10
  * @FilePath: /ocean_roguelike/assets/script/Bullet.ts
  * @Description: 注释信息
  */
@@ -23,7 +23,7 @@ export class Bullet extends Component {
 
 
     start() {
-        console.log(Player.fireDirection);
+        // console.log(Player.fireDirection);
         if (Player.fireDirection.length() > 0) {
             this.fireDirection = Player.fireDirection.normalize();
         }
@@ -46,10 +46,15 @@ export class Bullet extends Component {
     }
 
     onHitEnemy(selfCollider: Collider2D, otherCollider: Collider2D, concat: IPhysics2DContact | null) {
+        console.log("子弹碰到的东group是",otherCollider.group);
         if (otherCollider.group == 4) {
+            
             var hitenemy = otherCollider.node;
-            console.log(hitenemy);
+            // console.log(hitenemy);
             hitenemy.emit("hurt",this.damage);
+            this.scheduleOnce(function(){
+                this.node.destroy();
+            },0.1)
         }
     }
 }

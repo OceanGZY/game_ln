@@ -3,7 +3,7 @@ import { Vec2, v2, Vec3, RigidBody2D, PlaceMethod, BoxCollider2D, Contact2DType,
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 23:07:39
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-08 20:45:53
+ * @LastEditTime: 2024-03-08 22:51:18
  * @FilePath: /ocean_roguelike/assets/script/Monster.ts
  * @Description: 注释信息
  */
@@ -20,6 +20,7 @@ export class Monster extends Component {
     body: RigidBody2D;
     life: number = 5;
     bodyCollider: BoxCollider2D;
+    damage: number = 1;
 
     start() {
         this.body = this.getComponent(RigidBody2D);
@@ -34,6 +35,7 @@ export class Monster extends Component {
             if (temp != -1) {
                 Player.enemiesInArea.splice(temp, 1);
             }
+            this.node.emit("dead");
             this.node.destroy();
             return;
         }
@@ -69,6 +71,11 @@ export class Monster extends Component {
 
     onHitPlayer(selfCollider: BoxCollider2D, otherCollider: BoxCollider2D, contact: IPhysics2DContact | null) {
         // console.log("敌人撞到什么东西了");
+        // console.log(otherCollider.group,otherCollider.tag,otherCollider.name);
+        if (otherCollider.tag == 0.1) {
+            // console.log(otherCollider);
+            otherCollider.node.emit("hurt", this.damage);
+        }
     }
 
 }

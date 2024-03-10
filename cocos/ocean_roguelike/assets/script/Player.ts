@@ -1,16 +1,16 @@
-import { BoxCollider2D, ProgressBar, Vec2 } from 'cc';
+import { BoxCollider2D, director, ProgressBar, v3, Vec2 } from 'cc';
 /*
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 00:02:08
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-08 17:56:14
+ * @LastEditTime: 2024-03-10 15:42:45
  * @FilePath: /ocean_roguelike/assets/script/Player.ts
  * @Description: 注释信息
  */
 import { JoyStick } from './JoyStick';
-import { Weapon } from './Weapon';
 import { _decorator, CircleCollider2D, Collider2D, Component, Contact2DType, instantiate, IPhysics2DContact, Node, PhysicsSystem2D, Prefab, RigidBody2D, v2 } from 'cc';
 import { Global } from './Global';
+import getPlayerLevelState, { LevelId, PlayerLevelConfig } from './PlayerLevelConfig';
 const { ccclass, property } = _decorator;
 
 @ccclass('Player')
@@ -19,19 +19,23 @@ export class Player extends Component {
     @property(JoyStick) joyStick: JoyStick;
     @property(Prefab) weapon: Prefab;
 
-    moveSpeed: number = 5;
+    currentPlayerState: PlayerLevelConfig;
+    // moveSpeed: number = 5;
     body: RigidBody2D;
     weaponPoint: Node;
     curWeapon: Node;
-    life: number = 100;
-    maxLife: number = 100;
+    // life: number = 100;
+    // maxLife: number = 100;
     lifeBar: ProgressBar;
 
-    static enemiesInArea: Node[] = [];
 
+    static enemiesInArea: Node[] = [];
     static fireDirection: Vec2 = v2(0, 0);
 
     start() {
+        this.currentPlayerState = getPlayerLevelState(LevelId.lv0);
+        console.log("初始化", this.currentPlayerState);
+
         // 注册单个碰撞体的回调函数
         let collider = this.getComponent(BoxCollider2D);
         if (collider) {
@@ -60,19 +64,19 @@ export class Player extends Component {
     }
 
     update(deltaTime: number) {
-        if (this.life < 0) {
+        if (this.currentPlayerState.life < 0) {
             this.node.destroy();
             return;
         }
-        this.lifeBar.progress = this.life / this.maxLife;
+        this.lifeBar.progress = this.currentPlayerState.life / this.currentPlayerState.maxlife;
         const direction = this.joyStick.getJoyDir();
         // if (direction.x >= 0) {
         //     this.node.setScale(1, 1, 1);
         // } else {
         //     this.node.setScale(-1, 1, 1);
         // }
-        const nx = direction.x * this.moveSpeed * deltaTime;
-        const ny = direction.y * this.moveSpeed * deltaTime;
+        const nx = direction.x * this.currentPlayerState.moveSpeed * deltaTime;
+        const ny = direction.y * this.currentPlayerState.moveSpeed * deltaTime;
         var radian: number;
         if (Player.enemiesInArea.length > 0) {
             // var tempEnemy =this.enemiesInArea[Math.floor(Math.random()*this.enemiesInArea.length)];
@@ -120,11 +124,15 @@ export class Player extends Component {
 
 
     getWorldPosition() {
-        return this.node.worldPosition;
+        return this.node ? this.node.worldPosition : v3(0, 0, 0);
     }
 
     onHurt(damage: number) {
-        this.life -= damage;
+        this.currentPlayerState.life -= damage;
+    }
+
+    isDead() {
+        return this.currentPlayerState ? this.currentPlayerState.life < 0 : false;
     }
 }
 
