@@ -4,11 +4,11 @@ import { Monster } from './Monster';
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 22:05:38
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-10 15:17:14
+ * @LastEditTime: 2024-03-10 23:55:20
  * @FilePath: /ocean_roguelike/assets/script/Main.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, director, EPhysics2DDrawFlags, instantiate, Label, Node, PhysicsSystem2D, Prefab, ProgressBar, random, randomRangeInt, TiledMap, v3 } from 'cc';
+import { _decorator, AudioSource, Component, director, EPhysics2DDrawFlags, instantiate, Label, Node, PhysicsSystem2D, Prefab, ProgressBar, random, randomRangeInt, TiledMap, v3 } from 'cc';
 import { Player } from './Player';
 import getPlayerLevelState, { LevelId } from './PlayerLevelConfig';
 const { ccclass, property } = _decorator;
@@ -32,7 +32,11 @@ export class Main extends Component {
     levelNode: Node;
     levelNodeLabel: Label;
     levelNodeBar: Node;
-    levelNodeBarProgress: ProgressBar;
+    levelNodeBarProgress: ProgressBar; 
+
+    audioSource:AudioSource;
+
+    curevel: number = 0
 
     protected onLoad(): void {
         Global.player = this.orPlayer;
@@ -46,6 +50,7 @@ export class Main extends Component {
         this.levelNodeLabel = this.levelNode.getComponent(Label);
         this.levelNodeBar = this.levelNode.getChildByName("LevelBar");
         this.levelNodeBarProgress = this.levelNodeBar.getComponent(ProgressBar);
+        this.audioSource = this.getComponent(AudioSource);
 
     }
 
@@ -72,11 +77,14 @@ export class Main extends Component {
 
         this.levelNodeLabel.string = "等级:0";
         this.levelNodeBarProgress.progress = 0;
+        this.curevel = 0;
+        this.audioSource.play();
     }
 
     update(deltaTime: number) {
         this.orCamera.worldPosition = this.orPlayer.getWorldPosition();
         if (this.orPlayer.isDead()) {
+            this.audioSource.stop();
             Player.enemiesInArea = [];
             this.gameover.active = true;
             director.pause();
@@ -92,39 +100,66 @@ export class Main extends Component {
         svalueLabel.string = this.score.toString();
 
         if (this.exp < 50) {
-            this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv0);
+            if (this.curevel != 0) {
+                this.curevel = 0;
+                this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv0);
+            }
             this.levelNodeBarProgress.progress = this.exp / this.orPlayer.currentPlayerState.nextLvexp;
         }
         else if (this.exp < 50 + 100) {
-            this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv1);
+            if (this.curevel != 1) {
+                this.curevel = 1;
+                this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv1);
+            }
             this.levelNodeBarProgress.progress = (this.exp - 50) / this.orPlayer.currentPlayerState.nextLvexp;
         }
         else if (this.exp < 50 + 100 + 250) {
-            this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv2);
+            if (this.curevel != 2) {
+                this.curevel = 2;
+                this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv2);
+            }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100) / this.orPlayer.currentPlayerState.nextLvexp;
         }
         else if (this.exp < 50 + 100 + 250 + 450) {
-            this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv3);
+            if (this.curevel != 3) {
+                this.curevel = 3;
+                this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv3);
+            }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100 - 250) / this.orPlayer.currentPlayerState.nextLvexp;
         }
         else if (this.exp < 50 + 100 + 250 + 450 + 700) {
-            this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv4);
+            if (this.curevel != 4) {
+                this.curevel = 4;
+                this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv4);
+            }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100 - 250 - 450) / this.orPlayer.currentPlayerState.nextLvexp;
         }
         else if (this.exp < 50 + 100 + 250 + 450 + 700 + 1000) {
-            this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv5);
+            if (this.curevel != 5) {
+                this.curevel = 5;
+                this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv5);
+            }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100 - 250 - 450 - 700) / this.orPlayer.currentPlayerState.nextLvexp;
         }
         else if (this.exp < 50 + 100 + 250 + 450 + 700 + 1000 + 1400) {
-            this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv6);
+            if (this.curevel != 6) {
+                this.curevel = 6;
+                this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv6);
+            }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100 - 250 - 450 - 700 - 1000) / this.orPlayer.currentPlayerState.nextLvexp;
         }
         else if (this.exp < 50 + 100 + 250 + 450 + 700 + 1000 + 1400 + 2000) {
-            this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv7);
+            if (this.curevel != 7) {
+                this.curevel = 7;
+                this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv7);
+            }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100 - 250 - 450 - 700 - 1000 - 1400) / this.orPlayer.currentPlayerState.nextLvexp;
         }
         else if (this.exp < 50 + 100 + 250 + 450 + 700 + 1000 + 1400 + 2000 + 3000) {
-            this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv8);
+            if (this.curevel != 8) {
+                this.curevel = 8;
+                this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv8);
+            }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100 - 250 - 450 - 700 - 1000 - 1400 - 2000) % this.orPlayer.currentPlayerState.nextLvexp;
         }
         else {
