@@ -3,7 +3,7 @@ import { AudioSource, Vec2, v2 } from 'cc';
  * @Author: OCEAN.GZY
  * @Date: 2024-03-04 17:17:57
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-11 00:00:43
+ * @LastEditTime: 2024-03-11 23:38:16
  * @FilePath: /ocean_roguelike/assets/script/Weapon.ts
  * @Description: 注释信息
  */
@@ -26,8 +26,8 @@ export class Weapon extends Component {
             var firePoint = this.node.getChildByName("FirePoint");
             Global.weaponBullets.worldPosition = firePoint.worldPosition;
             var _bullet = instantiate(this.bullet);
-            this.fireSudioSource.play();
             Global.weaponBullets.addChild(_bullet);
+            this.fireSudioSource.play();
         };
         this.schedule(cb, this.interval);
     }

@@ -1,9 +1,9 @@
-import { BoxCollider2D, director, ProgressBar, v3, Vec2 } from 'cc';
+import { BoxCollider2D, Color, director, Label, ProgressBar, tween, v3, Vec2 } from 'cc';
 /*
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 00:02:08
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-10 15:42:45
+ * @LastEditTime: 2024-03-11 23:35:25
  * @FilePath: /ocean_roguelike/assets/script/Player.ts
  * @Description: 注释信息
  */
@@ -28,6 +28,8 @@ export class Player extends Component {
     // maxLife: number = 100;
     lifeBar: ProgressBar;
 
+    damageLabel: Label;
+
 
     static enemiesInArea: Node[] = [];
     static fireDirection: Vec2 = v2(0, 0);
@@ -47,6 +49,8 @@ export class Player extends Component {
         this.body = this.getComponent(RigidBody2D);
 
         this.lifeBar = this.node.getChildByName("LifeBar").getComponent(ProgressBar);
+        this.damageLabel = this.node.getChildByName("DamageLabel").getComponent(Label);
+        this.damageLabel.color = new Color(255, 255, 255, 0);
 
         this.node.on("hurt", this.onHurt, this);
 
@@ -129,6 +133,16 @@ export class Player extends Component {
 
     onHurt(damage: number) {
         this.currentPlayerState.life -= damage;
+        this.damageLabel.string = `-${damage}`;
+        tween(this.damageLabel)
+            .to(0.5, { color: new Color(255, 255, 255, 255), fontSize: 30 })
+            .delay(1)
+            .call(() => {
+                this.damageLabel.string = ''; // 清空标签文本
+                this.damageLabel.fontSize = 20;
+                this.damageLabel.color = new Color(255, 255, 255, 0);
+            })
+            .start();
     }
 
     isDead() {

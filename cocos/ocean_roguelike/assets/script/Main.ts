@@ -4,7 +4,7 @@ import { Monster } from './Monster';
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 22:05:38
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-10 23:55:20
+ * @LastEditTime: 2024-03-11 22:23:42
  * @FilePath: /ocean_roguelike/assets/script/Main.ts
  * @Description: 注释信息
  */
@@ -32,9 +32,9 @@ export class Main extends Component {
     levelNode: Node;
     levelNodeLabel: Label;
     levelNodeBar: Node;
-    levelNodeBarProgress: ProgressBar; 
+    levelNodeBarProgress: ProgressBar;
 
-    audioSource:AudioSource;
+    audioSource: AudioSource;
 
     curevel: number = 0
 
@@ -167,6 +167,10 @@ export class Main extends Component {
         }
         this.levelNodeLabel.string = this.orPlayer.currentPlayerState.lv == 9 ? "满级" : "等级:" + this.orPlayer.currentPlayerState.lv.toString();
 
+    }
+
+    showSelectSkill() {
+        console.log("升级啦，可以开始选择技能了");
     }
 }
 
