@@ -4,7 +4,7 @@ import { Monster } from './Monster';
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 22:05:38
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-11 22:23:42
+ * @LastEditTime: 2024-03-12 23:50:19
  * @FilePath: /ocean_roguelike/assets/script/Main.ts
  * @Description: 注释信息
  */
@@ -21,6 +21,7 @@ export class Main extends Component {
     @property(Node) orJoyStick: Node;
     @property(TiledMap) orMap0: TiledMap;
     @property(Prefab) orMonster: Prefab;
+    @property(Prefab) orLevelUp: Prefab;
     @property(Node) gameover: Node;
 
     score: number = 0;
@@ -110,6 +111,7 @@ export class Main extends Component {
             if (this.curevel != 1) {
                 this.curevel = 1;
                 this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv1);
+                this.showSelectSkill();
             }
             this.levelNodeBarProgress.progress = (this.exp - 50) / this.orPlayer.currentPlayerState.nextLvexp;
         }
@@ -117,6 +119,7 @@ export class Main extends Component {
             if (this.curevel != 2) {
                 this.curevel = 2;
                 this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv2);
+                this.showSelectSkill();
             }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100) / this.orPlayer.currentPlayerState.nextLvexp;
         }
@@ -124,6 +127,7 @@ export class Main extends Component {
             if (this.curevel != 3) {
                 this.curevel = 3;
                 this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv3);
+                this.showSelectSkill();
             }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100 - 250) / this.orPlayer.currentPlayerState.nextLvexp;
         }
@@ -131,6 +135,7 @@ export class Main extends Component {
             if (this.curevel != 4) {
                 this.curevel = 4;
                 this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv4);
+                this.showSelectSkill();
             }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100 - 250 - 450) / this.orPlayer.currentPlayerState.nextLvexp;
         }
@@ -138,6 +143,7 @@ export class Main extends Component {
             if (this.curevel != 5) {
                 this.curevel = 5;
                 this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv5);
+                this.showSelectSkill();
             }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100 - 250 - 450 - 700) / this.orPlayer.currentPlayerState.nextLvexp;
         }
@@ -145,6 +151,7 @@ export class Main extends Component {
             if (this.curevel != 6) {
                 this.curevel = 6;
                 this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv6);
+                this.showSelectSkill();
             }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100 - 250 - 450 - 700 - 1000) / this.orPlayer.currentPlayerState.nextLvexp;
         }
@@ -152,6 +159,7 @@ export class Main extends Component {
             if (this.curevel != 7) {
                 this.curevel = 7;
                 this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv7);
+                this.showSelectSkill();
             }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100 - 250 - 450 - 700 - 1000 - 1400) / this.orPlayer.currentPlayerState.nextLvexp;
         }
@@ -159,6 +167,7 @@ export class Main extends Component {
             if (this.curevel != 8) {
                 this.curevel = 8;
                 this.orPlayer.currentPlayerState = getPlayerLevelState(LevelId.lv8);
+                this.showSelectSkill();
             }
             this.levelNodeBarProgress.progress = (this.exp - 50 - 100 - 250 - 450 - 700 - 1000 - 1400 - 2000) % this.orPlayer.currentPlayerState.nextLvexp;
         }
@@ -171,6 +180,31 @@ export class Main extends Component {
 
     showSelectSkill() {
         console.log("升级啦，可以开始选择技能了");
+        let lvNode = instantiate(this.orLevelUp);
+        director.pause();
+        this.node.addChild(lvNode);
+
+        let skillBtn01 = lvNode.getChildByName("Layout").getChildByName("Skill01");
+        let skillBtn02 = lvNode.getChildByName("Layout").getChildByName("Skill02");
+        let skillBtn03 = lvNode.getChildByName("Layout").getChildByName("Skill03");
+
+        skillBtn01.on("click", () => {
+            console.log("技能1被选取")
+            lvNode.destroy();
+            director.resume();
+        }, this);
+
+        skillBtn02.on("click", () => {
+            console.log("技能2被选取")
+            lvNode.destroy();
+            director.resume();
+        }, this);
+
+        skillBtn03.on("click", () => {
+            console.log("技能3被选取", this.node);
+            lvNode.destroy();
+            director.resume();
+        }, this);
     }
 }
 

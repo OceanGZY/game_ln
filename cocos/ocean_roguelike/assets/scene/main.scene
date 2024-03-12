@@ -2588,6 +2588,10 @@
       "__uuid__": "86e029d3-cf19-4e03-b172-5de06696739e",
       "__expectedType__": "cc.Prefab"
     },
+    "orLevelUp": {
+      "__uuid__": "67739f52-213d-4245-b4e4-b53faf447e38",
+      "__expectedType__": "cc.Prefab"
+    },
     "gameover": {
       "__id__": 50
     },
