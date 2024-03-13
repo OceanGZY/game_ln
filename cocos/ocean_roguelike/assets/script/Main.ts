@@ -4,7 +4,7 @@ import { Monster } from './Monster';
  * @Author: OCEAN.GZY
  * @Date: 2024-02-28 22:05:38
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-12 23:50:19
+ * @LastEditTime: 2024-03-13 08:14:44
  * @FilePath: /ocean_roguelike/assets/script/Main.ts
  * @Description: 注释信息
  */
@@ -189,19 +189,26 @@ export class Main extends Component {
         let skillBtn03 = lvNode.getChildByName("Layout").getChildByName("Skill03");
 
         skillBtn01.on("click", () => {
-            console.log("技能1被选取")
+            console.log("技能1被选取");
+            // 实现给player state的 damge, speed,进行状态加成
+            // todo...
             lvNode.destroy();
             director.resume();
         }, this);
 
         skillBtn02.on("click", () => {
             console.log("技能2被选取")
+            // 实现给player state的 damge, speed,进行状态加成
+            // todo...
+
             lvNode.destroy();
             director.resume();
         }, this);
 
         skillBtn03.on("click", () => {
             console.log("技能3被选取", this.node);
+            // 可自行实现给player state的 damge, speed,进行状态加成
+            // todo...
             lvNode.destroy();
             director.resume();
         }, this);
