@@ -1,14 +1,19 @@
-import { _decorator, Component, Node } from 'cc';
-const { ccclass, property } = _decorator;
+/*
+ * @Author: OCEAN.GZY
+ * @Date: 2024-03-22 17:13:53
+ * @LastEditors: OCEAN.GZY
+ * @LastEditTime: 2024-03-23 16:58:20
+ * @FilePath: /OceanHero/assets/script/character/CharacterProperty.ts
+ * @Description: 注释信息
+ */
 
-@ccclass('CharacterProperty')
-export class CharacterProperty extends Component {
-    start() {
+export class CharacterProperty {
 
-    }
+    projectileCount: number = 1;
 
-    update(deltaTime: number) {
-        
-    }
+    maxLife: number = 100;
+
+    life: number = this.maxLife;
+
 }
 

@@ -2,13 +2,14 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-03-22 17:09:34
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-22 22:31:43
+ * @LastEditTime: 2024-03-23 22:53:55
  * @FilePath: /OceanHero/assets/script/character/Character.ts
  * @Description: 注释信息
  */
 import { _decorator, CCFloat, Collider, Component, Node, RigidBody, SkeletalAnimation, v2, v3, Vec3 } from 'cc';
 import { EnumAnimState } from './EnumAnimState';
 import { MathUtil } from '../util/MathUtils';
+import { CharacterProperty } from './CharacterProperty';
 const { ccclass, property } = _decorator;
 
 let _tempVelocity = v3();
@@ -32,6 +33,10 @@ export class Character extends Component {
     turnSpeed: number = 1.0;
 
     controlInput: Vec3 = v3();
+
+    cProperty: CharacterProperty = new CharacterProperty();
+
+    dead: boolean = false;
 
 
     start() {
@@ -70,7 +75,7 @@ export class Character extends Component {
 
     dorotate() { // 平滑转向
 
-        console.log("转向input", this.controlInput);
+        // console.log("转向input", this.controlInput);
 
         // 输入方向和当前朝向的夹角
         _tempVelocity1 = v3(0, MathUtil.signAngle(this.node.forward, this.controlInput, Vec3.UP) * this.turnSpeed, 0);
