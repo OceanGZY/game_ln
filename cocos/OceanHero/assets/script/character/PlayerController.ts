@@ -65,8 +65,6 @@ export class PlayerController extends Component {
             projectile.node.forward = arrowForward;
             projectile.node.worldPosition = arrowStartPosition;
             projectile.target = CharacterManager.instance.randomEnemy;
-
-
         }
 
     }

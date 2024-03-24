@@ -16,5 +16,11 @@
       "1": 5,
       "2": 3
     }
+  },
+  "general": {
+    "designResolution": {
+      "width": 720,
+      "height": 1280
+    }
   }
 }

@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-03-22 17:11:49
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-24 21:28:57
+ * @LastEditTime: 2024-03-24 23:18:51
  * @FilePath: /OceanHero/assets/script/character/Projectile.ts
  * @Description: 注释信息
  */
