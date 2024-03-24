@@ -420,9 +420,9 @@
     },
     "_angularFactor": {
       "__type__": "cc.Vec3",
-      "x": 1,
+      "x": 0,
       "y": 1,
-      "z": 1
+      "z": 0
     },
     "_id": ""
   },
@@ -443,8 +443,8 @@
       "__id__": 28
     },
     "skAnim": null,
-    "moveSpeed": 10,
-    "turnSpeed": 5,
+    "moveSpeed": 3,
+    "turnSpeed": 1,
     "_id": ""
   },
   {

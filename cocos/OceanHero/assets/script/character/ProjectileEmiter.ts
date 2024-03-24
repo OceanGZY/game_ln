@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-03-22 17:12:12
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-23 17:22:32
+ * @LastEditTime: 2024-03-24 20:06:52
  * @FilePath: /OceanHero/assets/script/character/ProjectileEmiter.ts
  * @Description: 注释信息
  */
@@ -43,10 +43,12 @@ export class ProjectileEmiter extends Component {
         let projectile = node.getComponent(Projectile);
         node.once(Events.OnProjectileDead, this.onProjectileDead, this);
         node.active = true;
+        console.log("创建子弹，开始ruturn");
         return projectile;
     }
 
     onProjectileDead(prj: Projectile) {
+        console.log("子弹onProjectileDead");
         prj.node.active = false;
         this.projectilePool.free(prj.node);
     }

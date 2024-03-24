@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-03-22 17:09:57
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-23 18:14:51
+ * @LastEditTime: 2024-03-24 21:18:57
  * @FilePath: /OceanHero/assets/script/character/PlayerController.ts
  * @Description: 注释信息
  */
@@ -12,6 +12,7 @@ import { JoyInput } from '../input/JoyInput';
 import { EnumAnimState } from './EnumAnimState';
 import { MathUtil } from '../util/MathUtils';
 import { ProjectileEmiter } from './ProjectileEmiter';
+import { CharacterManager } from '../level/CharacterManager';
 const { ccclass, property, requireComponent } = _decorator;
 
 @ccclass('PlayerController')
@@ -39,7 +40,16 @@ export class PlayerController extends Component {
             this.character.changeState(EnumAnimState.Run);
         } else {
             // console.log("虚拟摇杆已经不动了");
-            this.character.changeState(EnumAnimState.Idle);
+            let enemy = this.getNearEnemy();
+            if (enemy == null) {
+                this.character.changeState(EnumAnimState.Idle);
+            } else {
+                Vec3.subtract(this.character.controlInput, enemy.worldPosition, this.node.worldPosition);
+                this.character.controlInput.y = 0;
+                this.character.controlInput.normalize();
+                this.character.changeState(EnumAnimState.Attack);
+            }
+
         }
     }
 
@@ -53,6 +63,10 @@ export class PlayerController extends Component {
             let emitter = this.node.getComponent(ProjectileEmiter);
             let projectile = emitter.create();
             projectile.node.forward = arrowForward;
+            projectile.node.worldPosition = arrowStartPosition;
+            projectile.target = CharacterManager.instance.randomEnemy;
+
+
         }
 
     }
@@ -71,6 +85,21 @@ export class PlayerController extends Component {
         if (isOdd) {
             this._splitAngle.push(0);
         }
+    }
+
+    getNearEnemy(): Node {
+        let _minDistance: number = 999;
+        let _minNode: Node = null;
+
+        for (let enemy of CharacterManager.instance.enemies) {
+            let distacne = Vec3.distance(this.node.worldPosition, enemy.worldPosition);
+
+            if (distacne < _minDistance) {
+                _minDistance = distacne;
+                _minNode = enemy;
+            }
+        }
+        return _minNode; // 返回离player最近的敌人
     }
 }
 

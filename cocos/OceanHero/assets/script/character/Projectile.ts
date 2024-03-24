@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-03-22 17:11:49
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-03-23 17:56:51
+ * @LastEditTime: 2024-03-24 21:28:57
  * @FilePath: /OceanHero/assets/script/character/Projectile.ts
  * @Description: 注释信息
  */
@@ -49,11 +49,10 @@ export class Projectile extends Component {
         }
 
         if (this.target != null) {// 追踪敌人
-            let _forward: Vec3;
-            let _tmppos: Vec3;
+            let _forward: Vec3 = v3();
+            let _tmppos: Vec3 = v3();
             Vec3.subtract(_tmppos, this.target.worldPosition, this.node.worldPosition); // 目标位置-当前位置
             _tmppos.normalize();
-
             const angle = math.toRadian(this.angularSpeed) * deltaTime;
             MathUtil.rotateToward(_forward, this.node.forward, _tmppos, angle);
             this.node.forward = _forward;

@@ -259,6 +259,8 @@
     "__prefab": {
       "__id__": 15
     },
+    "linearSpeed": 30,
+    "angularSpeed": 180,
     "_id": ""
   },
   {

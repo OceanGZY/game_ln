@@ -468,7 +468,7 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 129.99447101553508,
+      "width": 129.9827376497006,
       "height": 60.4
     }
   },
@@ -602,7 +602,7 @@
   },
   {
     "__type__": "cc.PrefabInstance",
-    "fileId": "ffD3Gc2chLMLffnWVYI2UP",
+    "fileId": "e0K3DVyiRK75B89MYJA/l4",
     "prefabRootNode": null,
     "mountedChildren": [],
     "mountedComponents": [],
@@ -648,7 +648,7 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": -6.5,
+      "x": -6.482,
       "y": 0,
       "z": 0
     }
@@ -974,7 +974,7 @@
     "__prefab": null,
     "_materials": [
       {
-        "__uuid__": "4cbd7f62-6151-48b3-9666-e70f8275fed3",
+        "__uuid__": "78e0584a-4343-4727-8f37-e14e65c2a2db",
         "__expectedType__": "cc.Material"
       }
     ],

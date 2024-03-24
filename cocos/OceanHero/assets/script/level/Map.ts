@@ -1,3 +1,11 @@
+/*
+ * @Author: OCEAN.GZY
+ * @Date: 2024-03-23 19:06:36
+ * @LastEditors: OCEAN.GZY
+ * @LastEditTime: 2024-03-24 21:26:30
+ * @FilePath: /OceanHero/assets/script/level/Map.ts
+ * @Description: 注释信息
+ */
 import { _decorator, BoxCollider, Component, macro, Node, randomRange, RigidBody, v3, Vec3 } from 'cc';
 import { CharacterManager } from './CharacterManager';
 import { Character } from '../character/Character';
@@ -38,7 +46,7 @@ export class Map extends Component {
     }
 
     randomSpawn() {
-        console.log("CharacterManager.instance.enemies",CharacterManager.instance.enemies)
+        // console.log("CharacterManager.instance.enemies",CharacterManager.instance.enemies)
         if (CharacterManager.instance.enemies.length > this.maxAliveEnemy) {
             return;
         }
