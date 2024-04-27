@@ -1,4 +1,13 @@
-import { _decorator, CCFloat, Component, EventTouch, Input, input, math, Node, v3, Vec3 } from 'cc';
+/*
+ * @Author: OCEAN.GZY
+ * @Date: 2024-03-24 23:30:11
+ * @LastEditors: OCEAN.GZY
+ * @LastEditTime: 2024-03-29 16:23:55
+ * @FilePath: /Heros/assets/scripts/UI/JoySticker.ts
+ * @Description: 注释信息
+ */
+import { _decorator, CCFloat, Component, EventTouch, Input, input, math, Node, v2, v3, Vec2, Vec3 } from 'cc';
+import { UserInputControll } from '../Global/UserInputControll';
 const { ccclass, property } = _decorator;
 
 @ccclass('JoySticker')
@@ -11,7 +20,7 @@ export class JoySticker extends Component {
     innerJoy: Node;
 
     @property({ type: CCFloat })
-    maxRadius: number = 90;
+    maxRadius: number = 50;
 
     initPos: Vec3;
 
@@ -46,6 +55,10 @@ export class JoySticker extends Component {
             len = localPos.length();
         }
         localPos.normalize().multiplyScalar(len);
+        // console.log("此时的localPos", localPos);
+        UserInputControll.virtualInputDirection = v2(localPos.x, localPos.y);
+        // console.log("此时的UserInputControll.virtualInputDirection", UserInputControll.virtualInputDirection);
+
         this.innerJoy.setPosition(localPos);
     }
 
@@ -54,6 +67,8 @@ export class JoySticker extends Component {
         this.outterJoy.setWorldPosition(this.initPos);
         // innerjoy归位
         this.innerJoy.setPosition(Vec3.ZERO);
+        UserInputControll.virtualInputDirection = Vec2.ZERO;
+
 
     }
 }
