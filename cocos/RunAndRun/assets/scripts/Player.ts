@@ -2,8 +2,8 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-05-03 10:48:00
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-05-03 19:48:57
- * @FilePath: \RunAndRun\assets\scripts\Player.ts
+ * @LastEditTime: 2024-05-03 23:16:05
+ * @FilePath: /RunAndRun/assets/scripts/Player.ts
  * @Description: 注释信息
  */
 import { _decorator, Component, Node, Vec3, TERRAIN_HEIGHT_BASE } from 'cc';
@@ -12,14 +12,14 @@ const { ccclass, property } = _decorator;
 @ccclass('Player')
 export class Player extends Component {
 
-    private _gravity: number = -10;
+    private _gravity: number = -10; // 重力加速度
 
-    private _velocityX: number = 0;
-    private _velocityY: number = 0;
-    private _velocityZ: number = -10;
+    private _velocityX: number = 0; // X轴速度
+    private _velocityY: number = 0; // Y轴速度
+    private _velocityZ: number = -10; // Z轴速度
 
-    private _jumpTime: number = 0;
-    private _passedTime: number = 0;
+    private _jumpTime: number = 0; // 每次跳跃时长
+    private _passedTime: number = 0; // 消耗时长
     private _isJumping: boolean = false;
 
     private _endCB: Function = null;
@@ -30,7 +30,7 @@ export class Player extends Component {
     private _followCameraOffset: number = 0;
 
     start() {
-        this._followCameraOffset = this.followCamera.worldPosition.z-this.node.worldPosition.z;
+        this._followCameraOffset = this.followCamera.worldPosition.z - this.node.worldPosition.z;
     }
 
     update(deltaTime: number) {
@@ -51,8 +51,8 @@ export class Player extends Component {
         this._velocityY += this._gravity * deltaTime; // 受重力加速度影响
 
         this.node.setWorldPosition(oldPos);
-        this.followCamera.setWorldPosition(this.followCamera.worldPosition.x,this.followCamera.worldPosition.y,oldPos.z+this._followCameraOffset);
-        
+        this.followCamera.setWorldPosition(this.followCamera.worldPosition.x, this.followCamera.worldPosition.y, oldPos.z + this._followCameraOffset);
+
         if (this._passedTime >= this._jumpTime) {
             this._isJumping = false;
             if (this._endCB) {
@@ -63,7 +63,7 @@ export class Player extends Component {
 
 
     /**
-     * jumpTo
+     * 跳向下一个踏板
      * @param targetPos 
      */
     public jumpTo(targetPos: Vec3, endCB: Function) {

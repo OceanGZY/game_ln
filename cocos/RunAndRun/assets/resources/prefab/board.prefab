@@ -22,10 +22,13 @@
     "_components": [
       {
         "__id__": 2
+      },
+      {
+        "__id__": 5
       }
     ],
     "_prefab": {
-      "__id__": 5
+      "__id__": 8
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -70,7 +73,7 @@
     },
     "_materials": [
       {
-        "__uuid__": "67da2c2f-ce2b-40a9-87cc-84af0b139858",
+        "__uuid__": "c2b1046b-e51b-43b8-8175-0ee60f120fd8",
         "__expectedType__": "cc.Material"
       }
     ],
@@ -118,6 +121,49 @@
     "_bakeToReflectionProbe": true
   },
   {
+    "__type__": "cc.SphereLight",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 6
+    },
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 252,
+      "g": 10,
+      "b": 10,
+      "a": 255
+    },
+    "_useColorTemperature": false,
+    "_colorTemperature": 6550,
+    "_staticSettings": {
+      "__id__": 7
+    },
+    "_visibility": -325058561,
+    "_size": 0.15,
+    "_luminanceHDR": 1913.8445799108247,
+    "_luminance": 1913.8445799108247,
+    "_luminanceLDR": 498.3970260184439,
+    "_term": 0,
+    "_range": 2.1,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "74HtGOhtdD5YHkXm69jZ6V"
+  },
+  {
+    "__type__": "cc.StaticLightSettings",
+    "_baked": false,
+    "_editorOnly": false,
+    "_castShadow": false
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -126,6 +172,7 @@
       "__id__": 0
     },
     "fileId": "14ylKDNcdANpGUy5SLpL4l",
-    "instance": null
+    "instance": null,
+    "targetOverrides": null
   }
 ]
