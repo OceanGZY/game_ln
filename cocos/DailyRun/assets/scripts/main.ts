@@ -2,8 +2,8 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-05-04 17:05:34
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-05-04 22:42:02
- * @FilePath: \DailyRun\assets\scripts\main.ts
+ * @LastEditTime: 2024-05-05 00:04:57
+ * @FilePath: /DailyRun/assets/scripts/main.ts
  * @Description: 注释信息
  */
 import { _decorator, Component, Node, PhysicsSystem2D, EPhysics2DDrawFlags, BoxCollider2D, Contact2DType, IPhysics2DContact, EventTouch, Input, v2, tween, RigidBody2D } from 'cc';
@@ -21,11 +21,13 @@ export class main extends Component {
     @property(Node)
     backgrounds: Array<Node> = []; // 背景图片
 
+    curBg: Node = null;
+
     jumpForce: number = 100; // 跳跃力度  
     jumpDuration: number = 3; // 跳跃持续时间  
     maxJumpCount: number = 2; // 最大连跳次数
 
-    bgSpeed: number = 128; // 背景运动速度
+    bgSpeed: number = 256; // 背景运动速度
 
 
     start() {
@@ -42,6 +44,8 @@ export class main extends Component {
         this.playerColider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this)
 
         this.node.parent.on(Input.EventType.TOUCH_START, this.doJump, this);
+
+        this.curBg = this.backgrounds[0];
 
         this.schedule(this.backgoundMove);
     }
@@ -60,25 +64,19 @@ export class main extends Component {
     }
 
     backgoundMove() {
-        let dt:number=0.01;
-        let posX0 = this.backgrounds[0].position.x - this.bgSpeed * dt;
-        let posX1 = this.backgrounds[1].position.x - this.bgSpeed * dt;
-
-        if (posX0 <= -1280) {
-            posX0 = 640;
-            posX1 = 0;
-
+        let dt: number = 0.01;
+        var distance = this.bgSpeed * dt;
+        this.backgrounds[0].setPosition(this.backgrounds[0].position.x - distance, 0);
+        this.backgrounds[1].setPosition(this.backgrounds[1].position.x - distance, 0);
+        if (this.curBg.position.x <= -1280) {
+            if (this.curBg == this.backgrounds[0]) {
+                this.backgrounds[0].setPosition(this.backgrounds[1].position.x + 1280, 0);
+                this.curBg = this.backgrounds[1];
+            } else {
+                this.backgrounds[1].setPosition(this.backgrounds[0].position.x + 1280, 0);
+                this.curBg = this.backgrounds[0];
+            }
         }
-        if (posX1 <= -1280) {
-            posX1 = 640;
-            posX0 = 0;
-
-        }
-        this.backgrounds[0].setPosition(posX0, 0);
-        this.backgrounds[1].setPosition(posX1, 0);
-
-
-        tween(this.backgrounds[0])                                                                              
     }
 }
 
