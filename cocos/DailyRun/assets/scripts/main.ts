@@ -2,11 +2,11 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-05-04 17:05:34
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-05-05 00:04:57
+ * @LastEditTime: 2024-05-05 21:53:55
  * @FilePath: /DailyRun/assets/scripts/main.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, Node, PhysicsSystem2D, EPhysics2DDrawFlags, BoxCollider2D, Contact2DType, IPhysics2DContact, EventTouch, Input, v2, tween, RigidBody2D } from 'cc';
+import { _decorator, Component, Node, PhysicsSystem2D, EPhysics2DDrawFlags, BoxCollider2D, Contact2DType, IPhysics2DContact, EventTouch, Input, v2, tween, RigidBody2D, Collider2D, Label, AudioClip, AudioSource } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('main')
@@ -21,13 +21,33 @@ export class main extends Component {
     @property(Node)
     backgrounds: Array<Node> = []; // 背景图片
 
+    @property(Label)
+    scoreLabel: Label = null;
+    @property(Label)
+    goldLabel: Label = null;
+    @property(Label)
+    sliverLabel: Label = null;
+
+
     curBg: Node = null;
 
-    jumpForce: number = 100; // 跳跃力度  
+    jumpForce: number = 120; // 跳跃力度  
     jumpDuration: number = 3; // 跳跃持续时间  
     maxJumpCount: number = 2; // 最大连跳次数
 
     bgSpeed: number = 256; // 背景运动速度
+
+    score: number = 0;
+    goldPerScore: number = 10;
+    silverPerScore: number = 5;
+    goldCnt: number = 0;
+    silverCnt: number = 0;
+
+    @property(AudioClip)
+    jumpSoundSFX: AudioClip = null;
+
+    @property(AudioClip)
+    pickCoinSoundSFX: AudioClip = null;
 
 
     start() {
@@ -42,8 +62,10 @@ export class main extends Component {
         this.playBody = this.player.getComponent(RigidBody2D);
 
         this.playerColider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this)
+        this.playerColider.on(Contact2DType.END_CONTACT, this.pickCoin, this)
 
         this.node.parent.on(Input.EventType.TOUCH_START, this.doJump, this);
+
 
         this.curBg = this.backgrounds[0];
 
@@ -54,17 +76,73 @@ export class main extends Component {
 
     }
 
-    onBeginContact(selfCollider: BoxCollider2D, otherCollider: BoxCollider2D, contact: IPhysics2DContact | null) {
-        // 只在两个碰撞体开始接触时被调用一次
+    onBeginContact(selfCollider: BoxCollider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
+
         console.log('onBeginContact');
+        console.log(otherCollider.node);
+        if (otherCollider.node.name = "Floor") {
+            this.maxJumpCount = 2; //重置跳跃次数
+        }
+
+
+
+    }
+
+
+    pickCoin(selfCollider: BoxCollider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
+
+        if (otherCollider.tag == 1) {
+            this.scheduleOnce(() => {
+                if (otherCollider.node) {
+                    otherCollider.node.active = false;
+                }
+            }, 0.05);
+
+            this.goldCnt++;
+            this.score = this.score + this.goldPerScore;
+            this.scoreLabel.string = "分数：" + this.score.toString();
+            this.goldLabel.string = `${this.goldCnt}`;
+            this.node.getComponent(AudioSource).playOneShot(this.pickCoinSoundSFX, 5);
+
+            setTimeout(() => {
+                otherCollider.node.destroy();
+            }, 3);
+
+
+        }
+
+        if (otherCollider.tag == 2) {
+            this.scheduleOnce(() => {
+                if (otherCollider.node) {
+                    otherCollider.node.active = false;
+                }
+
+            }, 0.05);
+            this.silverCnt++;
+            this.score = this.score + this.silverPerScore;
+            this.scoreLabel.string = "分数：" + `${this.score}`;
+            this.sliverLabel.string = `${this.silverCnt}`;
+            this.node.getComponent(AudioSource).playOneShot(this.pickCoinSoundSFX, 5);
+
+            setTimeout(() => {
+                otherCollider.node.destroy();
+            }, 3);
+
+        }
     }
 
     doJump(event: EventTouch) {
-        this.playBody.applyLinearImpulse(v2(0, this.jumpForce), v2(this.playBody.node.worldPosition.x, this.playBody.node.worldPosition.y), true);
+        if (this.maxJumpCount > 0) {
+            this.playBody.applyLinearImpulse(v2(0, this.jumpForce), v2(this.playBody.node.worldPosition.x, this.playBody.node.worldPosition.y), true);
+            this.maxJumpCount--; //连跳次数减1
+            this.node.getComponent(AudioSource).playOneShot(this.jumpSoundSFX, 5);
+        }
     }
 
+
+
     backgoundMove() {
-        let dt: number = 0.01;
+        let dt: number = 0.02;
         var distance = this.bgSpeed * dt;
         this.backgrounds[0].setPosition(this.backgrounds[0].position.x - distance, 0);
         this.backgrounds[1].setPosition(this.backgrounds[1].position.x - distance, 0);
