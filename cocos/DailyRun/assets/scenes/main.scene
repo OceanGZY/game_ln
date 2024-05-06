@@ -209,6 +209,14 @@
     "sliverLabel": {
       "__id__": 121
     },
+    "goldCoinPrefab": {
+      "__uuid__": "112bbc7c-f1fd-4112-8bef-692d74b945fc",
+      "__expectedType__": "cc.Prefab"
+    },
+    "silverCoinPrefab": {
+      "__uuid__": "74e1a23c-d51c-4674-85e5-7941451801e0",
+      "__expectedType__": "cc.Prefab"
+    },
     "jumpSoundSFX": {
       "__uuid__": "7beabf32-a848-4ddf-b8c4-37255934c980",
       "__expectedType__": "cc.AudioClip"
@@ -3498,7 +3506,7 @@
     "_priority": 0,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 427.44525547445255,
+    "_orthoHeight": 433.2452276064611,
     "_near": 0,
     "_far": 1000,
     "_color": {

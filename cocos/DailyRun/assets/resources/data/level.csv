@@ -1,7 +1,7 @@
 编号,关卡类型,关卡数据表,关卡名称,敌人数量,金币数量,银币数量,最大时长
-number,number,string,string,number,number,number,number
 id,levelType,levelTable,levelName,enemyCount,goldCount,silverCount,maxTime
-1,0,level_01,level_01,0,10,20,10
-2,0,level_02,level_02,0,20,40,20
-3,0,level_03,level_03,0,40,60,40
-4,0,level_04,level_04,0,80,120,60
+number,string,string,string,number,number,number,number
+1,simple,level_01,level_01,0,10,20,10
+2,simple,level_02,level_02,0,20,40,20
+3,simple,level_03,level_03,0,40,60,40
+4,simple,level_04,level_04,0,80,120,60

@@ -2,11 +2,12 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-05-04 17:05:34
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-05-05 21:53:55
+ * @LastEditTime: 2024-05-06 18:13:05
  * @FilePath: /DailyRun/assets/scripts/main.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, Node, PhysicsSystem2D, EPhysics2DDrawFlags, BoxCollider2D, Contact2DType, IPhysics2DContact, EventTouch, Input, v2, tween, RigidBody2D, Collider2D, Label, AudioClip, AudioSource } from 'cc';
+import { _decorator, Component, Node, PhysicsSystem2D, EPhysics2DDrawFlags, BoxCollider2D, Contact2DType, IPhysics2DContact, EventTouch, Input, v2, tween, RigidBody2D, Collider2D, Label, AudioClip, AudioSource, Prefab, instantiate } from 'cc';
+import { GameState } from './global/GameState';
 const { ccclass, property } = _decorator;
 
 @ccclass('main')
@@ -43,6 +44,15 @@ export class main extends Component {
     goldCnt: number = 0;
     silverCnt: number = 0;
 
+    @property(Prefab)
+    goldCoinPrefab: Prefab = null;
+
+    @property(Prefab)
+    silverCoinPrefab: Prefab = null;
+
+
+
+
     @property(AudioClip)
     jumpSoundSFX: AudioClip = null;
 
@@ -61,7 +71,7 @@ export class main extends Component {
         this.playerColider = this.player.getComponent(BoxCollider2D);
         this.playBody = this.player.getComponent(RigidBody2D);
 
-        this.playerColider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this)
+        this.playerColider.on(Contact2DType.BEGIN_CONTACT, this.onTheFloor, this)
         this.playerColider.on(Contact2DType.END_CONTACT, this.pickCoin, this)
 
         this.node.parent.on(Input.EventType.TOUCH_START, this.doJump, this);
@@ -70,23 +80,23 @@ export class main extends Component {
         this.curBg = this.backgrounds[0];
 
         this.schedule(this.backgoundMove);
+        this.schedule(this.generateGoldCoin, 3);
+        this.schedule(this.generateSliverCoin, 5);
+
+
     }
 
     update(deltaTime: number) {
 
+
     }
 
-    onBeginContact(selfCollider: BoxCollider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
-
-        console.log('onBeginContact');
-        console.log(otherCollider.node);
+    onTheFloor(selfCollider: BoxCollider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
         if (otherCollider.node.name = "Floor") {
             this.maxJumpCount = 2; //重置跳跃次数
         }
-
-
-
     }
+
 
 
     pickCoin(selfCollider: BoxCollider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
@@ -156,6 +166,36 @@ export class main extends Component {
             }
         }
     }
+
+    generateGoldCoin() {
+        if (this.goldCnt >= GameState.getInstance().currentLevel.goldCount) {
+            this.unschedule(this.generateGoldCoin);// 取消定时器
+        }
+        for (let i = 0; i < 3; i++) {
+            let temp = instantiate(this.goldCoinPrefab);
+            this.curBg.addChild(temp);
+            temp.setPosition(100 * i, -10)
+            if (this.curBg.position.x <= -1280) {
+                temp.destroy();
+            }
+        }
+    }
+
+    generateSliverCoin() {
+        if (this.silverCnt >= GameState.getInstance().currentLevel.silverCount) {
+            this.unschedule(this.generateSliverCoin); // 取消定时器
+        }
+        for (let i = 0; i < 6; i++) {
+            let temp = instantiate(this.silverCoinPrefab);
+            this.curBg.addChild(temp);
+            temp.setPosition(80 + 60 * i, -10);
+            if (this.curBg.position.x <= -1280) {
+                temp.destroy();
+            }
+        }
+    }
+
+
 }
 
 

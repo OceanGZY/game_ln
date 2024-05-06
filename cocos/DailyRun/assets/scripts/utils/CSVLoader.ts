@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-05-05 23:56:06
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-05-06 00:48:21
+ * @LastEditTime: 2024-05-06 17:20:54
  * @FilePath: /DailyRun/assets/scripts/utils/CSVLoader.ts
  * @Description: 注释信息
  */
@@ -29,7 +29,7 @@ export class CSVLoader {
                 console.log(temp);
                 let res = temp.split("\n").map((v) => {
                     let temp1 = v.split(",").map((newv) => {
-                        return newv.replace("\"", "\'")
+                        return newv.replace("\"", "\'") 
                     })
 
                     return temp1;
