@@ -332,7 +332,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 511.6,
+      "width": 511.56723112512805,
       "height": 137.59999999999997
     },
     "_anchorPoint": {
@@ -362,10 +362,10 @@
       "b": 255,
       "a": 255
     },
-    "_string": "天天爱跑酷",
+    "_string": "天天爱酷跑",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 100,
+    "_actualFontSize": 101.66666666666666,
     "_fontSize": 100,
     "_fontFamily": "Arial",
     "_lineHeight": 100,
@@ -416,8 +416,8 @@
     "__prefab": null,
     "_alignFlags": 45,
     "_target": null,
-    "_left": 384.2,
-    "_right": 384.2,
+    "_left": 384.216384437436,
+    "_right": 384.216384437436,
     "_top": 181.353,
     "_bottom": 401.047,
     "_horizontalCenter": 0,
@@ -497,7 +497,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 298.0625,
+      "width": 298.0141321401127,
       "height": 54.39999999999998
     },
     "_anchorPoint": {
@@ -530,7 +530,7 @@
     "_string": "©️OceanCheese",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 40,
+    "_actualFontSize": 40.666666666666664,
     "_fontSize": 40,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -581,8 +581,8 @@
     "__prefab": null,
     "_alignFlags": 45,
     "_target": null,
-    "_left": 490.96875,
-    "_right": 490.96875,
+    "_left": 490.99293392994366,
+    "_right": 490.99293392994366,
     "_top": 332.8,
     "_bottom": 332.8,
     "_horizontalCenter": 0,
@@ -747,7 +747,7 @@
     "_string": "开始游戏",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 40,
+    "_actualFontSize": 40.666666666666664,
     "_fontSize": 40,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
