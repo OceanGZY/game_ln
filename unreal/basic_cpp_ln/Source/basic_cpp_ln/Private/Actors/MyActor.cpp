@@ -51,8 +51,9 @@ void AMyActor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (bShouldMove)
 	{
-		
-		AddActorLocalOffset(TickLocationOffset,true);
+		FHitResult HitResult; // save hit result
+		AddActorLocalOffset(TickLocationOffset, true, &HitResult); //when hit somebody ,HitResult will have value
+		UE_LOG(LogTemp, Log, TEXT("X: %f,Y: %f,Z:%f"), HitResult.Location.X, HitResult.Location.Y, HitResult.Location.Z);
 	}
 
 }
