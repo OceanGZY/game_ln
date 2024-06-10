@@ -33,6 +33,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = Input)
 	class UInputAction* FireAction;
 
+	UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	bool bJumpBtnDown;
 
 	UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	bool bCrouchBtnDown;
@@ -47,6 +49,9 @@ protected:
 
 	void Fire(const struct FInputActionValue& Value);
 
+	virtual void Jump() override;
+
+	virtual void StopJumping() override;
 
 
 
@@ -65,4 +70,6 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 	class UCameraComponent* FollowCarmera;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	class UWidgetComponent* OverHeadWidget;
 };

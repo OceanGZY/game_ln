@@ -13,5 +13,8 @@ UCLASS()
 class OCEANTPS_API AOTPSGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+
+
+
 	
 };

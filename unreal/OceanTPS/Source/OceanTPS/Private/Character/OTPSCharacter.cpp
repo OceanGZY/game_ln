@@ -10,6 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Components/WidgetComponent.h"
 
 // Sets default values
 AOTPSCharacter::AOTPSCharacter()
@@ -36,6 +37,11 @@ AOTPSCharacter::AOTPSCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.f;
 
+	bUseControllerRotationYaw = false;
+
+
+	OverHeadWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("OverHeadWidget"));
+	OverHeadWidget->SetupAttachment(RootComponent);
 	
 
 }
@@ -80,6 +86,18 @@ void AOTPSCharacter::Look(const FInputActionValue& Value)
 
 void AOTPSCharacter::Fire(const FInputActionValue& Value)
 {
+}
+
+void AOTPSCharacter::Jump()
+{
+	bJumpBtnDown = true;
+	Super::Jump();
+}
+
+void AOTPSCharacter::StopJumping()
+{
+	bJumpBtnDown = false;
+	Super::StopJumping();
 }
 
 

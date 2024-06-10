@@ -30,9 +30,33 @@ void UOTPSCharacterAnimInstance::NativeUpdateAnimation(float DeltaTime)
 	Speed = Velocity.Length();
 	Direction = CalculateDirection(Velocity, Rotation);
 
-	if (OTPSCharacter->bPressedJump && !bEnableJump) {
+
+
+	UE_LOG(LogTemp, Warning, TEXT("Velocity value %s"), *Velocity.ToString());
+	UE_LOG(LogTemp, Warning, TEXT("Rotation value %s"), *Rotation.ToString());
+
+	UE_LOG(LogTemp, Warning, TEXT("Speed value %f"), Speed);
+
+	UE_LOG(LogTemp, Warning, TEXT("OTPSCharacter->bPressedJump value %s"), (OTPSCharacter->bPressedJump ? TEXT("true") : TEXT("false")));
+	UE_LOG(LogTemp, Warning, TEXT("bEnableJump  %s"), (bEnableJump ? TEXT("true") : TEXT("false")));
+
+
+
+	if (OTPSCharacter->bJumpBtnDown && !bEnableJump) {
 		bEnableJump = true;
 	}
+	
+
+	UE_LOG(LogTemp, Warning, TEXT("now bEnableJump new  %s"), (bEnableJump ? TEXT("true") : TEXT("false")));
+
+	if (!OTPSCharacter->bJumpBtnDown) {
+		bEnableJump = false;
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("now new  bEnableJump new  %s"), (bEnableJump ? TEXT("true") : TEXT("false")));
+
+	
+	
 
 	/*if (fabs(Velocity.Z)!=0) {
 		bEnableJump = false;
