@@ -13,6 +13,7 @@
 #include "Components/WidgetComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "Weapon/Weapon.h"
+#include "OTPSComponents/CombatComponent.h"
 
 
 // Sets default values
@@ -45,7 +46,10 @@ AOTPSCharacter::AOTPSCharacter()
 
 	OverHeadWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("OverHeadWidget"));
 	OverHeadWidget->SetupAttachment(RootComponent);
-	
+
+
+	Combat = CreateDefaultSubobject<UCombatComponent>(TEXT("Combat"));
+	Combat->SetIsReplicated(true);
 
 }
 
@@ -103,6 +107,26 @@ void AOTPSCharacter::StopJumping()
 	Super::StopJumping();
 }
 
+void AOTPSCharacter::EquipBtnPressed()
+{
+	if (Combat) {
+		if (HasAuthority()) {
+			Combat->EquipWeapon(OverlappingWeapon);
+		}
+		else {
+			ServerEquipBtnPressed();
+		}
+		
+	}
+}
+
+void AOTPSCharacter::ServerEquipBtnPressed_Implementation()
+{
+	if (Combat) {
+		Combat->EquipWeapon(OverlappingWeapon);
+	}
+}
+
 
 // Called every frame
 void AOTPSCharacter::Tick(float DeltaTime)
@@ -137,6 +161,9 @@ void AOTPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		// Fire
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AOTPSCharacter::Fire);
 
+
+		// Equip
+		EnhancedInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &AOTPSCharacter::EquipBtnPressed);
 	}
 
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -150,6 +177,14 @@ void AOTPSCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 	DOREPLIFETIME_CONDITION(AOTPSCharacter, OverlappingWeapon,COND_OwnerOnly);
 }
 
+void AOTPSCharacter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	if (Combat) {
+		Combat->OTPSCharacter = this;
+	}
+}
+
 void AOTPSCharacter::OnRep_OverlappingWeapon(AWeapon* LastWeapon)
 {
 	if (OverlappingWeapon) {
@@ -160,6 +195,8 @@ void AOTPSCharacter::OnRep_OverlappingWeapon(AWeapon* LastWeapon)
 		LastWeapon->ShowPickupWidget(false);
 	}
 }
+
+
 
 void AOTPSCharacter::SetOverlappingWeapon(AWeapon* Weapon)
 {

@@ -29,6 +29,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = Input)
 	class UInputAction* JumpAction;
 
+	UPROPERTY(EditAnywhere, Category = Input)
+	class UInputAction* EquipAction;
+
 
 	UPROPERTY(EditAnywhere, Category = Input)
 	class UInputAction* FireAction;
@@ -54,6 +57,8 @@ protected:
 	virtual void StopJumping() override;
 
 
+	void EquipBtnPressed();
+
 
 public:	
 	// Called every frame
@@ -63,6 +68,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	virtual void PostInitializeComponents() override;
 
 private:
 	UPROPERTY(VisibleAnywhere, Category = Camera)
@@ -79,6 +86,12 @@ private:
 
 	UFUNCTION()
 	void OnRep_OverlappingWeapon(AWeapon* LastWeapon);
+
+	UPROPERTY(VisibleAnywhere)
+	class UCombatComponent* Combat;
+
+	UFUNCTION(Server, Reliable)
+	void ServerEquipBtnPressed();
 
 public:
 	void SetOverlappingWeapon(AWeapon* Weapon);
