@@ -2,12 +2,12 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-05-06 16:16:46
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-05-06 17:45:22
+ * @LastEditTime: 2024-06-27 17:44:15
  * @FilePath: /DailyRun/assets/scripts/global/GameState.ts
  * @Description: 注释信息
  */
 
-import { v2 } from "cc";
+import { NodePool, v2 } from "cc";
 import { LevelDetailModel, LevelModel } from "../model/LevelModel";
 import { CSVLoader } from "../utils/CSVLoader";
 
@@ -20,9 +20,12 @@ export class GameState {
         return this._instance;
     }
 
+    goldCoinPool: NodePool = new NodePool("GoldCoin");
+    sliverCoinPool: NodePool = new NodePool("SliverCoin");
+
     allLevels: Array<LevelModel> = [];
     curLevelId: number = 1;
-    currentLevel:LevelModel = {
+    currentLevel: LevelModel = {
         id: 0,
         levelType: "",
         levelTable: "",
@@ -34,7 +37,7 @@ export class GameState {
     };
 
 
-    // curLevel: Array<LevelDetailModel> = [];
+    curLevelData: Array<LevelDetailModel> = [];
 
 
     async parseData(path: string) {
@@ -73,27 +76,27 @@ export class GameState {
      * 
      * @param id 读取对应的子表， 暂时不用了
      */
-    // async parseCurLevel(id: number) {
-    //     this.curLevelId = id;
-    //     let levelPath = this.allLevels[this.curLevelId - 1].levelTable;
-    //     let data = await this.parseData(levelPath);
-    //     data.forEach(element => {
-    //         let temp: LevelDetailModel = {
-    //             id: element.id as number,
-    //             dtype: element.dtype,
-    //             name: element.name,
-    //             pfPath: element.pfPath,
-    //             pos: v2(element.pos.split("|")[0] as number, element.pos.split("|")[1] as number),
-    //             scale: element.scale ? v2(element.scale.split("|")[0] as number, element.scale.split("|")[1] as number) : v2(1, 1),
-    //             speed: v2(0, 0),
-    //             damage: element.damage as number,
-    //             life: element.life as number,
-    //             pscore: element.pscore as number
-    //         }
-    //         this.curLevel.push(temp);
-    //     });
-    //     console.log("this.curLevel", this.curLevel);
-    // }
+    async parseCurLevelData(id: number) {
+        this.curLevelId = id;
+        let levelPath = this.allLevels[this.curLevelId - 1].levelTable;
+        let data = await this.parseData(levelPath);
+        data.forEach(element => {
+            let temp: LevelDetailModel = {
+                id: element.id as number,
+                dtype: element.dtype,
+                name: element.name,
+                pfPath: element.pfPath,
+                pos: v2(element.pos.split("|")[0] as number, element.pos.split("|")[1] as number),
+                scale: element.scale ? v2(element.scale.split("|")[0] as number, element.scale.split("|")[1] as number) : v2(1, 1),
+                speed: v2(0, 0),
+                damage: element.damage as number,
+                life: element.life as number,
+                pscore: element.pscore as number
+            }
+            this.curLevelData.push(temp);
+        });
+        console.log("this.curLevelData", this.curLevelData);
+    }
 
 
     async parseCurLevel(id: number) {

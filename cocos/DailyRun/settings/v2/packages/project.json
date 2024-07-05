@@ -9,12 +9,18 @@
       {
         "index": 2,
         "name": "tools"
+      },
+      {
+        "index": 3,
+        "name": "SpwanTrigger"
       }
     ],
     "collisionMatrix": {
       "0": 3,
-      "1": 5,
-      "2": 2
+      "1": 13,
+      "2": 2,
+      "3": 2
     }
-  }
+  },
+  "custom_joint_texture_layouts": []
 }

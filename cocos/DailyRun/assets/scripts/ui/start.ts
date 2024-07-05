@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-05-05 18:48:01
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-05-06 17:34:29
+ * @LastEditTime: 2024-06-27 17:43:03
  * @FilePath: /DailyRun/assets/scripts/ui/start.ts
  * @Description: 注释信息
  */
@@ -24,6 +24,7 @@ export class start extends Component {
 
         await GameState.getInstance().parseLevels("level"); // 初始化关卡
         await GameState.getInstance().parseCurLevel(1);
+        await GameState.getInstance().parseCurLevelData(1);
     }
 
     update(deltaTime: number) {
