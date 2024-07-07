@@ -95,6 +95,16 @@ void AOTPSCharacter::Fire(const FInputActionValue& Value)
 {
 }
 
+void AOTPSCharacter::DoCrouch(const FInputActionValue& Value)
+{
+	if (bIsCrouched) {
+		UnCrouch();
+	}
+	else {
+		Crouch();
+	}
+}
+
 void AOTPSCharacter::Jump()
 {
 	bJumpBtnDown = true;
@@ -161,6 +171,8 @@ void AOTPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		// Fire
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AOTPSCharacter::Fire);
 
+		// Crouch
+		EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Triggered, this, &AOTPSCharacter::DoCrouch);
 
 		// Equip
 		EnhancedInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &AOTPSCharacter::EquipBtnPressed);

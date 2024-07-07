@@ -32,6 +32,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = Input)
 	class UInputAction* EquipAction;
 
+	UPROPERTY(EditAnywhere, Category = Input)
+	class UInputAction* CrouchAction;
 
 	UPROPERTY(EditAnywhere, Category = Input)
 	class UInputAction* FireAction;
@@ -39,8 +41,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	bool bJumpBtnDown;
 
-	UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
-	bool bCrouchBtnDown;
 
 protected:
 	// Called when the game starts or when spawned
@@ -51,6 +51,9 @@ protected:
 	void Look(const struct FInputActionValue& Value);
 
 	void Fire(const struct FInputActionValue& Value);
+
+	void DoCrouch(const struct FInputActionValue& Value);
+
 
 	virtual void Jump() override;
 

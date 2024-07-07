@@ -62,5 +62,5 @@ void UOTPSCharacterAnimInstance::NativeUpdateAnimation(float DeltaTime)
 		bEnableJump = false;
 	}*/
 
-	bIsCrouching = OTPSCharacter->bCrouchBtnDown;
+	bIsCrouching = OTPSCharacter->bIsCrouched;
 }
