@@ -43,4 +43,9 @@ protected:
 public:
 	void SpawnCoin(FVector Location,FRotator Rotator);
 
+	UFUNCTION()
+	void DoSaveGame();
+
+	UFUNCTION()
+	void SaveGameData();
 };

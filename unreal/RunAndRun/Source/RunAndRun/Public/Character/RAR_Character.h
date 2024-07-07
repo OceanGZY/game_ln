@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Components/TimelineComponent.h"
 #include "RAR_Character.generated.h"
 
 class USpringArmComponent;
@@ -12,6 +13,7 @@ class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
 class USkeletalMeshComponent;
+
 
 UCLASS(config = Game)
 class RUNANDRUN_API ARAR_Character : public ACharacter
@@ -59,6 +61,8 @@ private:
 	UInputAction* SlideMoveAction;
 
 
+
+
 	float TargetX;
 	float FollowX;
 	float FollowZ;
@@ -66,8 +70,10 @@ private:
 	FVector StartLocation;
 	float FollowAIArmSpeed;
 
+	float CapsuleHeight;
+
 	bool bCanScaleCapsule;
-	
+
 
 
 protected:
@@ -81,12 +87,32 @@ protected:
 
 	void DoJump();
 
+	// 声明曲线对象 (**)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UCurveFloat* SlideCurver;
+	
+	// 声明Timeline对象
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UTimelineComponent* SlideTimeline;
+
+	//委托将处理已完成事件的函数的签名。
+	FOnTimelineEvent SlideTimelineFinishedEvent;
+
+	UFUNCTION()
+	void SlideTimelineFinishedFunction();
+
+	//委托将处理事件进行的函数的签名。
+	FOnTimelineFloat SlideTimelineClickEvent;
+
+	UFUNCTION()
+	void SlideTimelineClickedFunction(float value);
+	
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -103,9 +129,12 @@ public:
 	void ChangeCapsuleCollision();
 
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Move")
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Move")
 	bool bIsSlide;
 
 	int32 HitCounts;
+
+
 
 };

@@ -31,20 +31,19 @@ ARAR_Character::ARAR_Character()
 
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
-	CameraBoom->TargetArmLength = 600.0f; 
-	CameraBoom->bUsePawnControlRotation = true; 
+	CameraBoom->TargetArmLength = 600.0f;
+	CameraBoom->bUsePawnControlRotation = true;
 
 
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
-	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); 
+	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
-
 
 
 	FollowAiArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("FollowAiArm"));
 	FollowAiArm->SetupAttachment(RootComponent);
 	FollowAiArm->SetRelativeLocation(FVector(0, 0, -96));
-	FollowAiArm->TargetArmLength = 150.f; 
+	FollowAiArm->TargetArmLength = 150.f;
 	FollowAiArm->bDoCollisionTest = false;
 
 
@@ -52,7 +51,11 @@ ARAR_Character::ARAR_Character()
 	FollowAi->SetupAttachment(FollowAiArm, USpringArmComponent::SocketName);
 	FollowAi->SetRelativeRotation(FRotator(0, -90, 0));
 
+	static ConstructorHelpers::FObjectFinder<UCurveFloat> Curve(TEXT("/Game/Blueprints/CBP_SlideCurve"));
+	check(Curve.Succeeded());
+	SlideCurver = Curve.Object;
 
+	
 }
 
 void ARAR_Character::MoveLeft(const FInputActionValue& Value)
@@ -78,15 +81,13 @@ void ARAR_Character::MoveLeft(const FInputActionValue& Value)
 }
 
 void ARAR_Character::SlideMove(const FInputActionValue& Value)
-{	
-	ChangeCapsuleCollision();
-	// LatentInfo, 
-	// Param1 : Linkage 默认给0
-	// Param2 : UUID 给个独一无二的编码即可  FMath::Rand()  或者给时间戳转Fstring + 类名 也可保证唯一性
-	// Param3 : ExecutionFunction 要执行的方法名  用TEXT宏转一下
-	// Param4 : CallbackTarget  回调传入的UObject目标 传this
-	const FLatentActionInfo LatentInfo(0, FMath::Rand(),TEXT("ChangeCapsuleCollision"),this);
-	UKismetSystemLibrary::RetriggerableDelay(this, 1.5, LatentInfo);
+{
+	bCanScaleCapsule = false;
+	bIsSlide = true;
+	if (SlideCurver) {
+		SlideTimeline->Play();
+	}
+
 }
 
 void ARAR_Character::DoJump()
@@ -97,8 +98,8 @@ void ARAR_Character::DoJump()
 	}
 
 	ARAR_Character::Jump();
-	
-	 
+
+
 }
 
 void ARAR_Character::MoveRight(const FInputActionValue& Value)
@@ -115,10 +116,10 @@ void ARAR_Character::MoveRight(const FInputActionValue& Value)
 
 		FVector OldLoc = GetActorLocation();
 		UE_LOG(LogTemp, Log, TEXT("right move '%f'  '%f' '%f'"), OldLoc.X, OldLoc.Y, OldLoc.Z);
-		if (TargetX >=-1390) {
+		if (TargetX >= -1390) {
 			TargetX -= 400;
 		}
-	
+
 	}
 }
 
@@ -135,14 +136,30 @@ void ARAR_Character::BeginPlay()
 	bCanScaleCapsule = true;
 	bIsSlide = false;
 
+	CapsuleHeight = 70.f;
+
 	const FLatentActionInfo LatentInfo(0, FMath::Rand(), TEXT("RemoveHit"), this);
 	UKismetSystemLibrary::Delay(this, 2.f, LatentInfo);
+
+	if (SlideCurver) {
+		SlideTimeline = NewObject<UTimelineComponent>(this, TEXT("SlideTimeline"));
+		SlideTimelineFinishedEvent.BindUFunction(this, TEXT("SlideTimelineFinishedFunction"));
+		SlideTimeline->SetTimelineFinishedFunc(SlideTimelineFinishedEvent);
+
+		SlideTimelineClickEvent.BindDynamic(this,&ARAR_Character::SlideTimelineClickedFunction);
+		SlideTimeline->AddInterpFloat(SlideCurver, SlideTimelineClickEvent);
+
+		SlideTimeline->RegisterComponent();
+	}
 }
+
+
 
 // Called every frame
 void ARAR_Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	SlideTimeline->TickComponent(DeltaTime, ELevelTick::LEVELTICK_TimeOnly, NULL);
 
 	// 持续前进
 	if (Controller != nullptr)
@@ -164,26 +181,27 @@ void ARAR_Character::Tick(float DeltaTime)
 
 		ARAR_GameMode* GameMode = Cast<ARAR_GameMode>(GetWorld()->GetAuthGameMode());
 		// 单位从cm转换为m
-		GameMode->RunDistance = FVector::Distance(GetActorLocation(), FVector(GetActorLocation().X, StartLocation.Y, GetActorLocation().Z)) /100 ;
-		
+		GameMode->RunDistance = FVector::Distance(GetActorLocation(), FVector(GetActorLocation().X, StartLocation.Y, GetActorLocation().Z)) / 100;
+
 		//UE_LOG(LogTemp, Log, TEXT("game mode run dist: %f"), GameMode->RunDistance);
 
-		GetCharacterMovement()->MaxWalkSpeed = FMath::Clamp(GetCharacterMovement()->MaxWalkSpeed+0.2, 0, 3000);
-	
+		GetCharacterMovement()->MaxWalkSpeed = FMath::Clamp(GetCharacterMovement()->MaxWalkSpeed + 0.2, 0, 3000);
 
-		FVector TempFollowAiLoc= FollowAi->GetComponentLocation();
+
+		FVector TempFollowAiLoc = FollowAi->GetComponentLocation();
 		/*UE_LOG(LogTemp, Log, TEXT("TempFollowAiLoc: %f %f %f"), TempFollowAiLoc.X, TempFollowAiLoc.Y, TempFollowAiLoc.Z);
 		UE_LOG(LogTemp, Log, TEXT("FollowAiArm->GetComponentLocation(): %f %f %f"), FollowAiArm->GetComponentLocation().X, FollowAiArm->GetComponentLocation().Y, FollowAiArm->GetComponentLocation().Z);
 		*/
 
-		FollowX= FMath::FInterpTo(FollowX, FollowAiArm->GetComponentLocation().X, DeltaTime, 8);
+		FollowX = FMath::FInterpTo(FollowX, FollowAiArm->GetComponentLocation().X, DeltaTime, 8);
 		FollowZ = FMath::FInterpTo(FollowZ, FollowAiArm->GetComponentLocation().Z, DeltaTime, 5);
 
 		FollowAi->SetWorldLocation(FVector(FollowX, FollowAi->GetComponentLocation().Y, FollowZ));
 
-		bool bIsGameOver =UpdateFollowAIArmLength(DeltaTime);
+		bool bIsGameOver = UpdateFollowAIArmLength(DeltaTime);
 		if (bIsGameOver) {
-			UKismetSystemLibrary::QuitGame(this, nullptr, EQuitPreference::Quit,true);
+			GameMode->DoSaveGame();
+			UKismetSystemLibrary::QuitGame(this, nullptr, EQuitPreference::Quit, true);
 		}
 	}
 
@@ -232,7 +250,7 @@ bool ARAR_Character::UpdateFollowAIArmLength(float DeltaTime)
 	{
 	case 0: {
 
-		float TempLength =  FMath::FInterpTo(FollowAiArm->TargetArmLength, 500, DeltaTime, FollowAIArmSpeed);
+		float TempLength = FMath::FInterpTo(FollowAiArm->TargetArmLength, 500, DeltaTime, FollowAIArmSpeed);
 		FollowAiArm->TargetArmLength = TempLength;
 		break;
 	}
@@ -269,17 +287,27 @@ void ARAR_Character::RemoveHit()
 
 void ARAR_Character::ChangeCapsuleCollision()
 {
-	UE_LOG(LogTemp, Log, TEXT("bCanScaleCapsule： %hs"), bCanScaleCapsule == false ? "false" : "true");
-
-	if(bCanScaleCapsule) {
-		GetCapsuleComponent()->SetCapsuleHalfHeight(15, true);
-		bCanScaleCapsule = false;
-		bIsSlide = true;
-	}
-	else {
-		GetCapsuleComponent()->SetCapsuleHalfHeight(70, true);
+	if (SlideCurver) {
 		bCanScaleCapsule = true;
 		bIsSlide = false;
+		SlideTimeline->Reverse();
 	}
+}
+
+void ARAR_Character::SlideTimelineClickedFunction(float value)
+{
+	CapsuleHeight = FMath::Lerp(70, 6, value);
+	GetCapsuleComponent()->SetCapsuleHalfHeight(CapsuleHeight, true);
+}
+
+void ARAR_Character::SlideTimelineFinishedFunction()
+{
+	// LatentInfo, 
+	// Param1 : Linkage 默认给0
+	// Param2 : UUID 给个独一无二的编码即可  FMath::Rand()  或者给时间戳转Fstring + 类名 也可保证唯一性
+	// Param3 : ExecutionFunction 要执行的方法名  用TEXT宏转一下
+	// Param4 : CallbackTarget  回调传入的UObject目标 传this
+	const FLatentActionInfo LatentInfo(0, FMath::Rand(), TEXT("ChangeCapsuleCollision"), this);
+	UKismetSystemLibrary::RetriggerableDelay(this, 1.5, LatentInfo);
 }
 

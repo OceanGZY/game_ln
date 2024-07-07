@@ -5,6 +5,7 @@
 #include "Blocks/RAR_Block.h"
 #include "Pickups/RAR_PickupItem.h"
 #include "Kismet/GameplayStatics.h"
+#include "Utils/RAR_SaveGame.h"
 
 ARAR_GameMode::ARAR_GameMode()
 {
@@ -115,4 +116,17 @@ void ARAR_GameMode::SpawnCoin(FVector Location, FRotator Rotator)
 		UClass* PickUpCoin = LoadClass<ARAR_PickupItem>(nullptr, *BPCoinPath);
 		ARAR_PickupItem* RAR_PickupItem = World->SpawnActor<ARAR_PickupItem>(PickUpCoin, Location, Rotator);
 	}
+}
+
+void ARAR_GameMode::DoSaveGame()
+{
+	if (URAR_SaveGame* SaveGameInstance = Cast<URAR_SaveGame>(UGameplayStatics::CreateSaveGameObject(URAR_SaveGame::StaticClass()))) {
+		SaveGameInstance->HighScore = RunDistance;
+		UGameplayStatics::SaveGameToSlot(SaveGameInstance, "HighScore", 0);
+	}
+
+}
+
+void ARAR_GameMode::SaveGameData()
+{
 }
