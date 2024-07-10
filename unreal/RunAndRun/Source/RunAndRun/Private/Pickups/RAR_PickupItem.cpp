@@ -7,6 +7,8 @@
 #include "Components/SphereComponent.h"
 #include "Components/SceneComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Sound/SoundCue.h"
 #include "GameFramework/RotatingMovementComponent.h"
 
 // Sets default values
@@ -53,6 +55,9 @@ void ARAR_PickupItem::OnPickupItemBeginOverlap(UPrimitiveComponent* OverlappedCo
 
 	ARAR_GameMode* GameMode = Cast<ARAR_GameMode>(GetWorld()->GetAuthGameMode());
 	GameMode->CoinCount++;
+
+	USoundCue* CoinSound  = LoadObject<USoundCue>(this,TEXT("SoundCue'/Game/Sounds/coin_Cue.coin_Cue'"));
+	UGameplayStatics::PlaySoundAtLocation(this, CoinSound, GetActorLocation());
 
 	this->Destroy();
 }

@@ -14,6 +14,9 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/GameplayStatics.h"
+#include "UI/RAR_PlayerHud.h"
+
 
 // Sets default values
 ARAR_Character::ARAR_Character()
@@ -182,6 +185,9 @@ void ARAR_Character::Tick(float DeltaTime)
 		ARAR_GameMode* GameMode = Cast<ARAR_GameMode>(GetWorld()->GetAuthGameMode());
 		// 单位从cm转换为m
 		GameMode->RunDistance = FVector::Distance(GetActorLocation(), FVector(GetActorLocation().X, StartLocation.Y, GetActorLocation().Z)) / 100;
+		if (GameMode->RunDistance > GameMode->HighScore) {
+			GameMode->HighScore = GameMode->RunDistance;
+		}
 
 		//UE_LOG(LogTemp, Log, TEXT("game mode run dist: %f"), GameMode->RunDistance);
 
@@ -201,7 +207,13 @@ void ARAR_Character::Tick(float DeltaTime)
 		bool bIsGameOver = UpdateFollowAIArmLength(DeltaTime);
 		if (bIsGameOver) {
 			GameMode->DoSaveGame();
-			UKismetSystemLibrary::QuitGame(this, nullptr, EQuitPreference::Quit, true);
+			ARAR_PlayerHud * RAR_PlayerHud = Cast<ARAR_PlayerHud>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+			RAR_PlayerHud->UMR_RAR_GameOver->AddToViewport();
+			UGameplayStatics::GetPlayerController(this, 0)->bShowMouseCursor = true; // 显示鼠标
+			UGameplayStatics::GetPlayerController(this, 0)->SetIgnoreLookInput(true);//设置鼠标不控制转向
+			FInputModeUIOnly InputMode;
+			UGameplayStatics::GetPlayerController(this, 0)->SetInputMode(InputMode);
+			UGameplayStatics::SetGamePaused(this,true);
 		}
 	}
 
@@ -271,7 +283,7 @@ bool ARAR_Character::UpdateFollowAIArmLength(float DeltaTime)
 
 	//UE_LOG(LogTemp, Log, TEXT("HitCounts: %d"), HitCounts);
 
-	if (FollowAiArm->TargetArmLength < 10) {
+	if (FollowAiArm->TargetArmLength < 50) {
 		return true;
 	}
 	return false;

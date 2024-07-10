@@ -17,6 +17,12 @@ void UUMG_RAR_PlayerState::SetDisplayCoinText()
 	CoinTextBlock->SetText(FText::FromString(FString::FromInt(GameMode->CoinCount)+" Coin"));
 }
 
+void UUMG_RAR_PlayerState::SetDisplayHighScoreText()
+{
+	ARAR_GameMode* GameMode = Cast<ARAR_GameMode>(GetWorld()->GetAuthGameMode());
+	HighScoreTextBlock->SetText(FText::FromString(FString::FromInt(GameMode->HighScore) + " m"));
+}
+
 void UUMG_RAR_PlayerState::NativeConstruct()
 {
 	Super::NativeConstruct();

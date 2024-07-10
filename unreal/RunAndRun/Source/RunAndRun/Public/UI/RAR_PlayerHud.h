@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
+#include "UI/UMR_RAR_GameOver.h"
 #include "RAR_PlayerHud.generated.h"
 
 /**
@@ -22,5 +23,8 @@ public:
 
 	UPROPERTY()
 	class UUMG_RAR_PlayerState* UMG_RAR_PlayerState;
+
+	UPROPERTY()
+	UUMR_RAR_GameOver* UMR_RAR_GameOver;
 
 };

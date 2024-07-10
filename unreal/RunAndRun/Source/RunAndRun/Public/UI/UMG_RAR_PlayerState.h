@@ -24,12 +24,18 @@ public:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UTextBlock* CoinTextBlock;
 
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	UTextBlock* HighScoreTextBlock;
+
 public:
 	UFUNCTION()
 	void SetDisplayMText();
 
 	UFUNCTION()
 	void SetDisplayCoinText();
+
+	UFUNCTION()
+	void SetDisplayHighScoreText();
 
 protected:
 	virtual void NativeConstruct() override;

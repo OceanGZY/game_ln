@@ -9,6 +9,8 @@
 #include "Components/BoxComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/GameplayStatics.h"
+#include "Sound/SoundCue.h"
 
 
 // Sets default values
@@ -278,6 +280,6 @@ void ARAR_Block::HitPlayer(ARAR_Character* Player)
 	FString BPCameramShakekPath = FString(TEXT("Blueprint'/Game/Blueprints/Utils/BP_RAR_CameraShake.BP_RAR_CameraShake_C'"));
 	UClass* BPCameramShakekClass = LoadClass<URAR_LegacyCameraShake>(nullptr, *BPCameramShakekPath);
 	GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(BPCameramShakekClass);
-		
+	USoundCue* HitSound = LoadObject<USoundCue>(this, TEXT("SoundCue'/Game/Sounds/hitobstacle_Cue.hitobstacle_Cue'"));
+	UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
 }
-

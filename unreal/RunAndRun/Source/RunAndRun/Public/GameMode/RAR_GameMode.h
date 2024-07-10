@@ -35,7 +35,10 @@ public:
 	UStaticMesh* TruckTrailer;
 
 	float RunDistance;
+	float HighScore;
 	int32 CoinCount;
+
+	FString SaveGameSlotName;
 	
 protected:
 	virtual void BeginPlay();
@@ -44,8 +47,8 @@ public:
 	void SpawnCoin(FVector Location,FRotator Rotator);
 
 	UFUNCTION()
-	void DoSaveGame();
+	void DoSaveGame() const;
 
 	UFUNCTION()
-	void SaveGameData();
+	void DoLoadGame();
 };

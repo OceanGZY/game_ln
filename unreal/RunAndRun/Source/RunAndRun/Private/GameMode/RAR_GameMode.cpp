@@ -11,7 +11,9 @@ ARAR_GameMode::ARAR_GameMode()
 {
 	LastBlock = 10;
 	RunDistance = 0;
+	HighScore = 0;
 	CoinCount = 0;
+	SaveGameSlotName = "HighScore";
 
 	UStaticMesh* StreetBlock1 = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Thirds/AssetsvilleTown/Meshes/StreetProps/SM_road_block"));
 	UStaticMesh* StreetBlock2 = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Thirds/AssetsvilleTown/Meshes/StreetProps/SM_road_block_2"));
@@ -106,6 +108,8 @@ void ARAR_GameMode::AddBlock(bool bInit)
 void ARAR_GameMode::BeginPlay()
 {
 	AddBlock();
+
+	DoLoadGame();
 }
 
 void ARAR_GameMode::SpawnCoin(FVector Location, FRotator Rotator)
@@ -118,15 +122,21 @@ void ARAR_GameMode::SpawnCoin(FVector Location, FRotator Rotator)
 	}
 }
 
-void ARAR_GameMode::DoSaveGame()
+void ARAR_GameMode::DoSaveGame() const
 {
 	if (URAR_SaveGame* SaveGameInstance = Cast<URAR_SaveGame>(UGameplayStatics::CreateSaveGameObject(URAR_SaveGame::StaticClass()))) {
-		SaveGameInstance->HighScore = RunDistance;
-		UGameplayStatics::SaveGameToSlot(SaveGameInstance, "HighScore", 0);
+		SaveGameInstance->HighScore = HighScore;
+		UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameSlotName, 0);
 	}
 
 }
 
-void ARAR_GameMode::SaveGameData()
+void ARAR_GameMode::DoLoadGame()
 {
+	bool bIsSaveExist = UGameplayStatics::DoesSaveGameExist(SaveGameSlotName, 0);
+	if (bIsSaveExist) {
+		if (URAR_SaveGame* SaveGameInstance = Cast<URAR_SaveGame>(UGameplayStatics::LoadGameFromSlot(SaveGameSlotName, 0))) {
+			HighScore = SaveGameInstance->HighScore;
+		}
+	}
 }
