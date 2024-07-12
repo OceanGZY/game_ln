@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-05-04 17:05:34
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-07-05 17:59:11
+ * @LastEditTime: 2024-07-09 17:42:58
  * @FilePath: /DailyRun/assets/scripts/main.ts
  * @Description: 注释信息
  */
@@ -65,43 +65,42 @@ export class main extends Component {
     @property(AudioClip)
     pickCoinSoundSFX: AudioClip = null;
 
+    bHasCollideFloor: boolean = false;
+
     start() {
         // 显示碰撞区域
-        PhysicsSystem2D.instance.debugDrawFlags = EPhysics2DDrawFlags.Aabb |
-            EPhysics2DDrawFlags.Pair |
-            EPhysics2DDrawFlags.CenterOfMass |
-            EPhysics2DDrawFlags.Joint |
-            EPhysics2DDrawFlags.Shape;
+        // PhysicsSystem2D.instance.debugDrawFlags = EPhysics2DDrawFlags.Aabb |
+        //     EPhysics2DDrawFlags.Pair |
+        //     EPhysics2DDrawFlags.CenterOfMass |
+        //     EPhysics2DDrawFlags.Joint |
+        //     EPhysics2DDrawFlags.Shape;
 
         this.playerColider = this.player.getComponent(BoxCollider2D);
         this.playBody = this.player.getComponent(RigidBody2D);
-
-        this.playerColider.on(Contact2DType.BEGIN_CONTACT, this.onHitOther, this)
         this.playerColider.on(Contact2DType.END_CONTACT, this.onEndHitOther, this)
-
         this.node.parent.on(Input.EventType.TOUCH_START, this.doJump, this);
 
 
         this.curBg = this.backgrounds[0];
-        this.curFloor = this.floors[0];
+        this.backgrounds[0].getComponent(BoxCollider2D).on("triggerenter", this.spawnCoin, this);
+        this.backgrounds[1].getComponent(BoxCollider2D).on("triggerenter", this.spawnCoin, this);
 
+        this.curFloor = this.floors[0];
         this.schedule(this.backgoundMove);
         this.schedule(this.floorMove);
 
     }
 
     update(deltaTime: number) {
-    }
-
-    onHitOther(selfCollider: BoxCollider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
-        // console.log("onHitOther otherCollider", otherCollider);
-
-        if (otherCollider.node.name = "Floor") {
-            // this.maxJumpCount = 2; //重置跳跃次数
+        if (this.playBody.linearVelocity.y == 0) {
             this.canJump = true;
         }
 
-        if (otherCollider.node.name == "Back01" || otherCollider.node.name == "Back02") {
+    }
+
+    spawnCoin(selfCollider: BoxCollider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
+        console.log("back碰到的物体", otherCollider.node);
+        if (otherCollider.node.name == "Player") {
             console.log("碰到生产金币了");
             setTimeout(() => {
                 this.generateCoin();
@@ -114,7 +113,7 @@ export class main extends Component {
 
         // console.log("onEndHitOther otherCollider", otherCollider);
 
-        if (otherCollider.tag == 1) {
+        if (otherCollider.tag == 10) {
             this.scheduleOnce(() => {
                 if (otherCollider.node) {
                     otherCollider.node.active = false;
@@ -137,7 +136,7 @@ export class main extends Component {
 
         }
 
-        if (otherCollider.tag == 2) {
+        if (otherCollider.tag == 11) {
             this.scheduleOnce(() => {
                 if (otherCollider.node) {
                     otherCollider.node.active = false;
@@ -163,6 +162,7 @@ export class main extends Component {
         console.log("this.canJump", this.canJump);
         if (this.canJump) {
             this.canJump = false;
+            this.bHasCollideFloor = false;
             this.playBody.applyLinearImpulse(v2(0, this.jumpForce), v2(this.playBody.node.worldPosition.x, this.playBody.node.worldPosition.y), true);
             this.node.getComponent(AudioSource).playOneShot(this.jumpSoundSFX, 5);
         }
@@ -184,6 +184,7 @@ export class main extends Component {
                 this.curBg = this.backgrounds[0];
             }
         }
+
     }
 
     floorMove() {
