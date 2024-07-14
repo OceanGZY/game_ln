@@ -78,13 +78,17 @@ private:
 
 protected:
 	/** Called for movement input */
+	UFUNCTION(BlueprintCallable)
 	void MoveRight(const FInputActionValue& Value);
 
 	/** Called for looking input */
+	UFUNCTION(BlueprintCallable)
 	void MoveLeft(const FInputActionValue& Value);
 
+	UFUNCTION(BlueprintCallable)
 	void SlideMove(const FInputActionValue& Value);
 
+	UFUNCTION(BlueprintCallable)
 	void DoJump();
 
 	// 声明曲线对象 (**)
@@ -134,7 +138,6 @@ public:
 	bool bIsSlide;
 
 	int32 HitCounts;
-
 
 
 };

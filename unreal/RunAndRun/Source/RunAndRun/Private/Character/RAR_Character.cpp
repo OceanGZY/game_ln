@@ -95,7 +95,7 @@ void ARAR_Character::SlideMove(const FInputActionValue& Value)
 
 void ARAR_Character::DoJump()
 {
-	UE_LOG(LogTemp, Log, TEXT("do jump bCanScaleCapsule£º %hs"), bCanScaleCapsule == false ? "false" : "true");
+	//UE_LOG(LogTemp, Log, TEXT("do jump bCanScaleCapsule£º %hs"), bCanScaleCapsule == false ? "false" : "true");
 	if (!bCanScaleCapsule) {
 		ChangeCapsuleCollision();
 	}
@@ -224,6 +224,7 @@ void ARAR_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+
 	// Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
 	{
@@ -248,6 +249,7 @@ void ARAR_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 		// SlideMove
 		EnhancedInputComponent->BindAction(SlideMoveAction, ETriggerEvent::Started, this, &ARAR_Character::SlideMove);
+
 	}
 	else
 	{
@@ -305,6 +307,7 @@ void ARAR_Character::ChangeCapsuleCollision()
 		SlideTimeline->Reverse();
 	}
 }
+
 
 void ARAR_Character::SlideTimelineClickedFunction(float value)
 {
