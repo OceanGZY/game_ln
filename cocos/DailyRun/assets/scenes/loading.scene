@@ -54,7 +54,7 @@
     "_globals": {
       "__id__": 23
     },
-    "_id": "d3828bcd-b8ee-4d2c-b433-0e8299d37bee"
+    "_id": "e72b9ccd-9159-478c-a911-b9b4a6f0c193"
   },
   {
     "__type__": "cc.Node",
@@ -182,7 +182,7 @@
     "_priority": 0,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 409.5104895104895,
+    "_orthoHeight": 453.9243807040417,
     "_near": 0,
     "_far": 1000,
     "_color": {
@@ -416,8 +416,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 400,
-      "height": 104.8
+      "width": 399.9955997392438,
+      "height": 104.80000000000001
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -449,7 +449,7 @@
     "_string": "加载中。。。",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 66,
+    "_actualFontSize": 98.87109375,
     "_fontSize": 66,
     "_fontFamily": "Arial",
     "_lineHeight": 80,
@@ -801,7 +801,7 @@
     "_id": "c5V1EV8IpMtrIvY1OE9t2u"
   },
   {
-    "__type__": "c3d77JxyElF+o/6I3HlCGcx",
+    "__type__": "908b9oQUsdDlbVsyjPWK+Ft",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -813,7 +813,7 @@
     "loadingProgressBar": {
       "__id__": 18
     },
-    "_id": "6a6YK3rUlJlKwqYRxfWLHx"
+    "_id": "f7WCaVNCBBJKGPNWEhdHPs"
   },
   {
     "__type__": "cc.SceneGlobals",

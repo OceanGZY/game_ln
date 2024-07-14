@@ -2,8 +2,8 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-05-06 16:16:46
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-06-27 17:44:15
- * @FilePath: /DailyRun/assets/scripts/global/GameState.ts
+ * @LastEditTime: 2024-07-14 21:36:27
+ * @FilePath: \DailyRun\assets\scripts\global\GameState.ts
  * @Description: 注释信息
  */
 
@@ -74,7 +74,7 @@ export class GameState {
 
     /**
      * 
-     * @param id 读取对应的子表， 暂时不用了
+     * @param id 读取对应的子表
      */
     async parseCurLevelData(id: number) {
         this.curLevelId = id;

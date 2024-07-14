@@ -2,11 +2,11 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-05-04 17:05:34
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-07-09 17:42:58
- * @FilePath: /DailyRun/assets/scripts/main.ts
+ * @LastEditTime: 2024-07-14 22:17:34
+ * @FilePath: \DailyRun\assets\scripts\main.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, Node, PhysicsSystem2D, EPhysics2DDrawFlags, BoxCollider2D, Contact2DType, IPhysics2DContact, EventTouch, Input, v2, RigidBody2D, Collider2D, Label, AudioClip, AudioSource, Prefab, instantiate, CircleCollider2D } from 'cc';
+import { _decorator, Component, Node, PhysicsSystem2D, EPhysics2DDrawFlags, BoxCollider2D, Contact2DType, IPhysics2DContact, EventTouch, Input, v2, RigidBody2D, Collider2D, Label, AudioClip, AudioSource, Prefab, instantiate, CircleCollider2D, Button } from 'cc';
 import { GameState } from './global/GameState';
 const { ccclass, property } = _decorator;
 
@@ -53,6 +53,9 @@ export class main extends Component {
 
     canJump: boolean = true;
 
+    @property(Node)
+    jumpBtn: Node = null;
+
     @property(Prefab)
     goldCoinPrefab: Prefab = null;
 
@@ -65,25 +68,37 @@ export class main extends Component {
     @property(AudioClip)
     pickCoinSoundSFX: AudioClip = null;
 
-    bHasCollideFloor: boolean = false;
-
     start() {
-        // 显示碰撞区域
-        // PhysicsSystem2D.instance.debugDrawFlags = EPhysics2DDrawFlags.Aabb |
-        //     EPhysics2DDrawFlags.Pair |
-        //     EPhysics2DDrawFlags.CenterOfMass |
-        //     EPhysics2DDrawFlags.Joint |
-        //     EPhysics2DDrawFlags.Shape;
 
         this.playerColider = this.player.getComponent(BoxCollider2D);
         this.playBody = this.player.getComponent(RigidBody2D);
-        this.playerColider.on(Contact2DType.END_CONTACT, this.onEndHitOther, this)
-        this.node.parent.on(Input.EventType.TOUCH_START, this.doJump, this);
+
+        this.playerColider.on(Contact2DType.END_CONTACT, this.onEndHitOther, this);
+
+        // this.node.parent.on(Input.EventType.TOUCH_START, this.doJump, this);
+        this.jumpBtn.on(Button.EventType.CLICK, this.doJump, this);
 
 
         this.curBg = this.backgrounds[0];
-        this.backgrounds[0].getComponent(BoxCollider2D).on("triggerenter", this.spawnCoin, this);
-        this.backgrounds[1].getComponent(BoxCollider2D).on("triggerenter", this.spawnCoin, this);
+
+        const floorBoxColliders01 = this.floors[0].components.filter((component) => component instanceof BoxCollider2D);
+        floorBoxColliders01.forEach(floorBoxCollider => {
+            if (floorBoxCollider.tag == 0) {
+                floorBoxCollider.on(Contact2DType.BEGIN_CONTACT, this.onDownFloor, this);
+            } else if (floorBoxCollider.tag == 99) {
+                floorBoxCollider.on(Contact2DType.BEGIN_CONTACT, this.spawnCoin, this);
+            }
+        });
+
+        const floorBoxColliders02 = this.floors[1].components.filter((component) => component instanceof BoxCollider2D);
+        floorBoxColliders02.forEach(floorBoxCollider => {
+            if (floorBoxCollider.tag == 0) {
+                floorBoxCollider.on(Contact2DType.BEGIN_CONTACT, this.onDownFloor, this);
+            } else if (floorBoxCollider.tag == 99) {
+                floorBoxCollider.on(Contact2DType.BEGIN_CONTACT, this.spawnCoin, this);
+            }
+        });
+
 
         this.curFloor = this.floors[0];
         this.schedule(this.backgoundMove);
@@ -92,26 +107,27 @@ export class main extends Component {
     }
 
     update(deltaTime: number) {
-        if (this.playBody.linearVelocity.y == 0) {
-            this.canJump = true;
-        }
 
     }
 
     spawnCoin(selfCollider: BoxCollider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
-        console.log("back碰到的物体", otherCollider.node);
+        console.log("spawn碰到的物体", otherCollider.node);
         if (otherCollider.node.name == "Player") {
-            console.log("碰到生产金币了");
             setTimeout(() => {
                 this.generateCoin();
             }, 0.001);
         }
     }
 
+    onDownFloor(selfCollider: BoxCollider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
+        console.log("spawn碰到的物体", otherCollider.node);
+        if (otherCollider.node.name == "Player") {
+            this.canJump = true;
+        }
+    }
+
 
     onEndHitOther(selfCollider: BoxCollider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
-
-        // console.log("onEndHitOther otherCollider", otherCollider);
 
         if (otherCollider.tag == 10) {
             this.scheduleOnce(() => {
@@ -158,18 +174,18 @@ export class main extends Component {
         }
     }
 
+    // 跳跃
     doJump(event: EventTouch) {
-        console.log("this.canJump", this.canJump);
+        // console.log("this.canJump", this.canJump);
         if (this.canJump) {
             this.canJump = false;
-            this.bHasCollideFloor = false;
             this.playBody.applyLinearImpulse(v2(0, this.jumpForce), v2(this.playBody.node.worldPosition.x, this.playBody.node.worldPosition.y), true);
             this.node.getComponent(AudioSource).playOneShot(this.jumpSoundSFX, 5);
         }
     }
 
 
-
+    // 背景移动
     backgoundMove() {
         let dt: number = 0.02;
         var distance = this.bgSpeed * dt;
@@ -187,6 +203,7 @@ export class main extends Component {
 
     }
 
+    // 地面移动
     floorMove() {
         let dt: number = 0.02;
         var distance = this.floorSpeed * dt;
@@ -202,20 +219,25 @@ export class main extends Component {
             }
         }
     }
-    generateCoin() {
-        var temp = instantiate(this.goldCoinPrefab);
-        // console.log("instantiate(this.goldCoinPrefab);", temp);
-        // console.log(this.node.parent);
-        this.node.parent.addChild(temp);
-        temp.setPosition(300, -170);
-        temp.on("hide", this.onCoinHide, temp);
 
-        var temp1 = instantiate(this.silverCoinPrefab);
-        this.node.parent.addChild(temp1);
-        temp1.setPosition(600, -170);
-        temp1.on("hide", this.onCoinHide, temp1);
+    // 根据关卡配置读取数据，并生产币
+    generateCoin() {
+        var temp: Node;
+        // console.log(this.node.parent);
+        GameState.getInstance().curLevelData.forEach(e => {
+            if (e.name == "gold_coin") {
+                temp = instantiate(this.goldCoinPrefab);
+            } else if (e.name == "silver_coin") {
+                temp = instantiate(this.silverCoinPrefab);
+            }
+            this.node.parent.addChild(temp);
+            temp.setPosition(e.pos.x, e.pos.y);
+            temp.on("hide", this.onCoinHide, temp);
+            // console.log("instantiate(this.goldCoinPrefab);", temp);
+        });
     }
 
+    // 币被销毁
     onCoinHide(cnode: Node) {
         // console.log("收到hide信号", cnode);
         cnode.destroy();
