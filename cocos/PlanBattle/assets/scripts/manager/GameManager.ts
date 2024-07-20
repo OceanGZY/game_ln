@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-07-16 19:59:58
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-07-20 16:39:49
+ * @LastEditTime: 2024-07-20 21:23:06
  * @FilePath: /PlanBattle/assets/scripts/manager/GameManager.ts
  * @Description: 注释信息
  */
@@ -26,7 +26,7 @@ export class GameManager extends Component {
 
     protected start(): void {
         // 显示碰撞盒子
-        PhysicsSystem.instance.debugDrawFlags = EPhysicsDrawFlags.AABB;
+        // PhysicsSystem.instance.debugDrawFlags = EPhysicsDrawFlags.AABB;
 
     }
 
@@ -68,8 +68,5 @@ export class GameManager extends Component {
             }
         }
     }
-
-
-
 }
 

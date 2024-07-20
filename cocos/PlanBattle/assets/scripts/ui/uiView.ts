@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-07-19 07:35:01
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-07-20 19:40:43
+ * @LastEditTime: 2024-07-20 21:12:45
  * @FilePath: /PlanBattle/assets/scripts/ui/uiView.ts
  * @Description: 注释信息
  */
@@ -92,8 +92,15 @@ export class start extends Component {
         this.gameState.gameStatus = GameStatus.Start;
     }
 
+    // 目前仅设计了一个关卡，下一关相当于继续加载第一关，可以自行实现后续关卡
     onScNextBtnClick() {
-
+        this.endUI.active = false;
+        this.gameStateUI.active = true;
+        this.gameState.gameStatus = GameStatus.Restart;
+        this.gameState.playerHealth = 100;
+        this.gameState.playerExp = 0;
+        this.gameState.score = 0;
+        this.gameState.killedCnt = 0;
     }
 
     onFaRestartBtnClick() {
@@ -104,6 +111,7 @@ export class start extends Component {
         this.gameState.playerHealth = 100;
         this.gameState.playerExp = 0;
         this.gameState.score = 0;
+        this.gameState.killedCnt = 0;
     }
 
 }

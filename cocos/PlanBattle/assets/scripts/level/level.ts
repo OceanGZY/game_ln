@@ -2,13 +2,13 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-07-20 11:38:33
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-07-20 19:45:14
+ * @LastEditTime: 2024-07-20 21:20:11
  * @FilePath: /PlanBattle/assets/scripts/level/level.ts
  * @Description: 注释信息
  */
 import { _decorator, Component, instantiate, Node, Prefab, random, randomRange, randomRangeInt, resources } from 'cc';
 import { GameManager } from '../manager/GameManager';
-import { GameState } from '../global/GameState';
+import { GameState, GameStatus } from '../global/GameState';
 import { AudioManager } from '../manager/AudioManager';
 const { ccclass, property } = _decorator;
 
@@ -34,7 +34,10 @@ export class level extends Component {
     }
 
     update(deltaTime: number) {
-
+        if (this.gameState.killedCnt >= this.gameState.enemyCount) {
+            this.node.scene.getChildByName("Audio").getComponent(AudioManager).playBgm(false);
+            this.gameState.gameStatus = GameStatus.Success;
+        }
     }
     // 随机位置生成敌人
     spawnEnemy() {

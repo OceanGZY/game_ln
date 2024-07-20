@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-07-16 20:05:19
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-07-20 20:37:26
+ * @LastEditTime: 2024-07-20 21:20:01
  * @FilePath: /PlanBattle/assets/scripts/enemy/EnemyController.ts
  * @Description: 注释信息
  */
@@ -117,6 +117,7 @@ export class EnemyController extends Component {
 
         if (this.health <= 0 && this.node.isValid) {
             this.createExplosion(this.node.position);
+            this.gameState.killedCnt++;
             this.node.destroy();
         }
     }
@@ -126,15 +127,11 @@ export class EnemyController extends Component {
         explosion.setParent(this.node.parent);
         explosion.setPosition(position);
         this.node.scene.getChildByName("Audio").getComponent(AudioManager).playExplodeSFX();
-
         setTimeout(() => {
-            explosion.destroy();
+            if (explosion.isValid) {
+                explosion.destroy();
+            }
         }, 300);
-        this.gameState.enemyCount--;
-        if (this.gameState.enemyCount <= 0) {
-            this.node.scene.getChildByName("Audio").getComponent(AudioManager).playBgm(false);
-            this.gameState.gameStatus = GameStatus.Success;
-        }
     }
 }
 

@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-07-19 07:23:27
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-07-20 19:34:34
+ * @LastEditTime: 2024-07-20 21:12:00
  * @FilePath: /PlanBattle/assets/scripts/global/GameState.ts
  * @Description: 注释信息
  */
@@ -34,8 +34,10 @@ export class GameState {
     public playerMaxHealth: number = 100;
     public playerLevel: number = 0;
     public playerAttack: number = 0;
+    public killedCnt: number = 0;
 
-    public enemyCount: number = 100;
+    public enemyCount: number = 10;
+
 
 }
 
