@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-07-19 07:35:01
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-07-20 21:12:45
+ * @LastEditTime: 2024-07-21 09:08:00
  * @FilePath: /PlanBattle/assets/scripts/ui/uiView.ts
  * @Description: 注释信息
  */
@@ -97,7 +97,7 @@ export class start extends Component {
         this.endUI.active = false;
         this.gameStateUI.active = true;
         this.gameState.gameStatus = GameStatus.Restart;
-        this.gameState.playerHealth = 100;
+        this.gameState.playerHealth = 50;
         this.gameState.playerExp = 0;
         this.gameState.score = 0;
         this.gameState.killedCnt = 0;
@@ -108,7 +108,7 @@ export class start extends Component {
         this.endUI.active = false;
         this.gameStateUI.active = true;
         this.gameState.gameStatus = GameStatus.Restart;
-        this.gameState.playerHealth = 100;
+        this.gameState.playerHealth = 50;
         this.gameState.playerExp = 0;
         this.gameState.score = 0;
         this.gameState.killedCnt = 0;
