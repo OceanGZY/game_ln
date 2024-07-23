@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-07-22 20:35:29
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-07-24 00:00:17
+ * @LastEditTime: 2024-07-24 00:08:40
  * @FilePath: \OceanDefense\assets\scripts\Game.ts
  * @Description: 注释信息
  */
@@ -42,18 +42,22 @@ export class Game extends Component {
         if (GameState.getInstance().curEnemyCount == 0) {
             for (let i = 0; i < this.curEnemyWave.count; i++) {
                 console.log("触发生成逻辑");
-                setTimeout(() => {
-                    let tempEnemy = instantiate(this.curEnemyWave.enemyPrefab);
-                    let initPos = this.node.scene.getChildByName("StartPoint").getPosition();
-                    this.node.scene.addChild(tempEnemy);
-                    tempEnemy.setPosition(initPos);
-                    GameState.getInstance().curEnemyCount++;
-                }, this.curEnemyWave.rate * 1000);
+                this.timer(i);
             }
-
             this.waveIndex++;
             console.log("this.waveIndex", this.waveIndex);
         }
+    }
+
+
+    timer(i: number) {
+        setTimeout(() => {
+            let tempEnemy = instantiate(this.curEnemyWave.enemyPrefab);
+            let initPos = this.node.scene.getChildByName("StartPoint").getPosition();
+            this.node.scene.addChild(tempEnemy);
+            tempEnemy.setPosition(initPos);
+            GameState.getInstance().curEnemyCount++;
+        }, i * 1000);
     }
 }
 
