@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-07-22 20:35:29
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-07-24 00:08:40
+ * @LastEditTime: 2024-07-24 00:18:53
  * @FilePath: \OceanDefense\assets\scripts\Game.ts
  * @Description: 注释信息
  */
@@ -34,12 +34,12 @@ export class Game extends Component {
         if (this.waveIndex > this.enemyWaveList.length - 1) {
             return;
         }
-        this.curEnemyWave = this.enemyWaveList[this.waveIndex];
         this.spawnEnemy();
     }
 
     spawnEnemy() {
         if (GameState.getInstance().curEnemyCount == 0) {
+            this.curEnemyWave = this.enemyWaveList[this.waveIndex];
             for (let i = 0; i < this.curEnemyWave.count; i++) {
                 console.log("触发生成逻辑");
                 this.timer(i);
