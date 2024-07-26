@@ -2,28 +2,31 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-07-22 20:35:29
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-07-24 00:18:53
+ * @LastEditTime: 2024-07-26 19:16:00
  * @FilePath: \OceanDefense\assets\scripts\Game.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, instantiate, Node, Prefab, tween } from 'cc';
-import { GameState } from './GameState';
-import { EnemyWave } from './EnemyWave';
+import { _decorator, Component, instantiate } from 'cc';
+import { EnemyWaveModel } from './enemy/EnemyWaveModel';
+import { BuildManager } from './buildSystem/BuildManager';
 const { ccclass, property } = _decorator;
 
 
 @ccclass('Game')
 export class Game extends Component {
 
-    @property([EnemyWave])
-    enemyWaveList: EnemyWave[] = [];
+    @property([EnemyWaveModel])
+    enemyWaveList: EnemyWaveModel[] = [];
+
+
 
     waveIndex: number = 0;
-    curEnemyWave: EnemyWave = null;
+    curEnemyWave: EnemyWaveModel = null;
     curEnemyCount: number = 0;
 
     protected onLoad(): void {
-        GameState.getInstance().wayPoints = this.node.scene.getChildByName("WayPoints").children;
+        BuildManager.getInstance().wayPoints = this.node.scene.getChildByName("WayPoints").children;
+        BuildManager.getInstance().groundCells = this.node.scene.getChildByName("Map").getChildByName("Ground").children;
     }
 
     start() {
@@ -38,14 +41,14 @@ export class Game extends Component {
     }
 
     spawnEnemy() {
-        if (GameState.getInstance().curEnemyCount == 0) {
+        if (BuildManager.getInstance().curEnemyCount == 0) {
             this.curEnemyWave = this.enemyWaveList[this.waveIndex];
             for (let i = 0; i < this.curEnemyWave.count; i++) {
-                console.log("触发生成逻辑");
+                // console.log("触发生成敌人逻辑");
                 this.timer(i);
             }
             this.waveIndex++;
-            console.log("this.waveIndex", this.waveIndex);
+            // console.log("this.waveIndex", this.waveIndex);
         }
     }
 
@@ -56,9 +59,12 @@ export class Game extends Component {
             let initPos = this.node.scene.getChildByName("StartPoint").getPosition();
             this.node.scene.addChild(tempEnemy);
             tempEnemy.setPosition(initPos);
-            GameState.getInstance().curEnemyCount++;
+            BuildManager.getInstance().curEnemyCount++;
         }, i * 1000);
     }
+
+
+
 }
 
 

@@ -1,3 +1,12 @@
+
+/*
+ * @Author: OCEAN.GZY
+ * @Date: 2024-07-21 21:04:13
+ * @LastEditors: OCEAN.GZY
+ * @LastEditTime: 2024-07-24 21:22:37
+ * @FilePath: \OceanDefense\assets\scripts\CameraController.ts
+ * @Description: 注释信息
+ */
 import { _decorator, CCFloat, CCInteger, Component, EventKeyboard, EventMouse, input, Input, KeyCode, MouseJoint2D, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
@@ -31,11 +40,11 @@ export class CameraController extends Component {
                 break;
             }
             case KeyCode.KEY_A: {
-                this.node.setPosition(pos.x, pos.y, pos.z + this.speed);
+                this.node.setPosition(pos.x, pos.y, pos.z - this.speed);
                 break;
             }
             case KeyCode.KEY_D: {
-                this.node.setPosition(pos.x, pos.y, pos.z - this.speed);
+                this.node.setPosition(pos.x, pos.y, pos.z + this.speed);
                 break;
             }
         }

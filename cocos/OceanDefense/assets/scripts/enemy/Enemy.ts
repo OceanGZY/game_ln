@@ -7,7 +7,8 @@
  * @Description: 注释信息
  */
 import { _decorator, Component, Node, v3, Vec3 } from 'cc';
-import { GameState } from './GameState';
+import { BuildManager } from '../buildSystem/BuildManager';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('Enemy')
@@ -22,7 +23,7 @@ export class Enemy extends Component {
     moveSpeed: number = 20;
 
     start() {
-        this.wayNodes = GameState.getInstance().wayPoints;
+        this.wayNodes = BuildManager.getInstance().wayPoints;
         // console.log(this.wayNodes);
         this.targetPos = this.wayNodes[this.pointIndex].position;
         // console.log("this.node.position", this.node.position);
@@ -46,7 +47,7 @@ export class Enemy extends Component {
     moveToNextPoint() {
         this.pointIndex++;
         if (this.pointIndex > this.wayNodes.length - 1) {
-            GameState.getInstance().curEnemyCount--;
+            BuildManager.getInstance().curEnemyCount--;
             this.node.destroy();
             return;
         }
