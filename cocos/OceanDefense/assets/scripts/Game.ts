@@ -2,11 +2,11 @@
  * @Author: OCEAN.GZY
  * @Date: 2024-07-22 20:35:29
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2024-07-26 19:16:00
+ * @LastEditTime: 2024-07-28 22:20:12
  * @FilePath: \OceanDefense\assets\scripts\Game.ts
  * @Description: 注释信息
  */
-import { _decorator, Component, instantiate } from 'cc';
+import { _decorator, Component, EPhysicsDrawFlags, instantiate, PhysicsSystem } from 'cc';
 import { EnemyWaveModel } from './enemy/EnemyWaveModel';
 import { BuildManager } from './buildSystem/BuildManager';
 const { ccclass, property } = _decorator;
@@ -30,10 +30,13 @@ export class Game extends Component {
     }
 
     start() {
+        // 显示碰撞盒子
+        // PhysicsSystem.instance.debugDrawFlags = EPhysicsDrawFlags.AABB;
 
     }
 
     update(deltaTime: number) {
+        // console.log("(this.waveIndex", this.waveIndex);
         if (this.waveIndex > this.enemyWaveList.length - 1) {
             return;
         }
