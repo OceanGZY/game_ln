@@ -6,6 +6,11 @@ public class FPSPlayerController : MonoBehaviour
 {
     public float m_speed = 5;
     public float m_rotateSpeed = 5;
+    public float m_jumpForce = 2000;
+
+    public Rigidbody m_rigidBody;
+
+    private Animator m_animator;
 
     private float m_angleX; // 上下看，绕X轴转
     private float m_angleY; // 左右看，绕Y轴转
@@ -13,7 +18,11 @@ public class FPSPlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_animator = GameObject.Find("Mage").GetComponent<Animator>();
+        // m_rigidBody = GetComponent<Rigidbody>();
 
+        Cursor.visible = false; // 隐藏鼠标
+        Cursor.lockState = CursorLockMode.Locked; // 锁定鼠标
     }
 
     // Update is called once per frame
@@ -21,6 +30,8 @@ public class FPSPlayerController : MonoBehaviour
     {
         MoveByKeboard();
         LookRotationByMouse();
+        DoAttack();
+        DoJump();
     }
 
     private void MoveByKeboard()
@@ -48,5 +59,25 @@ public class FPSPlayerController : MonoBehaviour
         m_angleX = Mathf.Clamp(m_angleX + lookVAngleX, -60, 60);
 
         transform.eulerAngles = new Vector3(m_angleX, m_angleY, transform.eulerAngles.z);
+    }
+
+
+    private void DoAttack()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("按住攻击了");
+            m_animator.SetTrigger("Shoot");
+        }
+    }
+
+
+    private void DoJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("按住跳跃了");
+            m_rigidBody.AddForce(m_jumpForce * Vector3.up);
+        }
     }
 }
