@@ -6,11 +6,16 @@ public class FPSPlayerController : MonoBehaviour
 {
     public float m_speed = 5;
     public float m_rotateSpeed = 5;
-    public float m_jumpForce = 2000;
-
+    public float m_jumpForce = 400;
     public Rigidbody m_rigidBody;
+    public GameObject m_firePoint;
+    public GameObject m_bloodPrefab;
+    public float m_fireDistance = 1000;
 
     private Animator m_animator;
+
+
+
 
     private float m_angleX; // 上下看，绕X轴转
     private float m_angleY; // 左右看，绕Y轴转
@@ -23,6 +28,8 @@ public class FPSPlayerController : MonoBehaviour
 
         Cursor.visible = false; // 隐藏鼠标
         Cursor.lockState = CursorLockMode.Locked; // 锁定鼠标
+
+
     }
 
     // Update is called once per frame
@@ -68,6 +75,17 @@ public class FPSPlayerController : MonoBehaviour
         {
             Debug.Log("按住攻击了");
             m_animator.SetTrigger("Shoot");
+
+            RaycastHit raycastHit;
+            bool bIsHit = Physics.Raycast(m_firePoint.GetComponent<Transform>().position, m_firePoint.GetComponent<Transform>().forward, out raycastHit, m_fireDistance);
+            if (bIsHit)
+            {
+                if (raycastHit.collider.CompareTag("Enemy"))
+                {
+                    Debug.Log("发现并击中敌人了");
+                    Instantiate(m_bloodPrefab, raycastHit.point, Quaternion.identity);
+                }
+            }
         }
     }
 
