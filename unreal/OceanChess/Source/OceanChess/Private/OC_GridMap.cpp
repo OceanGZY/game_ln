@@ -349,6 +349,13 @@ bool AOC_GridMap::IsPathExist(AActor* InActor, UOC_GridNode* FromNode, UOC_GridN
 	return FindPath(Path, InActor, FromNode, ToNode, StopSteps);
 }
 
+
+/// <summary>
+/// 获取相邻的棋格
+/// </summary>
+/// <param name="InNode"></param>
+/// <param name="InStep"></param>
+/// <returns></returns>
 TArray<UOC_GridNode*> AOC_GridMap::GetNodeNeighbors(UOC_GridNode* InNode, int InStep) const
 {
 	return TArray<UOC_GridNode*>();
