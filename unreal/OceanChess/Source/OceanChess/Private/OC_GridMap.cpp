@@ -3,6 +3,8 @@
 
 #include "OC_GridMap.h"
 #include "OC_HexNode.h"
+
+#include "Engine/Engine.h"
 //#include "Math/UnrealMathUtility.h"
 
 // Sets default values
@@ -114,7 +116,7 @@ void AOC_GridMap::GenerateHexNodes(float InHexSize, int InRow, int InColumn)
 			// UE中，横向坐标轴是Y轴， 纵向坐标轴是X轴，需调换在二维坐标系中的XY值
 			FGridVector tHexVector = FGridVector(j,i);
 			tHexLocation.X = 1.5 * InHexSize * i;
-			tHexLocation.Y = i % 2 == 0 ? (FMath::Sqrt(3.0) * InHexSize * j) : (FMath::Sqrt(3.0) * InHexSize * j + FMath::Sqrt(3) * 0.5 * InHexSize);
+			tHexLocation.Y = i % 2 == 0 ? (FMath::Sqrt(3.0) * InHexSize * j) : (FMath::Sqrt(3.0) * InHexSize * j + FMath::Sqrt(3.0) * 0.5 * InHexSize);
 			tHexLocation.Z = 0;
 			tHexLocation += GetActorLocation();
 
@@ -122,6 +124,8 @@ void AOC_GridMap::GenerateHexNodes(float InHexSize, int InRow, int InColumn)
 			UOC_HexNode* tNode = NewObject<UOC_HexNode>(this);
 			tNode->InitNode(this, tHexLocation, tHexVector, InHexSize);
 			NodeMap.Add(tHexVector, tNode);
+
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "UOC_HexNode init ");
 
 		}
 	}
@@ -278,7 +282,7 @@ bool AOC_GridMap::FindPath(TArray<UOC_GridNode*>& Path, AActor* InActor, UOC_Gri
 
 		// 获取邻居路点
 		TArray<UOC_GridNode*> neighbors = nowNode->GetNeighbors();
-		for (auto&& neighbor : neighbors) {
+		for (auto neighbor : neighbors) {
 			if (!neighbor) {
 				continue;
 			}
@@ -358,6 +362,40 @@ bool AOC_GridMap::IsPathExist(AActor* InActor, UOC_GridNode* FromNode, UOC_GridN
 /// <returns></returns>
 TArray<UOC_GridNode*> AOC_GridMap::GetNodeNeighbors(UOC_GridNode* InNode, int InStep) const
 {
-	return TArray<UOC_GridNode*>();
+	int neighborSteps = InStep;
+	TArray<UOC_GridNode*> nowCheckList;
+	TArray<UOC_GridNode*> nextCheckList;
+	TArray<UOC_GridNode*> findList;
+
+	nextCheckList.AddUnique(InNode);
+	findList.AddUnique(InNode);
+
+
+	// 使用While 
+	while (neighborSteps >0)
+	{
+		nowCheckList = nextCheckList;
+		nextCheckList.Empty();
+
+		for (UOC_GridNode* tempNode : nowCheckList)
+		{
+			if (!tempNode) {
+				continue;
+			}
+
+			TArray<UOC_GridNode*> neighbors = tempNode->GetNeighbors();
+			for (UOC_GridNode* temp :neighbors )
+			{
+				if (findList.Contains(temp)) {
+					continue;
+				}
+				findList.AddUnique(temp);
+				nextCheckList.AddUnique(temp);
+			}
+		}
+		neighborSteps -= 1;
+	}
+
+	return findList;
 }
 
