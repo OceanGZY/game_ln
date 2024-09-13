@@ -37,5 +37,8 @@ TArray<UOC_GridNode*> UOC_HexNode::GetNeighbors()
 		nearNodes.Add(LeftDownNode);
 	}
 
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "nearNodes num:");
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::FromInt(nearNodes.Num()));
+
 	return nearNodes;
 }

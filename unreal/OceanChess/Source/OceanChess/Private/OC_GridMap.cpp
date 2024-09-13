@@ -125,10 +125,11 @@ void AOC_GridMap::GenerateHexNodes(float InHexSize, int InRow, int InColumn)
 			tNode->InitNode(this, tHexLocation, tHexVector, InHexSize);
 			NodeMap.Add(tHexVector, tNode);
 
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "UOC_HexNode init ");
-
+			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "UOC_HexNode init ");
+		
 		}
 	}
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::FromInt(NodeMap.Num()));
 }
 
 /// <summary>
@@ -182,9 +183,9 @@ void AOC_GridMap::InitHexNodes()
 		}
 
 
-		FGridVector tLeftUp = node.Key.Y % 2 == 0 ? node.Key + FGridVector(-1, 1) : node.Key + FGridVector(0, 1);
-		if (NodeMap.Contains(tLeftUp) && NodeMap[tLeftUp]->IsA(UOC_HexNode::StaticClass())) {
-			tHexNode->LeftUpNode = Cast<UOC_HexNode>(NodeMap[tLeftUp]);
+		FGridVector tLeftDown = node.Key.Y % 2 == 0 ? node.Key + FGridVector(-1, -1) : node.Key + FGridVector(0, -1);
+		if (NodeMap.Contains(tLeftDown) && NodeMap[tLeftDown]->IsA(UOC_HexNode::StaticClass())) {
+			tHexNode->LeftDownNode = Cast<UOC_HexNode>(NodeMap[tLeftDown]);
 		}
 
 
@@ -193,11 +194,11 @@ void AOC_GridMap::InitHexNodes()
 			tHexNode->LeftNode = Cast<UOC_HexNode>(NodeMap[tLeft]);
 		}
 
-		FGridVector tLeftDown = node.Key.Y % 2 == 0 ? node.Key + FGridVector(-1, -1) : node.Key + FGridVector(0, -1);
-		if (NodeMap.Contains(tLeftDown) && NodeMap[tLeftDown]->IsA(UOC_HexNode::StaticClass())) {
-			tHexNode->LeftDownNode = Cast<UOC_HexNode>(NodeMap[tLeftDown]);
+		FGridVector tLeftUp = node.Key.Y % 2 == 0 ? node.Key + FGridVector(-1, 1) : node.Key + FGridVector(0, 1);
+		if (NodeMap.Contains(tLeftUp) && NodeMap[tLeftUp]->IsA(UOC_HexNode::StaticClass())) {
+			tHexNode->LeftUpNode = Cast<UOC_HexNode>(NodeMap[tLeftUp]);
 		}
-
+		
 	}
 }
 
@@ -210,7 +211,8 @@ void AOC_GridMap::InitHexNodes()
 UOC_GridNode* AOC_GridMap::GetNode(FGridVector InCoord) const
 {
 	if (NodeMap.Contains(InCoord)) {
-		return NodeMap[InCoord];
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "get node incoord");
+		return NodeMap[InCoord];			
 	}
 	else {
 		return nullptr;
@@ -231,14 +233,19 @@ bool AOC_GridMap::FindPath(TArray<UOC_GridNode*>& Path, AActor* InActor, UOC_Gri
 	Path.Empty();
 	// 安全判断
 	if (!FromNode || !ToNode) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "FromNode ||  ToNode is null");
+
 		return false;
 	}
 	if (!NodeMap.FindKey(FromNode) || !NodeMap.FindKey(ToNode)) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "FromNode ||  ToNode is not in nodemap");
+
 		return false;
 	}
 
 	// 获取实际所有终点
 	TArray<UOC_GridNode*> ToNodes = GetNodeNeighbors(ToNode, StopSteps);
+
 	for (int i = ToNodes.Num() - 1; i >= 0; i--) {
 		if (!ToNodes[i]->CanPass(InActor)) {
 			ToNodes.RemoveAt(i);
@@ -295,7 +302,7 @@ bool AOC_GridMap::FindPath(TArray<UOC_GridNode*>& Path, AActor* InActor, UOC_Gri
 			}
 
 			// 如果在closeList 或不能通行则跳过
-			if (closeList.Contains(neighbor) || neighbor->CanPass(InActor)) {
+			if (closeList.Contains(neighbor) || !neighbor->CanPass(InActor)) {
 				continue;
 			}
 
@@ -306,7 +313,7 @@ bool AOC_GridMap::FindPath(TArray<UOC_GridNode*>& Path, AActor* InActor, UOC_Gri
 			}
 		}
 
-		// 取出队手的路点， 设置为下次循环遍历的路点
+		// 取出队首的路点， 设置为下次循环遍历的路点
 		if (openList.Num() <= 0) {
 			break;
 		}
@@ -395,6 +402,7 @@ TArray<UOC_GridNode*> AOC_GridMap::GetNodeNeighbors(UOC_GridNode* InNode, int In
 		}
 		neighborSteps -= 1;
 	}
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::FromInt(findList.Num()));
 
 	return findList;
 }
