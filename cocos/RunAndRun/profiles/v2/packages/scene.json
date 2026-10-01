@@ -1,0 +1,153 @@
+{
+  "__version__": "1.0.0",
+  "builder": {},
+  "gizmos-infos": {
+    "is2D": false,
+    "is3DIcon": false,
+    "iconSize": 2,
+    "gridVisible": true,
+    "gridColor": [
+      166,
+      166,
+      166,
+      255
+    ],
+    "transformToolName": "position",
+    "pivot": "pivot",
+    "coordinate": "local",
+    "toolsVisibility3d": true
+  },
+  "snap-configs": {
+    "position": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "rotation": 1,
+    "scale": 1,
+    "isPositionSnapEnabled": false,
+    "isRotationSnapEnabled": false,
+    "isScaleSnapEnabled": false
+  },
+  "rect-snap-configs": {
+    "enableSnapping": true,
+    "snapThreshold": 4
+  },
+  "camera-infos": {
+    "3821e56c-4a5c-4fab-9d81-4bea2d2fd987": {
+      "position": {
+        "x": 0.9099646442265281,
+        "y": 2.6222602884441866,
+        "z": 5.791089407523707
+      },
+      "rotation": {
+        "x": -0.20813133179381915,
+        "y": 0.07613452718530708,
+        "z": 0.01625232512478688,
+        "w": 0.974997817650911
+      },
+      "viewCenter": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "contentRect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "scale": 1
+    },
+    "ca98de63-a96b-4f01-a190-25334fb9b4b4": {
+      "position": {
+        "x": 0.0018420578742953484,
+        "y": 0.005308288891692512,
+        "z": 0.011723006944896024
+      },
+      "rotation": {
+        "x": -0.20813133179381915,
+        "y": 0.07613452718530708,
+        "z": 0.01625232512478688,
+        "w": 0.974997817650911
+      },
+      "viewCenter": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "contentRect": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "scale": 1
+    },
+    "f46876e4-e81b-4931-b493-6d367be385e7": {
+      "position": {
+        "x": 10.435475423180804,
+        "y": 10.435475423180804,
+        "z": 10.435475423180804
+      },
+      "rotation": {
+        "x": -0.27984814233312133,
+        "y": 0.3647051996310009,
+        "z": 0.11591689595929512,
+        "w": 0.8804762392171493
+      },
+      "viewCenter": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "contentRect": {
+        "x": 0,
+        "y": 0,
+        "width": 667,
+        "height": 518
+      },
+      "scale": 1
+    }
+  },
+  "camera-uuids": [
+    "3821e56c-4a5c-4fab-9d81-4bea2d2fd987",
+    "ca98de63-a96b-4f01-a190-25334fb9b4b4",
+    "f46876e4-e81b-4931-b493-6d367be385e7"
+  ],
+  "camera": {
+    "color": [
+      48,
+      48,
+      48,
+      255
+    ],
+    "fov": 45,
+    "far": 10000,
+    "near": 0.01,
+    "wheelSpeed": 0.01,
+    "wanderSpeed": 10,
+    "enableAcceleration": true,
+    "size": "__default_design__",
+    "far2D": 10000,
+    "near2D": 1,
+    "wheelSpeed2D": 6,
+    "iso": 0,
+    "aperture": 19,
+    "shutter": 7,
+    "size_rotate": false
+  },
+  "float-window": {
+    "position": {
+      "cc": {
+        "Camera": {
+          "dock": false,
+          "top": null,
+          "bottom": 10,
+          "left": null,
+          "right": 10
+        }
+      }
+    }
+  }
+}
